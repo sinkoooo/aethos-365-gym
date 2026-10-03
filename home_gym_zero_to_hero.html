@@ -11701,6 +11701,8 @@
         populatePassportModal(currentUser);
         openModal('profilePassportModal');
       } else {
+        const titleEl = document.getElementById('authModalTitle');
+        if (titleEl) titleEl.innerHTML = '⚡ Trainee Portal';
         openModal('authModal');
         loadQuickAccountChips();
         switchAuthTab('login');
@@ -11710,9 +11712,17 @@
 
     function openSwitchAccountModal() {
       closeModal('profilePassportModal');
+      closeModal('profileSettingsModal');
+      const titleEl = document.getElementById('authModalTitle');
+      if (titleEl) {
+        titleEl.innerHTML = '🔄 Switch Athlete Account';
+      }
       openModal('authModal');
       loadQuickAccountChips();
       switchAuthTab('login');
+      if (typeof showToast === 'function') {
+        showToast('🔄 Select an athlete profile chip below to switch accounts');
+      }
     }
     window.openSwitchAccountModal = openSwitchAccountModal;
 
