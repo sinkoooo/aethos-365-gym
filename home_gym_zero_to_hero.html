@@ -16021,6 +16021,16 @@
 
         const overloadHtml = typeof getExerciseOverloadTip === 'function' ? getExerciseOverloadTip(item, currentDay) : '';
 
+        const cardPrefix = `d${currentDay}_ex${item.key}`;
+        let allSetsInCardDone = true;
+        for (let cs = 1; cs <= item.sets; cs++) {
+          const cKey = `${cardPrefix}_s${cs}`;
+          if (!loggedSetData[cKey] || !loggedSetData[cKey].done) {
+            allSetsInCardDone = false;
+            break;
+          }
+        }
+
         card.innerHTML = `
           <div class="ex-header-row">
             <div class="ex-title-wrap">
@@ -16028,7 +16038,7 @@
               <span class="ex-target-pill">${baseEx.target}</span>
             </div>
             <div style="display: flex; align-items: center; gap: 8px;">
-              <button type="button" class="btn-start-set" onclick="startNextIncompleteSetInCard('d${currentDay}_ex${item.key}', '${activeName.replace(/'/g, "\\'")}', ${item.sets}, '${item.reps}', '${item.targetWeight || 0}')" style="padding: 5px 12px; font-size: 0.78rem;" title="Start next set with on-screen music graphics">
+              <button type="button" class="btn-start-set" id="cardStartBtn_${cardPrefix}" data-card-prefix="${cardPrefix}" data-total-sets="${item.sets}" data-default-reps="${item.reps}" data-default-wt="${item.targetWeight || 0}" onclick="startNextIncompleteSetInCard('${cardPrefix}', '${activeName.replace(/'/g, "\\'")}', ${item.sets}, '${item.reps}', '${item.targetWeight || 0}')" style="padding: 5px 12px; font-size: 0.78rem; ${allSetsInCardDone ? 'display: none;' : ''}" title="Start next set with on-screen music graphics">
                 ⚡ Lift Move &bull; Music Beats
               </button>
               <div class="ex-target-badge">${item.sets} Sets × ${item.reps}</div>
@@ -16327,6 +16337,13 @@
 
         const isWorkoutComplete = planAllDone || allScreenDone || isLastExAndSet;
 
+        // Hide the corresponding Start Set button when set is logged
+        const rowStartBtn = document.getElementById(`startBtn_${key}`);
+        if (rowStartBtn) {
+          rowStartBtn.style.display = 'none';
+        }
+        updateExerciseCardHeaderStartButton(key);
+
         if (isWorkoutComplete) {
           showWorkoutCompleteTimerUI();
           if (!completedDays.has(setDay)) {
@@ -16350,11 +16367,34 @@
       } else {
         btn.classList.remove('done');
         btn.innerText = 'Log Set';
+        const rowStartBtn = document.getElementById(`startBtn_${key}`);
+        if (rowStartBtn) {
+          rowStartBtn.style.display = 'inline-flex';
+        }
+        updateExerciseCardHeaderStartButton(key);
         resetTimer();
       }
       checkAchievements();
       updateMissionChecklist();
       updateRPGSkillRadar();
+    }
+
+    function updateExerciseCardHeaderStartButton(setKey) {
+      const match = setKey.match(/^(d\d+_ex[a-zA-Z0-9_]+)_s\d+$/);
+      if (!match) return;
+      const cardPrefix = match[1];
+      const cardBtn = document.getElementById(`cardStartBtn_${cardPrefix}`);
+      if (!cardBtn) return;
+      const totalSets = parseInt(cardBtn.getAttribute('data-total-sets') || '3', 10);
+      let allDone = true;
+      for (let s = 1; s <= totalSets; s++) {
+        const k = `${cardPrefix}_s${s}`;
+        if (!loggedSetData[k] || !loggedSetData[k].done) {
+          allDone = false;
+          break;
+        }
+      }
+      cardBtn.style.display = allDone ? 'none' : 'inline-flex';
     }
 
     // ==========================================
@@ -20770,13 +20810,22 @@ function stopGuidedCooldown() {
     }
 
     function startNextIncompleteSetInCard(prefix, exName, totalSets, defaultReps, defaultWt) {
-      let targetSet = 1;
+      let targetSet = null;
       for (let s = 1; s <= totalSets; s++) {
         const key = `${prefix}_s${s}`;
         if (!loggedSetData[key] || !loggedSetData[key].done) {
           targetSet = s;
           break;
         }
+      }
+      if (targetSet === null) {
+        // All sets for this movement are completed
+        const cardBtn = document.getElementById(`cardStartBtn_${prefix}`);
+        if (cardBtn) cardBtn.style.display = 'none';
+        if (typeof showToast === 'function') {
+          showToast(`✓ All ${totalSets} sets of ${exName} are completed!`);
+        }
+        return;
       }
       const key = `${prefix}_s${targetSet}`;
       const btnEl = document.getElementById(`startBtn_${key}`);
@@ -20830,6 +20879,12 @@ function stopGuidedCooldown() {
           }
           const repsInput = row.querySelector('.log-input-reps');
           if (repsInput) repsInput.value = elapsed + 's';
+        }
+
+        const holdStartBtn = document.getElementById(`startBtn_${logKey}`);
+        if (holdStartBtn) holdStartBtn.style.display = 'none';
+        if (typeof updateExerciseCardHeaderStartButton === 'function') {
+          updateExerciseCardHeaderStartButton(logKey);
         }
 
         playAudioTone(587.33, 'triangle', 0.25);
