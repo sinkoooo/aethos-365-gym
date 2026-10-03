@@ -15,6 +15,29 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    // 100X EARLY INTERACTION DEFENSE: Instant Pill & Modal Activation
+    // Ensures clicking Sign In / User Pill responds within 0ms regardless of download or parse speed
+    (function initEarlyInteractivityShim() {
+      window.openModal = window.openModal || function(id) {
+        const el = document.getElementById(id);
+        if (el) el.classList.add('active');
+      };
+      window.closeModal = window.closeModal || function(id) {
+        const el = document.getElementById(id);
+        if (el) el.classList.remove('active');
+      };
+      window.handleUserPillClick = window.handleUserPillClick || function() {
+        const token = localStorage.getItem('aethos_auth_token');
+        if (token) {
+          window.openModal('profilePassportModal');
+        } else {
+          window.openModal('authModal');
+          if (typeof loadQuickAccountChips === 'function') loadQuickAccountChips();
+        }
+      };
+    })();
+  </script>
   <style>
     :root {
       --bg-dark: #07090e;
@@ -11343,13 +11366,19 @@
         const json = await res.json();
         if (json.success && Array.isArray(json.profiles) && json.profiles.length > 0) {
           wrap.style.display = 'block';
-          container.innerHTML = json.profiles.map(p => `
-            <div class="account-chip" onclick="fillQuickAccount('${p.username.replace(/'/g, "\\'")}')">
-              <span>${p.avatar || '⚡'}</span>
-              <strong>${p.displayName || p.username}</strong>
-              <span style="opacity: 0.6; font-size: 0.7rem;">(@${p.username})</span>
-            </div>
-          `).join('');
+          container.innerHTML = json.profiles.map(p => {
+            const isAdmin = p.role === 'admin';
+            const roleBadge = isAdmin ? '👑 Admin' : '⚡ Trainee';
+            const badgeBg = isAdmin ? 'rgba(168, 85, 247, 0.2)' : 'rgba(56, 189, 248, 0.12)';
+            const badgeColor = isAdmin ? '#c084fc' : '#38bdf8';
+            return `
+              <div class="account-chip" onclick="fillQuickAccount('${p.username.replace(/'/g, "\\'")}')" title="Click to autofill @${p.username}">
+                <span>${p.avatar || (isAdmin ? '👑' : '⚡')}</span>
+                <strong>${p.displayName || p.username}</strong>
+                <span style="font-size: 0.65rem; padding: 2px 6px; border-radius: 99px; background: ${badgeBg}; color: ${badgeColor}; font-weight: 700;">${roleBadge}</span>
+              </div>
+            `;
+          }).join('');
         } else {
           wrap.style.display = 'none';
         }
@@ -11367,6 +11396,19 @@
         passwordInput.focus();
       }
       switchAuthTab('login');
+      if (typeof showToast === 'function') {
+        showToast(`⚡ Selected profile: @${uname}. Enter password to sign in.`);
+      }
+    }
+
+    function calculateTraineeStreak() {
+      let streak = 0;
+      let check = currentDay;
+      while (completedDays && completedDays.has(check) && check > 0) {
+        streak++;
+        check--;
+      }
+      return streak;
     }
 
     function populatePassportModal(user) {
@@ -11381,7 +11423,8 @@
       const streakVal = document.getElementById('passportStreakVal');
       const workoutsVal = document.getElementById('passportWorkoutsVal');
 
-      if (avatarEl) avatarEl.textContent = user.avatar || '⚡';
+      const avatarIcon = user.avatar || (user.role === 'admin' ? '👑' : '⚡');
+      if (avatarEl) avatarEl.textContent = avatarIcon;
       if (nameEl) nameEl.textContent = user.displayName || user.username;
       if (unameEl) unameEl.textContent = `@${user.username}`;
       if (bioEl) bioEl.textContent = `"${user.bio || '365 Days of Zero Excuses'}"`;
@@ -11389,7 +11432,8 @@
       if (roleEl) roleEl.textContent = user.role === 'admin' ? 'Head Coach (Admin 🛡️)' : 'Trainee Athlete';
 
       if (dayVal) dayVal.textContent = `Day ${currentDay || 1}`;
-      if (streakVal) streakVal.textContent = `${userStreak || 1} 🔥`;
+      const currentStreak = calculateTraineeStreak();
+      if (streakVal) streakVal.textContent = `${currentStreak} 🔥`;
       if (workoutsVal) workoutsVal.textContent = `${completedDays ? completedDays.size : 0}`;
 
       // Populate edit fields
@@ -11401,7 +11445,7 @@
       if (editGoal) editGoal.value = user.goal || 'recomp';
       if (editTarget) editTarget.value = user.targetWeight || '';
       if (editBio) editBio.value = user.bio || '';
-      selectedEditAvatarVal = user.avatar || '⚡';
+      selectedEditAvatarVal = avatarIcon;
 
       // Highlight avatar in edit picker
       const editPicker = document.getElementById('editAvatarPicker');
@@ -11415,15 +11459,23 @@
     function toggleEditProfileSection() {
       const editor = document.getElementById('inlineProfileEditor');
       if (!editor) return;
-      editor.style.display = editor.style.display === 'none' ? 'block' : 'none';
+      const willShow = editor.style.display === 'none';
+      editor.style.display = willShow ? 'block' : 'none';
       const msg = document.getElementById('editProfileMsg');
       if (msg) msg.style.display = 'none';
+      if (willShow) {
+        const editName = document.getElementById('editDisplayNameInput');
+        if (editName) editName.focus();
+      }
     }
 
     function selectEditAvatar(emoji, btn) {
       selectedEditAvatarVal = emoji;
       document.querySelectorAll('#editAvatarPicker .avatar-btn').forEach(b => b.classList.remove('selected'));
       if (btn) btn.classList.add('selected');
+      // Live Instant Preview in Passport Header Card
+      const passAvatar = document.getElementById('passportAvatar');
+      if (passAvatar) passAvatar.textContent = emoji;
     }
 
     async function saveProfileChanges() {
@@ -11471,10 +11523,13 @@
             msg.style.border = '1px solid rgba(16, 185, 129, 0.3)';
             msg.textContent = '✅ Profile updated successfully!';
           }
+          if (typeof showToast === 'function') {
+            showToast('✅ Trainee Passport updated & synchronized!');
+          }
           setTimeout(() => {
             const editor = document.getElementById('inlineProfileEditor');
             if (editor) editor.style.display = 'none';
-          }, 1000);
+          }, 900);
         } else {
           if (msg) {
             msg.style.display = 'block';
@@ -20410,6 +20465,9 @@ function stopGuidedCooldown() {
           if (e.key === 'Escape') {
             closeModal('exerciseSwapModal');
             closeModal('hotkeysModal');
+            closeModal('authModal');
+            closeModal('profilePassportModal');
+            closeModal('adminModal');
             closeFocusHUD();
           }
           return;
@@ -20418,6 +20476,9 @@ function stopGuidedCooldown() {
         if (e.key === 'Escape') {
           closeModal('exerciseSwapModal');
           closeModal('hotkeysModal');
+          closeModal('authModal');
+          closeModal('profilePassportModal');
+          closeModal('adminModal');
           closeFocusHUD();
           closeModal('photoModal');
         } else if (e.key === 'f' || e.key === 'F') {
