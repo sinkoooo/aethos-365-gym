@@ -15039,6 +15039,217 @@
       return EXERCISE_VIDEOS[exKey] || EXERCISE_VIDEOS.box_squats || 'GxT863X9A4Q';
     }
 
+    // Dedicated technique cues, target muscles, and form guides for swapped exercise variations
+    const SWAP_TECHNIQUE_GUIDES = {
+      floor_press: {
+        target: 'Chest & Triceps (Shoulder Safe)',
+        muscles: ['chest', 'triceps'],
+        cues: {
+          'Floor Stop': 'Lie flat on floor with knees bent. Floor halts upper arm at 90°, preventing shoulder hyperextension.',
+          'Elbow Angle': 'Keep elbows tucked at a 45° angle to torso; drive dumbbells straight up above mid-chest.',
+          'Peak Squeeze': 'Lock out at top without banging weights; pause 1s at floor without relaxing tension.'
+        }
+      },
+      db_floor_press: {
+        target: 'Chest & Triceps (Shoulder Safe)',
+        muscles: ['chest', 'triceps'],
+        cues: {
+          'Floor Stop': 'Lie flat on floor with knees bent. Floor halts upper arm at 90°, protecting anterior shoulder capsule.',
+          'Elbow Angle': 'Keep elbows tucked at a 45° angle to torso; drive dumbbells straight up above mid-chest.',
+          'Peak Squeeze': 'Control 3-second descent until triceps lightly touch floor; pause 1s before explosive drive.'
+        }
+      },
+      band_chest_press: {
+        target: 'Chest & Anterior Deltoids',
+        muscles: ['chest', 'delts'],
+        cues: {
+          'Staggered Stance': 'Anchor band behind at chest height. Take a staggered athletic stance and brace core.',
+          'Ascending Resistance': 'Press handles straight forward with palms slightly angled; feel resistance peak at lockout.',
+          'Peak Contraction': 'Squeeze inner chest for 1 full second before 3s controlled eccentric return.'
+        }
+      },
+      pushup_handles: {
+        target: 'Chest, Triceps & Core (Neutral Wrist)',
+        muscles: ['chest', 'triceps'],
+        cues: {
+          'Neutral Wrist Grip': 'Grip handles firmly with straight wrists, eliminating hyperextension joint strain.',
+          'Deficit Stretch': 'Lower chest below handle depth for full pectoralis fiber stretch.',
+          'Full Plank Lock': 'Maintain rigid glutes and abs throughout the movement; press all the way to scapular protraction.'
+        }
+      },
+      knee_pushups: {
+        target: 'Chest & Triceps (Deloaded Calisthenics)',
+        muscles: ['chest', 'triceps'],
+        cues: {
+          'Straight Knee-Hip Line': 'Knees on mat, hips pushed forward so body forms a straight line from knees to crown.',
+          'Tucked Elbows': 'Lower chest to floor with elbows 45° back, avoiding flared shoulders.',
+          'Core Brace': 'Press floor away smoothly while keeping abdominals tight; avoid lumbar sagging.'
+        }
+      },
+      band_resisted_pushup: {
+        target: 'Chest & Triceps (Accommodating Power)',
+        muscles: ['chest', 'triceps'],
+        cues: {
+          'Band Wrap': 'Wrap resistance band across upper back and hold ends under palms on floor.',
+          'Explosive Drive': 'Lower with 3s control; explode upward against escalating band tension at lockout.',
+          'Braced Core': 'Keep glutes squeezed and ribcage pinned down to prevent spinal extension.'
+        }
+      },
+      single_arm_db_row: {
+        target: 'Lats & Rhomboids (Unilateral Overload)',
+        muscles: ['lats', 'biceps'],
+        cues: {
+          'Three-Point Base': 'Knee and hand on bench (or hand on sturdy chair); flat horizontal spine.',
+          'Pocket Pull': 'Pull dumbbell up toward hip crease (not shoulder) leading with the elbow.',
+          'Lat Stretch': 'Lower weight with control to full dead-hang stretch without rotating thoracic spine.'
+        }
+      },
+      incline_chest_supported_row: {
+        target: 'Lats & Mid-Back (Spine Supported)',
+        muscles: ['lats', 'rhomboids'],
+        cues: {
+          'Sternum Support': 'Set bench to 30-45° incline and rest chest firmly against pad; zero lumbar strain.',
+          'Elbow Path': 'Pull dumbbells backward toward hips with elbows flared 45° to recruit upper back and lats.',
+          'Scapular Squeeze': 'Pinch shoulder blades hard at apex for 1 second before controlled lowering.'
+        }
+      },
+      band_seated_row: {
+        target: 'Mid-Back, Rhomboids & Lats',
+        muscles: ['lats', 'rhomboids'],
+        cues: {
+          'Tall Torso': 'Sit upright with legs slightly bent; loop band around mid-foot or low anchor.',
+          'Chest Up': 'Initiate pull by retracting scapulae; drive elbows behind ribcage without leaning back.',
+          'Constant Tension': 'Pause 1s at full contraction; return with 2s tempo keeping band taut throughout.'
+        }
+      },
+      renegade_row: {
+        target: 'Lats & Rotary Core Stability',
+        muscles: ['lats', 'abs'],
+        cues: {
+          'Wide Base Plank': 'Set feet wider than shoulder-width for pelvic stability; grip hex dumbbells.',
+          'Zero Hip Swivel': 'Row one dumbbell to hip without shifting or rotating pelvis; resist torsion.',
+          'Controlled Plant': 'Lower smoothly to floor and re-brace core before switching sides.'
+        }
+      },
+      inverted_rows: {
+        target: 'Upper Back, Rhomboids & Rear Delts',
+        muscles: ['lats', 'rhomboids'],
+        cues: {
+          'Rigid Plank': 'Lie beneath bar/table; grip overhand and form straight line from heels to shoulders.',
+          'Chest-to-Bar Drive': 'Pull chest up to bar/edge by driving elbows down and back.',
+          'Scapular Lock': 'Pinch shoulder blades tight at apex; lower with 2s eccentric control.'
+        }
+      },
+      bulgarian_split_squat: {
+        target: 'Quads & Glutes (Unilateral Overload)',
+        muscles: ['quads', 'glutes'],
+        cues: {
+          'Rear Foot Laces Down': 'Elevate rear foot on bench or chair; hop front foot forward into comfortable stride.',
+          'Elevator Drop': 'Descend vertically until front thigh is parallel to floor and rear knee hovers above ground.',
+          'Front Heel Drive': 'Drive through front midfoot/heel to rise; keep torso tall with slight athletic hinge.'
+        }
+      },
+      bodyweight_tempo_squat: {
+        target: 'Quads & Glutes (Metabolic Burn)',
+        muscles: ['quads', 'glutes'],
+        cues: {
+          'Strict 3-1-1 Tempo': '3 full seconds down, 1-second pause at parallel, 1-second crisp drive up.',
+          'Knees Over Toes': 'Push knees out in line with second toe; maintain tall upright chest.',
+          'Zero Momentum': 'Eliminate bouncing at bottom; maintain constant continuous quad tension.'
+        }
+      },
+      single_leg_rdl: {
+        target: 'Hamstrings & Glutes (Unilateral Balance)',
+        muscles: ['glutes', 'hamstrings'],
+        cues: {
+          'Hip Hinge Arrow': 'Soft bend in plant knee; hinge forward sending back leg straight behind like an arrow.',
+          'Square Pelvis': 'Keep hips level with floor; avoid opening hip of floating leg outward.',
+          'Hamstring Pull': 'Lower until deep hamstring stretch; drive through heel to return to tall standing.'
+        }
+      },
+      band_pull_through: {
+        target: 'Glutes & Hamstrings (Zero Spinal Shear)',
+        muscles: ['glutes', 'hamstrings'],
+        cues: {
+          'Straddle Band': 'Anchor band low; stand facing away straddling band with hands holding ends between legs.',
+          'Deep Hip Hinge': 'Push hips backward toward anchor with soft knees and flat spine.',
+          'Glute Snap': 'Drive hips forward explosively into lockout; clamp glutes tight at apex.'
+        }
+      },
+      db_glute_bridge: {
+        target: 'Gluteus Maximus (Direct Hypertrophy)',
+        muscles: ['glutes', 'hamstrings'],
+        cues: {
+          'Pelvis Loaded': 'Lie supine with feet flat 12 inches from hips; hold dumbbell across hip crease.',
+          'Heel Drive': 'Drive through heels to lift pelvis until thighs and torso align; ribcage stays locked down.',
+          '2s Top Squeeze': 'Squeeze glutes maximally for 2 seconds at peak before controlled descent.'
+        }
+      },
+      band_lateral_raises: {
+        target: 'Lateral Deltoids (Shoulder Width)',
+        muscles: ['delts', 'traps'],
+        cues: {
+          'Step on Center': 'Step on band with feet shoulder-width; hold handles/ends at sides.',
+          'Slight Elbow Bend': 'Raise arms out to 90° shoulder height with pinkies slightly higher than thumbs.',
+          'Zero Shrugging': 'Keep traps relaxed and neck long; control descent resisting band snap-back.'
+        }
+      },
+      band_rows: {
+        target: 'Upper Back, Rhomboids & Lats',
+        muscles: ['lats', 'rhomboids'],
+        cues: {
+          'Upright Hinge': 'Loop band around sturdy post or feet; hinge slightly at hips with braced spine.',
+          'Scapular Retraction': 'Lead with elbows pulling band toward navel; squeeze shoulder blades together.',
+          '2s Controlled Return': 'Resist band tension on the eccentric return; keep shoulders away from ears.'
+        }
+      },
+      arnold_press: {
+        target: 'All 3 Deltoid Heads & Triceps',
+        muscles: ['delts', 'triceps'],
+        cues: {
+          'Palms Facing Face': 'Start with dumbbells at chin level, palms facing your chest.',
+          'Smooth Rotation': 'Press overhead while rotating wrists outward so palms face forward at top lockout.',
+          'Reverse Path': 'Reverse motion smoothly back to starting chin position with strict control.'
+        }
+      },
+      half_kneeling_press: {
+        target: 'Shoulders & Deep Core Bracing',
+        muscles: ['delts', 'core'],
+        cues: {
+          '90/90 Stance': 'Kneel with rear knee down directly under hip; front foot flat with 90° knee angle.',
+          'Down-Side Press': 'Hold dumbbell at shoulder on down-knee side; squeeze down glute to eliminate lower back arch.',
+          'Vertical Lockout': 'Press dumbbell straight overhead in line with ear; keep ribcage locked to pelvis.'
+        }
+      },
+      pallof_press: {
+        target: 'Anti-Rotation Core & Obliques',
+        muscles: ['abs', 'obliques'],
+        cues: {
+          'Athletic Stance': 'Stand perpendicular to band anchor, holding handle with both hands at sternum.',
+          'Press and Resist': 'Press hands straight out in front; fight the band rotating your torso sideways.',
+          '2s Hold': 'Hold outstretched for 2 seconds with rock-solid core brace; bring back to chest smoothly.'
+        }
+      },
+      hollow_body_hold: {
+        target: 'Transverse Abdominis & Anterior Core',
+        muscles: ['abs', 'core'],
+        cues: {
+          'Posterior Pelvic Tilt': 'Lie supine and press lower spine completely flat against floor (zero daylight).',
+          'Banana Shape': 'Extend arms overhead and legs outward 6-12 inches off floor, forming shallow crescent.',
+          'Continuous Tension': 'Breathe shallowly into ribcage while holding static tension; don’t let lower back lift.'
+        }
+      },
+      bird_dog: {
+        target: 'Rotary Core, Glutes & Spine Armor',
+        muscles: ['glutes', 'abs'],
+        cues: {
+          'Quadruped Setup': 'Hands under shoulders, knees under hips with spine neutral and core braced.',
+          'Opposite Reach': 'Reach opposite arm forward and opposite leg back simultaneously without tilting hips.',
+          'Glute Lock': 'Hold at horizontal for 2 seconds, squeezing glute and lat; return with strict control.'
+        }
+      }
+    };
+
     const MILESTONES = [
       {
         startDay: 31,
@@ -16009,25 +16220,55 @@
         if (swapKey && typeof EXERCISE_SWAPS !== 'undefined' && EXERCISE_SWAPS[item.key]) {
           swapItem = EXERCISE_SWAPS[item.key].find(s => s.key === swapKey);
         }
+
+        // Dynamically resolve swapped movement cues, target, and muscles
+        let activeTarget = baseEx.target;
+        let activeCropClass = baseEx.cropClass || '';
+        let activeMuscles = (baseEx.muscles && baseEx.muscles.length > 0) ? baseEx.muscles : ['Compound Kinematics'];
+
         if (swapItem) {
           activeName = `${swapItem.name} ⇄`;
           activeSearch = encodeURIComponent((swapItem.name || '') + ' proper form exercise tutorial');
+
+          // Normalize swap key if aliased
+          const normSwapKey = (swapKey === 'goblet_squats') ? 'goblet_squat' : (swapKey === 'deadbug') ? 'dead_bug' : swapKey;
+          const swapCatEx = CATALOG[normSwapKey] || CATALOG[swapKey];
+          const swapGuide = (typeof SWAP_TECHNIQUE_GUIDES !== 'undefined') ? SWAP_TECHNIQUE_GUIDES[swapKey] : null;
+
+          if (swapCatEx && swapCatEx.cues) {
+            activeCues = swapCatEx.cues;
+            if (swapCatEx.target) activeTarget = swapCatEx.target;
+            if (swapCatEx.muscles && swapCatEx.muscles.length > 0) activeMuscles = swapCatEx.muscles;
+            activeCropClass = swapCatEx.cropClass || '';
+          } else if (swapGuide && swapGuide.cues) {
+            activeCues = swapGuide.cues;
+            if (swapGuide.target) activeTarget = swapGuide.target;
+            if (swapGuide.muscles && swapGuide.muscles.length > 0) activeMuscles = swapGuide.muscles;
+            activeCropClass = ''; // Clear base cropClass so background-image style handles it directly
+          } else {
+            activeCues = {
+              "Technique Focus": swapItem.benefit || "Maintain strict mechanical tension through full range of motion.",
+              "Optimal Form": "Keep core braced with controlled tempo and smooth eccentric loading."
+            };
+            activeCropClass = '';
+          }
         }
 
         const activeVideoId = getExerciseVideoId(item.key, currentProg, swapKey);
 
-        const musclesList = (baseEx.muscles && baseEx.muscles.length > 0) ? baseEx.muscles : ['Compound Kinematics'];
-        const primaryMuscle = musclesList[0].toUpperCase();
+        const musclesList = activeMuscles;
+        const primaryMuscle = (musclesList[0] || 'COMPOUND').toUpperCase();
         const secondaryMuscle = musclesList[1] ? musclesList[1].toUpperCase() : 'CORE STABILIZERS';
 
         let cadenceText = '3-0-1-0 (3s Descent • Explosive Drive)';
-        if (item.key.includes('squat') || item.key.includes('lunge')) {
+        const searchCheckKey = swapItem ? (swapKey || '').toLowerCase() : item.key.toLowerCase();
+        if (searchCheckKey.includes('squat') || searchCheckKey.includes('lunge')) {
           cadenceText = '3-1-1-0 (3s Eccentric • 1s Pause • 1s Drive)';
-        } else if (item.key.includes('row') || item.key.includes('pull')) {
+        } else if (searchCheckKey.includes('row') || searchCheckKey.includes('pull')) {
           cadenceText = '2-0-1-1 (2s Lower • 1s Pull • 1s Peak Squeeze)';
-        } else if (item.key.includes('pushup') || item.key.includes('press') || item.key.includes('dip')) {
+        } else if (searchCheckKey.includes('pushup') || searchCheckKey.includes('press') || searchCheckKey.includes('dip')) {
           cadenceText = '3-1-1-0 (3s Lower • 1s Chest Pause • 1s Drive)';
-        } else if (item.key.includes('plank') || item.key.includes('dead_bug') || item.key.includes('bridge')) {
+        } else if (searchCheckKey.includes('plank') || searchCheckKey.includes('dead_bug') || searchCheckKey.includes('bridge') || searchCheckKey.includes('hold')) {
           cadenceText = 'Isometric Dynamic Tension (Max Braced IAP)';
         }
 
@@ -16146,7 +16387,7 @@
           <div class="ex-header-row">
             <div class="ex-title-wrap">
               <span class="ex-title-text">${idx + 1}. ${activeName}</span>
-              <span class="ex-target-pill">${baseEx.target}</span>
+              <span class="ex-target-pill">${activeTarget}</span>
             </div>
             <div style="display: flex; align-items: center; gap: 8px;">
               <button type="button" class="btn-start-set" id="cardStartBtn_${cardPrefix}" data-card-prefix="${cardPrefix}" data-total-sets="${item.sets}" data-default-reps="${item.reps}" data-default-wt="${item.targetWeight || 0}" onclick="startNextIncompleteSetInCard('${cardPrefix}', '${activeName.replace(/'/g, "\\'")}', ${item.sets}, '${item.reps}', '${item.targetWeight || 0}')" style="padding: 5px 12px; font-size: 0.78rem; ${allSetsInCardDone ? 'display: none;' : ''}" title="Start next set with on-screen music graphics">
@@ -16180,7 +16421,7 @@
           </div>
 
           <div class="ex-visual-grid" style="margin-top: 14px;">
-            <div class="ex-crop-viewport ${baseEx.cropClass}" style="background-image: url('https://img.youtube.com/vi/${activeVideoId}/hqdefault.jpg');" title="Click to watch ${activeName} video guide inline" onclick="toggleInlineVideo(${idx}, '${activeVideoId}', '${activeName.replace(/'/g, "\\'")}')">
+            <div class="ex-crop-viewport ${activeCropClass}" style="background-image: url('https://img.youtube.com/vi/${activeVideoId}/hqdefault.jpg') !important;" title="Click to watch ${activeName} video guide inline" onclick="toggleInlineVideo(${idx}, '${activeVideoId}', '${activeName.replace(/'/g, "\\'")}')">
               <div style="background: linear-gradient(180deg, transparent 0%, rgba(11, 17, 32, 0.95) 100%); padding: 8px 12px; display: flex; justify-content: space-between; align-items: flex-end; width: 100%;">
                 <div>
                   <span style="font-size: 0.65rem; font-weight: 800; color: var(--cyan); text-transform: uppercase; letter-spacing: 0.5px;">Biomechanics</span>
