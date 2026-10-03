@@ -1,0 +1,13 @@
+{
+  "gym_active_day": 2,
+  "gym_streak": 2,
+  "gym_set_logs": {
+    "d1_exbench_press_s1": {
+      "wt": "70",
+      "reps": "10",
+      "done": true
+    }
+  },
+  "secret_metric": "Confidential Trainee Metric",
+  "_serverTimestamp": "2026-10-03T11:36:37.374Z"
+}

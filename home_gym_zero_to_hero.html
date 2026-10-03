@@ -524,6 +524,57 @@
       background: rgba(255, 255, 255, 0.03);
     }
 
+    /* 🔍 ADMIN TRAINEE INSPECTION COCKPIT 100X STYLES */
+    .trainee-tab-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .trainee-tab-btn {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #94a3b8;
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 8px 14px;
+      cursor: pointer;
+      border-radius: 8px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+    .trainee-tab-btn:hover {
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .trainee-tab-btn.active {
+      color: #c084fc;
+      background: rgba(168, 85, 247, 0.2);
+      border-color: rgba(168, 85, 247, 0.5);
+      box-shadow: 0 0 12px rgba(168, 85, 247, 0.25);
+    }
+    .trainee-kpi-card {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 12px;
+      text-align: center;
+    }
+    .trainee-kpi-card .kpi-label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+    .trainee-kpi-card .kpi-val {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: #fff;
+    }
+
     /* AUTH MODAL & TRAINEE PASSPORT 100X STYLES */
     .auth-tab-row {
       display: flex;
@@ -9944,12 +9995,29 @@
                 <th>Streak</th>
                 <th>Total Workouts</th>
                 <th>Last Active</th>
+                <th style="text-align: right;">Action</th>
               </tr>
             </thead>
             <tbody id="adminRosterTableBody">
-              <tr><td colspan="6" style="text-align: center; color: var(--text-muted); padding: 20px;">Loading admin roster...</td></tr>
+              <tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 20px;">Loading admin roster...</td></tr>
             </tbody>
           </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: 🔍 HEAD COACH TRAINEE DEEP INSPECTION COCKPIT -->
+  <div id="adminTraineeDetailModal" class="app-modal" onclick="closeModalOnBackdrop(event, 'adminTraineeDetailModal')">
+    <div class="modal-box" style="max-width: 960px; max-height: 90vh; display: flex; flex-direction: column;">
+      <div class="modal-header">
+        <div class="modal-title" id="adminTraineeDetailTitle">🔍 Athlete Inspection Dossier</div>
+        <button class="modal-close" onclick="closeModal('adminTraineeDetailModal')">&times;</button>
+      </div>
+      <div class="modal-body" id="adminTraineeDetailBody" style="overflow-y: auto; padding-right: 6px;">
+        <div style="text-align: center; color: var(--text-muted); padding: 40px;">
+          <div style="font-size: 2rem; margin-bottom: 10px;">⚡</div>
+          Loading athlete dossier...
         </div>
       </div>
     </div>
@@ -12349,7 +12417,7 @@
       const activeUsersEl = document.getElementById('adminActiveUsers');
 
       if (!tableBody) return;
-      tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: var(--text-muted); padding: 20px;">Loading admin roster...</td></tr>';
+      tableBody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 20px;">Loading admin roster...</td></tr>';
 
       try {
         const res = await fetch('/api/admin/users', {
@@ -12358,7 +12426,7 @@
         });
         const json = await res.json();
         if (!res.ok || !json.success || !json.roster) {
-          tableBody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #f43f5e; padding: 20px;">${json.error || 'Failed to load roster'}</td></tr>`;
+          tableBody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: #f43f5e; padding: 20px;">${json.error || 'Failed to load roster'}</td></tr>`;
           return;
         }
 
@@ -12398,14 +12466,493 @@
               <td><span style="color: #f59e0b; font-weight: 700;">🔥 ${stats.streak || 0}d</span></td>
               <td>${stats.totalWorkouts || 0} days</td>
               <td style="font-size: 0.75rem; color: var(--text-muted);">${lastActiveStr}</td>
+              <td style="text-align: right; white-space: nowrap;">
+                <button class="btn-micro-step" onclick="inspectTraineeDetails('${escapeHtml(u.id)}')" style="background: rgba(168,85,247,0.18); border-color: rgba(168,85,247,0.5); color: #c084fc; font-weight: 700; padding: 4px 10px; font-size: 0.76rem; border-radius: 6px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(168,85,247,0.35)'" onmouseout="this.style.background='rgba(168,85,247,0.18)'">
+                  🔍 Inspect
+                </button>
+              </td>
             </tr>
           `;
         });
         tableBody.innerHTML = html;
       } catch (err) {
         console.error('Failed to load admin roster:', err);
-        tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #f43f5e; padding: 20px;">Network error loading roster.</td></tr>';
+        tableBody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: #f43f5e; padding: 20px;">Network error loading roster.</td></tr>';
       }
+    }
+
+    function safeParseTraineeJson(val, fallback) {
+      if (val === null || val === undefined) return fallback;
+      if (typeof val === 'object') return val;
+      if (typeof val === 'string') {
+        try { return JSON.parse(val); } catch { return fallback; }
+      }
+      return fallback;
+    }
+
+    async function inspectTraineeDetails(userId) {
+      if (!currentUser || currentUser.role !== 'admin') {
+        alert('Access denied: Head Coach (Admin) credentials required.');
+        return;
+      }
+
+      const bodyEl = document.getElementById('adminTraineeDetailBody');
+      const titleEl = document.getElementById('adminTraineeDetailTitle');
+      if (!bodyEl) return;
+
+      if (titleEl) titleEl.innerHTML = '🔍 Athlete Complete Dossier';
+      bodyEl.innerHTML = `
+        <div style="text-align: center; color: var(--text-muted); padding: 50px 20px;">
+          <div style="font-size: 2.2rem; margin-bottom: 12px; animation: pulse 1.2s infinite;">⚡</div>
+          <div style="font-weight: 800; color: #f1f5f9; font-size: 1.05rem;">Loading Athlete Dossier & State...</div>
+          <div style="font-size: 0.8rem; margin-top: 6px;">Retrieving full profile, set logs, and progression roadmap.</div>
+        </div>
+      `;
+
+      openModal('adminTraineeDetailModal');
+
+      try {
+        const res = await fetch('/api/admin/user/' + encodeURIComponent(userId) + '/state', {
+          headers: getAuthHeader(),
+          cache: 'no-store'
+        });
+        const data = await res.json();
+        if (!res.ok || !data.success || !data.user) {
+          bodyEl.innerHTML = `
+            <div style="padding: 24px; text-align: center; color: #f43f5e; background: rgba(244,63,94,0.1); border-radius: 12px; border: 1px solid rgba(244,63,94,0.3);">
+              <strong>Failed to load athlete details:</strong> ${escapeHtml(data.error || 'Server error')}
+            </div>
+          `;
+          return;
+        }
+
+        const u = data.user;
+        const state = data.state || {};
+        const stats = data.stats || {};
+
+        if (titleEl) {
+          titleEl.innerHTML = `🔍 Athlete Dossier &bull; ${escapeHtml(u.displayName || u.username)} <span style="font-size: 0.72rem; padding: 2px 8px; border-radius: 99px; background: ${u.role === 'admin' ? 'rgba(168,85,247,0.25); color:#c084fc;' : 'rgba(56,189,248,0.2); color:#38bdf8;'}; font-weight:800; margin-left: 6px;">${u.role.toUpperCase()}</span>`;
+        }
+
+        // Parse sub-objects
+        const completedDays = safeParseTraineeJson(state.gym_365_completed, []);
+        const setLogs = safeParseTraineeJson(state.gym_set_logs, {});
+        const metricsLogs = safeParseTraineeJson(state.gym_metrics_logs, {});
+        const milestones = safeParseTraineeJson(state.gym_unlocked_milestones, []);
+        const waterLog = safeParseTraineeJson(state.gym_water_log, {});
+        const profileObj = safeParseTraineeJson(state.gym_user_profile, {});
+
+        // Completed days array
+        let completedList = [];
+        if (Array.isArray(completedDays)) {
+          completedList = completedDays;
+        } else if (completedDays && typeof completedDays === 'object') {
+          completedList = Object.keys(completedDays);
+        }
+
+        // Milestones array
+        let milestoneList = [];
+        if (Array.isArray(milestones)) {
+          milestoneList = milestones;
+        } else if (milestones && typeof milestones === 'object') {
+          milestoneList = Object.keys(milestones);
+        }
+
+        // Photos
+        const photo1 = safeParseTraineeJson(state.gym_photo_1, state.gym_photo_1);
+        const photo2 = safeParseTraineeJson(state.gym_photo_2, state.gym_photo_2);
+        const photo3 = safeParseTraineeJson(state.gym_photo_3, state.gym_photo_3);
+        const photosCount = (photo1 ? 1 : 0) + (photo2 ? 1 : 0) + (photo3 ? 1 : 0);
+
+        // Group set logs by day and exercise
+        const daysMap = {};
+        let totalLoggedSets = 0;
+        let totalRepsCount = 0;
+        let totalTonnageKg = 0;
+
+        if (setLogs && typeof setLogs === 'object') {
+          Object.entries(setLogs).forEach(([key, val]) => {
+            if (!val || typeof val !== 'object') return;
+            totalLoggedSets++;
+            
+            // Format 1: d1_exbox_squats_s1
+            const match = key.match(/^d(\d+)_(.+)_s(\d+)$/);
+            if (match) {
+              const dNum = parseInt(match[1], 10);
+              const exId = match[2];
+              const sNum = parseInt(match[3], 10);
+              if (!daysMap[dNum]) daysMap[dNum] = {};
+              if (!daysMap[dNum][exId]) daysMap[dNum][exId] = [];
+              daysMap[dNum][exId].push({
+                setNum: sNum,
+                wt: val.wt || '0',
+                reps: val.reps || '--',
+                rir: val.rir !== undefined ? val.rir : '--',
+                done: !!val.done
+              });
+              const wtNum = parseFloat(val.wt) || 0;
+              const repNum = parseInt(val.reps, 10) || 0;
+              totalRepsCount += repNum;
+              totalTonnageKg += wtNum * repNum;
+            } else if (key.match(/^d(\d+)_/)) {
+              // Recovery or special event: e.g. d2_recovery_done
+              const dMatch = key.match(/^d(\d+)_(.+)$/);
+              const dNum = parseInt(dMatch[1], 10);
+              const exId = dMatch[2];
+              if (!daysMap[dNum]) daysMap[dNum] = {};
+              if (!daysMap[dNum][exId]) daysMap[dNum][exId] = [];
+              daysMap[dNum][exId].push({
+                setNum: 1,
+                wt: val.wt || '0',
+                reps: val.reps || (val.notes || 'Activity completed'),
+                rir: '--',
+                done: !!val.done
+              });
+            } else {
+              // Other day keys
+              if (!daysMap[1]) daysMap[1] = {};
+              if (!daysMap[1][key]) daysMap[1][key] = [];
+              daysMap[1][key].push({
+                setNum: 1,
+                wt: val.wt || '0',
+                reps: val.reps || '--',
+                rir: val.rir || '--',
+                done: !!val.done
+              });
+            }
+          });
+        }
+
+        // Starting and Target Weight
+        const startingWt = u.startingWeight || profileObj.weight || 74;
+        const targetWt = u.targetWeight || 74;
+        const weightDelta = (targetWt - startingWt).toFixed(1);
+        const deltaStr = weightDelta > 0 ? `+${weightDelta} kg` : `${weightDelta} kg`;
+
+        // Build HTML
+        let html = `
+          <!-- HERO ATHLETE PROFILE -->
+          <div style="background: linear-gradient(135deg, rgba(168,85,247,0.12) 0%, rgba(15,23,42,0.85) 100%); border: 1px solid rgba(168,85,247,0.3); border-radius: 14px; padding: 18px 22px; margin-bottom: 20px;">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px;">
+              <div style="display: flex; align-items: center; gap: 14px;">
+                <div style="font-size: 2.8rem; background: rgba(0,0,0,0.3); width: 68px; height: 68px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 2px solid rgba(168,85,247,0.4);">${u.avatar || '⚡'}</div>
+                <div>
+                  <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                    <h3 style="margin: 0; font-size: 1.25rem; color: #fff; font-weight: 800;">${escapeHtml(u.displayName || u.username)}</h3>
+                    <span style="font-size: 0.72rem; padding: 2px 8px; border-radius: 4px; font-weight: 800; background: ${u.role === 'admin' ? 'rgba(168,85,247,0.3); color:#c084fc;' : 'rgba(56,189,248,0.25); color:#38bdf8;'}">${u.role.toUpperCase()}</span>
+                    <span style="font-size: 0.7rem; color: #94a3b8; font-family: monospace;">ID: ${escapeHtml(u.id)}</span>
+                  </div>
+                  <div style="font-size: 0.8rem; color: var(--cyan); margin-top: 2px; font-weight: 600;">@${escapeHtml(u.username)} &bull; Goal: ${escapeHtml((u.goal || 'recomp').toUpperCase())}</div>
+                  <div style="font-size: 0.78rem; color: #cbd5e1; margin-top: 4px; font-style: italic;">"${escapeHtml(u.bio || 'Relentless athletic transformation & progression.')}"</div>
+                </div>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                <div style="font-size: 0.75rem; color: var(--text-muted);">Starting Weight: <strong style="color: #fff;">${startingWt} kg</strong></div>
+                <div style="font-size: 0.75rem; color: var(--text-muted);">Target Weight: <strong style="color: #34d399;">${targetWt} kg</strong> (${deltaStr})</div>
+                <div style="font-size: 0.72rem; color: var(--text-muted);">Enrolled: ${u.createdAt ? new Date(u.createdAt).toLocaleDateString() : 'N/A'}</div>
+                <div style="font-size: 0.72rem; color: var(--text-muted);">Last Active: ${u.lastActiveAt ? new Date(u.lastActiveAt).toLocaleString() : 'Never'}</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CORE METRIC KPIS -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 20px;">
+            <div class="trainee-kpi-card">
+              <div class="kpi-label">Active Day</div>
+              <div class="kpi-val" style="color: #38bdf8;">Day ${stats.currentDay || state.gym_active_day || 1}</div>
+            </div>
+            <div class="trainee-kpi-card">
+              <div class="kpi-label">Streak</div>
+              <div class="kpi-val" style="color: #f59e0b;">🔥 ${stats.streak || 1}d</div>
+            </div>
+            <div class="trainee-kpi-card">
+              <div class="kpi-label">Workouts Done</div>
+              <div class="kpi-val" style="color: #34d399;">${completedList.length} / 365</div>
+            </div>
+            <div class="trainee-kpi-card">
+              <div class="kpi-label">Total Sets Logged</div>
+              <div class="kpi-val" style="color: #a855f7;">${totalLoggedSets}</div>
+            </div>
+            <div class="trainee-kpi-card">
+              <div class="kpi-label">Rank / XP</div>
+              <div class="kpi-val" style="color: #e2e8f0; font-size: 1rem;">LVL ${stats.level || 1}<br><span style="font-size:0.75rem; color:#94a3b8;">${(stats.xp || 0).toLocaleString()} XP</span></div>
+            </div>
+            <div class="trainee-kpi-card">
+              <div class="kpi-label">Badges Unlocked</div>
+              <div class="kpi-val" style="color: #fbbf24;">🏆 ${milestoneList.length}</div>
+            </div>
+          </div>
+
+          <!-- TAB NAVIGATION -->
+          <div class="trainee-tab-row">
+            <button class="trainee-tab-btn active" id="traineeTabBtn_sets" onclick="switchTraineeDetailTab('sets')">🏋️ Workout Sets (${totalLoggedSets})</button>
+            <button class="trainee-tab-btn" id="traineeTabBtn_roadmap" onclick="switchTraineeDetailTab('roadmap')">🗺️ 365 Roadmap (${completedList.length} Days)</button>
+            <button class="trainee-tab-btn" id="traineeTabBtn_metrics" onclick="switchTraineeDetailTab('metrics')">⚖️ Body Metrics & Weight</button>
+            <button class="trainee-tab-btn" id="traineeTabBtn_milestones" onclick="switchTraineeDetailTab('milestones')">🏆 Badges (${milestoneList.length})</button>
+            <button class="trainee-tab-btn" id="traineeTabBtn_photos" onclick="switchTraineeDetailTab('photos')">📸 Photos (${photosCount})</button>
+            <button class="trainee-tab-btn" id="traineeTabBtn_raw" onclick="switchTraineeDetailTab('raw')">⚙️ Raw State JSON</button>
+          </div>
+
+          <!-- TAB 1: WORKOUT SETS & VOLUME -->
+          <div id="traineePane_sets" class="trainee-detail-pane" style="display: block;">
+        `;
+
+        const dayNums = Object.keys(daysMap).map(Number).sort((a,b) => a - b);
+        if (dayNums.length === 0) {
+          html += `
+            <div style="text-align: center; color: var(--text-muted); padding: 36px 20px; background: rgba(15,23,42,0.4); border-radius: 10px; border: 1px dashed rgba(255,255,255,0.1);">
+              <div style="font-size: 1.8rem; margin-bottom: 8px;">🏋️</div>
+              <div style="font-weight: 700; color: #e2e8f0;">No sets logged yet by this athlete</div>
+              <div style="font-size: 0.78rem; margin-top: 4px;">Once the trainee completes exercises in Today's Workout Engine, every set, rep, and weight entry will appear here in real time.</div>
+            </div>
+          `;
+        } else {
+          dayNums.forEach(dNum => {
+            const exercises = daysMap[dNum];
+            const exCount = Object.keys(exercises).length;
+            let daySetsCount = 0;
+            Object.values(exercises).forEach(sArr => { daySetsCount += sArr.length; });
+
+            html += `
+              <div style="background: rgba(15,23,42,0.7); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 14px; margin-bottom: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                  <div style="font-weight: 800; color: #fff; font-size: 0.95rem; display: flex; align-items: center; gap: 8px;">
+                    <span style="background: rgba(56,189,248,0.2); color: var(--cyan); padding: 2px 8px; border-radius: 6px; font-size: 0.76rem;">DAY ${dNum}</span>
+                    <span>Workout Progression Logs</span>
+                  </div>
+                  <div style="font-size: 0.75rem; color: var(--text-muted);">${exCount} Exercises &bull; ${daySetsCount} Sets Completed</div>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+            `;
+
+            Object.entries(exercises).forEach(([exId, sets]) => {
+              const cleanExName = exId.replace(/^ex/, '').replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+              html += `
+                <div style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 10px 12px;">
+                  <div style="font-weight: 700; color: #e2e8f0; font-size: 0.85rem; margin-bottom: 6px; display: flex; justify-content: space-between;">
+                    <span>📌 ${cleanExName}</span>
+                    <span style="font-size: 0.72rem; color: #34d399; font-weight: 600;">${sets.length} Sets Logged</span>
+                  </div>
+                  <table style="width: 100%; border-collapse: collapse; font-size: 0.78rem;">
+                    <thead>
+                      <tr style="color: var(--text-muted); border-bottom: 1px solid rgba(255,255,255,0.06); text-align: left;">
+                        <th style="padding: 4px 6px;">Set</th>
+                        <th style="padding: 4px 6px;">Weight (kg)</th>
+                        <th style="padding: 4px 6px;">Reps / Duration</th>
+                        <th style="padding: 4px 6px;">RIR</th>
+                        <th style="padding: 4px 6px; text-align: right;">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+              `;
+
+              sets.forEach(s => {
+                html += `
+                  <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
+                    <td style="padding: 4px 6px; font-weight: 700; color: #cbd5e1;">Set ${s.setNum}</td>
+                    <td style="padding: 4px 6px; color: var(--cyan);">${s.wt > 0 ? s.wt + ' kg' : 'Bodyweight'}</td>
+                    <td style="padding: 4px 6px; color: #fff;">${s.reps}</td>
+                    <td style="padding: 4px 6px; color: #f59e0b;">${s.rir}</td>
+                    <td style="padding: 4px 6px; text-align: right;">${s.done ? '<span style="color:#34d399; font-weight:800;">✅ Done</span>' : '<span style="color:#94a3b8;">Pending</span>'}</td>
+                  </tr>
+                `;
+              });
+
+              html += `
+                    </tbody>
+                  </table>
+                </div>
+              `;
+            });
+
+            html += `
+                </div>
+              </div>
+            `;
+          });
+        }
+
+        html += `
+          </div>
+
+          <!-- TAB 2: 365 ROADMAP PROGRESS -->
+          <div id="traineePane_roadmap" class="trainee-detail-pane" style="display: none;">
+            <div style="background: rgba(15,23,42,0.7); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 16px; margin-bottom: 16px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <div style="font-weight: 800; color: #fff; font-size: 0.9rem;">365-Day Transformation Master Roadmap</div>
+                <div style="font-weight: 800; color: var(--cyan); font-size: 0.9rem;">${((completedList.length / 365) * 100).toFixed(1)}% Completed</div>
+              </div>
+              <div style="width: 100%; height: 10px; background: rgba(255,255,255,0.08); border-radius: 99px; overflow: hidden; margin-bottom: 16px;">
+                <div style="height: 100%; width: ${Math.min(100, Math.max(1, (completedList.length / 365) * 100))}%; background: linear-gradient(90deg, #38bdf8, #a855f7); border-radius: 99px;"></div>
+              </div>
+              <div style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 12px;">Completed Days Log:</div>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+        `;
+
+        if (completedList.length === 0) {
+          html += `<div style="color: var(--text-muted); font-size: 0.8rem; font-style: italic;">No days marked complete yet. Athlete is currently on Day ${stats.currentDay || 1}.</div>`;
+        } else {
+          completedList.sort((a,b) => parseInt(a,10) - parseInt(b,10)).forEach(d => {
+            html += `<span style="background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.35); color: #34d399; padding: 4px 10px; border-radius: 6px; font-size: 0.76rem; font-weight: 700;">Day ${d} &check;</span>`;
+          });
+        }
+
+        html += `
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 3: BODY METRICS & WEIGHT -->
+          <div id="traineePane_metrics" class="trainee-detail-pane" style="display: none;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 16px;">
+              <div style="background: rgba(15,23,42,0.7); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 14px;">
+                <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Starting Weight</div>
+                <div style="font-size: 1.4rem; font-weight: 900; color: #fff;">${startingWt} kg</div>
+              </div>
+              <div style="background: rgba(15,23,42,0.7); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 14px;">
+                <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Target Goal Weight</div>
+                <div style="font-size: 1.4rem; font-weight: 900; color: #34d399;">${targetWt} kg</div>
+              </div>
+              <div style="background: rgba(15,23,42,0.7); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 14px;">
+                <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Required Delta</div>
+                <div style="font-size: 1.4rem; font-weight: 900; color: var(--cyan);">${deltaStr}</div>
+              </div>
+            </div>
+
+            <div style="background: rgba(15,23,42,0.7); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 16px; margin-bottom: 16px;">
+              <h5 style="margin: 0 0 10px 0; color: #fff; font-size: 0.85rem;">Hydration Tracker History</h5>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+        `;
+
+        const waterEntries = Object.entries(waterLog);
+        if (waterEntries.length === 0) {
+          html += `<div style="color: var(--text-muted); font-size: 0.8rem; font-style: italic;">No hydration logs recorded yet.</div>`;
+        } else {
+          waterEntries.forEach(([d, glasses]) => {
+            html += `<span style="background: rgba(56,189,248,0.15); border: 1px solid rgba(56,189,248,0.3); color: #38bdf8; padding: 4px 10px; border-radius: 6px; font-size: 0.76rem; font-weight: 600;">Day ${d}: 💧 ${glasses} glasses (${(glasses * 0.25).toFixed(1)}L)</span>`;
+          });
+        }
+
+        html += `
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 4: BADGES & MILESTONES -->
+          <div id="traineePane_milestones" class="trainee-detail-pane" style="display: none;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
+        `;
+
+        const allMilestonesDict = {
+          'first_step': { title: 'First Step', icon: '🏁', desc: 'Completed Day 1 workout' },
+          'tonnage_1k': { title: '1,000kg Club', icon: '🏋️', desc: 'Moved over 1,000kg of cumulative tonnage' },
+          'tonnage_5k': { title: '5,000kg Titan', icon: '⚡', desc: 'Surpassed 5,000kg of total workout volume' },
+          'photo_day1': { title: 'Day 1 Baseline', icon: '📸', desc: 'Captured inaugural Day 1 transformation photo' },
+          'photo_week1': { title: 'Week 1 Visual Proof', icon: '📸', desc: 'Logged 7-day visual physique comparison' },
+          'mastery_progressive': { title: 'Overload Master', icon: '📈', desc: 'Incremented load or reps across 3 consecutive sessions' }
+        };
+
+        if (milestoneList.length === 0) {
+          html += `
+            <div style="grid-column: 1 / -1; text-align: center; color: var(--text-muted); padding: 30px; background: rgba(15,23,42,0.4); border-radius: 8px;">
+              No milestones unlocked yet. Athlete will earn badges as workouts and photos are logged.
+            </div>
+          `;
+        } else {
+          milestoneList.forEach(mKey => {
+            const mInfo = allMilestonesDict[mKey] || { title: mKey.replace(/_/g, ' ').toUpperCase(), icon: '🏆', desc: 'Mastery milestone unlocked' };
+            html += `
+              <div style="background: rgba(15,23,42,0.8); border: 1px solid rgba(251,191,36,0.3); border-radius: 10px; padding: 14px; display: flex; align-items: center; gap: 12px; box-shadow: 0 0 10px rgba(251,191,36,0.08);">
+                <div style="font-size: 2rem;">${mInfo.icon}</div>
+                <div>
+                  <div style="font-weight: 800; color: #fbbf24; font-size: 0.88rem;">${mInfo.title}</div>
+                  <div style="font-size: 0.72rem; color: #94a3b8; margin-top: 2px;">${mInfo.desc}</div>
+                </div>
+              </div>
+            `;
+          });
+        }
+
+        html += `
+            </div>
+          </div>
+
+          <!-- TAB 5: TRANSFORMATION PHOTOS -->
+          <div id="traineePane_photos" class="trainee-detail-pane" style="display: none;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px;">
+        `;
+
+        const renderPhotoCard = (label, photoObj) => {
+          let imgUrl = null;
+          let photoDay = null;
+          if (photoObj) {
+            if (typeof photoObj === 'object') {
+              imgUrl = photoObj.dataUrl || photoObj.url || null;
+              photoDay = photoObj.day || photoObj.numericDay || null;
+            } else if (typeof photoObj === 'string' && photoObj.startsWith('data:image')) {
+              imgUrl = photoObj;
+            }
+          }
+
+          if (imgUrl) {
+            return `
+              <div style="background: rgba(15,23,42,0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; text-align: center;">
+                <div style="padding: 10px; font-weight: 700; color: #fff; font-size: 0.82rem; background: rgba(0,0,0,0.3); display: flex; justify-content: space-between;">
+                  <span>${label}</span>
+                  <span style="color: var(--cyan);">${photoDay ? 'Day ' + photoDay : ''}</span>
+                </div>
+                <div style="padding: 10px;">
+                  <img src="${imgUrl}" style="max-width: 100%; max-height: 240px; object-fit: contain; border-radius: 6px;" alt="${label}">
+                </div>
+              </div>
+            `;
+          } else {
+            return `
+              <div style="background: rgba(15,23,42,0.4); border: 1px dashed rgba(255,255,255,0.08); border-radius: 10px; padding: 36px 14px; text-align: center; color: var(--text-muted);">
+                <div style="font-size: 1.8rem; margin-bottom: 6px;">📷</div>
+                <div style="font-weight: 600; color: #94a3b8; font-size: 0.85rem;">${label}</div>
+                <div style="font-size: 0.72rem; margin-top: 4px;">No photo logged for this slot</div>
+              </div>
+            `;
+          }
+        };
+
+        html += renderPhotoCard('Milestone Photo 1 (Day 1)', photo1);
+        html += renderPhotoCard('Milestone Photo 2 (Day 30)', photo2);
+        html += renderPhotoCard('Milestone Photo 3 (Day 90)', photo3);
+
+        html += `
+            </div>
+          </div>
+
+          <!-- TAB 6: RAW STATE JSON -->
+          <div id="traineePane_raw" class="trainee-detail-pane" style="display: none;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="font-size: 0.75rem; color: var(--text-muted);">Complete user-isolated storage snapshot for ID: <code>${escapeHtml(u.id)}</code></span>
+              <button class="btn-micro-step" onclick="navigator.clipboard.writeText(JSON.stringify(${JSON.stringify(state).replace(/'/g, "\\'")}, null, 2)); if(typeof showToast==='function') showToast('📋 JSON copied to clipboard!');" style="padding: 4px 10px; font-size: 0.74rem;">📋 Copy JSON</button>
+            </div>
+            <pre style="background: rgba(5,8,16,0.95); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 14px; color: #38bdf8; font-family: monospace; font-size: 0.72rem; max-height: 400px; overflow: auto; white-space: pre-wrap; word-break: break-all;">${escapeHtml(JSON.stringify(state, null, 2))}</pre>
+          </div>
+        `;
+
+        bodyEl.innerHTML = html;
+      } catch (err) {
+        console.error('Failed to inspect trainee:', err);
+        bodyEl.innerHTML = `
+          <div style="padding: 24px; text-align: center; color: #f43f5e; background: rgba(244,63,94,0.1); border-radius: 12px; border: 1px solid rgba(244,63,94,0.3);">
+            <strong>Network error:</strong> Could not retrieve athlete dossier.
+          </div>
+        `;
+      }
+    }
+
+    function switchTraineeDetailTab(tabKey) {
+      document.querySelectorAll('.trainee-detail-pane').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('.trainee-tab-btn').forEach(btn => btn.classList.remove('active'));
+      const activePane = document.getElementById('traineePane_' + tabKey);
+      const activeBtn = document.getElementById('traineeTabBtn_' + tabKey);
+      if (activePane) activePane.style.display = 'block';
+      if (activeBtn) activeBtn.classList.add('active');
     }
 
     function updateSyncBadge(status, text) {
@@ -21072,6 +21619,7 @@ function stopGuidedCooldown() {
             closeModal('profilePassportModal');
             closeModal('profileSettingsModal');
             closeModal('adminModal');
+            closeModal('adminTraineeDetailModal');
             closeHeaderToolsMenu();
             closeFocusHUD();
           }
@@ -21085,6 +21633,7 @@ function stopGuidedCooldown() {
           closeModal('profilePassportModal');
           closeModal('profileSettingsModal');
           closeModal('adminModal');
+          closeModal('adminTraineeDetailModal');
           closeHeaderToolsMenu();
           closeFocusHUD();
           closeModal('photoModal');
@@ -23373,6 +23922,8 @@ if (typeof window !== 'undefined') {
       window.selectSettingsAvatar = selectSettingsAvatar;
       window.handleProfileSettingsSubmit = handleProfileSettingsSubmit;
       window.openPassportFromSettings = openPassportFromSettings;
+      window.inspectTraineeDetails = inspectTraineeDetails;
+      window.switchTraineeDetailTab = switchTraineeDetailTab;
 
       // Direct element click binding to guarantee pill responsiveness
       const userPillEl = document.getElementById('headerUserPill');

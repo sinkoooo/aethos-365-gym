@@ -316,29 +316,53 @@ export async function saveUserGymState(userId, payload) {
   return stateWithMeta;
 }
 
-// Calculate Trainee Stats for Leaderboard
-function calculateTraineeStats(user, state = {}) {
-  let completedDays = 0;
-  if (state.gym_365_completed) {
-    if (typeof state.gym_365_completed === 'object') {
-      completedDays = Object.keys(state.gym_365_completed).length;
+function safeParseJson(val, fallback = null) {
+  if (val === null || val === undefined) return fallback;
+  if (typeof val === 'object') return val;
+  if (typeof val === 'string') {
+    try {
+      return JSON.parse(val);
+    } catch {
+      return fallback;
     }
+  }
+  return fallback;
+}
+
+// Calculate Trainee Stats for Leaderboard & Admin Inspection
+function calculateTraineeStats(user, rawState = {}) {
+  const state = rawState || {};
+  let completedDays = 0;
+  const completedParsed = safeParseJson(state.gym_365_completed, state.gym_365_completed);
+  if (Array.isArray(completedParsed)) {
+    completedDays = completedParsed.length;
+  } else if (completedParsed && typeof completedParsed === 'object') {
+    completedDays = Object.keys(completedParsed).length;
   }
 
   let totalSets = 0;
-  if (state.gym_set_logs && typeof state.gym_set_logs === 'object') {
-    Object.values(state.gym_set_logs).forEach(daySets => {
-      if (typeof daySets === 'object') {
-        Object.values(daySets).forEach(sets => {
-          if (Array.isArray(sets)) totalSets += sets.length;
-        });
+  const setLogsParsed = safeParseJson(state.gym_set_logs, state.gym_set_logs);
+  if (setLogsParsed && typeof setLogsParsed === 'object') {
+    Object.values(setLogsParsed).forEach(item => {
+      if (Array.isArray(item)) {
+        totalSets += item.length;
+      } else if (item && typeof item === 'object') {
+        if ('done' in item || 'reps' in item || 'wt' in item) {
+          totalSets += 1;
+        } else {
+          Object.values(item).forEach(inner => {
+            if (Array.isArray(inner)) totalSets += inner.length;
+            else if (inner && typeof inner === 'object') totalSets += 1;
+          });
+        }
       }
     });
   }
 
   // Calculate XP & Level
   // Each completed day = 150 XP, each logged set = 15 XP
-  const xp = (completedDays * 150) + (totalSets * 15) + (state.gym_active_day ? (parseInt(state.gym_active_day, 10) * 20) : 0);
+  const activeDayNum = parseInt(state.gym_active_day, 10) || 1;
+  const xp = (completedDays * 150) + (totalSets * 15) + (activeDayNum * 20);
   
   let level = 1;
   let levelTitle = 'Initiate';
@@ -353,11 +377,14 @@ function calculateTraineeStats(user, state = {}) {
   else if (xp >= 250) { level = 2; levelTitle = 'Apprentice'; }
 
   let unlockedBadges = 0;
-  if (state.gym_unlocked_milestones && Array.isArray(state.gym_unlocked_milestones)) {
-    unlockedBadges = state.gym_unlocked_milestones.length;
+  const milestonesParsed = safeParseJson(state.gym_unlocked_milestones, state.gym_unlocked_milestones);
+  if (Array.isArray(milestonesParsed)) {
+    unlockedBadges = milestonesParsed.length;
+  } else if (milestonesParsed && typeof milestonesParsed === 'object') {
+    unlockedBadges = Object.keys(milestonesParsed).length;
   }
 
-  let streak = completedDays > 0 ? completedDays : 1;
+  let streak = completedDays > 0 ? completedDays : (parseInt(state.gym_streak, 10) || 1);
 
   return {
     userId: user.id,
@@ -374,7 +401,7 @@ function calculateTraineeStats(user, state = {}) {
     totalWorkouts: completedDays,
     totalSets,
     unlockedBadges,
-    currentDay: state.gym_active_day || 1,
+    currentDay: activeDayNum,
     lastActiveAt: user.lastActiveAt
   };
 }
@@ -432,5 +459,6 @@ export async function adminGetUserState(targetUserId) {
   const user = users.find(u => u.id === targetUserId);
   if (!user) throw new Error('User not found');
   const state = await getUserGymState(targetUserId);
-  return { user: sanitizeUser(user), state };
+  const stats = calculateTraineeStats(user, state);
+  return { user: sanitizeUser(user), state, stats };
 }
