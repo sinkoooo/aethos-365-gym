@@ -16295,6 +16295,23 @@
         wrap.innerHTML = '';
         if (btn) btn.innerHTML = '▶ Watch Video Guide Inline';
       } else {
+        // Automatically stop other music (GymMusic beats, synth, and local mp3) so video audio is clear
+        if (typeof GymMusic !== 'undefined' && GymMusic.isPlaying) {
+          GymMusic.pause();
+        }
+        // Stop any playing HTML audio elements
+        document.querySelectorAll('audio').forEach(a => {
+          try { a.pause(); } catch(e) {}
+        });
+
+        // Close any other open inline videos across the page
+        document.querySelectorAll('.inline-video-wrap').forEach(w => {
+          if (w.id !== `inlineVideoWrap_${idx}`) {
+            w.style.display = 'none';
+            w.innerHTML = '';
+          }
+        });
+
         wrap.style.display = 'block';
         wrap.innerHTML = renderInlineVideoPlayerHTML(
           videoId, 
@@ -17275,6 +17292,23 @@ function toggleMobilityVideo(id, videoId, name) {
     wrap.innerHTML = '';
     if (btn) btn.innerText = '▶ Watch Video Guide Inline';
   } else {
+    // Automatically stop other music (GymMusic beats, synth, and local mp3) so video audio is clear
+    if (typeof GymMusic !== 'undefined' && GymMusic.isPlaying) {
+      GymMusic.pause();
+    }
+    // Stop any playing HTML audio elements
+    document.querySelectorAll('audio').forEach(a => {
+      try { a.pause(); } catch(e) {}
+    });
+
+    // Close any other open inline videos across the page
+    document.querySelectorAll('.inline-video-wrap').forEach(w => {
+      if (w.id !== `mobVideoWrap_${id}`) {
+        w.style.display = 'none';
+        w.innerHTML = '';
+      }
+    });
+
     wrap.style.display = 'block';
     wrap.innerHTML = renderInlineVideoPlayerHTML(
       videoId, 
