@@ -1,0 +1,15 @@
+{
+  "name": "google-l8-mastery-platform",
+  "version": "2.0.0",
+  "description": "Google L8 / Staff Engineer Technical Mastery & Learning Platform for Shivam Agarwal",
+  "type": "module",
+  "main": "server.mjs",
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "node --watch server.mjs"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}

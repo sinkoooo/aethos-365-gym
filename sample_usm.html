@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Samsung USM - eNB Configuration</title>
+    <style>
+        body { font-family: Arial; padding: 20px; background-color: #f4f6f9; }
+        .container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h2 { color: #0a3d62; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        input[type="text"] { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .btn-submit { background-color: #3c6382; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Radio Configuration - eNodeB 8820</h2>
+        
+        <!-- Element with stable IDs -->
+        <div class="form-group">
+            <label>Cell Transmit Power (dBm)</label>
+            <input type="text" id="tx_power_input" data-testid="tx-power" value="43.0">
+        </div>
+        
+        <!-- Element mimicking dynamic React/CSS classes with no stable IDs -->
+        <div class="form-group">
+            <label class="css-dyn-label-x4">Frequency Band Indicator</label>
+            <input type="text" class="css-dyn-input-y9" value="Band 3 (1800 MHz)">
+        </div>
+        
+        <button class="btn-submit" onclick="alert('Configuration parameters successfully applied to eNodeB 8820.')">Apply Configuration</button>
+    </div>
+    
+    <div style="margin-top: 50px; padding: 10px; border-top: 2px dashed #ccc; color: #666; font-size: 14px;">
+        <strong>How to test with Chrome Extension:</strong>
+        <ol>
+            <li>Load the 'extension' folder in Chrome as an unpacked extension.</li>
+            <li>Open this HTML file in your browser.</li>
+            <li>Click the Extension popup and hit 'Start Mapping Mode'.</li>
+            <li>Click on the "Frequency Band Indicator" input box and the "Apply Configuration" button. (They will flash red).</li>
+            <li>Open the Extension popup again, hit 'Start Chat Mode', and ask something like "Where is the apply button?" or "Where is the frequency band?"</li>
+            <li>The extension will guide you!</li>
+        </ol>
+    </div>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USM AI Navigation Architecture</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+            margin: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+        h2 {
+            color: #1a73e8;
+            border-bottom: 2px solid #e8eaed;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+        p {
+            color: #5f6368;
+            font-size: 15px;
+            margin-bottom: 30px;
+        }
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Phase 1: Guided UI Mapping & Ingestion</h2>
+        <p><em>The process of a Domain Expert structurally mapping the USM web interface into the local Vector DB without requiring a live DOM copy for the LLM.</em></p>
+        <div class="mermaid">
+        sequenceDiagram
+            autonumber
+            actor Expert as Domain Expert
+            participant USM as USM Dashboard (Browser)
+            participant Ext as Chrome Extension
+            participant API as FastAPI Backend (CPU)
+            participant DB as Local Vector DB
+
+            Expert->>USM: Navigates through complex configuration menus
+            Expert->>Ext: Toggles to "Mapping Mode"
+            USM-->>Ext: Extension accesses local DOM Fragments
+            Ext->>Ext: Extracts Labels (e.g., "Tx Power") & Maps Locators
+            Note right of Ext: Resilient Locators Array:<br>1. Semantic ID<br>2. Text-Based XPath<br>3. Hierarchical XPath
+            Ext->>API: POST Navigation JSON (Structural UI Map)
+            API->>API: all-MiniLM-L6-v2 Creates Embeddings of UI Labels
+            API->>DB: Ingests & Indexes Embeddings + Target Metadata
+            DB-->>API: Acknowledges Safe Storage
+            API-->>Ext: "Page Successfully Mapped" Alert
+            Ext-->>Expert: Visual Confirmation
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Phase 2: User Intent & Guided Navigation</h2>
+        <p><em>The workflow where an Operator uses natural language, and the local CPU-bound AI securely highlights the target interface items.</em></p>
+        <div class="mermaid">
+        sequenceDiagram
+            autonumber
+            actor User as Standard Operator
+            participant USM as USM Dashboard (Browser)
+            participant Ext as Chrome Extension
+            participant API as FastAPI Backend (CPU)
+            participant LLM as Llama.cpp Engine (Quantized)
+            participant DB as Local Vector DB
+
+            User->>Ext: Types Intent: "Configure Tx Power on eNodeB"
+            Ext->>API: POST /navigate { intent: text }
+            API->>DB: Semantic Query using Intent Embedding
+            DB-->>API: Returns Top-K Matching UI Elements & Locators
+            Note right of API: RAG Retrieval completes instantly<br>without fetching live DOM
+            API->>LLM: Prompts LLM with User Intent + Top-K UI Elements
+            Note right of LLM: Runs entirely locally on CPU<br>without external API
+            LLM-->>API: Selects accurate element path sequence (Locator Array)
+            API-->>Ext: Returns specific XPaths/CSS for sequence
+            Ext->>USM: Tries Primary Locator -> Fails -> Tries Fallback Locator
+            USM->>USM: Highlights target tab/input (Bounding Box)
+            USM-->>User: Physical visual guidance applied to UI
+        </div>
+    </div>
+    
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ 
+            startOnLoad: true, 
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#e8f0fe',
+                primaryTextColor: '#202124',
+                lineColor: '#1a73e8',
+                secondaryColor: '#fce4ec',
+                tertiaryColor: '#e8f5e9',
+                noteBkgColor: '#fff9c4',
+                noteTextColor: '#202124'
+            }
+        });
+    </script>
+</body>
+</html>

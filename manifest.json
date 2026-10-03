@@ -1,0 +1,26 @@
+{
+  "name": "AETHOS 365 PRO - Home Gym OS",
+  "short_name": "AETHOS 365",
+  "description": "1-Year Progressive Home Gym & Longevity Operating System for 35yo 6'0\" Trainee",
+  "start_url": "./home_gym_zero_to_hero.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b1120",
+  "theme_color": "#0b1120",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["health", "fitness", "lifestyle"]
+}

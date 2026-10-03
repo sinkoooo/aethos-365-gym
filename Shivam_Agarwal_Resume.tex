@@ -1,0 +1,161 @@
+%-------------------------
+% Resume in LaTeX
+% Author : Shivam Agarwal
+% Target : Google / Big Tech - Staff / Senior Distributed Systems & Cloud Infrastructure Engineer
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,10pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins for high-density, professional formatting
+\addtolength{\oddsidemargin}{-0.55in}
+\addtolength{\evensidemargin}{-0.55in}
+\addtolength{\textwidth}{1.1in}
+\addtolength{\topmargin}{-0.65in}
+\addtolength{\textheight}{1.3in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-7pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-4pt}]
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[2]{
+  \item\small{
+    \textbf{#1}{: #2 \vspace{-1.5pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-3pt}}
+
+\renewcommand{\labelitemii}{$\circ$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*,label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=12pt]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-4pt}}
+
+%-------------------------------------------
+%%%%%%  CV STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%----------HEADING-----------------
+\begin{center}
+    \textbf{\Large \scshape Shivam Agarwal} \\ \vspace{2pt}
+    \small \textbf{Staff Software Engineer $|$ Distributed Systems \& Carrier-Scale Infrastructure} \\ \vspace{2pt}
+    Bengaluru, India $|$ +91 7024815138 $|$ \href{mailto:shivam681992@gmail.com}{\underline{shivam681992@gmail.com}} $|$ \href{https://linkedin.com/in/shivam681992}{\underline{linkedin.com/in/shivam681992}}
+\end{center}
+\vspace{-12pt}
+
+%-----------SUMMARY-----------------
+\section{Summary}
+\small{Staff Backend Engineer with \textbf{10+ years} architecting carrier-grade distributed systems and mission-critical cloud platforms. Core technical lead for Samsung's flagship \textbf{Unified System Manager (USM) Configuration Management (CM) platform} (3,164+ Java files across 60+ sub-modules), managing 4G/5G/O-RAN infrastructure for \textbf{15+ global Tier-1 telecom operators} (KDDI, KT, SKT, Comcast, TELUS, Reliance Jio). Deep expertise in southbound \textbf{NETCONF (RFC 6241/6242) / YANG} protocols, declarative validation engines, distributed session locking, and high-concurrency data layers (Java 21, Spring Boot, QueryDSL/JPA, JDBC, Kafka, Redis). Proven record diagnosing low-level protocol bottlenecks and engineering air-gapped AI agent integrations. Holds an \textbf{M.Tech. in Data Science} from the \textbf{Indian Institute of Science (IISc), Bengaluru}.}
+\vspace{-3pt}
+
+%-----------TECHNICAL SKILLS-----------------
+\section{Technical Skills}
+\begin{itemize}[leftmargin=*,label={}]
+    \small{\item{
+     \textbf{Languages \& Core}{: Java (21/17 - Virtual Threads, Concurrency, Pattern Matching, Records), Python (3.10+), SQL, Bash} \\
+     \textbf{Distributed Systems \& Protocols}{: NETCONF (RFC 6241/6242), YANG, Apache Kafka, Redis (Distributed Leases, Session Locking), Microservices, REST, gRPC, RPC Head-of-Line Queueing, Event-Driven Architecture, Idempotent Processing} \\
+     \textbf{Frameworks \& Data Access}{: Spring Boot (3.x/4.x), JPA / Hibernate, QueryDSL, JdbcTemplate, JAXB, Lombok, Quartz Scheduler} \\
+     \textbf{Databases \& Storage}{: PostgreSQL (Recursive CTEs, Index Tuning), MySQL, Redis, ChromaDB} \\
+     \textbf{Cloud, Infra \& Telecom}{: 5G NR (gNB CU/DU split, O-RAN, vRAN), 4G LTE, Network Slicing, Docker, Kubernetes, Helm, Perforce, Gradle (Kotlin DSL), Nexus, Wireshark/Pcap} \\
+     \textbf{Testing \& Reliability}{: JUnit 5, Mockito, AssertJ, JaCoCo (Coverage $>$85\%), Root Cause Analysis (RCA), SLA Governance}
+    }}
+\end{itemize}
+\vspace{-10pt}
+
+%-----------EXPERIENCE-----------------
+\section{Professional Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Samsung R\&D Institute}{Bengaluru, India}
+      {Chief Engineer (Lead Architect - Configuration Management)}{Jan 2020 -- Present}
+      \resumeItemListStart
+        \resumeItem{Core CM Platform Ownership \& Scale}
+          {Technical lead for Samsung's carrier-grade USM Configuration Management platform (3,164+ Java files across 60+ sub-modules); orchestrated network lifecycle operations (Grow/Degrow) and configuration management across 30+ 4G/5G NE types for \textbf{15+ global Tier-1 operators} (KDDI, KT, SKT, Comcast, TELUS, Reliance Jio).}
+        \resumeItem{Cross-Field Declarative Validation Framework}
+          {Designed and implemented a high-performance validation engine with \textbf{200+ relation validators} (\texttt{ValidMultiCarrierType}, \texttt{ValidCellNumForCpriEcpri}, \texttt{ValidEarfcnDl}, \texttt{ValidGnbId}); enforced multi-parameter constraint checking prior to southbound deployment, cutting invalid network element configuration attempts to \textbf{0\%}.}
+        \resumeItem{Parameter Audit \& Container-Based Diff Engine}
+          {Architected the Generic Parameter List (GPL) audit and delta-computation system; engineered a YANG container-based diff engine comparing physical NE running configurations against target templates, integrating distributed session locking (\texttt{EditingPlanLocker}, \texttt{SessionLocker}) to guarantee conflict-free concurrent editing across multi-operator engineering teams.}
+        \resumeItem{High-Throughput Southbound Synchronization (NETCONF/YANG)}
+          {Engineered an asynchronous multi-threaded synchronization pipeline over NETCONF (RFC 6241/6242) and YANG schema-driven parsers; sustained real-time synchronization of 4-tier Network Resource Models (NRM Level 3--6) and parallel multi-NE backup workflows across multi-server (MCM/CFM) cluster topologies.}
+        \resumeItem{High-Performance Hybrid Persistence Layer}
+          {Built a hybrid data access layer combining JPA, QueryDSL, and optimized \texttt{JdbcTemplate} batch processing across 15+ core CM entities; implemented custom naming strategies, composite indexing, and transactional wrappers, eliminating N+1 query overheads and accelerating batch report generation by \textbf{40\%}.}
+        \resumeItem{Zero-Touch Firmware \& Software Management (SWM)}
+          {Developed a Centralized Remote Operation (CRO) daemon with worker thread pools, MD5 cryptographic verification, and automated rollback mechanisms; orchestrated zero-touch scheduled firmware upgrades and forward compatibility validations across thousands of geographically distributed cell sites.}
+        \resumeItem{Deep Protocol RCA \& Critical Incident Resolution}
+          {Authored definitive root-cause analyses (RCAs) resolving critical Tier-1 carrier escalations; diagnosed a \textbf{172-second RPC delay} for a major US operator (Comcast) down to NE-side head-of-line queueing under RFC 6241 serial RPC processing (using pcap packet analysis, ConfD trace logs, and pending heartbeat queues), proving USM transport compliance and preserving contract SLAs.}
+        \resumeItem{Air-Gapped AI Agent Architecture (MCP)}
+          {Designed an on-premise Model Context Protocol (MCP) server and CPU-optimized semantic retrieval pipeline (ChromaDB + llama.cpp); enabled natural-language query resolution across complex 3GPP parameter hierarchies within air-gapped carrier environments with \textbf{sub-800ms response times}.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Cognizant Technology Solutions}{Bengaluru, India}
+      {Associate (Senior Software Engineer)}{Feb 2016 -- Jan 2020}
+      \resumeItemListStart
+        \resumeItem{Metadata-Driven Ingestion Engine}
+          {Engineered a metadata-driven ingestion framework using Java and SQL to automate schema parsing, validation, and loading across 15+ heterogeneous clinical data feeds; accelerated client onboarding time by \textbf{35\%}.}
+        \resumeItem{High-Throughput Data Pipeline}
+          {Architected automated XML and JSON serialization/deserialization pipelines utilizing Java (JAXB, Jackson) and custom stream processors, eliminating manual translation bottlenecks and processing \textbf{2M+ daily records} error-free.}
+        \resumeItem{Database Performance Tuning}
+          {Optimized complex relational schemas and batch ETL queries across multi-terabyte healthcare datasets in Oracle/MySQL; tuned table partitioning, indexing, and execution plans, reducing nightly batch processing windows by \textbf{40\%}.}
+        \resumeItem{Engineering Quality}
+          {Led technical design reviews and established CI/CD automated test suites (JUnit, Mockito), driving code coverage above 85\% and reducing production deployment defects by 25\%.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+\vspace{-8pt}
+
+%-----------EDUCATION-----------------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Indian Institute of Science (IISc)}{Bengaluru, India}
+      {Master of Technology (M.Tech.) in Data Science \& Business Analytics}{2022 -- 2024}
+      \resumeItemListStart
+        \resumeItem{Key Focus}{Distributed Systems, Scalable Machine Learning, Deep Learning, Statistical Optimization.}
+      \resumeItemListEnd
+    \resumeSubheading
+      {Jaypee University of Engineering and Technology}{Guna, India}
+      {Bachelor of Technology (B.Tech.) in Computer Science \& Engineering}{2011 -- 2015}
+  \resumeSubHeadingListEnd
+
+%-------------------------------------------
+\end{document}

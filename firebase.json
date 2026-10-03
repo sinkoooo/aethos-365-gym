@@ -1,0 +1,26 @@
+{
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      ".venv/**",
+      "USM_Architecture_Flow.pptx",
+      "architecture_diagram.html",
+      "architecture_diagram.md",
+      "create_architecture_ppt.py",
+      "pdf_questions.txt",
+      "sample_usm.html",
+      "server/**",
+      "extension/**"
+    ],
+    "redirects": [
+      {
+        "source": "/",
+        "destination": "/garima_doodh_margdarshika.html",
+        "type": 302
+      }
+    ]
+  }
+}

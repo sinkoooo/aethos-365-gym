@@ -1,0 +1,13 @@
+[
+  {
+    "id": "usr_admin_master",
+    "username": "admin",
+    "displayName": "Head Coach (Admin)",
+    "salt": "2323d2a495967719110a5b08986235e0",
+    "passwordHash": "63cd86aa8b04096ac38d3a967ab00651de5c80e00c7feca22b369ddef40d86879773d9129ec1b90c566192143f101160263efcb2606044fcf73e950b56aae1bf",
+    "role": "admin",
+    "avatar": "👑",
+    "createdAt": "2026-10-03T06:31:11.514Z",
+    "lastActiveAt": "2026-10-03T06:41:14.512Z"
+  }
+]

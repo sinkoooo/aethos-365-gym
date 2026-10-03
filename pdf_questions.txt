@@ -1,0 +1,1094 @@
+#
+Category
+Interview Question (Probing level: Staff/Lead)
+1 Deep Project Dive: Samsung Configuration Management
+Explain the internal architecture of the CM module. Why was Kafka chosen over gRPC for configuration updates?
+2 Deep Project Dive: Samsung Configuration Management
+Walk me through the data flow for an update across 20M+ cells. Where is the potential for data loss?
+3 Deep Project Dive: Samsung Configuration Management
+How do you handle the 'Thundering Herd' problem when 1M+ Network Elements reconnect simultaneously?
+4 Deep Project Dive: Samsung Configuration Management
+Explain your custom Redis-based distributed lock. How do you handle clock drift between Redis and the App node?
+5 Deep Project Dive: Samsung Configuration Management
+Describe the 'Idempotent Consumer Pattern' you built. How did you handle the overhead of checking message IDs?
+6 Deep Project Dive: Samsung Configuration Management
+Why Recursive CTEs in PostgreSQL? Compare the cost of a recursive scan vs. a flat table with adjacency list.
+7 Deep Project Dive: Samsung Configuration Management
+How do you handle schema evolution in the configuration data passed through Kafka?
+8 Deep Project Dive: Samsung Configuration Management
+What happens to the configuration state if a Kafka consumer rebalances mid-processing?
+9 Deep Project Dive: Samsung Configuration Management
+You mentioned <1% SLA breaches. What were the root causes of the 1% failures?
+10 Deep Project Dive: Samsung Configuration Management
+How do you maintain zero-downtime during a major schema migration for the MO tree?
+11 Deep Project Dive: Samsung Configuration Management
+(11) Explain the internal architecture of the CM module. Why was Kafka chosen over gRPC for configuration updates? [Variation 1]
+12 Deep Project Dive: Samsung Configuration Management
+(12) Walk me through the data flow for an update across 20M+ cells. Where is the potential for data loss? [Variation 1]
+13 Deep Project Dive: Samsung Configuration Management
+(13) How do you handle the 'Thundering Herd' problem when 1M+ Network Elements reconnect simultaneously? [Variation 1]
+14 Deep Project Dive: Samsung Configuration Management
+(14) Explain your custom Redis-based distributed lock. How do you handle clock drift between Redis and the App node? [Variation 1]
+15 Deep Project Dive: Samsung Configuration Management
+(15) Describe the 'Idempotent Consumer Pattern' you built. How did you handle the overhead of checking message IDs? [Variation 1]
+16 Deep Project Dive: Samsung Configuration Management
+(16) Why Recursive CTEs in PostgreSQL? Compare the cost of a recursive scan vs. a flat table with adjacency list. [Variation 1]
+17 Deep Project Dive: Samsung Configuration Management
+(17) How do you handle schema evolution in the configuration data passed through Kafka? [Variation 1]
+18 Deep Project Dive: Samsung Configuration Management
+(18) What happens to the configuration state if a Kafka consumer rebalances mid-processing? [Variation 1]
+19 Deep Project Dive: Samsung Configuration Management
+(19) You mentioned <1% SLA breaches. What were the root causes of the 1% failures? [Variation 1]
+20 Deep Project Dive: Samsung Configuration Management
+(20) How do you maintain zero-downtime during a major schema migration for the MO tree? [Variation 1]
+21 Deep Project Dive: Samsung Configuration Management
+(21) Explain the internal architecture of the CM module. Why was Kafka chosen over gRPC for configuration updates? [Variation 2]
+22 Deep Project Dive: Samsung Configuration Management
+(22) Walk me through the data flow for an update across 20M+ cells. Where is the potential for data loss? [Variation 2]
+23 Deep Project Dive: Samsung Configuration Management
+(23) How do you handle the 'Thundering Herd' problem when 1M+ Network Elements reconnect simultaneously? [Variation 2]
+24 Deep Project Dive: Samsung Configuration Management
+(24) Explain your custom Redis-based distributed lock. How do you handle clock drift between Redis and the App node? [Variation 2]
+25 Deep Project Dive: Samsung Configuration Management
+(25) Describe the 'Idempotent Consumer Pattern' you built. How did you handle the overhead of checking message IDs? [Variation 2]
+26 Deep Project Dive: Samsung Configuration Management
+(26) Why Recursive CTEs in PostgreSQL? Compare the cost of a recursive scan vs. a flat table with adjacency list. [Variation 2]
+27 Deep Project Dive: Samsung Configuration Management
+(27) How do you handle schema evolution in the configuration data passed through Kafka? [Variation 2]
+28 Deep Project Dive: Samsung Configuration Management
+(28) What happens to the configuration state if a Kafka consumer rebalances mid-processing? [Variation 2]
+29 Deep Project Dive: Samsung Configuration Management
+(29) You mentioned <1% SLA breaches. What were the root causes of the 1% failures? [Variation 2]
+30 Deep Project Dive: Samsung Configuration Management
+(30) How do you maintain zero-downtime during a major schema migration for the MO tree? [Variation 2]
+31 Deep Project Dive: Samsung Configuration Management
+(31) Explain the internal architecture of the CM module. Why was Kafka chosen over gRPC for configuration updates? [Variation 3]
+32 Deep Project Dive: Samsung Configuration Management
+(32) Walk me through the data flow for an update across 20M+ cells. Where is the potential for data loss? [Variation 3]
+33 Deep Project Dive: Samsung Configuration Management
+(33) How do you handle the 'Thundering Herd' problem when 1M+ Network Elements reconnect simultaneously? [Variation 3]
+34 Deep Project Dive: Samsung Configuration Management
+(34) Explain your custom Redis-based distributed lock. How do you handle clock drift between Redis and the App node? [Variation 3]
+35 Deep Project Dive: Samsung Configuration Management
+(35) Describe the 'Idempotent Consumer Pattern' you built. How did you handle the overhead of checking message IDs? [Variation 3]
+36 Deep Project Dive: Samsung Configuration Management
+(36) Why Recursive CTEs in PostgreSQL? Compare the cost of a recursive scan vs. a flat table with adjacency list. [Variation 3]
+37 Deep Project Dive: Samsung Configuration Management
+(37) How do you handle schema evolution in the configuration data passed through Kafka? [Variation 3]
+38 Deep Project Dive: Samsung Configuration Management
+(38) What happens to the configuration state if a Kafka consumer rebalances mid-processing? [Variation 3]
+39 Deep Project Dive: Samsung Configuration Management
+(39) You mentioned <1% SLA breaches. What were the root causes of the 1% failures? [Variation 3]
+40 Deep Project Dive: Samsung Configuration Management
+(40) How do you maintain zero-downtime during a major schema migration for the MO tree? [Variation 3]
+41 Deep Project Dive: Samsung Configuration Management
+(41) Explain the internal architecture of the CM module. Why was Kafka chosen over gRPC for configuration updates? [Variation 4]
+42 Deep Project Dive: Samsung Configuration Management
+(42) Walk me through the data flow for an update across 20M+ cells. Where is the potential for data loss? [Variation 4]
+43 Deep Project Dive: Samsung Configuration Management
+(43) How do you handle the 'Thundering Herd' problem when 1M+ Network Elements reconnect simultaneously? [Variation 4]
+44 Deep Project Dive: Samsung Configuration Management
+(44) Explain your custom Redis-based distributed lock. How do you handle clock drift between Redis and the App node? [Variation 4]
+45 Deep Project Dive: Samsung Configuration Management
+(45) Describe the 'Idempotent Consumer Pattern' you built. How did you handle the overhead of checking message IDs? [Variation 4]
+46 Deep Project Dive: Samsung Configuration Management
+(46) Why Recursive CTEs in PostgreSQL? Compare the cost of a recursive scan vs. a flat table with adjacency list. [Variation 4]
+47 Deep Project Dive: Samsung Configuration Management
+(47) How do you handle schema evolution in the configuration data passed through Kafka? [Variation 4]
+48 Deep Project Dive: Samsung Configuration Management
+(48) What happens to the configuration state if a Kafka consumer rebalances mid-processing? [Variation 4]
+
+49 Deep Project Dive: Samsung Configuration Management
+(49) You mentioned <1% SLA breaches. What were the root causes of the 1% failures? [Variation 4]
+50 Deep Project Dive: Samsung Configuration Management
+(50) How do you maintain zero-downtime during a major schema migration for the MO tree? [Variation 4]
+51 Deep Project Dive: Samsung Configuration Management
+(51) Explain the internal architecture of the CM module. Why was Kafka chosen over gRPC for configuration updates? [Variation 5]
+52 Deep Project Dive: Samsung Configuration Management
+(52) Walk me through the data flow for an update across 20M+ cells. Where is the potential for data loss? [Variation 5]
+53 Deep Project Dive: Samsung Configuration Management
+(53) How do you handle the 'Thundering Herd' problem when 1M+ Network Elements reconnect simultaneously? [Variation 5]
+54 Deep Project Dive: Samsung Configuration Management
+(54) Explain your custom Redis-based distributed lock. How do you handle clock drift between Redis and the App node? [Variation 5]
+55 Deep Project Dive: Samsung Configuration Management
+(55) Describe the 'Idempotent Consumer Pattern' you built. How did you handle the overhead of checking message IDs? [Variation 5]
+56 Deep Project Dive: Samsung Configuration Management
+(56) Why Recursive CTEs in PostgreSQL? Compare the cost of a recursive scan vs. a flat table with adjacency list. [Variation 5]
+57 Deep Project Dive: Samsung Configuration Management
+(57) How do you handle schema evolution in the configuration data passed through Kafka? [Variation 5]
+58 Deep Project Dive: Samsung Configuration Management
+(58) What happens to the configuration state if a Kafka consumer rebalances mid-processing? [Variation 5]
+59 Deep Project Dive: Samsung Configuration Management
+(59) You mentioned <1% SLA breaches. What were the root causes of the 1% failures? [Variation 5]
+60 Deep Project Dive: Samsung Configuration Management
+(60) How do you maintain zero-downtime during a major schema migration for the MO tree? [Variation 5]
+61 Core Java 21 & JVM Internals
+How do Virtual Threads (Loom) impact the scalability of your Spring Boot microservices?
+62 Core Java 21 & JVM Internals
+Explain the 'Pinning' issue in Virtual Threads and how you avoided it in the Samsung USM project.
+63 Core Java 21 & JVM Internals
+Compare ZGC and G1 for a system with 20M+ objects in memory. Which one minimizes pause times for config updates?
+64 Core Java 21 & JVM Internals
+How would you use Scoped Values to pass request context in a concurrent environment?
+65 Core Java 21 & JVM Internals
+Discuss the performance benefits of Record Patterns in Java 21 when processing complex tree nodes.
+66 Core Java 21 & JVM Internals
+How does the JVM handle thread-local storage for 1 million virtual threads?
+67 Core Java 21 & JVM Internals
+What are the trade-offs of using Project Panama for low-level network optimization?
+68 Core Java 21 & JVM Internals
+Explain the 'Sequence Collections' API. How did it simplify your MO tree traversal logic?
+69 Core Java 21 & JVM Internals
+How do you profile a Java 21 application to find memory leaks in virtual thread stacks?
+70 Core Java 21 & JVM Internals
+Explain the bytecode changes for String Templates (preview) vs traditional concatenation.
+71 Core Java 21 & JVM Internals
+(11) How do Virtual Threads (Loom) impact the scalability of your Spring Boot microservices? [Variation 1]
+72 Core Java 21 & JVM Internals
+(12) Explain the 'Pinning' issue in Virtual Threads and how you avoided it in the Samsung USM project. [Variation 1]
+73 Core Java 21 & JVM Internals
+(13) Compare ZGC and G1 for a system with 20M+ objects in memory. Which one minimizes pause times for config updates? [Variation 1]
+74 Core Java 21 & JVM Internals
+(14) How would you use Scoped Values to pass request context in a concurrent environment? [Variation 1]
+75 Core Java 21 & JVM Internals
+(15) Discuss the performance benefits of Record Patterns in Java 21 when processing complex tree nodes. [Variation 1]
+76 Core Java 21 & JVM Internals
+(16) How does the JVM handle thread-local storage for 1 million virtual threads? [Variation 1]
+77 Core Java 21 & JVM Internals
+(17) What are the trade-offs of using Project Panama for low-level network optimization? [Variation 1]
+78 Core Java 21 & JVM Internals
+(18) Explain the 'Sequence Collections' API. How did it simplify your MO tree traversal logic? [Variation 1]
+79 Core Java 21 & JVM Internals
+(19) How do you profile a Java 21 application to find memory leaks in virtual thread stacks? [Variation 1]
+80 Core Java 21 & JVM Internals
+(20) Explain the bytecode changes for String Templates (preview) vs traditional concatenation. [Variation 1]
+81 Core Java 21 & JVM Internals
+(21) How do Virtual Threads (Loom) impact the scalability of your Spring Boot microservices? [Variation 2]
+82 Core Java 21 & JVM Internals
+(22) Explain the 'Pinning' issue in Virtual Threads and how you avoided it in the Samsung USM project. [Variation 2]
+83 Core Java 21 & JVM Internals
+(23) Compare ZGC and G1 for a system with 20M+ objects in memory. Which one minimizes pause times for config updates? [Variation 2]
+84 Core Java 21 & JVM Internals
+(24) How would you use Scoped Values to pass request context in a concurrent environment? [Variation 2]
+85 Core Java 21 & JVM Internals
+(25) Discuss the performance benefits of Record Patterns in Java 21 when processing complex tree nodes. [Variation 2]
+86 Core Java 21 & JVM Internals
+(26) How does the JVM handle thread-local storage for 1 million virtual threads? [Variation 2]
+87 Core Java 21 & JVM Internals
+(27) What are the trade-offs of using Project Panama for low-level network optimization? [Variation 2]
+88 Core Java 21 & JVM Internals
+(28) Explain the 'Sequence Collections' API. How did it simplify your MO tree traversal logic? [Variation 2]
+89 Core Java 21 & JVM Internals
+(29) How do you profile a Java 21 application to find memory leaks in virtual thread stacks? [Variation 2]
+90 Core Java 21 & JVM Internals
+(30) Explain the bytecode changes for String Templates (preview) vs traditional concatenation. [Variation 2]
+91 Core Java 21 & JVM Internals
+(31) How do Virtual Threads (Loom) impact the scalability of your Spring Boot microservices? [Variation 3]
+92 Core Java 21 & JVM Internals
+(32) Explain the 'Pinning' issue in Virtual Threads and how you avoided it in the Samsung USM project. [Variation 3]
+93 Core Java 21 & JVM Internals
+(33) Compare ZGC and G1 for a system with 20M+ objects in memory. Which one minimizes pause times for config updates? [Variation 3]
+94 Core Java 21 & JVM Internals
+(34) How would you use Scoped Values to pass request context in a concurrent environment? [Variation 3]
+95 Core Java 21 & JVM Internals
+(35) Discuss the performance benefits of Record Patterns in Java 21 when processing complex tree nodes. [Variation 3]
+96 Core Java 21 & JVM Internals
+(36) How does the JVM handle thread-local storage for 1 million virtual threads? [Variation 3]
+97 Core Java 21 & JVM Internals
+(37) What are the trade-offs of using Project Panama for low-level network optimization? [Variation 3]
+
+98 Core Java 21 & JVM Internals
+(38) Explain the 'Sequence Collections' API. How did it simplify your MO tree traversal logic? [Variation 3]
+99 Core Java 21 & JVM Internals
+(39) How do you profile a Java 21 application to find memory leaks in virtual thread stacks? [Variation 3]
+100 Core Java 21 & JVM Internals
+(40) Explain the bytecode changes for String Templates (preview) vs traditional concatenation. [Variation 3]
+101 Core Java 21 & JVM Internals
+(41) How do Virtual Threads (Loom) impact the scalability of your Spring Boot microservices? [Variation 4]
+102 Core Java 21 & JVM Internals
+(42) Explain the 'Pinning' issue in Virtual Threads and how you avoided it in the Samsung USM project. [Variation 4]
+103 Core Java 21 & JVM Internals
+(43) Compare ZGC and G1 for a system with 20M+ objects in memory. Which one minimizes pause times for config updates? [Variation 4]
+104 Core Java 21 & JVM Internals
+(44) How would you use Scoped Values to pass request context in a concurrent environment? [Variation 4]
+105 Core Java 21 & JVM Internals
+(45) Discuss the performance benefits of Record Patterns in Java 21 when processing complex tree nodes. [Variation 4]
+106 Core Java 21 & JVM Internals
+(46) How does the JVM handle thread-local storage for 1 million virtual threads? [Variation 4]
+107 Core Java 21 & JVM Internals
+(47) What are the trade-offs of using Project Panama for low-level network optimization? [Variation 4]
+108 Core Java 21 & JVM Internals
+(48) Explain the 'Sequence Collections' API. How did it simplify your MO tree traversal logic? [Variation 4]
+109 Core Java 21 & JVM Internals
+(49) How do you profile a Java 21 application to find memory leaks in virtual thread stacks? [Variation 4]
+110 Core Java 21 & JVM Internals
+(50) Explain the bytecode changes for String Templates (preview) vs traditional concatenation. [Variation 4]
+111 Core Java 21 & JVM Internals
+(51) How do Virtual Threads (Loom) impact the scalability of your Spring Boot microservices? [Variation 5]
+112 Core Java 21 & JVM Internals
+(52) Explain the 'Pinning' issue in Virtual Threads and how you avoided it in the Samsung USM project. [Variation 5]
+113 Core Java 21 & JVM Internals
+(53) Compare ZGC and G1 for a system with 20M+ objects in memory. Which one minimizes pause times for config updates? [Variation 5]
+114 Core Java 21 & JVM Internals
+(54) How would you use Scoped Values to pass request context in a concurrent environment? [Variation 5]
+115 Core Java 21 & JVM Internals
+(55) Discuss the performance benefits of Record Patterns in Java 21 when processing complex tree nodes. [Variation 5]
+116 Core Java 21 & JVM Internals
+(56) How does the JVM handle thread-local storage for 1 million virtual threads? [Variation 5]
+117 Core Java 21 & JVM Internals
+(57) What are the trade-offs of using Project Panama for low-level network optimization? [Variation 5]
+118 Core Java 21 & JVM Internals
+(58) Explain the 'Sequence Collections' API. How did it simplify your MO tree traversal logic? [Variation 5]
+119 Core Java 21 & JVM Internals
+(59) How do you profile a Java 21 application to find memory leaks in virtual thread stacks? [Variation 5]
+120 Core Java 21 & JVM Internals
+(60) Explain the bytecode changes for String Templates (preview) vs traditional concatenation. [Variation 5]
+121 Spring Framework & Microservices
+(1) How does Spring Boot 3.x's AOT (Ahead-of-Time) compilation affect your startup time?
+122 Spring Framework & Microservices
+(2) Explain the internal bean lifecycle in Spring and how it changes with 'Lazy Initialization' in large projects.
+123 Spring Framework & Microservices
+(3) How do you handle distributed transactions across multiple microservices without using 2PC?
+124 Spring Framework & Microservices
+(4) Describe your implementation of the Circuit Breaker pattern for the CM notification service.
+125 Spring Framework & Microservices
+(5) How do you use Spring Cloud Gateway to route requests to the USM project?
+126 Spring Framework & Microservices
+(6) Explain the difference between @Transactional and manual transaction management in a Kafka listener.
+127 Spring Framework & Microservices
+(7) How do you handle 'Backpressure' in a Spring Boot application consuming 100k events/sec?
+128 Spring Framework & Microservices
+(8) What is the impact of Spring's 'Context Caching' on your integration test suite performance?
+129 Spring Framework & Microservices
+(9) How do you implement custom 'Conditional' beans for environment-specific AI model deployments?
+130 Spring Framework & Microservices
+(10) Explain how you use Micrometer to track the latency of MO tree traversals.
+131 Spring Framework & Microservices
+(11) How does Spring Boot 3.x's AOT (Ahead-of-Time) compilation affect your startup time?
+132 Spring Framework & Microservices
+(12) Explain the internal bean lifecycle in Spring and how it changes with 'Lazy Initialization' in large projects.
+133 Spring Framework & Microservices
+(13) How do you handle distributed transactions across multiple microservices without using 2PC?
+134 Spring Framework & Microservices
+(14) Describe your implementation of the Circuit Breaker pattern for the CM notification service.
+135 Spring Framework & Microservices
+(15) How do you use Spring Cloud Gateway to route requests to the USM project?
+136 Spring Framework & Microservices
+(16) Explain the difference between @Transactional and manual transaction management in a Kafka listener.
+137 Spring Framework & Microservices
+(17) How do you handle 'Backpressure' in a Spring Boot application consuming 100k events/sec?
+138 Spring Framework & Microservices
+(18) What is the impact of Spring's 'Context Caching' on your integration test suite performance?
+139 Spring Framework & Microservices
+(19) How do you implement custom 'Conditional' beans for environment-specific AI model deployments?
+140 Spring Framework & Microservices
+(20) Explain how you use Micrometer to track the latency of MO tree traversals.
+141 Spring Framework & Microservices
+(21) How does Spring Boot 3.x's AOT (Ahead-of-Time) compilation affect your startup time?
+142 Spring Framework & Microservices
+(22) Explain the internal bean lifecycle in Spring and how it changes with 'Lazy Initialization' in large projects.
+143 Spring Framework & Microservices
+(23) How do you handle distributed transactions across multiple microservices without using 2PC?
+144 Spring Framework & Microservices
+(24) Describe your implementation of the Circuit Breaker pattern for the CM notification service.
+145 Spring Framework & Microservices
+(25) How do you use Spring Cloud Gateway to route requests to the USM project?
+146 Spring Framework & Microservices
+(26) Explain the difference between @Transactional and manual transaction management in a Kafka listener.
+
+147 Spring Framework & Microservices
+(27) How do you handle 'Backpressure' in a Spring Boot application consuming 100k events/sec?
+148 Spring Framework & Microservices
+(28) What is the impact of Spring's 'Context Caching' on your integration test suite performance?
+149 Spring Framework & Microservices
+(29) How do you implement custom 'Conditional' beans for environment-specific AI model deployments?
+150 Spring Framework & Microservices
+(30) Explain how you use Micrometer to track the latency of MO tree traversals.
+151 Spring Framework & Microservices
+(31) How does Spring Boot 3.x's AOT (Ahead-of-Time) compilation affect your startup time?
+152 Spring Framework & Microservices
+(32) Explain the internal bean lifecycle in Spring and how it changes with 'Lazy Initialization' in large projects.
+153 Spring Framework & Microservices
+(33) How do you handle distributed transactions across multiple microservices without using 2PC?
+154 Spring Framework & Microservices
+(34) Describe your implementation of the Circuit Breaker pattern for the CM notification service.
+155 Spring Framework & Microservices
+(35) How do you use Spring Cloud Gateway to route requests to the USM project?
+156 Spring Framework & Microservices
+(36) Explain the difference between @Transactional and manual transaction management in a Kafka listener.
+157 Spring Framework & Microservices
+(37) How do you handle 'Backpressure' in a Spring Boot application consuming 100k events/sec?
+158 Spring Framework & Microservices
+(38) What is the impact of Spring's 'Context Caching' on your integration test suite performance?
+159 Spring Framework & Microservices
+(39) How do you implement custom 'Conditional' beans for environment-specific AI model deployments?
+160 Spring Framework & Microservices
+(40) Explain how you use Micrometer to track the latency of MO tree traversals.
+161 Spring Framework & Microservices
+(41) How does Spring Boot 3.x's AOT (Ahead-of-Time) compilation affect your startup time?
+162 Spring Framework & Microservices
+(42) Explain the internal bean lifecycle in Spring and how it changes with 'Lazy Initialization' in large projects.
+163 Spring Framework & Microservices
+(43) How do you handle distributed transactions across multiple microservices without using 2PC?
+164 Spring Framework & Microservices
+(44) Describe your implementation of the Circuit Breaker pattern for the CM notification service.
+165 Spring Framework & Microservices
+(45) How do you use Spring Cloud Gateway to route requests to the USM project?
+166 Spring Framework & Microservices
+(46) Explain the difference between @Transactional and manual transaction management in a Kafka listener.
+167 Spring Framework & Microservices
+(47) How do you handle 'Backpressure' in a Spring Boot application consuming 100k events/sec?
+168 Spring Framework & Microservices
+(48) What is the impact of Spring's 'Context Caching' on your integration test suite performance?
+169 Spring Framework & Microservices
+(49) How do you implement custom 'Conditional' beans for environment-specific AI model deployments?
+170 Spring Framework & Microservices
+(50) Explain how you use Micrometer to track the latency of MO tree traversals.
+171 Kafka & Distributed Messaging at Scale
+(1) Explain the 'exactly-once' semantics in Kafka. How did you verify this in the CM module?
+172 Kafka & Distributed Messaging at Scale
+(2) What is the impact of 'max.poll.interval.ms' on consumer rebalances?
+173 Kafka & Distributed Messaging at Scale
+(3) How do you handle a scenario where a single partition becomes a hotspot for configuration updates?
+174 Kafka & Distributed Messaging at Scale
+(4) Describe the 'Transactional Outbox Pattern'. Did you use it? Why or why not?
+175 Kafka & Distributed Messaging at Scale
+(5) How do you tune 'linger.ms' and 'batch.size' for high throughput vs low latency?
+176 Kafka & Distributed Messaging at Scale
+(6) What happens if the Kafka controller fails? How does it affect your 20M cell update pipeline?
+177 Kafka & Distributed Messaging at Scale
+(7) How do you manage Kafka schema registry for 100+ different configuration event types?
+178 Kafka & Distributed Messaging at Scale
+(8) Explain Kafka's 'Zero-Copy' optimization and how it helps at Samsung's scale.
+179 Kafka & Distributed Messaging at Scale
+(9) How do you handle consumer lag for the Al-driven navigation tool's background updates?
+180 Kafka & Distributed Messaging at Scale
+(10) Describe your strategy for Kafka multi-region replication (MirrorMaker 2).
+181 Kafka & Distributed Messaging at Scale
+(11) Explain the 'exactly-once' semantics in Kafka. How did you verify this in the CM module?
+182 Kafka & Distributed Messaging at Scale
+(12) What is the impact of 'max.poll.interval.ms' on consumer rebalances?
+183 Kafka & Distributed Messaging at Scale
+(13) How do you handle a scenario where a single partition becomes a hotspot for configuration updates?
+184 Kafka & Distributed Messaging at Scale
+(14) Describe the 'Transactional Outbox Pattern'. Did you use it? Why or why not?
+185 Kafka & Distributed Messaging at Scale
+(15) How do you tune 'linger.ms' and 'batch.size' for high throughput vs low latency?
+186 Kafka & Distributed Messaging at Scale
+(16) What happens if the Kafka controller fails? How does it affect your 20M cell update pipeline?
+187 Kafka & Distributed Messaging at Scale
+(17) How do you manage Kafka schema registry for 100+ different configuration event types?
+188 Kafka & Distributed Messaging at Scale
+(18) Explain Kafka's 'Zero-Copy' optimization and how it helps at Samsung's scale.
+189 Kafka & Distributed Messaging at Scale
+(19) How do you handle consumer lag for the Al-driven navigation tool's background updates?
+190 Kafka & Distributed Messaging at Scale
+(20) Describe your strategy for Kafka multi-region replication (MirrorMaker 2).
+191 Kafka & Distributed Messaging at Scale
+(21) Explain the 'exactly-once' semantics in Kafka. How did you verify this in the CM module?
+192 Kafka & Distributed Messaging at Scale
+(22) What is the impact of 'max.poll.interval.ms' on consumer rebalances?
+193 Kafka & Distributed Messaging at Scale
+(23) How do you handle a scenario where a single partition becomes a hotspot for configuration updates?
+194 Kafka & Distributed Messaging at Scale
+(24) Describe the 'Transactional Outbox Pattern'. Did you use it? Why or why not?
+195 Kafka & Distributed Messaging at Scale
+(25) How do you tune 'linger.ms' and 'batch.size' for high throughput vs low latency?
+
+196 Kafka & Distributed Messaging at Scale
+(26) What happens if the Kafka controller fails? How does it affect your 20M cell update pipeline?
+197 Kafka & Distributed Messaging at Scale
+(27) How do you manage Kafka schema registry for 100+ different configuration event types?
+198 Kafka & Distributed Messaging at Scale
+(28) Explain Kafka's 'Zero-Copy' optimization and how it helps at Samsung's scale.
+199 Kafka & Distributed Messaging at Scale
+(29) How do you handle consumer lag for the Al-driven navigation tool's background updates?
+200 Kafka & Distributed Messaging at Scale
+(30) Describe your strategy for Kafka multi-region replication (MirrorMaker 2).
+201 Kafka & Distributed Messaging at Scale
+(31) Explain the 'exactly-once' semantics in Kafka. How did you verify this in the CM module?
+202 Kafka & Distributed Messaging at Scale
+(32) What is the impact of 'max.poll.interval.ms' on consumer rebalances?
+203 Kafka & Distributed Messaging at Scale
+(33) How do you handle a scenario where a single partition becomes a hotspot for configuration updates?
+204 Kafka & Distributed Messaging at Scale
+(34) Describe the 'Transactional Outbox Pattern'. Did you use it? Why or why not?
+205 Kafka & Distributed Messaging at Scale
+(35) How do you tune 'linger.ms' and 'batch.size' for high throughput vs low latency?
+206 Kafka & Distributed Messaging at Scale
+(36) What happens if the Kafka controller fails? How does it affect your 20M cell update pipeline?
+207 Kafka & Distributed Messaging at Scale
+(37) How do you manage Kafka schema registry for 100+ different configuration event types?
+208 Kafka & Distributed Messaging at Scale
+(38) Explain Kafka's 'Zero-Copy' optimization and how it helps at Samsung's scale.
+209 Kafka & Distributed Messaging at Scale
+(39) How do you handle consumer lag for the Al-driven navigation tool's background updates?
+210 Kafka & Distributed Messaging at Scale
+(40) Describe your strategy for Kafka multi-region replication (MirrorMaker 2).
+211 Kafka & Distributed Messaging at Scale
+(41) Explain the 'exactly-once' semantics in Kafka. How did you verify this in the CM module?
+212 Kafka & Distributed Messaging at Scale
+(42) What is the impact of 'max.poll.interval.ms' on consumer rebalances?
+213 Kafka & Distributed Messaging at Scale
+(43) How do you handle a scenario where a single partition becomes a hotspot for configuration updates?
+214 Kafka & Distributed Messaging at Scale
+(44) Describe the 'Transactional Outbox Pattern'. Did you use it? Why or why not?
+215 Kafka & Distributed Messaging at Scale
+(45) How do you tune 'linger.ms' and 'batch.size' for high throughput vs low latency?
+216 Kafka & Distributed Messaging at Scale
+(46) What happens if the Kafka controller fails? How does it affect your 20M cell update pipeline?
+217 Kafka & Distributed Messaging at Scale
+(47) How do you manage Kafka schema registry for 100+ different configuration event types?
+218 Kafka & Distributed Messaging at Scale
+(48) Explain Kafka's 'Zero-Copy' optimization and how it helps at Samsung's scale.
+219 Kafka & Distributed Messaging at Scale
+(49) How do you handle consumer lag for the Al-driven navigation tool's background updates?
+220 Kafka & Distributed Messaging at Scale
+(50) Describe your strategy for Kafka multi-region replication (MirrorMaker 2).
+221 Kafka & Distributed Messaging at Scale
+(51) Explain the 'exactly-once' semantics in Kafka. How did you verify this in the CM module?
+222 Kafka & Distributed Messaging at Scale
+(52) What is the impact of 'max.poll.interval.ms' on consumer rebalances?
+223 Kafka & Distributed Messaging at Scale
+(53) How do you handle a scenario where a single partition becomes a hotspot for configuration updates?
+224 Kafka & Distributed Messaging at Scale
+(54) Describe the 'Transactional Outbox Pattern'. Did you use it? Why or why not?
+225 Kafka & Distributed Messaging at Scale
+(55) How do you tune 'linger.ms' and 'batch.size' for high throughput vs low latency?
+226 Kafka & Distributed Messaging at Scale
+(56) What happens if the Kafka controller fails? How does it affect your 20M cell update pipeline?
+227 Kafka & Distributed Messaging at Scale
+(57) How do you manage Kafka schema registry for 100+ different configuration event types?
+228 Kafka & Distributed Messaging at Scale
+(58) Explain Kafka's 'Zero-Copy' optimization and how it helps at Samsung's scale.
+229 Kafka & Distributed Messaging at Scale
+(59) How do you handle consumer lag for the Al-driven navigation tool's background updates?
+230 Kafka & Distributed Messaging at Scale
+(60) Describe your strategy for Kafka multi-region replication (MirrorMaker 2).
+231 Redis & Distributed Concurrency
+(1) Explain the eviction policies in Redis. Which one did you use for the distributed lock system?
+232 Redis & Distributed Concurrency
+(2) How do you prevent 'Cache Penetration' when querying MO data from Redis?
+233 Redis & Distributed Concurrency
+(3) Describe the 'Redlock' algorithm. Why is it controversial, and did you use a variant of it?
+234 Redis & Distributed Concurrency
+(4) How do you handle Redis failover without losing the current state of active 'Edit-Config' locks?
+235 Redis & Distributed Concurrency
+(5) Explain the difference between Redis Streams and Kafka for your notification service.
+236 Redis & Distributed Concurrency
+(6) How do you use Redis Bitmaps or HyperLogLogs for tracking unique network elements?
+237 Redis & Distributed Concurrency
+(7) What is the impact of 'LUA Scripts' on Redis atomicity and performance?
+238 Redis & Distributed Concurrency
+(8) How do you monitor Redis memory fragmentation in the USM project environment?
+239 Redis & Distributed Concurrency
+(9) Explain the eviction policies in Redis. Which one did you use for the distributed lock system?
+240 Redis & Distributed Concurrency
+(10) How do you prevent 'Cache Penetration' when querying MO data from Redis?
+241 Redis & Distributed Concurrency
+(11) Describe the 'Redlock' algorithm. Why is it controversial, and did you use a variant of it?
+242 Redis & Distributed Concurrency
+(12) How do you handle Redis failover without losing the current state of active 'Edit-Config' locks?
+243 Redis & Distributed Concurrency
+(13) Explain the difference between Redis Streams and Kafka for your notification service.
+244 Redis & Distributed Concurrency
+(14) How do you use Redis Bitmaps or HyperLogLogs for tracking unique network elements?
+
+245 Redis & Distributed Concurrency
+(15) What is the impact of 'LUA Scripts' on Redis atomicity and performance?
+246 Redis & Distributed Concurrency
+(16) How do you monitor Redis memory fragmentation in the USM project environment?
+247 Redis & Distributed Concurrency
+(17) Explain the eviction policies in Redis. Which one did you use for the distributed lock system?
+248 Redis & Distributed Concurrency
+(18) How do you prevent 'Cache Penetration' when querying MO data from Redis?
+249 Redis & Distributed Concurrency
+(19) Describe the 'Redlock' algorithm. Why is it controversial, and did you use a variant of it?
+250 Redis & Distributed Concurrency
+(20) How do you handle Redis failover without losing the current state of active 'Edit-Config' locks?
+251 Redis & Distributed Concurrency
+(21) Explain the difference between Redis Streams and Kafka for your notification service.
+252 Redis & Distributed Concurrency
+(22) How do you use Redis Bitmaps or HyperLogLogs for tracking unique network elements?
+253 Redis & Distributed Concurrency
+(23) What is the impact of 'LUA Scripts' on Redis atomicity and performance?
+254 Redis & Distributed Concurrency
+(24) How do you monitor Redis memory fragmentation in the USM project environment?
+255 Redis & Distributed Concurrency
+(25) Explain the eviction policies in Redis. Which one did you use for the distributed lock system?
+256 Redis & Distributed Concurrency
+(26) How do you prevent 'Cache Penetration' when querying MO data from Redis?
+257 Redis & Distributed Concurrency
+(27) Describe the 'Redlock' algorithm. Why is it controversial, and did you use a variant of it?
+258 Redis & Distributed Concurrency
+(28) How do you handle Redis failover without losing the current state of active 'Edit-Config' locks?
+259 Redis & Distributed Concurrency
+(29) Explain the difference between Redis Streams and Kafka for your notification service.
+260 Redis & Distributed Concurrency
+(30) How do you use Redis Bitmaps or HyperLogLogs for tracking unique network elements?
+261 Redis & Distributed Concurrency
+(31) What is the impact of 'LUA Scripts' on Redis atomicity and performance?
+262 Redis & Distributed Concurrency
+(32) How do you monitor Redis memory fragmentation in the USM project environment?
+263 Redis & Distributed Concurrency
+(33) Explain the eviction policies in Redis. Which one did you use for the distributed lock system?
+264 Redis & Distributed Concurrency
+(34) How do you prevent 'Cache Penetration' when querying MO data from Redis?
+265 Redis & Distributed Concurrency
+(35) Describe the 'Redlock' algorithm. Why is it controversial, and did you use a variant of it?
+266 Redis & Distributed Concurrency
+(36) How do you handle Redis failover without losing the current state of active 'Edit-Config' locks?
+267 Redis & Distributed Concurrency
+(37) Explain the difference between Redis Streams and Kafka for your notification service.
+268 Redis & Distributed Concurrency
+(38) How do you use Redis Bitmaps or HyperLogLogs for tracking unique network elements?
+269 Redis & Distributed Concurrency
+(39) What is the impact of 'LUA Scripts' on Redis atomicity and performance?
+270 Redis & Distributed Concurrency
+(40) How do you monitor Redis memory fragmentation in the USM project environment?
+271 PostgreSQL & Database Optimization
+(1) Analyze the cost of a 'Recursive CTE'. When does it become slower than a manual iterative approach?
+272 PostgreSQL & Database Optimization
+(2) Explain 'Index Skip Scan' and how it applies to your MO tree queries.
+273 PostgreSQL & Database Optimization
+(3) How do you optimize 'VACUUM' settings for a table with 20M+ rows and heavy updates?
+274 PostgreSQL & Database Optimization
+(4) Describe your approach to database sharding vs. partitioning for the CM module.
+275 PostgreSQL & Database Optimization
+(5) How do you use 'Lateral Joins' in PostgreSQL to fetch metadata for the MO tree?
+276 PostgreSQL & Database Optimization
+(6) What is the impact of 'Fill Factor' on update performance for the Configuration Management DB?
+277 PostgreSQL & Database Optimization
+(7) Explain the 'Visibility Map' in PostgreSQL and how it affects index-only scans.
+278 PostgreSQL & Database Optimization
+(8) How do you handle long-running transactions that block autovacuum in your system?
+279 PostgreSQL & Database Optimization
+(9) Compare 'B-Tree' and 'BRIN' indexes for time-series data like network logs.
+280 PostgreSQL & Database Optimization
+(10) How do you prevent 'SQL Injection' in a system that generates dynamic MO tree queries?
+281 PostgreSQL & Database Optimization
+(11) Analyze the cost of a 'Recursive CTE'. When does it become slower than a manual iterative approach?
+282 PostgreSQL & Database Optimization
+(12) Explain 'Index Skip Scan' and how it applies to your MO tree queries.
+283 PostgreSQL & Database Optimization
+(13) How do you optimize 'VACUUM' settings for a table with 20M+ rows and heavy updates?
+284 PostgreSQL & Database Optimization
+(14) Describe your approach to database sharding vs. partitioning for the CM module.
+285 PostgreSQL & Database Optimization
+(15) How do you use 'Lateral Joins' in PostgreSQL to fetch metadata for the MO tree?
+286 PostgreSQL & Database Optimization
+(16) What is the impact of 'Fill Factor' on update performance for the Configuration Management DB?
+287 PostgreSQL & Database Optimization
+(17) Explain the 'Visibility Map' in PostgreSQL and how it affects index-only scans.
+288 PostgreSQL & Database Optimization
+(18) How do you handle long-running transactions that block autovacuum in your system?
+289 PostgreSQL & Database Optimization
+(19) Compare 'B-Tree' and 'BRIN' indexes for time-series data like network logs.
+290 PostgreSQL & Database Optimization
+(20) How do you prevent 'SQL Injection' in a system that generates dynamic MO tree queries?
+291 PostgreSQL & Database Optimization
+(21) Analyze the cost of a 'Recursive CTE'. When does it become slower than a manual iterative approach?
+292 PostgreSQL & Database Optimization
+(22) Explain 'Index Skip Scan' and how it applies to your MO tree queries.
+293 PostgreSQL & Database Optimization
+(23) How do you optimize 'VACUUM' settings for a table with 20M+ rows and heavy updates?
+
+294 PostgreSQL & Database Optimization
+(24) Describe your approach to database sharding vs. partitioning for the CM module.
+295 PostgreSQL & Database Optimization
+(25) How do you use 'Lateral Joins' in PostgreSQL to fetch metadata for the MO tree?
+296 PostgreSQL & Database Optimization
+(26) What is the impact of 'Fill Factor' on update performance for the Configuration Management DB?
+297 PostgreSQL & Database Optimization
+(27) Explain the 'Visibility Map' in PostgreSQL and how it affects index-only scans.
+298 PostgreSQL & Database Optimization
+(28) How do you handle long-running transactions that block autovacuum in your system?
+299 PostgreSQL & Database Optimization
+(29) Compare 'B-Tree' and 'BRIN' indexes for time-series data like network logs.
+300 PostgreSQL & Database Optimization
+(30) How do you prevent 'SQL Injection' in a system that generates dynamic MO tree queries?
+301 PostgreSQL & Database Optimization
+(31) Analyze the cost of a 'Recursive CTE'. When does it become slower than a manual iterative approach?
+302 PostgreSQL & Database Optimization
+(32) Explain 'Index Skip Scan' and how it applies to your MO tree queries.
+303 PostgreSQL & Database Optimization
+(33) How do you optimize 'VACUUM' settings for a table with 20M+ rows and heavy updates?
+304 PostgreSQL & Database Optimization
+(34) Describe your approach to database sharding vs. partitioning for the CM module.
+305 PostgreSQL & Database Optimization
+(35) How do you use 'Lateral Joins' in PostgreSQL to fetch metadata for the MO tree?
+306 PostgreSQL & Database Optimization
+(36) What is the impact of 'Fill Factor' on update performance for the Configuration Management DB?
+307 PostgreSQL & Database Optimization
+(37) Explain the 'Visibility Map' in PostgreSQL and how it affects index-only scans.
+308 PostgreSQL & Database Optimization
+(38) How do you handle long-running transactions that block autovacuum in your system?
+309 PostgreSQL & Database Optimization
+(39) Compare 'B-Tree' and 'BRIN' indexes for time-series data like network logs.
+310 PostgreSQL & Database Optimization
+(40) How do you prevent 'SQL Injection' in a system that generates dynamic MO tree queries?
+311 PostgreSQL & Database Optimization
+(41) Analyze the cost of a 'Recursive CTE'. When does it become slower than a manual iterative approach?
+312 PostgreSQL & Database Optimization
+(42) Explain 'Index Skip Scan' and how it applies to your MO tree queries.
+313 PostgreSQL & Database Optimization
+(43) How do you optimize 'VACUUM' settings for a table with 20M+ rows and heavy updates?
+314 PostgreSQL & Database Optimization
+(44) Describe your approach to database sharding vs. partitioning for the CM module.
+315 PostgreSQL & Database Optimization
+(45) How do you use 'Lateral Joins' in PostgreSQL to fetch metadata for the MO tree?
+316 PostgreSQL & Database Optimization
+(46) What is the impact of 'Fill Factor' on update performance for the Configuration Management DB?
+317 PostgreSQL & Database Optimization
+(47) Explain the 'Visibility Map' in PostgreSQL and how it affects index-only scans.
+318 PostgreSQL & Database Optimization
+(48) How do you handle long-running transactions that block autovacuum in your system?
+319 PostgreSQL & Database Optimization
+(49) Compare 'B-Tree' and 'BRIN' indexes for time-series data like network logs.
+320 PostgreSQL & Database Optimization
+(50) How do you prevent 'SQL Injection' in a system that generates dynamic MO tree queries?
+321 AI, RAG & LLM Infrastructure
+(1) Explain the 'Retrieval' part of your RAG architecture. How do you rank the most relevant documents?
+322 AI, RAG & LLM Infrastructure
+(2) Why use 'Ollama' instead of 'vLLM' for local inference?
+323 AI, RAG & LLM Infrastructure
+(3) How do you handle 'Context Window' limits when the support team asks about a massive MO sub-tree?
+324 AI, RAG & LLM Infrastructure
+(4) Describe your 'Agentic AI' loop. How does the agent verify that its navigation step was correct?
+325 AI, RAG & LLM Infrastructure
+(5) What is the dimensionality of your embeddings in Chroma DB? How does it affect search latency?
+326 AI, RAG & LLM Infrastructure
+(6) How do you mitigate 'Prompt Injection' in your internal AI tool?
+327 AI, RAG & LLM Infrastructure
+(7) Explain 'Vector Quantization' and its impact on the accuracy of your navigation tool.
+328 AI, RAG & LLM Infrastructure
+(8) How do you evaluate the quality of your RAG system? (e.g., RAGAS, BLEU, ROUGE)
+329 AI, RAG & LLM Infrastructure
+(9) How do you serve the local LLM to multiple users concurrently without a GPU?
+330 AI, RAG & LLM Infrastructure
+(10) Describe the process of fine-tuning an LLM for Samsung-specific configuration syntax.
+331 AI, RAG & LLM Infrastructure
+(11) Explain the 'Retrieval' part of your RAG architecture. How do you rank the most relevant documents?
+332 AI, RAG & LLM Infrastructure
+(12) Why use 'Ollama' instead of 'vLLM' for local inference?
+333 AI, RAG & LLM Infrastructure
+(13) How do you handle 'Context Window' limits when the support team asks about a massive MO sub-tree?
+334 AI, RAG & LLM Infrastructure
+(14) Describe your 'Agentic AI' loop. How does the agent verify that its navigation step was correct?
+335 AI, RAG & LLM Infrastructure
+(15) What is the dimensionality of your embeddings in Chroma DB? How does it affect search latency?
+336 AI, RAG & LLM Infrastructure
+(16) How do you mitigate 'Prompt Injection' in your internal AI tool?
+337 AI, RAG & LLM Infrastructure
+(17) Explain 'Vector Quantization' and its impact on the accuracy of your navigation tool.
+338 AI, RAG & LLM Infrastructure
+(18) How do you evaluate the quality of your RAG system? (e.g., RAGAS, BLEU, ROUGE)
+339 AI, RAG & LLM Infrastructure
+(19) How do you serve the local LLM to multiple users concurrently without a GPU?
+340 AI, RAG & LLM Infrastructure
+(20) Describe the process of fine-tuning an LLM for Samsung-specific configuration syntax.
+341 AI, RAG & LLM Infrastructure
+(21) Explain the 'Retrieval' part of your RAG architecture. How do you rank the most relevant documents?
+342 AI, RAG & LLM Infrastructure
+(22) Why use 'Ollama' instead of 'vLLM' for local inference?
+
+343 AI, RAG & LLM Infrastructure
+(23) How do you handle 'Context Window' limits when the support team asks about a massive MO sub-tree?
+344 AI, RAG & LLM Infrastructure
+(24) Describe your 'Agentic AI' loop. How does the agent verify that its navigation step was correct?
+345 AI, RAG & LLM Infrastructure
+(25) What is the dimensionality of your embeddings in Chroma DB? How does it affect search latency?
+346 AI, RAG & LLM Infrastructure
+(26) How do you mitigate 'Prompt Injection' in your internal AI tool?
+347 AI, RAG & LLM Infrastructure
+(27) Explain 'Vector Quantization' and its impact on the accuracy of your navigation tool.
+348 AI, RAG & LLM Infrastructure
+(28) How do you evaluate the quality of your RAG system? (e.g., RAGAS, BLEU, ROUGE)
+349 AI, RAG & LLM Infrastructure
+(29) How do you serve the local LLM to multiple users concurrently without a GPU?
+350 AI, RAG & LLM Infrastructure
+(30) Describe the process of fine-tuning an LLM for Samsung-specific configuration syntax.
+351 AI, RAG & LLM Infrastructure
+(31) Explain the 'Retrieval' part of your RAG architecture. How do you rank the most relevant documents?
+352 AI, RAG & LLM Infrastructure
+(32) Why use 'Ollama' instead of 'vLLM' for local inference?
+353 AI, RAG & LLM Infrastructure
+(33) How do you handle 'Context Window' limits when the support team asks about a massive MO sub-tree?
+354 AI, RAG & LLM Infrastructure
+(34) Describe your 'Agentic AI' loop. How does the agent verify that its navigation step was correct?
+355 AI, RAG & LLM Infrastructure
+(35) What is the dimensionality of your embeddings in Chroma DB? How does it affect search latency?
+356 AI, RAG & LLM Infrastructure
+(36) How do you mitigate 'Prompt Injection' in your internal AI tool?
+357 AI, RAG & LLM Infrastructure
+(37) Explain 'Vector Quantization' and its impact on the accuracy of your navigation tool.
+358 AI, RAG & LLM Infrastructure
+(38) How do you evaluate the quality of your RAG system? (e.g., RAGAS, BLEU, ROUGE)
+359 AI, RAG & LLM Infrastructure
+(39) How do you serve the local LLM to multiple users concurrently without a GPU?
+360 AI, RAG & LLM Infrastructure
+(40) Describe the process of fine-tuning an LLM for Samsung-specific configuration syntax.
+361 AI, RAG & LLM Infrastructure
+(41) Explain the 'Retrieval' part of your RAG architecture. How do you rank the most relevant documents?
+362 AI, RAG & LLM Infrastructure
+(42) Why use 'Ollama' instead of 'vLLM' for local inference?
+363 AI, RAG & LLM Infrastructure
+(43) How do you handle 'Context Window' limits when the support team asks about a massive MO sub-tree?
+364 AI, RAG & LLM Infrastructure
+(44) Describe your 'Agentic AI' loop. How does the agent verify that its navigation step was correct?
+365 AI, RAG & LLM Infrastructure
+(45) What is the dimensionality of your embeddings in Chroma DB? How does it affect search latency?
+366 AI, RAG & LLM Infrastructure
+(46) How do you mitigate 'Prompt Injection' in your internal AI tool?
+367 AI, RAG & LLM Infrastructure
+(47) Explain 'Vector Quantization' and its impact on the accuracy of your navigation tool.
+368 AI, RAG & LLM Infrastructure
+(48) How do you evaluate the quality of your RAG system? (e.g., RAGAS, BLEU, ROUGE)
+369 AI, RAG & LLM Infrastructure
+(49) How do you serve the local LLM to multiple users concurrently without a GPU?
+370 AI, RAG & LLM Infrastructure
+(50) Describe the process of fine-tuning an LLM for Samsung-specific configuration syntax.
+371 AI, RAG & LLM Infrastructure
+(51) Explain the 'Retrieval' part of your RAG architecture. How do you rank the most relevant documents?
+372 AI, RAG & LLM Infrastructure
+(52) Why use 'Ollama' instead of 'vLLM' for local inference?
+373 AI, RAG & LLM Infrastructure
+(53) How do you handle 'Context Window' limits when the support team asks about a massive MO sub-tree?
+374 AI, RAG & LLM Infrastructure
+(54) Describe your 'Agentic AI' loop. How does the agent verify that its navigation step was correct?
+375 AI, RAG & LLM Infrastructure
+(55) What is the dimensionality of your embeddings in Chroma DB? How does it affect search latency?
+376 AI, RAG & LLM Infrastructure
+(56) How do you mitigate 'Prompt Injection' in your internal AI tool?
+377 AI, RAG & LLM Infrastructure
+(57) Explain 'Vector Quantization' and its impact on the accuracy of your navigation tool.
+378 AI, RAG & LLM Infrastructure
+(58) How do you evaluate the quality of your RAG system? (e.g., RAGAS, BLEU, ROUGE)
+379 AI, RAG & LLM Infrastructure
+(59) How do you serve the local LLM to multiple users concurrently without a GPU?
+380 AI, RAG & LLM Infrastructure
+(60) Describe the process of fine-tuning an LLM for Samsung-specific configuration syntax.
+381 System Design (High Concurrency & Scale)
+(1) Design a system to monitor 1M+ Network Elements in real-time with <5s latency.
+382 System Design (High Concurrency & Scale)
+(2) How do you handle 'Clock Skew' in a distributed system spanning multiple Samsung data centers?
+383 System Design (High Concurrency & Scale)
+(3) Design a global rate limiter that allows 100k requests/sec with minimal cross-region latency.
+384 System Design (High Concurrency & Scale)
+(4) How do you ensure 'Linearizability' in your Configuration Management module?
+385 System Design (High Concurrency & Scale)
+(5) Explain the CAP theorem trade-offs you made for the USM project.
+386 System Design (High Concurrency & Scale)
+(6) How do you handle 'Data Consistency' between your PostgreSQL DB and the Vector DB?
+387 System Design (High Concurrency & Scale)
+(7) Design a deployment pipeline that can roll back a 20M cell configuration update in <10 seconds.
+388 System Design (High Concurrency & Scale)
+(8) How do you handle 'Service Discovery' in a Kubernetes cluster with 500+ microservices?
+389 System Design (High Concurrency & Scale)
+(9) Describe the 'Saga Pattern' for a multi-step configuration rollout across different network layers.
+390 System Design (High Concurrency & Scale)
+(10) How do you optimize for 'Cost' in an AWS environment with massive data egress from Kafka?
+391 System Design (High Concurrency & Scale)
+(11) Design a system to monitor 1M+ Network Elements in real-time with <5s latency.
+
+392 System Design (High Concurrency & Scale)
+(12) How do you handle 'Clock Skew' in a distributed system spanning multiple Samsung data centers?
+393 System Design (High Concurrency & Scale)
+(13) Design a global rate limiter that allows 100k requests/sec with minimal cross-region latency.
+394 System Design (High Concurrency & Scale)
+(14) How do you ensure 'Linearizability' in your Configuration Management module?
+395 System Design (High Concurrency & Scale)
+(15) Explain the CAP theorem trade-offs you made for the USM project.
+396 System Design (High Concurrency & Scale)
+(16) How do you handle 'Data Consistency' between your PostgreSQL DB and the Vector DB?
+397 System Design (High Concurrency & Scale)
+(17) Design a deployment pipeline that can roll back a 20M cell configuration update in <10 seconds.
+398 System Design (High Concurrency & Scale)
+(18) How do you handle 'Service Discovery' in a Kubernetes cluster with 500+ microservices?
+399 System Design (High Concurrency & Scale)
+(19) Describe the 'Saga Pattern' for a multi-step configuration rollout across different network layers.
+400 System Design (High Concurrency & Scale)
+(20) How do you optimize for 'Cost' in an AWS environment with massive data egress from Kafka?
+401 System Design (High Concurrency & Scale)
+(21) Design a system to monitor 1M+ Network Elements in real-time with <5s latency.
+402 System Design (High Concurrency & Scale)
+(22) How do you handle 'Clock Skew' in a distributed system spanning multiple Samsung data centers?
+403 System Design (High Concurrency & Scale)
+(23) Design a global rate limiter that allows 100k requests/sec with minimal cross-region latency.
+404 System Design (High Concurrency & Scale)
+(24) How do you ensure 'Linearizability' in your Configuration Management module?
+405 System Design (High Concurrency & Scale)
+(25) Explain the CAP theorem trade-offs you made for the USM project.
+406 System Design (High Concurrency & Scale)
+(26) How do you handle 'Data Consistency' between your PostgreSQL DB and the Vector DB?
+407 System Design (High Concurrency & Scale)
+(27) Design a deployment pipeline that can roll back a 20M cell configuration update in <10 seconds.
+408 System Design (High Concurrency & Scale)
+(28) How do you handle 'Service Discovery' in a Kubernetes cluster with 500+ microservices?
+409 System Design (High Concurrency & Scale)
+(29) Describe the 'Saga Pattern' for a multi-step configuration rollout across different network layers.
+410 System Design (High Concurrency & Scale)
+(30) How do you optimize for 'Cost' in an AWS environment with massive data egress from Kafka?
+411 System Design (High Concurrency & Scale)
+(31) Design a system to monitor 1M+ Network Elements in real-time with <5s latency.
+412 System Design (High Concurrency & Scale)
+(32) How do you handle 'Clock Skew' in a distributed system spanning multiple Samsung data centers?
+413 System Design (High Concurrency & Scale)
+(33) Design a global rate limiter that allows 100k requests/sec with minimal cross-region latency.
+414 System Design (High Concurrency & Scale)
+(34) How do you ensure 'Linearizability' in your Configuration Management module?
+415 System Design (High Concurrency & Scale)
+(35) Explain the CAP theorem trade-offs you made for the USM project.
+416 System Design (High Concurrency & Scale)
+(36) How do you handle 'Data Consistency' between your PostgreSQL DB and the Vector DB?
+417 System Design (High Concurrency & Scale)
+(37) Design a deployment pipeline that can roll back a 20M cell configuration update in <10 seconds.
+418 System Design (High Concurrency & Scale)
+(38) How do you handle 'Service Discovery' in a Kubernetes cluster with 500+ microservices?
+419 System Design (High Concurrency & Scale)
+(39) Describe the 'Saga Pattern' for a multi-step configuration rollout across different network layers.
+420 System Design (High Concurrency & Scale)
+(40) How do you optimize for 'Cost' in an AWS environment with massive data egress from Kafka?
+421 System Design (High Concurrency & Scale)
+(41) Design a system to monitor 1M+ Network Elements in real-time with <5s latency.
+422 System Design (High Concurrency & Scale)
+(42) How do you handle 'Clock Skew' in a distributed system spanning multiple Samsung data centers?
+423 System Design (High Concurrency & Scale)
+(43) Design a global rate limiter that allows 100k requests/sec with minimal cross-region latency.
+424 System Design (High Concurrency & Scale)
+(44) How do you ensure 'Linearizability' in your Configuration Management module?
+425 System Design (High Concurrency & Scale)
+(45) Explain the CAP theorem trade-offs you made for the USM project.
+426 System Design (High Concurrency & Scale)
+(46) How do you handle 'Data Consistency' between your PostgreSQL DB and the Vector DB?
+427 System Design (High Concurrency & Scale)
+(47) Design a deployment pipeline that can roll back a 20M cell configuration update in <10 seconds.
+428 System Design (High Concurrency & Scale)
+(48) How do you handle 'Service Discovery' in a Kubernetes cluster with 500+ microservices?
+429 System Design (High Concurrency & Scale)
+(49) Describe the 'Saga Pattern' for a multi-step configuration rollout across different network layers.
+430 System Design (High Concurrency & Scale)
+(50) How do you optimize for 'Cost' in an AWS environment with massive data egress from Kafka?
+431 System Design (High Concurrency & Scale)
+(51) Design a system to monitor 1M+ Network Elements in real-time with <5s latency.
+432 System Design (High Concurrency & Scale)
+(52) How do you handle 'Clock Skew' in a distributed system spanning multiple Samsung data centers?
+433 System Design (High Concurrency & Scale)
+(53) Design a global rate limiter that allows 100k requests/sec with minimal cross-region latency.
+434 System Design (High Concurrency & Scale)
+(54) How do you ensure 'Linearizability' in your Configuration Management module?
+435 System Design (High Concurrency & Scale)
+(55) Explain the CAP theorem trade-offs you made for the USM project.
+436 System Design (High Concurrency & Scale)
+(56) How do you handle 'Data Consistency' between your PostgreSQL DB and the Vector DB?
+437 System Design (High Concurrency & Scale)
+(57) Design a deployment pipeline that can roll back a 20M cell configuration update in <10 seconds.
+438 System Design (High Concurrency & Scale)
+(58) How do you handle 'Service Discovery' in a Kubernetes cluster with 500+ microservices?
+439 System Design (High Concurrency & Scale)
+(59) Describe the 'Saga Pattern' for a multi-step configuration rollout across different network layers.
+440 System Design (High Concurrency & Scale)
+(60) How do you optimize for 'Cost' in an AWS environment with massive data egress from Kafka?
+
+441 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(1) Explain the difference between 'NodePort', 'ClusterIP', and 'LoadBalancer' in your K8s setup.
+442 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(2) How do you manage 'Terraform State' in a team of 10+ engineers?
+443 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(3) Describe your strategy for 'Blue-Green' deployments for the CM module.
+444 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(4) How do you use 'AWS Lambda' for event-driven processing of network logs?
+445 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(5) Explain 'Kubernetes Resource Quotas' and how they prevent one microservice from crashing the USM cluster.
+446 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(6) How do you handle 'Secret Management' without hardcoding credentials in Jenkins?
+447 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(7) Explain the 'Sidecar Pattern' and how you used it for logging and monitoring.
+448 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(8) How do you optimize the cost of 'EKS' nodes for high-compute AI workloads?
+449 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(9) What is your 'DR' (Disaster Recovery) plan for the 20M cell configuration database?
+450 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(10) How do you use 'Helm' to manage complex microservice dependencies?
+451 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(11) Explain the difference between 'NodePort', 'ClusterIP', and 'LoadBalancer' in your K8s setup.
+452 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(12) How do you manage 'Terraform State' in a team of 10+ engineers?
+453 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(13) Describe your strategy for 'Blue-Green' deployments for the CM module.
+454 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(14) How do you use 'AWS Lambda' for event-driven processing of network logs?
+455 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(15) Explain 'Kubernetes Resource Quotas' and how they prevent one microservice from crashing the USM cluster.
+456 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(16) How do you handle 'Secret Management' without hardcoding credentials in Jenkins?
+457 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(17) Explain the 'Sidecar Pattern' and how you used it for logging and monitoring.
+458 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(18) How do you optimize the cost of 'EKS' nodes for high-compute AI workloads?
+459 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(19) What is your 'DR' (Disaster Recovery) plan for the 20M cell configuration database?
+460 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(20) How do you use 'Helm' to manage complex microservice dependencies?
+461 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(21) Explain the difference between 'NodePort', 'ClusterIP', and 'LoadBalancer' in your K8s setup.
+462 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(22) How do you manage 'Terraform State' in a team of 10+ engineers?
+463 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(23) Describe your strategy for 'Blue-Green' deployments for the CM module.
+464 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(24) How do you use 'AWS Lambda' for event-driven processing of network logs?
+465 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(25) Explain 'Kubernetes Resource Quotas' and how they prevent one microservice from crashing the USM cluster.
+466 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(26) How do you handle 'Secret Management' without hardcoding credentials in Jenkins?
+467 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(27) Explain the 'Sidecar Pattern' and how you used it for logging and monitoring.
+468 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(28) How do you optimize the cost of 'EKS' nodes for high-compute AI workloads?
+469 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(29) What is your 'DR' (Disaster Recovery) plan for the 20M cell configuration database?
+470 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(30) How do you use 'Helm' to manage complex microservice dependencies?
+471 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(31) Explain the difference between 'NodePort', 'ClusterIP', and 'LoadBalancer' in your K8s setup.
+472 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(32) How do you manage 'Terraform State' in a team of 10+ engineers?
+473 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(33) Describe your strategy for 'Blue-Green' deployments for the CM module.
+474 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(34) How do you use 'AWS Lambda' for event-driven processing of network logs?
+475 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(35) Explain 'Kubernetes Resource Quotas' and how they prevent one microservice from crashing the USM cluster.
+476 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(36) How do you handle 'Secret Management' without hardcoding credentials in Jenkins?
+477 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(37) Explain the 'Sidecar Pattern' and how you used it for logging and monitoring.
+478 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(38) How do you optimize the cost of 'EKS' nodes for high-compute AI workloads?
+479 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(39) What is your 'DR' (Disaster Recovery) plan for the 20M cell configuration database?
+480 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(40) How do you use 'Helm' to manage complex microservice dependencies?
+481 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(41) Explain the difference between 'NodePort', 'ClusterIP', and 'LoadBalancer' in your K8s setup.
+482 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(42) How do you manage 'Terraform State' in a team of 10+ engineers?
+483 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(43) Describe your strategy for 'Blue-Green' deployments for the CM module.
+484 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(44) How do you use 'AWS Lambda' for event-driven processing of network logs?
+485 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(45) Explain 'Kubernetes Resource Quotas' and how they prevent one microservice from crashing the USM cluster.
+486 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(46) How do you handle 'Secret Management' without hardcoding credentials in Jenkins?
+487 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(47) Explain the 'Sidecar Pattern' and how you used it for logging and monitoring.
+488 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(48) How do you optimize the cost of 'EKS' nodes for high-compute AI workloads?
+489 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(49) What is your 'DR' (Disaster Recovery) plan for the 20M cell configuration database?
+
+490 Infrastructure, Cloud (AWS/K8s) & CI/CD
+(50) How do you use 'Helm' to manage complex microservice dependencies?
+491 Leadership & Pressure Scenarios
+(1) Describe a time you had to override a senior architect's decision for the USM project. What was the outcome?
+492 Leadership & Pressure Scenarios
+(2) How do you mentor junior engineers to handle mission-critical Tier-1 operator issues?
+493 Leadership & Pressure Scenarios
+(3) Explain your process for 'Root Cause Analysis' (RCA) after a major production incident.
+494 Leadership & Pressure Scenarios
+(4) How do you balance technical debt with the need for rapid feature delivery at Samsung?
+495 Leadership & Pressure Scenarios
+(5) Describe a situation where you had to manage a conflict between the AI and Backend teams.
+496 Leadership & Pressure Scenarios
+(6) How do you define 'Success' for a Staff Engineer role?
+497 Leadership & Pressure Scenarios
+(7) What is your strategy for hiring top-tier talent for high-concurrency systems?
+498 Leadership & Pressure Scenarios
+(8) How do you stay updated with rapidly evolving tech like Java 21 and AI while managing a team?
+499 Leadership & Pressure Scenarios
+(9) Explain a time you failed to meet an SLA. What did you learn?
+500 Leadership & Pressure Scenarios
+(10) How do you influence stakeholders to invest in 'invisible' work like refactoring or query optimization?
+501 Leadership & Pressure Scenarios
+(11) Describe a time you had to override a senior architect's decision for the USM project. What was the outcome?
+502 Leadership & Pressure Scenarios
+(12) How do you mentor junior engineers to handle mission-critical Tier-1 operator issues?
+503 Leadership & Pressure Scenarios
+(13) Explain your process for 'Root Cause Analysis' (RCA) after a major production incident.
+504 Leadership & Pressure Scenarios
+(14) How do you balance technical debt with the need for rapid feature delivery at Samsung?
+505 Leadership & Pressure Scenarios
+(15) Describe a situation where you had to manage a conflict between the AI and Backend teams.
+506 Leadership & Pressure Scenarios
+(16) How do you define 'Success' for a Staff Engineer role?
+507 Leadership & Pressure Scenarios
+(17) What is your strategy for hiring top-tier talent for high-concurrency systems?
+508 Leadership & Pressure Scenarios
+(18) How do you stay updated with rapidly evolving tech like Java 21 and AI while managing a team?
+509 Leadership & Pressure Scenarios
+(19) Explain a time you failed to meet an SLA. What did you learn?
+510 Leadership & Pressure Scenarios
+(20) How do you influence stakeholders to invest in 'invisible' work like refactoring or query optimization?
+511 Leadership & Pressure Scenarios
+(21) Describe a time you had to override a senior architect's decision for the USM project. What was the outcome?
+512 Leadership & Pressure Scenarios
+(22) How do you mentor junior engineers to handle mission-critical Tier-1 operator issues?
+513 Leadership & Pressure Scenarios
+(23) Explain your process for 'Root Cause Analysis' (RCA) after a major production incident.
+514 Leadership & Pressure Scenarios
+(24) How do you balance technical debt with the need for rapid feature delivery at Samsung?
+515 Leadership & Pressure Scenarios
+(25) Describe a situation where you had to manage a conflict between the AI and Backend teams.
+516 Leadership & Pressure Scenarios
+(26) How do you define 'Success' for a Staff Engineer role?
+517 Leadership & Pressure Scenarios
+(27) What is your strategy for hiring top-tier talent for high-concurrency systems?
+518 Leadership & Pressure Scenarios
+(28) How do you stay updated with rapidly evolving tech like Java 21 and AI while managing a team?
+519 Leadership & Pressure Scenarios
+(29) Explain a time you failed to meet an SLA. What did you learn?
+520 Leadership & Pressure Scenarios
+(30) How do you influence stakeholders to invest in 'invisible' work like refactoring or query optimization?
+521 Leadership & Pressure Scenarios
+(31) Describe a time you had to override a senior architect's decision for the USM project. What was the outcome?
+522 Leadership & Pressure Scenarios
+(32) How do you mentor junior engineers to handle mission-critical Tier-1 operator issues?
+523 Leadership & Pressure Scenarios
+(33) Explain your process for 'Root Cause Analysis' (RCA) after a major production incident.
+524 Leadership & Pressure Scenarios
+(34) How do you balance technical debt with the need for rapid feature delivery at Samsung?
+525 Leadership & Pressure Scenarios
+(35) Describe a situation where you had to manage a conflict between the AI and Backend teams.
+526 Leadership & Pressure Scenarios
+(36) How do you define 'Success' for a Staff Engineer role?
+527 Leadership & Pressure Scenarios
+(37) What is your strategy for hiring top-tier talent for high-concurrency systems?
+528 Leadership & Pressure Scenarios
+(38) How do you stay updated with rapidly evolving tech like Java 21 and AI while managing a team?
+529 Leadership & Pressure Scenarios
+(39) Explain a time you failed to meet an SLA. What did you learn?
+530 Leadership & Pressure Scenarios
+(40) How do you influence stakeholders to invest in 'invisible' work like refactoring or query optimization?
+531 Leadership & Pressure Scenarios
+(41) Describe a time you had to override a senior architect's decision for the USM project. What was the outcome?
+532 Leadership & Pressure Scenarios
+(42) How do you mentor junior engineers to handle mission-critical Tier-1 operator issues?
+533 Leadership & Pressure Scenarios
+(43) Explain your process for 'Root Cause Analysis' (RCA) after a major production incident.
+534 Leadership & Pressure Scenarios
+(44) How do you balance technical debt with the need for rapid feature delivery at Samsung?
+535 Leadership & Pressure Scenarios
+(45) Describe a situation where you had to manage a conflict between the AI and Backend teams.
+536 Leadership & Pressure Scenarios
+(46) How do you define 'Success' for a Staff Engineer role?
+537 Leadership & Pressure Scenarios
+(47) What is your strategy for hiring top-tier talent for high-concurrency systems?
+538 Leadership & Pressure Scenarios
+(48) How do you stay updated with rapidly evolving tech like Java 21 and AI while managing a team?
+
+539 Leadership & Pressure Scenarios
+(49) Explain a time you failed to meet an SLA. What did you learn?
+540 Leadership & Pressure Scenarios
+(50) How do you influence stakeholders to invest in 'invisible' work like refactoring or query optimization?

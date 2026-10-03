@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>शिशु आहार रेसिपीज: नन्हे बाबू के लिए 30 लाजवाब भोजन | स्वास्थ्य मार्गदर्शन</title>
+    <meta name="description" content="शिशु के पहले ठोस आहार की 30 आसान और सेहतमंद रेसिपीज। सिंगल प्यूरी, न्यूट्रिएंट्स कॉम्बो और संतुलित भोजन। मां के लिए सरल हिंदी गाइड।">
+    <link rel="stylesheet" href="recipes_style.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">🍼 शिशु पोषण</a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">दूध मार्गदर्शिका</a>
+                <a href="recipes.html" class="nav-link active">30 बेबी रेसिपीज</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        
+        <!-- Header / Hero Section -->
+        <header class="page-intro">
+            <h1 class="heading-primary">नन्हे बाबू के लिए 30 सेहतमंद रेसिपीज़ 🥣</h1>
+            <p>शिशु के पहले ठोस आहार की शुरुआत के लिए आसान, स्वादिष्ट और पोषक तत्वों से भरपूर व्यंजन। इसे हमने तीन अलग-अलग चरणों में बांटा है ताकि आप उम्र के अनुसार सही खाना चुन सकें।</p>
+        </header>
+
+        <!-- Safety Guidelines Banner -->
+        <section class="safety-banner">
+            <div class="safety-banner-title">
+                <span>⚠️</span> डॉक्टर बाबू के सुनहरे नियम (Safety First!)
+            </div>
+            <p>बच्चे को कोई भी ठोस आहार (Solid Food) शुरू करने से पहले इन 4 बातों का विशेष ध्यान रखें:</p>
+            <ul>
+                <li><strong>नमक और चीनी बिल्कुल मना:</strong> 1 साल से छोटे बच्चों के गुर्दे (kidneys) नाजुक होते हैं। भोजन में नमक या चीनी कभी न मिलाएं।</li>
+                <li><strong>3-दिन का नियम (3-Day Rule):</strong> कोई भी नया खाना पहली बार देने के बाद 3 दिन तक रुकें। देखें कि बच्चे को कोई एलर्जी (चकत्ते, उल्टी, पेट दर्द) तो नहीं हो रही।</li>
+                <li><strong>शहद 1 साल तक बंद:</strong> 1 साल से कम उम्र के बच्चे को शहद कभी न दें। इससे शिशु बॉटुलिज़्म (Infant Botulism) नामक घातक बीमारी हो सकती है।</li>
+                <li><strong>दूध पकाने में मना:</strong> दलिया या खीर को केवल पानी में पकाएं। पकने के बाद गैस से उतारकर ही उसमें मां का दूध या फॉर्मूला मिलाएं।</li>
+            </ul>
+        </section>
+
+        <!-- Search and Filter Bar -->
+        <div class="control-bar">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" class="search-input" placeholder="सामग्री या रेसिपी का नाम खोजें (जैसे: सेब, केला, खिचड़ी, ओट्स)...">
+            </div>
+            
+            <div class="filter-group">
+                <button class="btn-filter active" data-stage="all">सभी रेसिपीज़ (30)</button>
+                <button class="btn-filter" data-stage="1">चरण 1 (6+ महीने): सिंगल सामग्री (10)</button>
+                <button class="btn-filter" data-stage="2">चरण 2 (7+ महीने): पौष्टिक कॉम्बो (10)</button>
+                <button class="btn-filter" data-stage="3">चरण 3 (8+ महीने): संतुलित भोजन (10)</button>
+            </div>
+        </div>
+
+        <!-- Recipes Grid (Dynamically Populated by script.js) -->
+        <div id="recipesGrid" class="recipes-grid">
+            <!-- Dynamic Recipe Cards will load here -->
+        </div>
+
+    </div>
+
+    <!-- Floating Tried Progress Tracker -->
+    <div class="progress-tracker">
+        <span>बाबू ने चखा:</span>
+        <div id="totalTriedBadge" class="progress-circle">0/30</div>
+    </div>
+
+    <!-- Recipe Details Modal -->
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <button id="btnCloseModal" class="btn-close-modal">×</button>
+            
+            <div class="modal-header">
+                <span id="modalStage" class="modal-stage">स्टेज</span>
+                <h2 id="modalTitle" class="modal-title">रेसिपी का नाम</h2>
+                <div id="modalTitleEn" class="modal-title-en">Recipe Name EN</div>
+            </div>
+            
+            <div class="modal-section">
+                <span style="font-weight: 700; color: var(--text-muted); font-size: 0.9rem;">⏱️ बनने का समय: <span id="modalPrepTime" style="color: var(--text-main);">10 मिनट</span></span>
+            </div>
+
+            <div class="modal-section">
+                <h4>आवश्यक सामग्री (Ingredients)</h4>
+                <ul id="modalIngredients" class="ingredients-list">
+                    <!-- Dynamic List -->
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h4>बनाने की सरल विधि (Steps)</h4>
+                <ol id="modalSteps" class="steps-list">
+                    <!-- Dynamic List -->
+                </ol>
+            </div>
+
+            <div class="modal-section">
+                <h4>पोषण के लाभ (Health Benefits)</h4>
+                <div class="benefit-box">
+                    <p id="modalBenefit">यह बच्चे के लिए बहुत पौष्टिक है।</p>
+                </div>
+            </div>
+
+            <div id="modalTipBox" class="modal-section tip-box">
+                <div class="tip-icon">💡</div>
+                <div class="tip-text">
+                    <h5>मम्मी के लिए जरूरी टिप:</h5>
+                    <p id="modalTipText">टिप सामग्री यहां आएगी।</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container" style="padding-top: 0; padding-bottom: 1rem;">
+            <p>© 2026 शिशु पोषण और प्रथम आहार मार्गदर्शिका</p>
+            <p class="doc-note">⚠️ <strong>महत्वपूर्ण अस्वीकरण (Disclaimer):</strong> यह वेब पेज केवल माता-पिता की सामान्य जानकारी बढ़ाने के लिए तैयार किया गया है। हर बच्चा अलग होता है और उसकी जरूरतें अलग हो सकती हैं। कोई भी नया ठोस आहार शुरू करने से पहले या यदि बच्चा खाने में असहज महसूस करे, तो अपने शिशु रोग विशेषज्ञ (Pediatrician) से परामर्श अवश्य लें।</p>
+        </div>
+    </footer>
+
+    <script src="recipes_script.js"></script>
+</body>
+</html>
