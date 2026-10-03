@@ -343,13 +343,15 @@
       background: rgba(255, 255, 255, 0.03);
     }
 
-    /* AUTH MODAL STYLES */
+    /* AUTH MODAL & TRAINEE PASSPORT 100X STYLES */
     .auth-tab-row {
       display: flex;
       gap: 8px;
       margin-bottom: 18px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding-bottom: 8px;
+      background: rgba(15, 23, 42, 0.6);
+      padding: 4px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
     .auth-tab-btn {
       flex: 1;
@@ -357,15 +359,17 @@
       border: none;
       color: #94a3b8;
       font-weight: 700;
-      font-size: 0.9rem;
-      padding: 8px;
+      font-size: 0.85rem;
+      padding: 9px;
       cursor: pointer;
-      border-radius: 6px;
-      transition: all 0.2s;
+      border-radius: 8px;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .auth-tab-btn.active {
-      color: #38bdf8;
-      background: rgba(56, 189, 248, 0.15);
+      color: #fff;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.3) 0%, rgba(99, 102, 241, 0.3) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2);
     }
     .avatar-picker {
       display: flex;
@@ -374,22 +378,163 @@
       margin-top: 6px;
     }
     .avatar-btn {
-      width: 38px;
-      height: 38px;
-      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
       background: rgba(15, 23, 42, 0.8);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .avatar-btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(56, 189, 248, 0.5);
     }
     .avatar-btn.selected {
       border-color: #38bdf8;
       background: rgba(56, 189, 248, 0.25);
-      transform: scale(1.1);
+      transform: scale(1.12);
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.4);
+    }
+
+    .form-group-100x {
+      margin-bottom: 14px;
+      text-align: left;
+    }
+    .form-group-100x label {
+      display: block;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 5px;
+    }
+    .input-wrapper-100x {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .input-wrapper-100x input, .input-wrapper-100x select, .input-wrapper-100x textarea {
+      width: 100%;
+      background: rgba(10, 16, 30, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: #fff;
+      font-size: 0.9rem;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .input-wrapper-100x input:focus, .input-wrapper-100x select:focus, .input-wrapper-100x textarea:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+      background: rgba(15, 23, 42, 0.95);
+    }
+    .pwd-toggle-btn {
+      position: absolute;
+      right: 10px;
+      background: none;
+      border: none;
+      color: #94a3b8;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 4px;
+      line-height: 1;
+    }
+    .pwd-toggle-btn:hover { color: #fff; }
+
+    /* Quick Account Switcher Chips */
+    .quick-account-chips {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    }
+    .account-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 99px;
+      padding: 4px 10px;
+      font-size: 0.76rem;
+      color: #cbd5e1;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .account-chip:hover {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: rgba(56, 189, 248, 0.4);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    /* Trainee Passport VIP Card Styling */
+    .trainee-passport-card {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 16px;
+      padding: 22px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    .trainee-passport-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .passport-avatar-badge {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 12px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.2) 0%, rgba(99, 102, 241, 0.2) 100%);
+      border: 2px solid #38bdf8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      box-shadow: 0 8px 24px rgba(56, 189, 248, 0.3);
+    }
+    .passport-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 16px 0;
+      background: rgba(10, 16, 30, 0.5);
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .passport-stat-item {
+      text-align: center;
+    }
+    .passport-stat-val {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    .passport-stat-lbl {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #94a3b8;
+      margin-top: 2px;
     }
 
     /* VIEW SWITCHER - MODERN HIGH-END GLASS SEGMENTED DOCK */
@@ -9520,61 +9665,226 @@
     </div>
   </div>
 
-  <!-- MODAL: 👤 USER AUTHENTICATION & PROFILE -->
+  <!-- MODAL: 👤 USER AUTHENTICATION (100X EXPERIENCE) -->
   <div id="authModal" class="app-modal" onclick="closeModalOnBackdrop(event, 'authModal')">
-    <div class="modal-box" style="max-width: 440px;">
+    <div class="modal-box" style="max-width: 460px;">
       <div class="modal-header">
-        <div class="modal-title" id="authModalTitle">👤 Trainee Account</div>
+        <div class="modal-title" id="authModalTitle">⚡ Trainee Portal</div>
         <button class="modal-close" onclick="closeModal('authModal')">&times;</button>
       </div>
       <div class="modal-body">
+        <!-- Quick Account Switcher Chips -->
+        <div id="quickAccountSwitcher" style="display: none;">
+          <div style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--cyan); margin-bottom: 6px; font-weight: 700;">⚡ Quick Select Account</div>
+          <div class="quick-account-chips" id="quickAccountChipsContainer"></div>
+        </div>
+
         <div class="auth-tab-row" id="authTabRow">
           <button class="auth-tab-btn active" id="tabBtnLogin" onclick="switchAuthTab('login')">Sign In</button>
           <button class="auth-tab-btn" id="tabBtnRegister" onclick="switchAuthTab('register')">Create Profile</button>
         </div>
 
-        <!-- Logged in state display -->
-        <div id="authLoggedInState" style="display: none; text-align: center; padding: 10px 0;">
-          <div style="font-size: 3rem; margin-bottom: 8px;" id="authProfileAvatar">⚡</div>
-          <h3 id="authProfileName" style="margin: 0 0 4px; color: #fff;">Trainee Name</h3>
-          <p id="authProfileDetails" style="font-size: 0.8rem; color: var(--text-muted); margin: 0 0 16px;">@username &bull; Role: Member</p>
-          <div style="display: flex; gap: 8px; justify-content: center;">
-            <button class="btn-live-session" onclick="openLeaderboardModal(); closeModal('authModal');" style="padding: 8px 16px; font-size: 0.82rem;">🏆 View Leaderboard</button>
-            <button class="btn-secondary" onclick="logoutCurrentUser()" style="padding: 8px 16px; font-size: 0.82rem; border-color: rgba(244,63,94,0.4); color: #f43f5e;">🚪 Sign Out</button>
-          </div>
-        </div>
-
         <!-- Auth Form -->
         <form id="authForm" onsubmit="handleAuthSubmit(event)">
           <div id="authRegisterExtraFields" style="display: none;">
-            <label style="font-size: 0.76rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Display Name</label>
-            <input type="text" id="authDisplayNameInput" placeholder="e.g. Spartan Warrior" style="width: 100%; background: var(--bg-card); border: 1px solid var(--border); padding: 8px 12px; color: #fff; border-radius: 6px; margin-bottom: 12px;">
+            <div class="form-group-100x">
+              <label>Athlete Name</label>
+              <div class="input-wrapper-100x">
+                <input type="text" id="authDisplayNameInput" placeholder="e.g. Shivam (Head Coach) or Spartan Warrior">
+              </div>
+            </div>
 
-            <label style="font-size: 0.76rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Choose Your Avatar</label>
-            <div class="avatar-picker" id="avatarPickerContainer">
-              <button type="button" class="avatar-btn selected" onclick="selectAvatar('⚡', this)">⚡</button>
-              <button type="button" class="avatar-btn" onclick="selectAvatar('🦁', this)">🦁</button>
-              <button type="button" class="avatar-btn" onclick="selectAvatar('🥋', this)">🥋</button>
-              <button type="button" class="avatar-btn" onclick="selectAvatar('🦅', this)">🦅</button>
-              <button type="button" class="avatar-btn" onclick="selectAvatar('🔥', this)">🔥</button>
-              <button type="button" class="avatar-btn" onclick="selectAvatar('🐺', this)">🐺</button>
-              <button type="button" class="avatar-btn" onclick="selectAvatar('🛡️', this)">🛡️</button>
-              <button type="button" class="avatar-btn" onclick="selectAvatar('👑', this)">👑</button>
+            <div class="form-group-100x">
+              <label>Primary Training Goal</label>
+              <div class="input-wrapper-100x">
+                <select id="authGoalInput">
+                  <option value="recomp">🔥 Body Recomposition (Burn Fat & Build Muscle)</option>
+                  <option value="hypertrophy">💪 Pure Hypertrophy (Maximum Muscle Mass)</option>
+                  <option value="strength">🏋️ Relentless Strength (Power & PRs)</option>
+                  <option value="shred">⚡ Lean Shred (Extreme Definition)</option>
+                  <option value="longevity">🧬 Athletic Longevity & Joint Health</option>
+                </select>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+              <div class="form-group-100x">
+                <label>Starting Weight (kg)</label>
+                <div class="input-wrapper-100x">
+                  <input type="number" id="authStartWeightInput" step="0.5" placeholder="e.g. 74.0">
+                </div>
+              </div>
+              <div class="form-group-100x">
+                <label>Target Goal (kg)</label>
+                <div class="input-wrapper-100x">
+                  <input type="number" id="authTargetWeightInput" step="0.5" placeholder="e.g. 70.0">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group-100x">
+              <label>Athlete Bio / Motivation</label>
+              <div class="input-wrapper-100x">
+                <input type="text" id="authBioInput" placeholder="e.g. 365 days of zero excuses.">
+              </div>
+            </div>
+
+            <div class="form-group-100x">
+              <label>Select Avatar Icon</label>
+              <div class="avatar-picker" id="avatarPickerContainer">
+                <button type="button" class="avatar-btn selected" onclick="selectAvatar('⚡', this)">⚡</button>
+                <button type="button" class="avatar-btn" onclick="selectAvatar('🦁', this)">🦁</button>
+                <button type="button" class="avatar-btn" onclick="selectAvatar('🥋', this)">🥋</button>
+                <button type="button" class="avatar-btn" onclick="selectAvatar('🦅', this)">🦅</button>
+                <button type="button" class="avatar-btn" onclick="selectAvatar('🔥', this)">🔥</button>
+                <button type="button" class="avatar-btn" onclick="selectAvatar('🐺', this)">🐺</button>
+                <button type="button" class="avatar-btn" onclick="selectAvatar('🛡️', this)">🛡️</button>
+                <button type="button" class="avatar-btn" onclick="selectAvatar('👑', this)">👑</button>
+              </div>
             </div>
           </div>
 
-          <label style="font-size: 0.76rem; color: var(--text-muted); display: block; margin: 12px 0 4px;">Username</label>
-          <input type="text" id="authUsernameInput" required autocomplete="username" placeholder="Username (e.g. shivam or alex)" style="width: 100%; background: var(--bg-card); border: 1px solid var(--border); padding: 8px 12px; color: #fff; border-radius: 6px; margin-bottom: 12px;">
+          <div class="form-group-100x">
+            <label>Username</label>
+            <div class="input-wrapper-100x">
+              <input type="text" id="authUsernameInput" required autocomplete="username" placeholder="Username (e.g. shivam or alex)">
+            </div>
+          </div>
 
-          <label style="font-size: 0.76rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Password</label>
-          <input type="password" id="authPasswordInput" required autocomplete="current-password" placeholder="Password" style="width: 100%; background: var(--bg-card); border: 1px solid var(--border); padding: 8px 12px; color: #fff; border-radius: 6px; margin-bottom: 16px;">
+          <div class="form-group-100x">
+            <label>Password</label>
+            <div class="input-wrapper-100x">
+              <input type="password" id="authPasswordInput" required autocomplete="current-password" placeholder="Enter password">
+              <button type="button" class="pwd-toggle-btn" onclick="togglePasswordVisibility('authPasswordInput', this)" title="Show/Hide Password">👁️</button>
+            </div>
+          </div>
 
-          <div id="authErrorMsg" style="display: none; color: #f43f5e; font-size: 0.8rem; margin-bottom: 12px; padding: 6px 10px; background: rgba(244,63,94,0.1); border-radius: 6px; border: 1px solid rgba(244,63,94,0.3);"></div>
+          <div id="authErrorMsg" style="display: none; color: #f43f5e; font-size: 0.8rem; margin-bottom: 12px; padding: 8px 12px; background: rgba(244,63,94,0.12); border-radius: 8px; border: 1px solid rgba(244,63,94,0.3);"></div>
 
-          <button type="submit" class="btn-live-session" id="authSubmitBtn" style="width: 100%; padding: 10px; font-weight: 700;">
+          <button type="submit" class="btn-live-session" id="authSubmitBtn" style="width: 100%; padding: 12px; font-weight: 800; font-size: 0.95rem; border-radius: 10px;">
             Sign In
           </button>
         </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: 🪪 TRAINEE PASSPORT & PROFILE MANAGEMENT -->
+  <div id="profilePassportModal" class="app-modal" onclick="closeModalOnBackdrop(event, 'profilePassportModal')">
+    <div class="modal-box" style="max-width: 480px;">
+      <div class="modal-header">
+        <div class="modal-title">🪪 Trainee Passport</div>
+        <button class="modal-close" onclick="closeModal('profilePassportModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="trainee-passport-card">
+          <div class="passport-avatar-badge" id="passportAvatar">⚡</div>
+          <h2 id="passportDisplayName" style="margin: 0; font-size: 1.35rem; color: #fff; font-weight: 800;">Trainee Name</h2>
+          <div id="passportUsernameBadge" style="display: inline-block; background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.3); color: var(--cyan); padding: 2px 10px; border-radius: 99px; font-size: 0.75rem; font-weight: 700; margin: 6px 0 10px;">@username</div>
+          <p id="passportBio" style="font-size: 0.82rem; color: #cbd5e1; margin: 0 0 14px; font-style: italic;">"365 Days of Zero Excuses"</p>
+
+          <div class="passport-stat-grid">
+            <div class="passport-stat-item">
+              <div class="passport-stat-val" id="passportDayVal" style="color: var(--cyan);">Day 1</div>
+              <div class="passport-stat-lbl">Active Day</div>
+            </div>
+            <div class="passport-stat-item">
+              <div class="passport-stat-val" id="passportStreakVal" style="color: #fbbf24;">1 🔥</div>
+              <div class="passport-stat-lbl">Streak</div>
+            </div>
+            <div class="passport-stat-item">
+              <div class="passport-stat-val" id="passportWorkoutsVal" style="color: #34d399;">0</div>
+              <div class="passport-stat-lbl">Completed</div>
+            </div>
+          </div>
+
+          <div style="text-align: left; background: rgba(10, 16, 30, 0.5); padding: 10px 14px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.05); margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; font-size: 0.78rem; margin-bottom: 4px;">
+              <span style="color: var(--text-muted);">Target Focus:</span>
+              <strong id="passportGoalBadge" style="color: #fff; text-transform: uppercase;">Body Recomposition</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.78rem;">
+              <span style="color: var(--text-muted);">Account Level:</span>
+              <strong id="passportRoleBadge" style="color: var(--cyan);">Trainee Athlete</strong>
+            </div>
+          </div>
+
+          <!-- Edit Profile Toggle -->
+          <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
+            <button class="btn-micro-step" onclick="toggleEditProfileSection()" style="padding: 7px 14px; font-size: 0.8rem; border-color: rgba(56, 189, 248, 0.4); color: var(--cyan);">
+              ✏️ Edit Profile
+            </button>
+            <button class="btn-live-session" onclick="openLeaderboardModal(); closeModal('profilePassportModal');" style="padding: 7px 14px; font-size: 0.8rem;">
+              🏆 View Leaderboard
+            </button>
+            <button class="btn-secondary" onclick="openSwitchAccountModal()" style="padding: 7px 14px; font-size: 0.8rem; border-color: rgba(255, 255, 255, 0.2);">
+              🔄 Switch User
+            </button>
+            <button class="btn-secondary" onclick="logoutCurrentUser()" style="padding: 7px 14px; font-size: 0.8rem; border-color: rgba(244,63,94,0.4); color: #f43f5e;">
+              🚪 Sign Out
+            </button>
+          </div>
+        </div>
+
+        <!-- Inline Profile Editor Form -->
+        <div id="inlineProfileEditor" style="display: none; margin-top: 18px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 16px; text-align: left;">
+          <h4 style="margin: 0 0 12px; color: #fff; font-size: 0.9rem;">✏️ Update Athlete Passport</h4>
+          
+          <div class="form-group-100x">
+            <label>Display Name</label>
+            <div class="input-wrapper-100x">
+              <input type="text" id="editDisplayNameInput">
+            </div>
+          </div>
+
+          <div class="form-group-100x">
+            <label>Primary Focus</label>
+            <div class="input-wrapper-100x">
+              <select id="editGoalInput">
+                <option value="recomp">🔥 Body Recomposition</option>
+                <option value="hypertrophy">💪 Pure Hypertrophy</option>
+                <option value="strength">🏋️ Relentless Strength</option>
+                <option value="shred">⚡ Lean Shred</option>
+                <option value="longevity">🧬 Athletic Longevity</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group-100x">
+            <label>Target Bodyweight (kg)</label>
+            <div class="input-wrapper-100x">
+              <input type="number" id="editTargetWeightInput" step="0.5">
+            </div>
+          </div>
+
+          <div class="form-group-100x">
+            <label>Motto / Bio</label>
+            <div class="input-wrapper-100x">
+              <input type="text" id="editBioInput" maxlength="160">
+            </div>
+          </div>
+
+          <div class="form-group-100x">
+            <label>Avatar Icon</label>
+            <div class="avatar-picker" id="editAvatarPicker">
+              <button type="button" class="avatar-btn" onclick="selectEditAvatar('⚡', this)">⚡</button>
+              <button type="button" class="avatar-btn" onclick="selectEditAvatar('🦁', this)">🦁</button>
+              <button type="button" class="avatar-btn" onclick="selectEditAvatar('🥋', this)">🥋</button>
+              <button type="button" class="avatar-btn" onclick="selectEditAvatar('🦅', this)">🦅</button>
+              <button type="button" class="avatar-btn" onclick="selectEditAvatar('🔥', this)">🔥</button>
+              <button type="button" class="avatar-btn" onclick="selectEditAvatar('🐺', this)">🐺</button>
+              <button type="button" class="avatar-btn" onclick="selectEditAvatar('🛡️', this)">🛡️</button>
+              <button type="button" class="avatar-btn" onclick="selectEditAvatar('👑', this)">👑</button>
+            </div>
+          </div>
+
+          <div id="editProfileMsg" style="display: none; font-size: 0.8rem; margin-bottom: 10px; padding: 6px 10px; border-radius: 6px;"></div>
+
+          <div style="display: flex; gap: 8px; justify-content: flex-end;">
+            <button type="button" class="btn-secondary" onclick="toggleEditProfileSection()" style="padding: 7px 14px; font-size: 0.8rem;">Cancel</button>
+            <button type="button" class="btn-live-session" onclick="saveProfileChanges()" style="padding: 7px 18px; font-size: 0.8rem;">Save Changes</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -10977,30 +11287,189 @@
     }
 
     function handleUserPillClick() {
-      openModal('authModal');
-      const loggedInBox = document.getElementById('authLoggedInState');
-      const authForm = document.getElementById('authForm');
-      const authTabRow = document.getElementById('authTabRow');
-      const titleEl = document.getElementById('authModalTitle');
-
       if (currentUser) {
-        if (loggedInBox) loggedInBox.style.display = 'block';
-        if (authForm) authForm.style.display = 'none';
-        if (authTabRow) authTabRow.style.display = 'none';
-        if (titleEl) titleEl.textContent = '👤 Profile & Account';
-
-        const pAvatar = document.getElementById('authProfileAvatar');
-        const pName = document.getElementById('authProfileName');
-        const pDetails = document.getElementById('authProfileDetails');
-        if (pAvatar) pAvatar.textContent = currentUser.avatar || '⚡';
-        if (pName) pName.textContent = currentUser.displayName || currentUser.username;
-        if (pDetails) pDetails.textContent = `@${currentUser.username} • Role: ${currentUser.role === 'admin' ? 'Head Coach (Admin)' : 'Trainee'}`;
+        populatePassportModal(currentUser);
+        openModal('profilePassportModal');
       } else {
-        if (loggedInBox) loggedInBox.style.display = 'none';
-        if (authForm) authForm.style.display = 'block';
-        if (authTabRow) authTabRow.style.display = 'flex';
-        if (titleEl) titleEl.textContent = '👤 Trainee Account';
+        openModal('authModal');
+        loadQuickAccountChips();
         switchAuthTab('login');
+      }
+    }
+
+    function openSwitchAccountModal() {
+      closeModal('profilePassportModal');
+      openModal('authModal');
+      loadQuickAccountChips();
+      switchAuthTab('login');
+    }
+
+    let selectedAvatar = '⚡';
+    let selectedEditAvatarVal = '⚡';
+
+    function togglePasswordVisibility(inputId, btn) {
+      const inp = document.getElementById(inputId);
+      if (!inp) return;
+      if (inp.type === 'password') {
+        inp.type = 'text';
+        btn.textContent = '🔒';
+      } else {
+        inp.type = 'password';
+        btn.textContent = '👁️';
+      }
+    }
+
+    async function loadQuickAccountChips() {
+      const container = document.getElementById('quickAccountChipsContainer');
+      const wrap = document.getElementById('quickAccountSwitcher');
+      if (!container || !wrap) return;
+
+      try {
+        const res = await fetch('/api/auth/profiles', { cache: 'no-store' });
+        const json = await res.json();
+        if (json.success && Array.isArray(json.profiles) && json.profiles.length > 0) {
+          wrap.style.display = 'block';
+          container.innerHTML = json.profiles.map(p => `
+            <div class="account-chip" onclick="fillQuickAccount('${p.username.replace(/'/g, "\\'")}')">
+              <span>${p.avatar || '⚡'}</span>
+              <strong>${p.displayName || p.username}</strong>
+              <span style="opacity: 0.6; font-size: 0.7rem;">(@${p.username})</span>
+            </div>
+          `).join('');
+        } else {
+          wrap.style.display = 'none';
+        }
+      } catch {
+        wrap.style.display = 'none';
+      }
+    }
+
+    function fillQuickAccount(uname) {
+      const usernameInput = document.getElementById('authUsernameInput');
+      const passwordInput = document.getElementById('authPasswordInput');
+      if (usernameInput) usernameInput.value = uname;
+      if (passwordInput) {
+        passwordInput.value = '';
+        passwordInput.focus();
+      }
+      switchAuthTab('login');
+    }
+
+    function populatePassportModal(user) {
+      const avatarEl = document.getElementById('passportAvatar');
+      const nameEl = document.getElementById('passportDisplayName');
+      const unameEl = document.getElementById('passportUsernameBadge');
+      const bioEl = document.getElementById('passportBio');
+      const goalEl = document.getElementById('passportGoalBadge');
+      const roleEl = document.getElementById('passportRoleBadge');
+
+      const dayVal = document.getElementById('passportDayVal');
+      const streakVal = document.getElementById('passportStreakVal');
+      const workoutsVal = document.getElementById('passportWorkoutsVal');
+
+      if (avatarEl) avatarEl.textContent = user.avatar || '⚡';
+      if (nameEl) nameEl.textContent = user.displayName || user.username;
+      if (unameEl) unameEl.textContent = `@${user.username}`;
+      if (bioEl) bioEl.textContent = `"${user.bio || '365 Days of Zero Excuses'}"`;
+      if (goalEl) goalEl.textContent = user.goal ? user.goal.toUpperCase() : 'BODY RECOMPOSITION';
+      if (roleEl) roleEl.textContent = user.role === 'admin' ? 'Head Coach (Admin 🛡️)' : 'Trainee Athlete';
+
+      if (dayVal) dayVal.textContent = `Day ${currentDay || 1}`;
+      if (streakVal) streakVal.textContent = `${userStreak || 1} 🔥`;
+      if (workoutsVal) workoutsVal.textContent = `${completedDays ? completedDays.size : 0}`;
+
+      // Populate edit fields
+      const editName = document.getElementById('editDisplayNameInput');
+      const editGoal = document.getElementById('editGoalInput');
+      const editTarget = document.getElementById('editTargetWeightInput');
+      const editBio = document.getElementById('editBioInput');
+      if (editName) editName.value = user.displayName || user.username;
+      if (editGoal) editGoal.value = user.goal || 'recomp';
+      if (editTarget) editTarget.value = user.targetWeight || '';
+      if (editBio) editBio.value = user.bio || '';
+      selectedEditAvatarVal = user.avatar || '⚡';
+
+      // Highlight avatar in edit picker
+      const editPicker = document.getElementById('editAvatarPicker');
+      if (editPicker) {
+        editPicker.querySelectorAll('.avatar-btn').forEach(btn => {
+          btn.classList.toggle('selected', btn.textContent.trim() === selectedEditAvatarVal);
+        });
+      }
+    }
+
+    function toggleEditProfileSection() {
+      const editor = document.getElementById('inlineProfileEditor');
+      if (!editor) return;
+      editor.style.display = editor.style.display === 'none' ? 'block' : 'none';
+      const msg = document.getElementById('editProfileMsg');
+      if (msg) msg.style.display = 'none';
+    }
+
+    function selectEditAvatar(emoji, btn) {
+      selectedEditAvatarVal = emoji;
+      document.querySelectorAll('#editAvatarPicker .avatar-btn').forEach(b => b.classList.remove('selected'));
+      if (btn) btn.classList.add('selected');
+    }
+
+    async function saveProfileChanges() {
+      const msg = document.getElementById('editProfileMsg');
+      const token = localStorage.getItem('aethos_auth_token');
+      if (!token) return;
+
+      const displayName = document.getElementById('editDisplayNameInput')?.value.trim();
+      const goal = document.getElementById('editGoalInput')?.value;
+      const targetWeight = document.getElementById('editTargetWeightInput')?.value;
+      const bio = document.getElementById('editBioInput')?.value.trim();
+
+      try {
+        const res = await fetch('/api/auth/profile', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+          },
+          body: JSON.stringify({
+            displayName,
+            goal,
+            targetWeight,
+            bio,
+            avatar: selectedEditAvatarVal
+          })
+        });
+        const data = await res.json();
+        if (data.success && data.user) {
+          currentUser = data.user;
+          updateUserPillUI(currentUser);
+          populatePassportModal(currentUser);
+          if (msg) {
+            msg.style.display = 'block';
+            msg.style.background = 'rgba(16, 185, 129, 0.15)';
+            msg.style.color = '#34d399';
+            msg.style.border = '1px solid rgba(16, 185, 129, 0.3)';
+            msg.textContent = '✅ Profile updated successfully!';
+          }
+          setTimeout(() => {
+            const editor = document.getElementById('inlineProfileEditor');
+            if (editor) editor.style.display = 'none';
+          }, 1000);
+        } else {
+          if (msg) {
+            msg.style.display = 'block';
+            msg.style.background = 'rgba(244,63,94,0.15)';
+            msg.style.color = '#f43f5e';
+            msg.style.border = '1px solid rgba(244,63,94,0.3)';
+            msg.textContent = data.error || 'Failed to update profile.';
+          }
+        }
+      } catch (e) {
+        if (msg) {
+          msg.style.display = 'block';
+          msg.style.background = 'rgba(244,63,94,0.15)';
+          msg.style.color = '#f43f5e';
+          msg.style.border = '1px solid rgba(244,63,94,0.3)';
+          msg.textContent = 'Server connection error.';
+        }
       }
     }
 
@@ -11023,24 +11492,29 @@
         if (tabLogin) tabLogin.classList.remove('active');
         if (tabReg) tabReg.classList.add('active');
         if (extraFields) extraFields.style.display = 'block';
-        if (submitBtn) submitBtn.textContent = 'Create Profile & Start';
+        if (submitBtn) submitBtn.textContent = 'Create Profile & Launch 365';
       }
     }
 
     function selectAvatar(emoji, btn) {
       selectedAvatar = emoji;
-      document.querySelectorAll('.avatar-btn').forEach(b => b.classList.remove('selected'));
+      document.querySelectorAll('#avatarPickerContainer .avatar-btn').forEach(b => b.classList.remove('selected'));
       if (btn) btn.classList.add('selected');
     }
 
     async function handleAuthSubmit(e) {
       e.preventDefault();
       const errBox = document.getElementById('authErrorMsg');
+      const submitBtn = document.getElementById('authSubmitBtn');
       if (errBox) errBox.style.display = 'none';
 
       const usernameInput = document.getElementById('authUsernameInput');
       const passwordInput = document.getElementById('authPasswordInput');
       const displayNameInput = document.getElementById('authDisplayNameInput');
+      const goalInput = document.getElementById('authGoalInput');
+      const startWeightInput = document.getElementById('authStartWeightInput');
+      const targetWeightInput = document.getElementById('authTargetWeightInput');
+      const bioInput = document.getElementById('authBioInput');
 
       const username = usernameInput ? usernameInput.value.trim() : '';
       const password = passwordInput ? passwordInput.value : '';
@@ -11051,6 +11525,16 @@
       if (currentAuthTab === 'register') {
         body.displayName = displayName || username;
         body.avatar = selectedAvatar;
+        body.goal = goalInput ? goalInput.value : 'recomp';
+        body.startingWeight = startWeightInput ? parseFloat(startWeightInput.value) : undefined;
+        body.targetWeight = targetWeightInput ? parseFloat(targetWeightInput.value) : undefined;
+        body.bio = bioInput ? bioInput.value.trim() : '';
+      }
+
+      const origText = submitBtn ? submitBtn.textContent : '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Verifying Credentials...';
       }
 
       try {
@@ -11062,8 +11546,12 @@
         const data = await res.json();
         if (!res.ok || !data.success) {
           if (errBox) {
-            errBox.textContent = data.error || 'Authentication failed';
+            errBox.textContent = data.error || 'Authentication failed. Please check credentials.';
             errBox.style.display = 'block';
+          }
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = origText;
           }
           return;
         }
@@ -11088,6 +11576,10 @@
           errBox.textContent = 'Server connection error. Please try again.';
           errBox.style.display = 'block';
         }
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = origText;
+        }
       }
     }
 
@@ -11104,6 +11596,7 @@
       localStorage.removeItem('aethos_auth_token');
       currentUser = null;
       updateUserPillUI(null);
+      closeModal('profilePassportModal');
       closeModal('authModal');
       location.reload();
     }

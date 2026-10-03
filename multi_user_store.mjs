@@ -111,7 +111,7 @@ export async function initMultiUserStore() {
 }
 
 // Register a new user
-export async function registerUser({ username, password, displayName, avatar = '⚡' }) {
+export async function registerUser({ username, password, displayName, avatar = '⚡', goal = 'recomp', targetWeight = 74, bio = '' }) {
   if (!username || typeof username !== 'string' || username.trim().length < 3) {
     throw new Error('Username must be at least 3 characters');
   }
@@ -139,6 +139,10 @@ export async function registerUser({ username, password, displayName, avatar = '
     passwordHash: hash,
     role,
     avatar: avatar || '⚡',
+    goal: goal || 'recomp',
+    targetWeight: parseFloat(targetWeight) || 74,
+    startingWeight: parseFloat(targetWeight) || 74,
+    bio: bio ? bio.trim().slice(0, 200) : 'Relentless athletic transformation & progression.',
     createdAt: new Date().toISOString(),
     lastActiveAt: new Date().toISOString()
   };
@@ -244,6 +248,46 @@ export async function destroySession(token) {
   return true;
 }
 
+// Update Profile Attributes
+export async function updateUserProfile(userId, updates = {}) {
+  const users = await loadUsers();
+  const user = users.find(u => u.id === userId);
+  if (!user) throw new Error('User not found');
+
+  if (updates.displayName && typeof updates.displayName === 'string') {
+    user.displayName = updates.displayName.trim();
+  }
+  if (updates.avatar && typeof updates.avatar === 'string') {
+    user.avatar = updates.avatar.trim();
+  }
+  if (updates.goal && typeof updates.goal === 'string') {
+    user.goal = updates.goal.trim();
+  }
+  if (updates.targetWeight !== undefined) {
+    user.targetWeight = parseFloat(updates.targetWeight) || user.targetWeight;
+  }
+  if (updates.bio && typeof updates.bio === 'string') {
+    user.bio = updates.bio.trim().slice(0, 200);
+  }
+
+  user.lastActiveAt = new Date().toISOString();
+  await saveUsers();
+  return sanitizeUser(user);
+}
+
+// Get Public Profiles for Quick Account Switcher
+export async function getPublicProfilesList() {
+  const users = await loadUsers();
+  return users.map(u => ({
+    id: u.id,
+    username: u.username,
+    displayName: u.displayName,
+    avatar: u.avatar || '⚡',
+    role: u.role,
+    goal: u.goal || 'recomp'
+  }));
+}
+
 // User-Isolated Gym State Management
 export async function getUserGymState(userId) {
   const filePath = path.join(STATES_DIR, `${userId}.json`);
@@ -321,6 +365,8 @@ function calculateTraineeStats(user, state = {}) {
     displayName: user.displayName,
     avatar: user.avatar || '⚡',
     role: user.role,
+    goal: user.goal || 'recomp',
+    bio: user.bio || '',
     level,
     levelTitle,
     xp,

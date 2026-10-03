@@ -8,6 +8,47 @@
     "role": "admin",
     "avatar": "👑",
     "createdAt": "2026-10-03T06:31:11.514Z",
-    "lastActiveAt": "2026-10-03T06:41:14.512Z"
+    "lastActiveAt": "2026-10-03T09:05:00.004Z"
+  },
+  {
+    "id": "usr_f81d76e09503d1bb",
+    "username": "alex",
+    "displayName": "Alex Spartan",
+    "salt": "90cfd6d55b368e4eb87343167f731e0e",
+    "passwordHash": "61c99e6c4280205cdb9e6256a614a09d9771af7cb0eb66918512778dc474f0990e9e5100c48dcae3cfcd2efa863d147cde4c7cb5681b4d797c0bf1e5f629d683",
+    "role": "user",
+    "avatar": "🐺",
+    "createdAt": "2026-10-03T06:41:14.427Z",
+    "lastActiveAt": "2026-10-03T06:41:14.484Z"
+  },
+  {
+    "id": "usr_dcbdda386858009d",
+    "username": "trainee_23317",
+    "displayName": "King Leonidas",
+    "salt": "12d922ee6d9c3d695ca3fd1084fa3092",
+    "passwordHash": "1065bc619efa82731d5f29a8e74090fc34863e7e8851335a45e4b813ed5a40a1b1312dd58534850cf90e34c3cef99f73d08d5149be1988a20e1d6ecaca63ee04",
+    "role": "user",
+    "avatar": "🦁",
+    "goal": "strength",
+    "targetWeight": 82.5,
+    "startingWeight": 82.5,
+    "bio": "Molon Labe! Never quit.",
+    "createdAt": "2026-10-03T09:03:43.336Z",
+    "lastActiveAt": "2026-10-03T09:03:43.417Z"
+  },
+  {
+    "id": "usr_ffee8096ccd124a1",
+    "username": "trainee_99961",
+    "displayName": "King Leonidas",
+    "salt": "c481f2f882ae3cf9e4c9d68d9d91bf06",
+    "passwordHash": "d1f39d8b7f8e5498bcd2bd94f6ce009837fed703b86d000ef431979d67b604ad357c73fee7b43e6d34dc544a60d509ebf4afc83c87f0aa465a5c73a700671f6d",
+    "role": "user",
+    "avatar": "🦁",
+    "goal": "strength",
+    "targetWeight": 82.5,
+    "startingWeight": 82.5,
+    "bio": "Molon Labe! Never quit.",
+    "createdAt": "2026-10-03T09:04:59.975Z",
+    "lastActiveAt": "2026-10-03T09:05:00.026Z"
   }
 ]

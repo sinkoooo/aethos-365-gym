@@ -13,7 +13,9 @@ import {
   saveUserGymState,
   getCommunityLeaderboard,
   getAdminRoster,
-  adminGetUserState
+  adminGetUserState,
+  updateUserProfile,
+  getPublicProfilesList
 } from './multi_user_store.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -292,8 +294,8 @@ app.post('/api/simulate/fencing', (req, res) => {
 // ==================== MULTI-USER AUTHENTICATION APIS ====================
 app.post('/api/auth/register', async (req, res) => {
   try {
-    const { username, password, displayName, avatar } = req.body || {};
-    const result = await registerUser({ username, password, displayName, avatar });
+    const { username, password, displayName, avatar, goal, targetWeight, startingWeight, bio } = req.body || {};
+    const result = await registerUser({ username, password, displayName, avatar, goal, targetWeight, startingWeight, bio });
     res.json({ success: true, ...result });
   } catch (err) {
     res.status(400).json({ success: false, error: err.message });
@@ -315,6 +317,27 @@ app.get('/api/auth/me', (req, res) => {
     return res.status(401).json({ authenticated: false, user: null });
   }
   res.json({ authenticated: true, user: req.user });
+});
+
+app.put('/api/auth/profile', async (req, res) => {
+  if (!req.user) {
+    return res.status(401).json({ success: false, error: 'Unauthorized: Log in to edit your profile' });
+  }
+  try {
+    const updatedUser = await updateUserProfile(req.user.id, req.body || {});
+    res.json({ success: true, user: updatedUser });
+  } catch (err) {
+    res.status(400).json({ success: false, error: err.message });
+  }
+});
+
+app.get('/api/auth/profiles', async (req, res) => {
+  try {
+    const profiles = await getPublicProfilesList();
+    res.json({ success: true, profiles });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
 });
 
 app.post('/api/auth/logout', async (req, res) => {
