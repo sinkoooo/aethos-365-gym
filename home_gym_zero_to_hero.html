@@ -1289,6 +1289,12 @@
     .bp-2 { background: rgba(16, 185, 129, 0.15); color: var(--emerald); border: 1px solid rgba(16, 185, 129, 0.4); box-shadow: 0 0 12px rgba(16, 185, 129, 0.2); }
     .bp-3 { background: rgba(168, 85, 247, 0.15); color: var(--purple); border: 1px solid rgba(168, 85, 247, 0.4); box-shadow: 0 0 12px rgba(168, 85, 247, 0.2); }
     .bp-4 { background: rgba(251, 191, 36, 0.15); color: var(--amber); border: 1px solid rgba(251, 191, 36, 0.4); box-shadow: 0 0 12px rgba(251, 191, 36, 0.2); }
+    .bp-5 { background: rgba(244, 63, 94, 0.15); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.4); box-shadow: 0 0 12px rgba(244, 63, 94, 0.2); }
+    .bp-6 { background: rgba(249, 115, 22, 0.15); color: #fb923c; border: 1px solid rgba(249, 115, 22, 0.4); box-shadow: 0 0 12px rgba(249, 115, 22, 0.2); }
+    .bp-7 { background: rgba(14, 165, 233, 0.15); color: #38bdf8; border: 1px solid rgba(14, 165, 233, 0.4); box-shadow: 0 0 12px rgba(14, 165, 233, 0.2); }
+    .bp-8 { background: rgba(139, 92, 246, 0.15); color: #c084fc; border: 1px solid rgba(139, 92, 246, 0.4); box-shadow: 0 0 12px rgba(139, 92, 246, 0.2); }
+    .bp-9 { background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.4); box-shadow: 0 0 12px rgba(34, 197, 94, 0.2); }
+    .bp-10 { background: rgba(236, 72, 153, 0.15); color: #f472b6; border: 1px solid rgba(236, 72, 153, 0.4); box-shadow: 0 0 12px rgba(236, 72, 153, 0.2); }
 
     /* WARMUP GUIDED BANNER */
     .warmup-launch-box {
@@ -15777,6 +15783,538 @@
           },
           searchQuery: "single+arm+dumbbell+row+form"
         }
+      },
+      kb_swing: {
+        name: "Kettlebell Russian Swing",
+        target: "Hips, Glutes & Posterior Chain Power",
+        cropClass: "crop-glute-bridge",
+        cues: {
+          "Hike Pass": "Hike the kettlebell high between thighs; maintain rigid flat spine and braced core.",
+          "Explosive Hip Snap": "Snap hips forward to stand tall; float bell to chest level using pure hip drive, not arms.",
+          "Rooted Stance": "Root feet into floor; squeeze glutes and quads hard at the apex of every rep."
+        },
+        searchQuery: "kettlebell+swing+proper+form+tutorial",
+        muscles: ['glutes', 'hamstrings'],
+        easier: {
+          name: "Band Hip Pull-Through",
+          cues: {
+            "Straddle Band": "Straddle low anchored band; push hips back and explode forward without impact.",
+            "Zero Shear": "Teaches crisp hip snap with zero lumbar compression."
+          },
+          searchQuery: "band+pull+through+exercise"
+        },
+        harder: {
+          name: "Single-Arm Kettlebell Swing",
+          cues: {
+            "Anti-Rotation": "Grip with one hand; resist rotational twist through shoulder and core.",
+            "Lat Lock": "Pack lat on working side tight against ribs throughout swing arc."
+          },
+          searchQuery: "single+arm+kettlebell+swing"
+        }
+      },
+      bulgarian_split_squat: {
+        name: "Bulgarian Split Squat (Rear-Foot Elevated)",
+        target: "Quads, Glutes & Hip Stabilizers",
+        cropClass: "crop-reverse-lunge",
+        cues: {
+          "Laces Down": "Rest rear foot on bench laces-down; take athletic stride forward.",
+          "Elevator Drop": "Drop front hip straight down until front thigh is parallel; keep torso slightly pitched forward.",
+          "Front Heel Drive": "Drive through front heel and midfoot; keep rear leg relaxed as passive stabilizer."
+        },
+        searchQuery: "bulgarian+split+squat+form+tutorial",
+        muscles: ['quads', 'glutes'],
+        easier: {
+          name: "Bodyweight Bulgarian Split Squat",
+          cues: {
+            "Fingertip Balance": "Touch wall or rack with fingertips for balance while mastering depth.",
+            "Smooth Tempo": "Descend with controlled 3-second cadence."
+          },
+          searchQuery: "bodyweight+bulgarian+split+squat"
+        },
+        harder: {
+          name: "Loaded DB Bulgarian Split Squat with 1.5 Reps",
+          cues: {
+            "Bottom Pulse": "Drop to bottom, rise halfway up, drop back to parallel, then stand fully.",
+            "Hypertrophy Tension": "Doubles time-under-tension for rapid quad and glute development."
+          },
+          searchQuery: "bulgarian+split+squat+with+dumbbells"
+        }
+      },
+      single_arm_db_row: {
+        name: "Bench-Supported Single-Arm DB Row",
+        target: "Lats, Rhomboids & Rotational Core",
+        cropClass: "crop-door-row",
+        cues: {
+          "Three-Point Base": "Place knee and same-side hand firmly on bench; keep back horizontal and flat.",
+          "Elbow to Hip": "Pull dumbbell back toward hip crease rather than up toward chest.",
+          "Full Stretch": "Allow shoulder blade to glide forward under load at the bottom for maximum lat elongation."
+        },
+        searchQuery: "single+arm+dumbbell+row+form+tutorial",
+        muscles: ['lats', 'rhomboids'],
+        easier: {
+          name: "Two-Hand Banded Seated Rows",
+          cues: {
+            "Seated Upright": "Sit on bench with band anchored; pull handles to lower ribs with flat back.",
+            "Scapula Retract": "Focus on pinching shoulder blades smoothly."
+          },
+          searchQuery: "seated+resistance+band+row"
+        },
+        harder: {
+          name: "Single-Arm DB Row with 2s Peak Squeeze",
+          cues: {
+            "Dead Pause": "Hold elbow pinned at top contraction for 2 full seconds before lowering.",
+            "Zero Jerk": "Eliminate all torso rocking and body momentum."
+          },
+          searchQuery: "single+arm+dumbbell+row+pause"
+        }
+      },
+      arnold_press: {
+        name: "Arnold Dumbbell Press",
+        target: "Anterior, Lateral Delts & Triceps",
+        cropClass: "crop-incline-pushup",
+        cues: {
+          "Chin Level Start": "Start with dumbbells at chin level, palms facing chest with elbows tucked in.",
+          "Fluid Spiral": "Press upward while rotating forearms so palms face forward at full lockout.",
+          "Track Reversal": "Reverse path with precision back to chin; keep ribs pinned down without lumbar arching."
+        },
+        searchQuery: "arnold+dumbbell+press+proper+form",
+        muscles: ['delts', 'triceps'],
+        easier: {
+          name: "Half-Kneeling Single-Arm DB Press",
+          cues: {
+            "Down Knee Core Lock": "Press one dumbbell overhead from half-kneeling stance for spine safety.",
+            "Strict Line": "Lock core and press straight overhead."
+          },
+          searchQuery: "half+kneeling+dumbbell+press"
+        },
+        harder: {
+          name: "Arnold Press with 3s Eccentric Descent",
+          cues: {
+            "Slow Spiral": "Take 3 full seconds to lower and inwardly rotate dumbbells back to chin.",
+            "Maximum Tension": "Prolongs eccentric tension on anterior and lateral delt heads."
+          },
+          searchQuery: "arnold+press+eccentric+tempo"
+        }
+      },
+      renegade_row: {
+        name: "Hex Dumbbell Renegade Row",
+        target: "Rotary Core Armor & Upper Back",
+        cropClass: "crop-door-row",
+        cues: {
+          "Wide Base Plank": "Place feet slightly wider than shoulder-width to create stable triangular foundation.",
+          "Zero Hip Twist": "Row dumbbell to ribcage while keeping hips parallel to floor; fight all rotational torque.",
+          "Smooth Plant": "Lower weight gently to mat without clattering before initiating row on opposite side."
+        },
+        searchQuery: "renegade+row+form+tutorial",
+        muscles: ['lats', 'abs'],
+        easier: {
+          name: "Kneeling Renegade Row",
+          cues: {
+            "Knee Plank": "Perform row from knees to reduce abdominal shear while learning stability.",
+            "Anti-Rotation": "Keep pelvis strictly level."
+          },
+          searchQuery: "kneeling+renegade+row"
+        },
+        harder: {
+          name: "Renegade Row + Strict Push-Up Combo",
+          cues: {
+            "Push-Up Between Rows": "Row right, row left, then perform full strict push-up on dumbbells.",
+            "Compound Density": "Significantly amplifies upper chest and core fatigue."
+          },
+          searchQuery: "renegade+row+pushup+combo"
+        }
+      },
+      single_leg_rdl: {
+        name: "Single-Leg Dumbbell RDL",
+        target: "Hamstrings, Glute Medius & Ankle Balance",
+        cropClass: "crop-glute-bridge",
+        cues: {
+          "Soft Knee Hinge": "Slight unlock in working knee; hinge forward sending opposite leg straight behind like an arrow.",
+          "Level Pelvis": "Keep hip bones square to floor; do not flare floating hip open to ceiling.",
+          "Heel Drive": "Squeeze working glute and drive through midfoot to stand tall."
+        },
+        searchQuery: "single+leg+dumbbell+rdl+form",
+        muscles: ['glutes', 'hamstrings'],
+        easier: {
+          name: "Kickstand DB Romanian Deadlift",
+          cues: {
+            "Toe Support": "Place rear toes lightly on floor 12 inches behind for kickstand balance.",
+            "80/20 Load": "Keep 80% weight on front working leg while hinging safely."
+          },
+          searchQuery: "kickstand+rdl+dumbbell"
+        },
+        harder: {
+          name: "Single-Leg DB RDL with 2s Isometric Pause",
+          cues: {
+            "Parallel Hold": "Hold torso and rear leg parallel to ground for 2 seconds before returning.",
+            "Tendon Resilience": "Develops elite hamstring eccentric control."
+          },
+          searchQuery: "single+leg+deadlift+pause"
+        }
+      },
+      db_floor_press: {
+        name: "Dumbbell Floor Press (Shoulder Safe)",
+        target: "Chest & Triceps (Joint Safe)",
+        cropClass: "crop-incline-pushup",
+        cues: {
+          "Floor Block": "Lie on back with knees bent; triceps lightly tap floor at 90°, shielding anterior shoulder.",
+          "45° Elbow Tuck": "Tuck elbows slightly toward torso; press weights upward into soft apex.",
+          "Dead Stop Drive": "Pause triceps on mat for 1 second to eliminate stretch reflex before explosive drive."
+        },
+        searchQuery: "dumbbell+floor+press+tutorial",
+        muscles: ['chest', 'triceps'],
+        easier: {
+          name: "Band-Assisted Floor Press",
+          cues: {
+            "Lighter Load": "Use lighter dumbbells with smooth tempo.",
+            "Strict Floor Stop": "Tap triceps lightly to protect shoulders."
+          },
+          searchQuery: "floor+press+for+beginners"
+        },
+        harder: {
+          name: "Alternating Dumbbell Floor Press",
+          cues: {
+            "Static Lockout": "Keep one dumbbell pressed overhead while opposite side performs controlled reps.",
+            "Core Stabilization": "Demands intense anti-lateral flexion core bracing."
+          },
+          searchQuery: "alternating+dumbbell+floor+press"
+        }
+      },
+      half_kneeling_press: {
+        name: "Half-Kneeling Single-Arm DB Press",
+        target: "Deltoids & Deep Core Stability",
+        cropClass: "crop-incline-pushup",
+        cues: {
+          "90/90 Posture": "Down knee under hip, front knee at 90°; squeeze down glute to lock pelvis neutral.",
+          "Vertical Track": "Hold dumbbell on down-knee side; press straight up without leaning torso sideways.",
+          "Ribcage Pinned": "Keep ribs locked down; prevent lower back arching throughout entire rep."
+        },
+        searchQuery: "half+kneeling+dumbbell+press+form",
+        muscles: ['delts', 'abs'],
+        easier: {
+          name: "Seated Dumbbell Shoulder Press",
+          cues: {
+            "Back Supported": "Perform press seated upright on bench for extra postural support.",
+            "Neutral Grip": "Keep palms facing inward to protect rotator cuffs."
+          },
+          searchQuery: "seated+dumbbell+shoulder+press"
+        },
+        harder: {
+          name: "Half-Kneeling DB Press with 3s Lowering",
+          cues: {
+            "Eccentric Focus": "Lower dumbbell over 3 full seconds maintaining rock-solid core brace.",
+            "Stability Challenge": "Tests hip and shoulder stability under deep fatigue."
+          },
+          searchQuery: "half+kneeling+press+tempo"
+        }
+      },
+      pallof_press: {
+        name: "Standing Band Pallof Press",
+        target: "Anti-Rotation Core & Obliques",
+        cropClass: "crop-dead-bug",
+        cues: {
+          "Perpendicular Stance": "Stand sideways to anchor; grip band handle with both hands held tight against sternum.",
+          "Straight Extension": "Press arms straight forward; resist the rotational pull trying to twist your torso.",
+          "2s Lockout Hold": "Hold outstretched arms rock-solid for 2 seconds before returning to chest."
+        },
+        searchQuery: "pallof+press+technique+tutorial",
+        muscles: ['abs', 'obliques'],
+        easier: {
+          name: "Kneeling Band Pallof Press",
+          cues: {
+            "Tall Kneeling": "Kneel tall on both knees to eliminate leg sway while bracing core.",
+            "Smooth Press": "Press straight forward with light band tension."
+          },
+          searchQuery: "kneeling+pallof+press"
+        },
+        harder: {
+          name: "Pallof Press with Overhead Raise",
+          cues: {
+            "Press & Lift": "Press forward, lift arms overhead, lower back to chest height, return to sternum.",
+            "Severe Core Load": "Magnifies rotational and anti-extension core torque exponentially."
+          },
+          searchQuery: "pallof+press+overhead+raise"
+        }
+      },
+      band_pull_through: {
+        name: "Band Hip Pull-Through",
+        target: "Glutes & Hamstrings (Zero Spinal Shear)",
+        cropClass: "crop-glute-bridge",
+        cues: {
+          "Straddle Band": "Anchor band low; stand facing away with band between legs, holding handles with straight arms.",
+          "Hips to Anchor": "Hinge hips backward toward anchor with flat back and soft knees.",
+          "Glute Clamp": "Drive hips forward into upright standing; clamp glutes maximally at top lockout."
+        },
+        searchQuery: "band+pull+through+exercise+form",
+        muscles: ['glutes', 'hamstrings'],
+        easier: {
+          name: "Bodyweight Glute Bridges",
+          cues: {
+            "Floor Setup": "Lie on back; drive hips to ceiling with 2s squeeze.",
+            "Zero Shear": "Completely eliminates standing spinal shear."
+          },
+          searchQuery: "glute+bridges+form"
+        },
+        harder: {
+          name: "Heavy Band Pull-Through with 3s Pause",
+          cues: {
+            "Max Contraction": "Hold hip lockout with maximum glute clamp for 3 seconds per rep.",
+            "High Metabolic Burn": "Drives exceptional glute muscle fiber activation."
+          },
+          searchQuery: "band+pull+through+hypertrophy"
+        }
+      },
+      band_lateral_raises: {
+        name: "Standing Band Lateral Raises",
+        target: "Lateral Deltoids (Shoulder Width)",
+        cropClass: "crop-doorframe-rows",
+        cues: {
+          "Step on Center": "Step firmly on center of loop band; hold handles or ends at outer thighs.",
+          "Slight Elbow Lead": "Raise arms outward to parallel with slight forward elbow sweep (30° scapular plane).",
+          "Controlled Descent": "Fight band pull on way down; keep traps depressed away from ears."
+        },
+        searchQuery: "band+lateral+raise+form",
+        muscles: ['delts'],
+        easier: {
+          name: "Single-Arm Band Lateral Raise",
+          cues: {
+            "Single Side": "Work one arm at a time to reduce band resistance.",
+            "Focus on Form": "Isolate lateral head without neck shrugging."
+          },
+          searchQuery: "single+arm+band+lateral+raise"
+        },
+        harder: {
+          name: "Band Lateral Raise with 2s Top Hold",
+          cues: {
+            "Isometric Apex": "Pause at top horizontal for 2 seconds where band tension is highest.",
+            "Burnout Finish": "Creates rapid side delt metabolic stress."
+          },
+          searchQuery: "lateral+raise+isometric+hold"
+        }
+      },
+      band_rows: {
+        name: "Standing Band Row",
+        target: "Rhomboids, Middle Traps & Lats",
+        cropClass: "crop-door-row",
+        cues: {
+          "Athletic Hinge": "Anchor band at mid-torso height; hinge slightly at hips with braced spine.",
+          "Elbows Back": "Drive elbows straight back past torso; pull shoulder blades together.",
+          "2s Peak Squeeze": "Squeeze upper back for 2 seconds before slowly returning arms forward."
+        },
+        searchQuery: "standing+resistance+band+row+form",
+        muscles: ['lats', 'rhomboids'],
+        easier: {
+          name: "Doorframe Incline Row",
+          cues: {
+            "Upright Angle": "Stand close to doorframe for easy bodyweight row.",
+            "Smooth Pull": "Maintain flat spine and relaxed traps."
+          },
+          searchQuery: "doorway+bodyweight+row"
+        },
+        harder: {
+          name: "Single-Arm Band Row with Torso Brace",
+          cues: {
+            "Unilateral Focus": "Row one side at a time against heavy band tension.",
+            "Anti-Rotation": "Keep chest facing square forward."
+          },
+          searchQuery: "single+arm+band+row"
+        }
+      },
+      hollow_body_hold: {
+        name: "Gymnastic Hollow Body Hold",
+        target: "Transverse Abdominis & Deep Core",
+        cropClass: "crop-dead-bug",
+        cues: {
+          "Spine Glued": "Lie on back and tilt pelvis so lower spine is 100% glued flat to floor.",
+          "Crescent Shape": "Extend arms overhead and legs 6–12 inches off floor into shallow banana shape.",
+          "Rhythm Breathing": "Breathe into ribcage while holding static tension; lower legs if spine arches."
+        },
+        searchQuery: "hollow+body+hold+progression+tutorial",
+        muscles: ['abs'],
+        easier: {
+          name: "Tuck Hollow Body Hold",
+          cues: {
+            "Knees to Chest": "Bend knees to 90° with hands reaching forward along thighs.",
+            "Flat Spine": "Keeps lower back pressed firmly into floor."
+          },
+          searchQuery: "tuck+hollow+hold"
+        },
+        harder: {
+          name: "Hollow Body Rocking",
+          cues: {
+            "Rigid Rock": "Gently rock forward and backward like a cradle without breaking crescent form.",
+            "Total Core Armor": "Demands absolute rotational and sagittal stiffness."
+          },
+          searchQuery: "hollow+body+rocks"
+        }
+      },
+      bird_dog: {
+        name: "Bird-Dog Core Bracing",
+        target: "Rotary Core, Glutes & Lumbar Spine Armor",
+        cropClass: "crop-dead-bug",
+        cues: {
+          "Quadruped Base": "Hands under shoulders, knees under hips with rigid neutral spine.",
+          "Opposite Reach": "Extend right arm forward and left leg straight back simultaneously.",
+          "2s Glute Lock": "Hold apex horizontal for 2 seconds; keep hips completely level without sagging."
+        },
+        searchQuery: "bird+dog+exercise+mcgill+form",
+        muscles: ['glutes', 'abs'],
+        easier: {
+          name: "Leg-Only Bird Dog",
+          cues: {
+            "Hands Planted": "Keep both hands on floor; extend one leg back at a time.",
+            "Pelvic Stability": "Focus entirely on glute squeeze and level hips."
+          },
+          searchQuery: "bird+dog+regression"
+        },
+        harder: {
+          name: "Bird Dog with Square Tracing",
+          cues: {
+            "Apex Trace": "Draw a small square with extended hand and foot at top before returning.",
+            "Dynamic Control": "Forces deep multifidus and rotary core stabilization."
+          },
+          searchQuery: "advanced+bird+dog+exercise"
+        }
+      },
+      cat_cow: {
+        name: "Cat-Cow Spine Mobilization Flow",
+        target: "Spinal Segmental Articulation & Decompression",
+        cropClass: "crop-dead-bug",
+        cues: {
+          "Cow Inhale": "Inhale; drop belly smoothly toward floor, lift chest and look gently forward.",
+          "Cat Exhale": "Exhale; round spine upward toward ceiling, tuck chin and tailbone under.",
+          "Fluid Rhythm": "Move vertebra by vertebra without forcing end ranges."
+        },
+        searchQuery: "cat+cow+stretch+proper+form",
+        muscles: ['abs', 'lats'],
+        easier: {
+          name: "Gentle Cat-Cow Flow",
+          cues: {
+            "Smaller Range": "Move gently through middle 70% of motion.",
+            "Relaxed Breathing": "Coordinate slow inhale and exhale."
+          },
+          searchQuery: "gentle+cat+cow"
+        },
+        harder: {
+          name: "Segmental Cat-Cow Flow",
+          cues: {
+            "Vertebra by Vertebra": "Move through spine one joint at a time starting from pelvis to neck.",
+            "Mind-Muscle Control": "Restores elite motor control to thoracic spine."
+          },
+          searchQuery: "segmental+cat+cow"
+        }
+      },
+      ring_dips: {
+        name: "Gymnastic Ring Dips",
+        target: "Lower Chest, Triceps & Scapular Depressors",
+        cropClass: "crop-incline-pushup",
+        cues: {
+          "Support Hold": "Lock out rings at hips with elbows straight and rings turned slightly out (RTO).",
+          "Controlled Descent": "Lower until shoulders touch or approach hands at 90° elbow flexion.",
+          "Press & Turn Out": "Drive upward through palms; turn rings outward 30° at full top lockout."
+        },
+        searchQuery: "ring+dips+proper+form+tutorial",
+        muscles: ['chest', 'triceps'],
+        easier: {
+          name: "Toe-Assisted Ring Dips",
+          cues: {
+            "Toes on Floor": "Place toes lightly on floor behind to take 30% of bodyweight load off.",
+            "Full Range": "Build ring stabilization safely."
+          },
+          searchQuery: "assisted+ring+dips"
+        },
+        harder: {
+          name: "Ring Dips with 3s Pause at Bottom",
+          cues: {
+            "Dead Stop": "Pause at deepest joint-safe stretch for 3 seconds before driving up.",
+            "Elite Chest Power": "Eliminates rebound and builds immense tendon strength."
+          },
+          searchQuery: "pause+ring+dips"
+        }
+      },
+      pull_up: {
+        name: "Strict Doorway Pull-Up",
+        target: "Lats, Biceps & Upper Back Width",
+        cropClass: "crop-doorframe-rows",
+        cues: {
+          "Dead Hang Initiation": "Start from full hang; engage lats first by depressing shoulder blades.",
+          "Chest to Bar": "Drive elbows straight down to floor; pull chin smoothly over bar.",
+          "3s Controlled Lower": "Lower with complete control to dead hang; avoid dropping abruptly."
+        },
+        searchQuery: "how+to+do+a+proper+pull+up",
+        muscles: ['lats', 'biceps'],
+        easier: {
+          name: "Band-Assisted Doorway Pull-Up",
+          cues: {
+            "Band Under Foot": "Loop band around bar and step foot into loop to deload 20–40 lbs.",
+            "Full Extension": "Achieve full range of motion with assistance."
+          },
+          searchQuery: "band+assisted+pull+up"
+        },
+        harder: {
+          name: "Strict Pull-Up with 2s Chest-to-Bar Hold",
+          cues: {
+            "Lock at Top": "Hold chest pinned to bar for 2 full seconds on every rep.",
+            "Zero Kip": "Strict body line with legs straight and toes pointed."
+          },
+          searchQuery: "strict+pull+up+hold"
+        }
+      },
+      pushup_handles: {
+        name: "Deficit Push-Ups on Handles / Rings",
+        target: "Pectoralis Major & Triceps (Neutral Wrists)",
+        cropClass: "crop-incline-pushup",
+        cues: {
+          "Neutral Wrists": "Grip handles firmly; straight wrists eliminate hyperextension joint ache.",
+          "Deep Deficit": "Lower chest below handle level for amplified pectoral stretch.",
+          "Full Lockout": "Drive floor away until upper back gently rounds at top (scapular protraction)."
+        },
+        searchQuery: "push+up+handles+proper+form",
+        muscles: ['chest', 'triceps'],
+        easier: {
+          name: "Incline Push-Ups on Handles",
+          cues: {
+            "Elevated Hands": "Place handles on sturdy raised step or bench.",
+            "Shoulder Deload": "Eases load while preserving neutral wrist benefits."
+          },
+          searchQuery: "incline+pushups+handles"
+        },
+        harder: {
+          name: "Deficit Push-Ups with 3s Eccentric",
+          cues: {
+            "Slow Descent": "Take 3 seconds to lower into deepest comfortable chest stretch.",
+            "Explosive Press": "Explode upward to crisp lockout."
+          },
+          searchQuery: "deficit+pushups+hypertrophy"
+        }
+      },
+      band_resisted_pushup: {
+        name: "Band-Resisted Strict Push-Up",
+        target: "Chest & Triceps Lockout Power",
+        cropClass: "crop-incline-pushup",
+        cues: {
+          "Band Across Back": "Wrap band behind shoulder blades and anchor ends securely under palms.",
+          "Strict Rigid Plank": "Maintain tight glutes and abdomen; no sagging through lower back.",
+          "Explosive Lockout": "Press up against escalating band resistance; drive hard into top lockout."
+        },
+        searchQuery: "band+resisted+pushups+tutorial",
+        muscles: ['chest', 'triceps'],
+        easier: {
+          name: "Standard Floor Push-Ups",
+          cues: {
+            "No Band": "Perform standard bodyweight push-ups with strict 2-1-1 tempo.",
+            "Elbows Tucked": "Elbows at 45° angle to torso."
+          },
+          searchQuery: "perfect+pushup+form"
+        },
+        harder: {
+          name: "Heavy Band Push-Ups with 2s Lockout Squeeze",
+          cues: {
+            "Thick Band": "Use heavier loop band for maximum accommodating resistance.",
+            "Chest Squeeze": "Squeeze chest hard at apex against peak tension."
+          },
+          searchQuery: "heavy+band+resisted+pushups"
+        }
       }
     };
 
@@ -15805,11 +16343,21 @@
 
       let phaseNum = 1, phaseName = "Phase 1: Body Base", bpClass = "bp-1", equipText = "Zero Equipment ($0)";
       if (day >= 31 && day <= 60) {
-        phaseNum = 2; phaseName = "Phase 2: Band Hypertrophy"; bpClass = "bp-2"; equipText = "Loop Bands + Anchor";
+        phaseNum = 2; phaseName = "Phase 2: Band Hypertrophy"; bpClass = "bp-2"; equipText = "Loop Bands + Door Anchor";
       } else if (day >= 61 && day <= 90) {
         phaseNum = 3; phaseName = "Phase 3: Rings & Calisthenics"; bpClass = "bp-3"; equipText = "Pull-Up Bar + Rings";
-      } else if (day >= 91) {
-        phaseNum = 4; phaseName = "Phase 4: Dumbbells & Bench"; bpClass = "bp-4"; equipText = "Dumbbells + Bench";
+      } else if (day >= 91 && day <= 120) {
+        phaseNum = 4; phaseName = "Phase 4: Dumbbell Foundation"; bpClass = "bp-4"; equipText = "Adjustable Dumbbells Set";
+      } else if (day >= 121 && day <= 150) {
+        phaseNum = 5; phaseName = "Phase 5: Incline Bench Hypertrophy"; bpClass = "bp-5"; equipText = "Dumbbells + Adjustable Bench";
+      } else if (day >= 151 && day <= 180) {
+        phaseNum = 6; phaseName = "Phase 6: Kettlebell Ballistics & Power"; bpClass = "bp-6"; equipText = "Kettlebell + Dumbbells + Bench";
+      } else if (day >= 181 && day <= 240) {
+        phaseNum = 7; phaseName = "Phase 7: Density & Unilateral Overload"; bpClass = "bp-7"; equipText = "Dumbbells + Bench + Rings";
+      } else if (day >= 241 && day <= 300) {
+        phaseNum = 8; phaseName = "Phase 8: Athletic Functional Armor"; bpClass = "bp-8"; equipText = "Full Home Arsenal (KB + DB + Rings)";
+      } else if (day >= 301) {
+        phaseNum = 9; phaseName = "Phase 9: Peak Hybrid Strength & Longevity"; bpClass = "bp-9"; equipText = "Peak Performance Home Arsenal";
       }
 
       const isDeload = (week % 7 === 0);
@@ -15838,15 +16386,30 @@
           exercises: []
         };
       } else if (dayOfWeek === 6) {
+        let satExercises = [
+          { key: 'dead_bug', sets: 3, reps: '8/side', defWt: '0' },
+          { key: 'plank', sets: 3, reps: '30s hold', defWt: '0' },
+          { key: 'glute_bridges', sets: 3, reps: '15 reps', defWt: '0' }
+        ];
+        if (phaseNum >= 6) {
+          satExercises = [
+            { key: 'dead_hang', sets: 3, reps: '45s hold', defWt: 'Body' },
+            { key: 'pallof_press', sets: 3, reps: '10/side', defWt: 'Band' },
+            { key: 'bird_dog', sets: 3, reps: '8/side', defWt: '0' },
+            { key: 'cat_cow', sets: 2, reps: '60s flow', defWt: '0' }
+          ];
+        } else if (phaseNum >= 3) {
+          satExercises = [
+            { key: 'dead_hang', sets: 3, reps: '35s hold', defWt: 'Body' },
+            { key: 'bird_dog', sets: 3, reps: '8/side', defWt: '0' },
+            { key: 'plank', sets: 3, reps: '40s hold', defWt: '0' }
+          ];
+        }
         return {
           day, month, week, phaseName, bpClass, equipText,
           workoutName: "Spine Decompression, Joint Alignment & Core Flow",
           subtitle: `Month ${month} • Week ${week} • Saturday Postural Reset`,
-          exercises: [
-            { key: 'dead_bug', sets: 3, reps: '8/side', defWt: '0' },
-            { key: 'plank', sets: 3, reps: '30s hold', defWt: '0' },
-            { key: 'glute_bridges', sets: 3, reps: '15 reps', defWt: '0' }
-          ]
+          exercises: satExercises
         };
       }
 
@@ -15911,23 +16474,123 @@
             { key: 'dead_hang', sets: setQty, reps: '35s', defWt: 'Body' }
           ];
         }
-      } else {
+      } else if (phaseNum === 4) {
         if (dayOfWeek === 1 || dayOfWeek === 5) {
           workoutName = "Workout A: Loaded Dumbbell Compound Hypertrophy";
           exercises = [
             { key: 'goblet_squat', sets: setQty, reps: '8–10', defWt: '12kg' },
-            { key: 'incline_db_press', sets: setQty, reps: '8–10', defWt: '10kg' },
-            { key: 'chest_supported_row', sets: setQty, reps: '10–12', defWt: '10kg' },
+            { key: 'db_floor_press', sets: setQty, reps: '8–10', defWt: '10kg' },
+            { key: 'doorframe_rows', sets: setQty, reps: '10–12', defWt: '0' },
             { key: 'dead_hang', sets: setQty, reps: '40s', defWt: 'Body' },
             { key: 'dead_bug', sets: setQty, reps: '10/side', defWt: '0' }
           ];
         } else {
-          workoutName = "Workout B: Loaded Posterior & Unilateral Hypertrophy";
+          workoutName = "Workout B: Loaded Posterior & Dumbbell Pressing";
           exercises = [
             { key: 'db_rdl', sets: setQty, reps: '8–10', defWt: '14kg' },
             { key: 'reverse_lunge', sets: setQty, reps: '8/leg', defWt: '8kg' },
-            { key: 'chest_supported_row', sets: setQty, reps: '10–12', defWt: '10kg' },
+            { key: 'half_kneeling_press', sets: setQty, reps: '8–10/side', defWt: '8kg' },
             { key: 'plank', sets: setQty, reps: '45s', defWt: '0' }
+          ];
+        }
+      } else if (phaseNum === 5) {
+        if (dayOfWeek === 1 || dayOfWeek === 5) {
+          workoutName = "Workout A: Incline Bench Hypertrophy & Loaded Squat";
+          exercises = [
+            { key: 'goblet_squat', sets: setQty, reps: '8–10', defWt: '14kg' },
+            { key: 'incline_db_press', sets: setQty, reps: '8–10', defWt: '12kg' },
+            { key: 'chest_supported_row', sets: setQty, reps: '10–12', defWt: '12kg' },
+            { key: 'dead_hang', sets: setQty, reps: '45s', defWt: 'Body' },
+            { key: 'dead_bug', sets: setQty, reps: '10/side', defWt: '0' }
+          ];
+        } else {
+          workoutName = "Workout B: Posterior Chain Overload & Bench Support";
+          exercises = [
+            { key: 'db_rdl', sets: setQty, reps: '8–10', defWt: '16kg' },
+            { key: 'reverse_lunge', sets: setQty, reps: '8/leg', defWt: '10kg' },
+            { key: 'chest_supported_row', sets: setQty, reps: '10–12', defWt: '12kg' },
+            { key: 'band_face_pull', sets: setQty, reps: '15', defWt: 'Band' },
+            { key: 'plank', sets: setQty, reps: '50s', defWt: '0' }
+          ];
+        }
+      } else if (phaseNum === 6) {
+        if (dayOfWeek === 1 || dayOfWeek === 5) {
+          workoutName = "Workout A: Kettlebell Ballistics & Incline Pressing";
+          exercises = [
+            { key: 'kb_swing', sets: setQty, reps: '15–20', defWt: '16kg' },
+            { key: 'incline_db_press', sets: setQty, reps: '8–10', defWt: '14kg' },
+            { key: 'single_arm_db_row', sets: setQty, reps: '8–10/side', defWt: '14kg' },
+            { key: 'goblet_squat', sets: setQty, reps: '8–10', defWt: '16kg' },
+            { key: 'pallof_press', sets: setQty, reps: '10/side', defWt: 'Band' }
+          ];
+        } else {
+          workoutName = "Workout B: Ballistic Hip Power & Overhead Strength";
+          exercises = [
+            { key: 'kb_swing', sets: setQty, reps: '15–20', defWt: '16kg' },
+            { key: 'db_rdl', sets: setQty, reps: '8–10', defWt: '18kg' },
+            { key: 'arnold_press', sets: setQty, reps: '8–10', defWt: '10kg' },
+            { key: 'ring_inverted_rows', sets: setQty, reps: '10', defWt: 'Body' },
+            { key: 'hollow_body_hold', sets: setQty, reps: '30s', defWt: '0' }
+          ];
+        }
+      } else if (phaseNum === 7) {
+        if (dayOfWeek === 1 || dayOfWeek === 5) {
+          workoutName = "Workout A: Unilateral Leg Density & Incline Overload";
+          exercises = [
+            { key: 'bulgarian_split_squat', sets: setQty, reps: '8–10/leg', defWt: '8kg' },
+            { key: 'incline_db_press', sets: setQty, reps: '8–10', defWt: '14kg' },
+            { key: 'single_arm_db_row', sets: setQty, reps: '10/side', defWt: '16kg' },
+            { key: 'dead_hang', sets: setQty, reps: '50s', defWt: 'Body' },
+            { key: 'pallof_press', sets: setQty, reps: '12/side', defWt: 'Band' }
+          ];
+        } else {
+          workoutName = "Workout B: Unilateral Posterior Hinge & Rotational Core";
+          exercises = [
+            { key: 'single_leg_rdl', sets: setQty, reps: '8/leg', defWt: '10kg' },
+            { key: 'arnold_press', sets: setQty, reps: '8–10', defWt: '12kg' },
+            { key: 'chest_supported_row', sets: setQty, reps: '10–12', defWt: '14kg' },
+            { key: 'kb_swing', sets: setQty, reps: '20', defWt: '16kg' },
+            { key: 'hollow_body_hold', sets: setQty, reps: '35s', defWt: '0' }
+          ];
+        }
+      } else if (phaseNum === 8) {
+        if (dayOfWeek === 1 || dayOfWeek === 5) {
+          workoutName = "Workout A: Functional Calisthenics & Rotary Torso Armor";
+          exercises = [
+            { key: 'bulgarian_split_squat', sets: setQty, reps: '8–10/leg', defWt: '10kg' },
+            { key: 'renegade_row', sets: setQty, reps: '8/side', defWt: '10kg' },
+            { key: 'pushup_handles', sets: setQty, reps: '10–12', defWt: 'Body' },
+            { key: 'kb_swing', sets: setQty, reps: '20', defWt: '16kg' },
+            { key: 'dead_hang', sets: setQty, reps: '50s', defWt: 'Body' }
+          ];
+        } else {
+          workoutName = "Workout B: Athletic Posterior Power & Overhead Drive";
+          exercises = [
+            { key: 'db_rdl', sets: setQty, reps: '8–10', defWt: '20kg' },
+            { key: 'single_arm_db_row', sets: setQty, reps: '8–10/side', defWt: '16kg' },
+            { key: 'half_kneeling_press', sets: setQty, reps: '8–10/side', defWt: '12kg' },
+            { key: 'ring_inverted_rows', sets: setQty, reps: '12', defWt: 'Body' },
+            { key: 'pallof_press', sets: setQty, reps: '12/side', defWt: 'Band' }
+          ];
+        }
+      } else {
+        if (dayOfWeek === 1 || dayOfWeek === 5) {
+          workoutName = "Workout A: Peak Hybrid Strength & Incline Density";
+          exercises = [
+            { key: 'goblet_squat', sets: setQty, reps: '8–10', defWt: '18kg' },
+            { key: 'incline_db_press', sets: setQty, reps: '6–8', defWt: '16kg' },
+            { key: 'single_arm_db_row', sets: setQty, reps: '8–10/side', defWt: '18kg' },
+            { key: 'kb_swing', sets: setQty, reps: '20', defWt: '20kg' },
+            { key: 'dead_hang', sets: setQty, reps: '60s', defWt: 'Body' }
+          ];
+        } else {
+          workoutName = "Workout B: Peak Posterior Armor & Unilateral Mastery";
+          exercises = [
+            { key: 'db_rdl', sets: setQty, reps: '8–10', defWt: '20kg' },
+            { key: 'bulgarian_split_squat', sets: setQty, reps: '8/leg', defWt: '12kg' },
+            { key: 'renegade_row', sets: setQty, reps: '8/side', defWt: '12kg' },
+            { key: 'arnold_press', sets: setQty, reps: '8–10', defWt: '14kg' },
+            { key: 'hollow_body_hold', sets: setQty, reps: '40s', defWt: '0' }
           ];
         }
       }
@@ -22324,6 +22987,36 @@ function stopGuidedCooldown() {
       cat_cow: [
         { key: "bird_dog", name: "Bird-Dog Core Bracing", benefit: "McGill Big 3 spine stabilization and diagonal sling activation." },
         { key: "glute_bridges", name: "Glute Bridges (2s Squeeze)", benefit: "Restores anterior/posterior pelvic balance." }
+      ],
+      kb_swing: [
+        { key: "db_rdl", name: "Dumbbell Romanian Deadlift", benefit: "Controlled eccentric loading for hamstring and glute hypertrophy." },
+        { key: "band_pull_through", name: "Band Hip Pull-Through", benefit: "Zero axial spine shear; safe horizontal hip hinge power." },
+        { key: "single_leg_rdl", name: "Single-Leg DB RDL", benefit: "Unilateral stability and ankle-hip joint balance." }
+      ],
+      bulgarian_split_squat: [
+        { key: "reverse_lunge", name: "Dumbbell Reverse Lunge", benefit: "Easier balance while delivering massive unilateral quad overload." },
+        { key: "goblet_squat", name: "Loaded Dumbbell Goblet Squat", benefit: "Bilateral stability and deep upright squat mechanics." },
+        { key: "box_squats", name: "Box / Chair Squats", benefit: "Knee-friendly calibrated depth onto a sturdy seat." }
+      ],
+      single_arm_db_row: [
+        { key: "chest_supported_row", name: "Chest-Supported Incline DB Row", benefit: "Removes 100% of lower back strain for total lat isolation." },
+        { key: "ring_inverted_rows", name: "Inverted Ring Rows", benefit: "Rotational bodyweight horizontal pull that fixes rounded shoulders." },
+        { key: "band_seated_row", name: "Seated Band Row", benefit: "Constant tension curve through full scapular retraction." }
+      ],
+      arnold_press: [
+        { key: "incline_db_press", name: "30° Incline Dumbbell Bench Press", benefit: "Heavy pressing power with bench taking spine load." },
+        { key: "half_kneeling_press", name: "Half-Kneeling Single-Arm DB Press", benefit: "Spares lower back by locking pelvis in 90/90 stance." },
+        { key: "band_lateral_raises", name: "Band Lateral & Front Raise Combo", benefit: "Direct side delt isolation without rotator cuff impingement." }
+      ],
+      renegade_row: [
+        { key: "single_arm_db_row", name: "Bench-Supported Single-Arm DB Row", benefit: "Heavier pulling load without requiring plank core endurance." },
+        { key: "chest_supported_row", name: "Chest-Supported Incline DB Row", benefit: "Zero lumbar fatigue allows full focus on mid-back squeeze." },
+        { key: "plank", name: "Forearm Core Plank", benefit: "Direct anti-extension core stability." }
+      ],
+      single_leg_rdl: [
+        { key: "db_rdl", name: "Bilateral Dumbbell RDL", benefit: "Heavier double-leg hinge with zero balance limitation." },
+        { key: "band_pull_through", name: "Band Hip Pull-Through", benefit: "Horizontal hip drive with zero axial spine compression." },
+        { key: "db_glute_bridge", name: "Dumbbell Glute Bridge", benefit: "Direct glute activation without loading knees or spine." }
       ]
     };
 
