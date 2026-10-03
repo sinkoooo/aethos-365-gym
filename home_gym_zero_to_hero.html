@@ -11300,6 +11300,10 @@
 
     async function pushGymStateToServer() {
       if (isHydratingFromServer) return;
+      if (!currentUser) {
+        updateSyncBadge('offline', 'Guest (Log In)');
+        return;
+      }
       if (!window.location.protocol.startsWith('http')) {
         updateSyncBadge('offline', 'Local');
         return;
@@ -11446,6 +11450,11 @@
     async function loadGymStateFromServer(isInitial = false) {
       if (!window.location.protocol.startsWith('http')) {
         updateSyncBadge('offline', 'Local');
+        return false;
+      }
+
+      if (!currentUser) {
+        updateSyncBadge('offline', 'Guest (Log In)');
         return false;
       }
 
@@ -22038,7 +22047,23 @@ if (typeof window !== 'undefined') {
     async function initGymZeroToHeroApp() {
       checkProtocolBanner();
       await initAuthSession();
-      await loadGymStateFromServer(true);
+
+      if (!currentUser) {
+        // STRICT DATA PRIVACY: Unauthenticated visitor must NEVER see any previous user or admin data
+        for (let i = localStorage.length - 1; i >= 0; i--) {
+          const k = localStorage.key(i);
+          if (k && (k.startsWith('gym_') || k.startsWith('aethos_')) && k !== 'aethos_auth_token' && k !== 'gym_voice_enabled') {
+            localStorage.removeItem(k);
+          }
+        }
+        currentDay = 1;
+        updateSyncBadge('offline', 'Guest (Log In)');
+        setTimeout(() => {
+          if (!currentUser) openModal('authModal');
+        }, 700);
+      } else {
+        await loadGymStateFromServer(true);
+      }
       // Reload profile and state variables from hydrated localStorage
       currentProfileId = localStorage.getItem('gym_active_profile') || 'shivam';
       currentProfile = currentProfileId;

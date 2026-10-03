@@ -327,21 +327,23 @@ app.post('/api/auth/logout', async (req, res) => {
 // ==================== USER-ISOLATED GYM STATE APIS ====================
 app.get('/api/gym/state', async (req, res) => {
   try {
-    // If authenticated, strictly load that user's private state
+    // STRICT ZERO-LEAK DATA ISOLATION: Only authenticated users can access their state
     if (req.user) {
       const data = await getUserGymState(req.user.id);
-      return res.json({ exists: true, data, user: req.user });
+      return res.json({ exists: true, data, user: req.user, authenticated: true });
     }
-    // Fallback for unauthenticated local browser: load admin state for seamless continuity
-    const data = await getUserGymState('usr_admin_master');
-    res.json({ exists: true, data, user: null, note: 'Guest / Default Fallback' });
+    // Unauthenticated visitors get NO data (Strict privacy protection for admin & users)
+    res.json({ exists: false, data: null, authenticated: false });
   } catch (err) {
-    res.json({ exists: false, data: null });
+    res.json({ exists: false, data: null, authenticated: false });
   }
 });
 
 app.post('/api/gym/state', async (req, res) => {
   try {
+    if (!req.user) {
+      return res.status(401).json({ error: 'Unauthorized: You must log in to save workout data' });
+    }
     let payload = req.body;
     if (!payload || typeof payload !== 'object') {
       return res.status(400).json({ error: 'Invalid state payload' });
@@ -350,17 +352,16 @@ app.post('/api/gym/state', async (req, res) => {
       payload = payload.data;
     }
 
-    const targetUserId = req.user ? req.user.id : 'usr_admin_master';
-    const saved = await saveUserGymState(targetUserId, payload);
+    const saved = await saveUserGymState(req.user.id, payload);
 
-    // Mirror to legacy gym_state.json if admin/default for backward safety
-    if (!req.user || req.user.role === 'admin') {
+    // Mirror to legacy gym_state.json ONLY if admin
+    if (req.user.role === 'admin') {
       try {
         await fs.writeFile(GYM_STATE_FILE, JSON.stringify(saved, null, 2), 'utf-8');
       } catch {}
     }
 
-    res.json({ success: true, timestamp: saved._serverTimestamp, userId: targetUserId });
+    res.json({ success: true, timestamp: saved._serverTimestamp, userId: req.user.id });
   } catch (err) {
     console.error('Failed to save gym state:', err);
     res.status(500).json({ error: 'Failed to persist gym state' });
