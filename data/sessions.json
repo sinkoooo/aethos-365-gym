@@ -108,5 +108,20 @@
     "userId": "usr_11aa183ea12d598f",
     "createdAt": "2026-10-03T09:14:49.600Z",
     "expiresAt": "2027-04-01T09:14:49.600Z"
+  },
+  "aethos_5f8c1b5c4373b5c28a56b9f05ca582fc2af1db729dcae200": {
+    "userId": "usr_admin_master",
+    "createdAt": "2026-10-03T09:22:25.065Z",
+    "expiresAt": "2027-04-01T09:22:25.065Z"
+  },
+  "aethos_8e5677910bb4c12361fa84a27ea15dc56a9c898e723036c9": {
+    "userId": "usr_e1041894d0765c18",
+    "createdAt": "2026-10-03T09:22:25.104Z",
+    "expiresAt": "2027-04-01T09:22:25.104Z"
+  },
+  "aethos_32a464efb1dc1298f93645ddddf88562df22ca2fe158732e": {
+    "userId": "usr_68f99cd6cf9fbe84",
+    "createdAt": "2026-10-03T09:22:25.149Z",
+    "expiresAt": "2027-04-01T09:22:25.149Z"
   }
 }

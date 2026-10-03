@@ -1,0 +1,22 @@
+{
+  "gym_active_day": 3,
+  "gym_streak": 3,
+  "gym_365_completed": {
+    "1": {
+      "timestamp": "2026-10-03T09:22:25.160Z"
+    },
+    "2": {
+      "timestamp": "2026-10-03T09:22:25.160Z"
+    }
+  },
+  "gym_set_logs": {
+    "d2_ex1": {
+      "sets": [
+        1,
+        2
+      ],
+      "done": true
+    }
+  },
+  "_serverTimestamp": "2026-10-03T09:22:25.164Z"
+}

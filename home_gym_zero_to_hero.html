@@ -3795,10 +3795,11 @@
       background: rgba(4, 7, 15, 0.85);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      z-index: 1000;
+      z-index: 9999999;
       align-items: center;
       justify-content: center;
       padding: 20px;
+      pointer-events: auto;
     }
 
     .app-modal.active { display: flex; }
@@ -11308,6 +11309,7 @@
         switchAuthTab('login');
       }
     }
+    window.handleUserPillClick = handleUserPillClick;
 
     function openSwitchAccountModal() {
       closeModal('profilePassportModal');
@@ -11315,6 +11317,7 @@
       loadQuickAccountChips();
       switchAuthTab('login');
     }
+    window.openSwitchAccountModal = openSwitchAccountModal;
 
     let selectedEditAvatarVal = '⚡';
 
@@ -19420,6 +19423,7 @@ function stopGuidedCooldown() {
       const el = document.getElementById(id);
       if (el) el.classList.add('active');
     }
+    window.openModal = openModal;
 
     function closeModal(id) {
       if (id === 'voiceModal') id = 'musicModal';
@@ -19429,10 +19433,12 @@ function stopGuidedCooldown() {
       const el = document.getElementById(id);
       if (el) el.classList.remove('active');
     }
+    window.closeModal = closeModal;
 
     function closeModalOnBackdrop(e, id) {
       if (e.target.id === id) closeModal(id);
     }
+    window.closeModalOnBackdrop = closeModalOnBackdrop;
 
     function exportDataJSON() {
       const data = {
@@ -22688,6 +22694,22 @@ if (typeof window !== 'undefined') {
       window.adjustComparisonZoom = adjustComparisonZoom;
       window.resetComparisonZoom = resetComparisonZoom;
       window.onCrossfadeInput = onCrossfadeInput;
+      window.handleUserPillClick = handleUserPillClick;
+      window.openModal = openModal;
+      window.closeModal = closeModal;
+      window.openLeaderboardModal = openLeaderboardModal;
+      window.openAdminModal = openAdminModal;
+      window.switchAuthTab = switchAuthTab;
+      window.togglePasswordVisibility = togglePasswordVisibility;
+
+      // Direct element click binding to guarantee pill responsiveness
+      const userPillEl = document.getElementById('headerUserPill');
+      if (userPillEl) {
+        userPillEl.addEventListener('click', (e) => {
+          e.preventDefault();
+          handleUserPillClick();
+        });
+      }
 
       window.__appReady = true;
     }
