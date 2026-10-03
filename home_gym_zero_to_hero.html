@@ -20665,6 +20665,9 @@ function stopGuidedCooldown() {
       activeWorkingSetKey = logKey;
       activeWorkingSetSecs = 0;
 
+      // Automatically stop and reset rest timer when lifting set begins
+      resetTimer();
+
       if (activeWorkingSetInterval) clearInterval(activeWorkingSetInterval);
       if (activeWorkingCadenceInterval) clearInterval(activeWorkingCadenceInterval);
 
