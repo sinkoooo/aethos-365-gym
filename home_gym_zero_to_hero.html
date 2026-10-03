@@ -2486,6 +2486,13 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .ex-crop-viewport:hover {
+      border-color: rgba(56, 189, 248, 0.8);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.65), 0 0 20px rgba(56, 189, 248, 0.35);
+      transform: translateY(-2px);
     }
 
     .mobility-photo-viewport {
@@ -2503,6 +2510,13 @@
       flex-direction: column;
       justify-content: flex-end;
       margin-bottom: 14px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .mobility-photo-viewport:hover {
+      border-color: rgba(56, 189, 248, 0.8);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.65), 0 0 20px rgba(56, 189, 248, 0.35);
+      transform: translateY(-2px);
     }
     .cooldown-card .mobility-photo-viewport {
       border-color: rgba(16, 185, 129, 0.35);
@@ -16166,15 +16180,15 @@
           </div>
 
           <div class="ex-visual-grid" style="margin-top: 14px;">
-            <div class="ex-crop-viewport ${baseEx.cropClass}" style="background-image: url('https://img.youtube.com/vi/${activeVideoId}/hqdefault.jpg');" title="${activeName}">
-              <div style="background: linear-gradient(180deg, transparent 0%, rgba(11, 17, 32, 0.95) 100%); padding: 8px 12px; display: flex; justify-content: space-between; align-items: flex-end;">
+            <div class="ex-crop-viewport ${baseEx.cropClass}" style="background-image: url('https://img.youtube.com/vi/${activeVideoId}/hqdefault.jpg');" title="Click to watch ${activeName} video guide inline" onclick="toggleInlineVideo(${idx}, '${activeVideoId}', '${activeName.replace(/'/g, "\\'")}')">
+              <div style="background: linear-gradient(180deg, transparent 0%, rgba(11, 17, 32, 0.95) 100%); padding: 8px 12px; display: flex; justify-content: space-between; align-items: flex-end; width: 100%;">
                 <div>
                   <span style="font-size: 0.65rem; font-weight: 800; color: var(--cyan); text-transform: uppercase; letter-spacing: 0.5px;">Biomechanics</span>
                   <div style="font-size: 0.78rem; font-weight: 700; color: #fff;">${activeName}</div>
                 </div>
-                <button type="button" class="btn-card-min-toggle" onclick="toggleInlineVideo(${idx}, '${activeVideoId}', '${activeName.replace(/'/g, "\\'")}')" style="padding: 2px 8px; font-size: 0.7rem; border-color: rgba(56, 189, 248, 0.4); color: var(--cyan);" title="Play movement video">
-                  ▶ Video
-                </button>
+                <span class="btn-card-min-toggle" style="padding: 2px 8px; font-size: 0.7rem; border-color: rgba(56, 189, 248, 0.4); color: var(--cyan); pointer-events: none;" title="Play movement video">
+                  ▶ Play
+                </span>
               </div>
             </div>
             <div>
@@ -16182,11 +16196,9 @@
                 ${cuesList}
               </div>
               <div class="ex-video-dock">
-                <button type="button" class="btn-inline-video" id="btnInlineVideo_${idx}" onclick="toggleInlineVideo(${idx}, '${activeVideoId}', '${activeName.replace(/'/g, "\\'")}')">
-                  ▶ Watch Video Guide Inline
-                </button>
-                <a href="https://www.youtube.com/results?search_query=${activeSearch}" target="_blank" rel="noopener noreferrer" style="color: var(--rose); font-size: 0.78rem; font-weight: 700; text-decoration: none; margin-left: 10px; display: inline-flex; align-items: center; gap: 4px;">
-                  Open YouTube Tab ↗
+                <a href="https://www.youtube.com/watch?v=${activeVideoId}" target="_blank" rel="noopener noreferrer" style="color: var(--rose); font-size: 0.78rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: -2px;"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                  YouTube ↗
                 </a>
                 <div id="inlineVideoWrap_${idx}" class="inline-video-wrap" style="display: none;"></div>
               </div>
@@ -16244,12 +16256,6 @@
               <a href="${ytWatchUrl}" target="_blank" rel="noopener noreferrer" class="btn-player-link btn-player-primary" title="Open directly in YouTube (Guaranteed 100% playback)">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: -1px; margin-right: 3px;"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                 YouTube Tab ↗
-              </a>
-              <button type="button" class="btn-player-link" onclick="openVideoPopout('${videoId}', '${safeTitle.replace(/'/g, "\\'")}')" title="Open in clean standalone popup player">
-                🪟 Pop-Out
-              </button>
-              <a href="${ytSearchUrl}" target="_blank" rel="noopener noreferrer" class="btn-player-link" title="Search tutorials on YouTube">
-                🔍 Search
               </a>
               <button type="button" class="btn-player-close" onclick="${closeJsCall}" title="Close Video Player">✕ Close</button>
             </div>
@@ -17058,26 +17064,24 @@ function generateMovementCardHTML(m, isCooldown) {
           <button type="button" class="btn-card-min-toggle" id="btnToggleCard_${m.id}" onclick="toggleSingleMobilityCard('${m.id}')" title="Minimize / Maximize this movement">
             <span id="iconToggleCard_${m.id}">➖</span> <span id="labelToggleCard_${m.id}">Minimize</span>
           </button>
-          <button type="button" class="btn-inline-video" onclick="toggleMobilityVideo('${m.id}', '${m.videoId}', '${m.shortName.replace(/'/g, "\\'")}')" id="btnMobVideo_${m.id}">
-            ▶ Video
-          </button>
-          <a href="https://www.youtube.com/results?search_query=${m.searchQuery || ''}" target="_blank" rel="noopener noreferrer" style="color: var(--rose); font-size: 0.78rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+          <a href="https://www.youtube.com/watch?v=${m.videoId}" target="_blank" rel="noopener noreferrer" style="color: var(--rose); font-size: 0.78rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: -2px;"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
             YouTube ↗
           </a>
         </div>
       </div>
 
       <div class="tech-card-body" id="bodyCard_${m.id}">
-        <!-- Relevant High-Definition Movement Technique Photo -->
-        <div class="mobility-photo-viewport" style="background-image: url('https://img.youtube.com/vi/${m.videoId}/hqdefault.jpg');" title="${m.name}">
-          <div style="background: linear-gradient(180deg, transparent 0%, rgba(11, 17, 32, 0.95) 100%); padding: 10px 14px; display: flex; justify-content: space-between; align-items: flex-end;">
+        <!-- Relevant High-Definition Movement Technique Photo (Click to Play Inline) -->
+        <div class="mobility-photo-viewport" style="background-image: url('https://img.youtube.com/vi/${m.videoId}/hqdefault.jpg');" title="Click to watch ${m.name} video guide inline" onclick="toggleMobilityVideo('${m.id}', '${m.videoId}', '${m.shortName.replace(/'/g, "\\'")}')">
+          <div style="background: linear-gradient(180deg, transparent 0%, rgba(11, 17, 32, 0.95) 100%); padding: 10px 14px; display: flex; justify-content: space-between; align-items: flex-end; width: 100%;">
             <div>
               <span style="font-size: 0.68rem; font-weight: 800; color: ${accentColor}; text-transform: uppercase; letter-spacing: 0.5px;">${isCooldown ? 'Post-Workout Cool-Down' : 'Pre-Workout Warm-Up'} Form</span>
               <div style="font-size: 0.88rem; font-weight: 800; color: #fff;">${m.shortName || m.name}</div>
             </div>
-            <button type="button" class="btn-card-min-toggle" onclick="toggleMobilityVideo('${m.id}', '${m.videoId}', '${m.shortName.replace(/'/g, "\\'")}')" style="padding: 3px 10px; font-size: 0.72rem; border-color: ${accentColor}; color: ${accentColor};">
-              ▶ Video Tutorial
-            </button>
+            <span class="btn-card-min-toggle" style="padding: 3px 10px; font-size: 0.72rem; border-color: ${accentColor}; color: ${accentColor}; pointer-events: none;">
+              ▶ Play
+            </span>
           </div>
         </div>
 
