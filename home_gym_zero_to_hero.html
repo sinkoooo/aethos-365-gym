@@ -6043,6 +6043,39 @@
       border-color: var(--cyan);
       box-shadow: 0 0 10px rgba(0, 242, 254, 0.25);
     }
+    .ba-angle-bar {
+      display: inline-flex;
+      gap: 3px;
+      background: rgba(0, 0, 0, 0.45);
+      padding: 3px;
+      border-radius: 99px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .ba-angle-btn {
+      padding: 4px 10px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      font-weight: 700;
+      border-radius: 99px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .ba-angle-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .ba-angle-btn.active {
+      background: linear-gradient(135deg, var(--cyan) 0%, #0284c7 100%);
+      color: #000;
+      font-weight: 800;
+      box-shadow: 0 2px 8px rgba(0, 242, 254, 0.35);
+    }
     .ba-mode-bar {
       display: flex;
       gap: 4px;
@@ -8621,8 +8654,27 @@
       <!-- NEXT-LEVEL ATHLETIC TRANSFORMATION COMPARISON STUDIO -->
       <div class="ba-studio-card" id="baStudioCard">
         <div class="ba-toolbar-top">
-          <!-- Left: Before / After Selector Dropdowns & Swap -->
+          <!-- Left: Before / After Selector Dropdowns, Swap & Angle Sync -->
           <div class="ba-picker-group">
+            <!-- Angle Filter (Front to Front, Back to Back, Side to Side, All) -->
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <span style="font-size: 0.72rem; color: #94a3b8; font-weight: 800; text-transform: uppercase;">Angle:</span>
+              <div class="ba-angle-bar" id="baAngleBar">
+                <button type="button" class="ba-angle-btn active" id="baAngleBtn_all" onclick="setComparisonAngleFilter('all')" title="Compare Any Angle">
+                  🌐 All
+                </button>
+                <button type="button" class="ba-angle-btn" id="baAngleBtn_front" onclick="setComparisonAngleFilter('front')" title="Compare Front to Front photos">
+                  🧍 Front to Front
+                </button>
+                <button type="button" class="ba-angle-btn" id="baAngleBtn_back" onclick="setComparisonAngleFilter('back')" title="Compare Back to Back photos">
+                  🧗 Back to Back
+                </button>
+                <button type="button" class="ba-angle-btn" id="baAngleBtn_side" onclick="setComparisonAngleFilter('side')" title="Compare Side Profile to Side Profile photos">
+                  🚶 Side to Side
+                </button>
+              </div>
+            </div>
+
             <div style="display: flex; align-items: center; gap: 6px;">
               <span style="font-size: 0.74rem; color: #94a3b8; font-weight: 800;">BEFORE:</span>
               <select id="baSelectBefore" class="ba-select" onchange="onSelectComparisonBefore(this.value)">
@@ -20059,7 +20111,7 @@ function stopGuidedCooldown() {
               <span style="font-size: 0.74rem; color: var(--text-dim);">${p.dateStr || ''}</span>
             </div>
             <div style="display: flex; gap: 4px;">
-              <button onclick="setAsSliderTarget('${p.day}')" class="nav-pill-btn" style="padding: 3px 8px; font-size: 0.72rem; border-color: var(--cyan); color: var(--cyan);" title="Compare in Split Slider">
+              <button onclick="setAsSliderTarget('${numDay}_${angle}')" class="nav-pill-btn" style="padding: 3px 8px; font-size: 0.72rem; border-color: var(--cyan); color: var(--cyan);" title="Compare in Split Slider">
                 Compare ⇄
               </button>
               <button onclick="selectPhotoAngle('${angle}'); openPhotoModal(${numDay});" class="nav-pill-btn" style="padding: 3px 8px; font-size: 0.72rem; border-color: var(--text-muted); color: var(--text-muted);" title="Retake / Edit">
@@ -20080,6 +20132,7 @@ function stopGuidedCooldown() {
     // NEXT-LEVEL ATHLETIC TRANSFORMATION COMPARISON STUDIO
     // ==========================================
     let baComparisonMode = 'split'; // 'split' | 'side' | 'fade' | 'diff' | 'blink'
+    let baComparisonAngleFilter = 'all'; // 'all' | 'front' | 'back' | 'side'
     let baBeforePhoto = null;
     let baAfterPhoto = null;
     let baBeforeKey = '';
@@ -20094,6 +20147,33 @@ function stopGuidedCooldown() {
     let baPanStartX = 0;
     let baPanStartY = 0;
     let isBaTheater = false;
+
+    async function setComparisonAngleFilter(angle) {
+      baComparisonAngleFilter = angle || 'all';
+      ['all', 'front', 'back', 'side'].forEach(a => {
+        const btn = document.getElementById(`baAngleBtn_${a}`);
+        if (btn) {
+          if (a === baComparisonAngleFilter) btn.classList.add('active');
+          else btn.classList.remove('active');
+        }
+      });
+
+      const photos = await getAllPhotosFromDB();
+      await populateComparisonSelects(photos);
+
+      const selBefore = document.getElementById('baSelectBefore');
+      const selAfter = document.getElementById('baSelectAfter');
+      if (selBefore && selBefore.value) baBeforeKey = selBefore.value;
+      if (selAfter && selAfter.value) baAfterKey = selAfter.value;
+
+      await loadComparisonPair(baBeforeKey, baAfterKey);
+
+      const angleLabel = angle === 'all' ? 'All Angles' : (angle === 'front' ? 'Front-to-Front' : (angle === 'back' ? 'Back-to-Back' : 'Side-to-Side'));
+      showToast(`📐 Studio Angle: ${angleLabel} comparison activated`);
+      if (typeof SoundFX !== 'undefined' && SoundFX.playBeep) {
+        SoundFX.playBeep(587.33, 'sine', 0.1, 0.12);
+      }
+    }
 
     async function populateComparisonSelects(photos) {
       if (!photos) photos = await getAllPhotosFromDB();
@@ -20113,7 +20193,20 @@ function stopGuidedCooldown() {
         return;
       }
 
-      photos.forEach(p => {
+      // Filter by selected angle if not 'all'
+      let filteredPhotos = photos;
+      if (baComparisonAngleFilter && baComparisonAngleFilter !== 'all') {
+        filteredPhotos = photos.filter(p => (p.angle || 'front').toLowerCase() === baComparisonAngleFilter);
+      }
+
+      if (filteredPhotos.length === 0) {
+        const angleName = baComparisonAngleFilter.toUpperCase();
+        selBefore.innerHTML = `<option value="">No ${angleName} photos yet (Switch Angle or Snap ${angleName})</option>`;
+        selAfter.innerHTML = `<option value="">No ${angleName} photos yet (Switch Angle or Snap ${angleName})</option>`;
+        return;
+      }
+
+      filteredPhotos.forEach(p => {
         const numDay = p.numericDay !== undefined ? p.numericDay : parseInt(String(p.day).replace(/\D/g, ''), 10);
         const a = (p.angle || 'front').toLowerCase();
         const key = `${numDay}_${a}`;
@@ -20130,10 +20223,11 @@ function stopGuidedCooldown() {
         selAfter.appendChild(optA);
       });
 
-      const firstKey = `${photos[0].numericDay || 1}_${(photos[0].angle || 'front').toLowerCase()}`;
-      const lastP = photos[photos.length - 1];
+      const firstKey = `${filteredPhotos[0].numericDay || 1}_${(filteredPhotos[0].angle || 'front').toLowerCase()}`;
+      const lastP = filteredPhotos[filteredPhotos.length - 1];
       const lastKey = `${lastP.numericDay || currentDay}_${(lastP.angle || 'front').toLowerCase()}`;
 
+      // If user had a selected value that exists in the filtered options, keep it; otherwise default first & last
       selBefore.value = (beforeVal && selBefore.querySelector(`option[value="${beforeVal}"]`)) ? beforeVal : firstKey;
       selAfter.value = (afterVal && selAfter.querySelector(`option[value="${afterVal}"]`)) ? afterVal : lastKey;
 
@@ -20395,20 +20489,38 @@ function stopGuidedCooldown() {
     }
 
     async function setAsSliderTarget(keyOrDay) {
-      const selAfter = document.getElementById('baSelectAfter');
-      if (!selAfter) return;
-
       let targetKey = String(keyOrDay);
       if (!targetKey.includes('_')) {
         targetKey = `${targetKey}_front`;
       }
 
+      const parts = targetKey.split('_');
+      const targetAngle = parts[1] || 'front';
+
+      // If comparison is currently filtered to a different angle, update filter to targetAngle or 'all'
+      if (baComparisonAngleFilter !== 'all' && baComparisonAngleFilter !== targetAngle) {
+        await setComparisonAngleFilter(targetAngle);
+      }
+
+      const selBefore = document.getElementById('baSelectBefore');
+      const selAfter = document.getElementById('baSelectAfter');
+      if (!selAfter) return;
+
       const opt = selAfter.querySelector(`option[value="${targetKey}"]`);
       if (opt) {
         selAfter.value = targetKey;
       } else {
-        const anyOpt = Array.from(selAfter.options).find(o => o.value.startsWith(`${keyOrDay}_`));
+        const anyOpt = Array.from(selAfter.options).find(o => o.value === targetKey || o.value.startsWith(`${parts[0]}_`));
         if (anyOpt) selAfter.value = anyOpt.value;
+      }
+
+      // If Before select has an option with the same angle, ensure it matches for pure like-for-like comparison
+      if (selBefore && baComparisonAngleFilter !== 'all') {
+        const beforeHasAngle = Array.from(selBefore.options).find(o => o.value.endsWith(`_${targetAngle}`));
+        if (beforeHasAngle && (!selBefore.value || !selBefore.value.endsWith(`_${targetAngle}`))) {
+          selBefore.value = beforeHasAngle.value;
+          baBeforeKey = selBefore.value;
+        }
       }
 
       baAfterKey = selAfter.value;
