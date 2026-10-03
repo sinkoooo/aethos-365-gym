@@ -8,7 +8,7 @@
     "role": "admin",
     "avatar": "👑",
     "createdAt": "2026-10-03T06:31:11.514Z",
-    "lastActiveAt": "2026-10-03T09:05:00.004Z"
+    "lastActiveAt": "2026-10-03T09:14:49.622Z"
   },
   {
     "id": "usr_f81d76e09503d1bb",
@@ -49,6 +49,36 @@
     "startingWeight": 82.5,
     "bio": "Molon Labe! Never quit.",
     "createdAt": "2026-10-03T09:04:59.975Z",
-    "lastActiveAt": "2026-10-03T09:05:00.026Z"
+    "lastActiveAt": "2026-10-03T09:05:00.049Z"
+  },
+  {
+    "id": "usr_c0fc46516663f661",
+    "username": "thor_1791018889537",
+    "displayName": "Thor Allfather",
+    "salt": "7b52a401aa50eeabbf03a4bbe21ba8c2",
+    "passwordHash": "fd4b6acc61d0097d3b07133c781ae44fd5c4777127d24f74fa80f66a7b15db3736607874102f46fda43ce5309892f729df5af8b2f7591eb3c00118186b8c6417",
+    "role": "user",
+    "avatar": "🦅",
+    "goal": "hypertrophy",
+    "targetWeight": 105,
+    "startingWeight": 100,
+    "bio": "Ascended to the throne of Asgard.",
+    "createdAt": "2026-10-03T09:14:49.556Z",
+    "lastActiveAt": "2026-10-03T09:14:49.638Z"
+  },
+  {
+    "id": "usr_11aa183ea12d598f",
+    "username": "athena_1791018889581",
+    "displayName": "Goddess Athena",
+    "salt": "f64763ca4fc1d5934416abce15406192",
+    "passwordHash": "05a01cced41d37b5377c9ee61ac7a0ce762d602888bf4661f245550960dc1021337b254d59d1cb3073e7cc169aff86250facd89d198e52effa21374b42bdfbc8",
+    "role": "user",
+    "avatar": "🛡️",
+    "goal": "shred",
+    "targetWeight": 58,
+    "startingWeight": 58,
+    "bio": "Goddess of Tactical Strength.",
+    "createdAt": "2026-10-03T09:14:49.595Z",
+    "lastActiveAt": "2026-10-03T09:14:49.611Z"
   }
 ]

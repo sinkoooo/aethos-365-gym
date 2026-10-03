@@ -11148,8 +11148,14 @@
 
     function updateProfileSwitcherUI() {
       const wmProf = document.getElementById('watermarkProfile');
+      const goalName = (currentUser && currentUser.goal) ? currentUser.goal.toUpperCase() : (userProfile?.goal ? userProfile.goal.toUpperCase() : 'RECOMP');
+      const avatarIcon = (currentUser && currentUser.avatar) ? currentUser.avatar : '⚡';
+      const userWt = (currentUser && (currentUser.targetWeight || currentUser.startingWeight)) 
+        ? (currentUser.targetWeight || currentUser.startingWeight) 
+        : (userProfile?.weight || 74);
+
       if (wmProf) {
-        wmProf.innerText = 'RECOMP';
+        wmProf.innerText = goalName;
       }
       if (document.body) {
         document.body.classList.remove('theme-garima');
@@ -11159,29 +11165,31 @@
       const traineeHeaderBadge = document.getElementById('traineeHeaderBadge');
       if (traineeHeaderBadge) {
         traineeHeaderBadge.className = 'badge-trainee trainee-recomp';
-        traineeHeaderBadge.textContent = '⚡ 74 kg • RECOMP';
+        traineeHeaderBadge.textContent = `${avatarIcon} ${userWt} kg • ${goalName}`;
       }
 
       // Synchronize Water Target Label
       const waterTargetLabel = document.getElementById('waterTargetLabel');
       if (waterTargetLabel) {
-        waterTargetLabel.textContent = '💧 Water (3.6L Target):';
+        const waterLiters = (userWt * 0.045).toFixed(1);
+        waterTargetLabel.textContent = `💧 Water (${waterLiters}L Target):`;
       }
 
       // Synchronize Focus Mode Trainee Title
       const focusEmoji = document.getElementById('focusProfileEmoji');
       const focusName = document.getElementById('focusProfileName');
       if (focusName) {
-        focusName.textContent = 'ATHLETIC RECOMP';
+        focusName.textContent = `${goalName} ATHLETE`;
       }
       if (focusEmoji) {
-        focusEmoji.textContent = '🔥';
+        focusEmoji.textContent = avatarIcon;
       }
 
       // Synchronize Print Page Trainee Subtitle
       const printTrainee = document.getElementById('printPageTrainee');
       if (printTrainee) {
-        printTrainee.innerHTML = '<strong>Program:</strong> Zero To Hero 365 (74 kg Recomp)';
+        const dName = currentUser ? (currentUser.displayName || currentUser.username) : 'Trainee';
+        printTrainee.innerHTML = `<strong>Athlete:</strong> ${dName} | <strong>Program:</strong> Zero To Hero 365 (${userWt} kg ${goalName})`;
       }
 
       updateRoadmapProfileUI();
@@ -11190,7 +11198,11 @@
     function updateRoadmapProfileUI() {
       const bioDesc = document.getElementById('roadmapBioDescription');
       if (!bioDesc) return;
-      bioDesc.innerHTML = 'Tailored for <strong>74 kg athletic recomposition</strong>, progressive overload & posture restoration. Month 1 is 100% equipment-free ($0). Each subsequent phase systematically introduces high-ROI minimal apparatus with a 5-day advance procurement radar.';
+      const userWt = (currentUser && (currentUser.targetWeight || currentUser.startingWeight)) 
+        ? (currentUser.targetWeight || currentUser.startingWeight) 
+        : (userProfile?.weight || 74);
+      const goalName = (currentUser && currentUser.goal) ? currentUser.goal : 'athletic recomposition';
+      bioDesc.innerHTML = `Tailored for <strong>${userWt} kg ${goalName}</strong>, progressive overload & posture restoration. Month 1 is 100% equipment-free ($0). Each subsequent phase systematically introduces high-ROI minimal apparatus with a 5-day advance procurement radar.`;
     }
 
     // ==========================================
@@ -11440,8 +11452,16 @@
         const data = await res.json();
         if (data.success && data.user) {
           currentUser = data.user;
+          if (userProfile) {
+            userProfile.name = currentUser.displayName || currentUser.username;
+            userProfile.goal = currentUser.goal || userProfile.goal;
+            if (currentUser.targetWeight) userProfile.weight = currentUser.targetWeight;
+            localStorage.setItem(getProfileKey('gym_user_profile'), JSON.stringify(userProfile));
+          }
           updateUserPillUI(currentUser);
           populatePassportModal(currentUser);
+          updateProfileSwitcherUI();
+          if (typeof calculateMacros === 'function') calculateMacros();
           if (msg) {
             msg.style.display = 'block';
             msg.style.background = 'rgba(16, 185, 129, 0.15)';
@@ -22544,7 +22564,11 @@ if (typeof window !== 'undefined') {
         currentDay = 1;
         updateSyncBadge('offline', 'Guest (Log In)');
         setTimeout(() => {
-          if (!currentUser) openModal('authModal');
+          if (!currentUser) {
+            openModal('authModal');
+            loadQuickAccountChips();
+            switchAuthTab('login');
+          }
         }, 700);
       } else {
         await loadGymStateFromServer(true);
