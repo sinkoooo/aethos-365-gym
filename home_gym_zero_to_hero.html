@@ -7987,6 +7987,9 @@
                   </p>
                 </div>
                 <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+                  <button class="btn-toggle-guides" type="button" onclick="openModal('musicStudioModal')" id="btnWarmupLaunchMusic" title="Open Warmup Soundtrack Studio" style="border-color: rgba(56, 189, 248, 0.35); color: #38bdf8;">
+                    🎵 Warm-Up Beats
+                  </button>
                   <button class="btn-toggle-guides" type="button" onclick="toggleWarmupGuidesDrawer()" id="btnWarmupGuidesToggle">
                     📖 Step-by-Step Form & Video Guides <span id="warmupGuideChevron">▾</span>
                   </button>
@@ -8056,6 +8059,61 @@
                 </div>
                 <div style="font-size: 0.8rem; color: #cbd5e1; line-height: 1.4;" id="warmupLiveCue">
                   Belly drops slowly, tailbone tilts up, chest beams forward through arms. Do not bend elbows.
+                </div>
+              </div>
+
+              <!-- Dedicated Warm-Up Soundtrack Studio Dock (100X Music Capabilities) -->
+              <div class="warmup-music-dock" style="background: rgba(10, 16, 32, 0.75); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 10px; padding: 12px 16px; margin-top: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;">
+                  <div style="display: flex; align-items: center; gap: 10px;">
+                    <div class="audio-eq-bars" id="warmupEqBars">
+                      <span class="audio-bar"></span>
+                      <span class="audio-bar"></span>
+                      <span class="audio-bar"></span>
+                      <span class="audio-bar"></span>
+                    </div>
+                    <div>
+                      <div style="font-size: 0.86rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 6px;">
+                        <span id="warmupMusicTrackName">🎧 Lo-Fi Deep Focus</span>
+                        <span id="warmupMusicBpmBadge" style="font-size: 0.68rem; font-family: 'JetBrains Mono'; background: rgba(56, 189, 248, 0.15); color: var(--cyan); border: 1px solid rgba(56, 189, 248, 0.3); padding: 1px 6px; border-radius: 4px;">84 BPM</span>
+                      </div>
+                      <div style="font-size: 0.72rem; color: var(--text-muted);" id="warmupMusicSubtext">Joint Mobility Cadence • Dynamic Audio Pacing</div>
+                    </div>
+                  </div>
+
+                  <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">
+                    <button type="button" class="btn-card-min-toggle" onclick="GymMusic.prevTrack()" title="Previous Track">
+                      ⏮
+                    </button>
+                    <button type="button" class="btn-launch-warmup" id="btnWarmupMusicToggle" onclick="GymMusic.togglePlay()" style="padding: 5px 14px; font-size: 0.78rem; font-weight: 800;">
+                      ▶ Play Beats
+                    </button>
+                    <button type="button" class="btn-card-min-toggle" onclick="GymMusic.nextTrack()" title="Next Track">
+                      ⏭
+                    </button>
+                    <button type="button" class="btn-card-min-toggle" id="btnWarmupBassToggle" onclick="GymMusic.toggleBassBoost()" title="Toggle Bass Boost">
+                      ⚡ BASS
+                    </button>
+                    <button type="button" class="btn-card-min-toggle" onclick="openModal('musicStudioModal')" title="Open Full Soundtrack Studio (YouTube Music, MP3, 10 Channels)">
+                      🎛️ Studio
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Live Audio Spectrum Visualizer for Warm-Ups -->
+                <div style="position: relative; height: 38px; background: rgba(0, 0, 0, 0.4); border-radius: 6px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.06);">
+                  <canvas id="warmupMusicSpectrumCanvas" width="500" height="38" style="width: 100%; height: 100%; display: block;"></canvas>
+                  <div style="position: absolute; right: 8px; top: 4px; font-size: 0.65rem; color: #64748b; font-family: 'JetBrains Mono';">
+                    REACTIVE DSP
+                  </div>
+                </div>
+
+                <!-- Quick Genre Presets for Warmup -->
+                <div style="display: flex; gap: 6px; margin-top: 8px; overflow-x: auto; padding-bottom: 2px;">
+                  <button type="button" class="mobility-chip active" id="chipWarmupLofi" onclick="GymMusic.selectTrack('lofi_focus')">🎧 Lo-Fi Mobility (84 BPM)</button>
+                  <button type="button" class="mobility-chip" id="chipWarmupSynth" onclick="GymMusic.selectTrack('synthwave')">🌌 Synthwave Flow (116 BPM)</button>
+                  <button type="button" class="mobility-chip" id="chipWarmupBinaural" onclick="GymMusic.selectTrack('binaural_flow')">🌊 Alpha Waves (64 BPM)</button>
+                  <button type="button" class="mobility-chip" id="chipWarmupYt" onclick="GymMusic.selectTrack('youtube_music')">🔴 YouTube Music</button>
                 </div>
               </div>
             </div>
@@ -17198,6 +17256,14 @@ function startGuidedWarmup() {
   if (btn) btn.innerText = `⏸ Pause (${warmupSec}s)`;
   if (playerPauseBtn) playerPauseBtn.innerText = "⏸ Pause";
 
+  // Ensure GymMusic visualizer loop runs for warmup spectrum canvas
+  if (typeof GymMusic !== 'undefined') {
+    GymMusic.init();
+    GymMusic.startVisualizer();
+    GymMusic.transitionForPhase('warmup');
+    GymMusic.updateUI();
+  }
+
   function tickWarmup() {
     if (warmupStep >= WARMUP_DETAILS.length) {
       clearInterval(warmupInterval);
@@ -22619,7 +22685,8 @@ const GymMusic = {
         document.getElementById('onScreenSetCanvas'),
         document.getElementById('musicSpectrumCanvas'),
         document.getElementById('focusMusicSpectrumCanvas'),
-        document.getElementById('liveMusicSpectrumCanvas')
+        document.getElementById('liveMusicSpectrumCanvas'),
+        document.getElementById('warmupMusicSpectrumCanvas')
       ].filter(c => c && c.offsetParent !== null);
 
       if (targetCanvases.length === 0) return;
@@ -23016,7 +23083,11 @@ const GymMusic = {
       if (!this.isPlaying && (phase === 'set' || phase === 'hold')) this.play();
       return;
     }
-    if (phase === 'set' || phase === 'hold') {
+    if (phase === 'warmup') {
+      if (this.isPlaying && this.currentTrackId !== 'lofi_focus' && this.currentTrackId !== 'synthwave' && this.currentTrackId !== 'binaural_flow') {
+        this.selectTrack('lofi_focus');
+      }
+    } else if (phase === 'set' || phase === 'hold') {
       if (this.currentTrackId !== 'cyber_pump' && this.currentTrackId !== 'dark_phonk' && this.currentTrackId !== 'dnb_rush') {
         this.selectTrack('cyber_pump');
       } else if (!this.isPlaying) {
@@ -23555,6 +23626,37 @@ const GymMusic = {
     // Focus HUD music metadata
     const focusHudMusicMeta = document.getElementById('focusHudMusicMeta');
     if (focusHudMusicMeta) focusHudMusicMeta.innerText = `🎵 ${tObj.name} • ${tObj.bpm ? this.tempoBpm + ' BPM' : 'Workout Beats'}`;
+
+    // Dedicated Warm-Up Soundtrack Studio Dock UI sync
+    const warmupTrackName = document.getElementById('warmupMusicTrackName');
+    if (warmupTrackName) warmupTrackName.innerText = tObj.name;
+    const warmupBpmBadge = document.getElementById('warmupMusicBpmBadge');
+    if (warmupBpmBadge) warmupBpmBadge.innerText = tObj.bpm ? (this.tempoBpm + ' BPM') : 'STREAM';
+    const btnWarmupToggle = document.getElementById('btnWarmupMusicToggle');
+    if (btnWarmupToggle) {
+      btnWarmupToggle.innerText = this.isPlaying ? '⏸ Pause Beats' : '▶ Play Beats';
+      btnWarmupToggle.classList.toggle('playing', this.isPlaying);
+    }
+    const btnWarmupBass = document.getElementById('btnWarmupBassToggle');
+    if (btnWarmupBass) {
+      btnWarmupBass.style.background = this.bassBoostActive ? 'linear-gradient(135deg, #ec4899, #8b5cf6)' : '';
+      btnWarmupBass.style.color = this.bassBoostActive ? '#fff' : '';
+      btnWarmupBass.innerText = this.bassBoostActive ? '⚡ BASS: ON' : '⚡ BASS';
+    }
+    // Warmup quick chips active state sync
+    const warmupChips = [
+      { id: 'chipWarmupLofi', track: 'lofi_focus' },
+      { id: 'chipWarmupSynth', track: 'synthwave' },
+      { id: 'chipWarmupBinaural', track: 'binaural_flow' },
+      { id: 'chipWarmupYt', track: 'youtube_music' }
+    ];
+    warmupChips.forEach(item => {
+      const chipEl = document.getElementById(item.id);
+      if (chipEl) {
+        if (this.currentTrackId === item.track) chipEl.classList.add('active');
+        else chipEl.classList.remove('active');
+      }
+    });
 
     // Channel selection cards
     const cards = document.querySelectorAll('.music-genre-card');
