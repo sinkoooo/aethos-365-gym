@@ -36,6 +36,15 @@
           if (typeof loadQuickAccountChips === 'function') loadQuickAccountChips();
         }
       };
+      window.openProfileSettingsModal = window.openProfileSettingsModal || function() {
+        const token = localStorage.getItem('aethos_auth_token');
+        if (token) {
+          window.openModal('profileSettingsModal');
+        } else {
+          window.openModal('authModal');
+          if (typeof loadQuickAccountChips === 'function') loadQuickAccountChips();
+        }
+      };
     })();
   </script>
   <style>
@@ -655,6 +664,55 @@
       background: rgba(56, 189, 248, 0.22);
       color: #fff;
       box-shadow: 0 0 16px rgba(56, 189, 248, 0.35);
+    }
+
+    /* Executive Profile Settings Icon Buttons */
+    .profile-settings-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #94a3b8;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(12px);
+      padding: 0;
+      flex-shrink: 0;
+    }
+    .profile-settings-btn:hover {
+      border-color: var(--cyan);
+      color: #fff;
+      background: rgba(56, 189, 248, 0.18);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+      transform: rotate(24deg);
+    }
+    .card-settings-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #cbd5e1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 2;
+    }
+    .card-settings-btn:hover {
+      border-color: var(--cyan);
+      color: #fff;
+      background: rgba(56, 189, 248, 0.2);
+      transform: rotate(30deg) scale(1.08);
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.35);
     }
 
     /* Trainee Passport VIP Card Styling */
@@ -7295,12 +7353,19 @@
               </div>
             </button>
 
-            <div class="tools-group-title" style="margin-top: 4px;">🏆 Community</div>
+            <div class="tools-group-title" style="margin-top: 4px;">🏆 Community & Profile</div>
             <button type="button" class="tool-item-row" onclick="closeHeaderToolsMenu(); openLeaderboardModal();">
               <span class="tool-icon">🏆</span>
               <div>
                 <div>Leaderboard</div>
                 <div class="tool-item-desc">Athlete standings & rank</div>
+              </div>
+            </button>
+            <button type="button" class="tool-item-row" onclick="closeHeaderToolsMenu(); openProfileSettingsModal();">
+              <span class="tool-icon">⚙️</span>
+              <div>
+                <div>Profile Settings</div>
+                <div class="tool-item-desc">Customize athlete goals & avatar</div>
               </div>
             </button>
           </div>
@@ -7321,6 +7386,13 @@
             <span class="user-pill-role" id="headerUserRole">Sign In</span>
           </div>
         </div>
+
+        <button class="profile-settings-btn" id="btnHeaderSettings" onclick="openProfileSettingsModal()" title="Customize Profile & Account Settings" aria-label="Profile Settings">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
 
         <button class="top-corner-kiosk-btn" id="btnKioskToggle" onclick="toggleFullscreen()" title="Kiosk Mode / Fullscreen (F11)" aria-label="Toggle Kiosk Mode">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -9996,6 +10068,12 @@
       </div>
       <div class="modal-body">
         <div class="trainee-passport-card">
+          <button class="card-settings-btn" onclick="openProfileSettingsModal()" title="Customize Profile Settings" aria-label="Profile Settings">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+          </button>
           <div class="passport-avatar-badge" id="passportAvatar">⚡</div>
           <h2 id="passportDisplayName" style="margin: 0; font-size: 1.35rem; color: #fff; font-weight: 800;">Trainee Name</h2>
           <div id="passportUsernameBadge" style="display: inline-block; background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.3); color: var(--cyan); padding: 2px 10px; border-radius: 99px; font-size: 0.75rem; font-weight: 700; margin: 6px 0 10px;">@username</div>
@@ -10031,10 +10109,10 @@
             </div>
           </div>
 
-          <!-- Edit Profile Toggle -->
+          <!-- Edit Profile & Settings Controls -->
           <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
-            <button class="btn-micro-step" onclick="toggleEditProfileSection()" style="padding: 7px 14px; font-size: 0.8rem; border-color: rgba(56, 189, 248, 0.4); color: var(--cyan);">
-              ✏️ Edit Profile
+            <button class="btn-micro-step" onclick="openProfileSettingsModal()" style="padding: 7px 14px; font-size: 0.8rem; border-color: rgba(56, 189, 248, 0.45); color: var(--cyan); background: rgba(56, 189, 248, 0.12);">
+              ⚙️ Profile Settings
             </button>
             <button class="btn-live-session" onclick="openLeaderboardModal(); closeModal('profilePassportModal');" style="padding: 7px 14px; font-size: 0.8rem;">
               🏆 View Leaderboard
@@ -10107,6 +10185,104 @@
             <button type="button" class="btn-live-session" onclick="saveProfileChanges()" style="padding: 7px 18px; font-size: 0.8rem;">Save Changes</button>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: ⚙️ ATHLETE PROFILE & SYSTEM SETTINGS -->
+  <div id="profileSettingsModal" class="app-modal" onclick="closeModalOnBackdrop(event, 'profileSettingsModal')">
+    <div class="modal-box" style="max-width: 520px;">
+      <div class="modal-header">
+        <div class="modal-title">⚙️ Athlete Profile Settings</div>
+        <button class="modal-close" onclick="closeModal('profileSettingsModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        
+        <!-- Quick Preview Badge -->
+        <div style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 12px; padding: 14px; display: flex; align-items: center; gap: 14px; margin-bottom: 18px;">
+          <div id="settingsPreviewAvatar" style="font-size: 2.2rem; width: 54px; height: 54px; background: rgba(56, 189, 248, 0.15); border: 1.5px solid var(--cyan); border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">⚡</div>
+          <div style="flex: 1; min-width: 0;">
+            <div id="settingsPreviewName" style="font-size: 1.1rem; font-weight: 800; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Shivam (Head Coach)</div>
+            <div style="display: flex; gap: 8px; align-items: center; margin-top: 2px;">
+              <span id="settingsPreviewUsername" style="font-size: 0.75rem; color: var(--cyan); font-weight: 700;">@admin</span>
+              <span id="settingsPreviewRole" style="font-size: 0.65rem; background: rgba(168, 85, 247, 0.25); color: #c084fc; padding: 2px 7px; border-radius: 99px; font-weight: 700;">Admin</span>
+            </div>
+          </div>
+        </div>
+
+        <form id="profileSettingsForm" onsubmit="handleProfileSettingsSubmit(event)">
+          <div class="form-group-100x">
+            <label>Athlete / Display Name</label>
+            <div class="input-wrapper-100x">
+              <input type="text" id="settingsDisplayNameInput" required placeholder="Your athlete alias or full name">
+            </div>
+          </div>
+
+          <div class="form-group-100x">
+            <label>Primary Focus / Target Goal</label>
+            <div class="input-wrapper-100x">
+              <select id="settingsGoalInput">
+                <option value="recomp">🔥 Body Recomposition (Burn Fat & Build Muscle)</option>
+                <option value="hypertrophy">💪 Pure Hypertrophy (Maximum Muscle Mass)</option>
+                <option value="strength">🏋️ Relentless Strength (Power & PRs)</option>
+                <option value="shred">⚡ Lean Shred (Extreme Definition)</option>
+                <option value="longevity">🧬 Athletic Longevity & Joint Health</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="form-group-100x">
+              <label>Target Weight (kg)</label>
+              <div class="input-wrapper-100x">
+                <input type="number" id="settingsTargetWeightInput" step="0.5" min="30" max="250" placeholder="e.g. 74.0">
+              </div>
+            </div>
+            <div class="form-group-100x">
+              <label>Current Weight (kg)</label>
+              <div class="input-wrapper-100x">
+                <input type="number" id="settingsCurrentWeightInput" step="0.5" min="30" max="250" placeholder="e.g. 74.0">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group-100x">
+            <label>Athlete Motto / Bio</label>
+            <div class="input-wrapper-100x">
+              <input type="text" id="settingsBioInput" maxlength="160" placeholder="e.g. 365 Days of Zero Excuses. Relentless execution.">
+            </div>
+          </div>
+
+          <div class="form-group-100x">
+            <label>Profile Avatar Icon</label>
+            <div class="avatar-picker" id="settingsAvatarPicker">
+              <button type="button" class="avatar-btn" onclick="selectSettingsAvatar('⚡', this)">⚡</button>
+              <button type="button" class="avatar-btn" onclick="selectSettingsAvatar('🦁', this)">🦁</button>
+              <button type="button" class="avatar-btn" onclick="selectSettingsAvatar('🥋', this)">🥋</button>
+              <button type="button" class="avatar-btn" onclick="selectSettingsAvatar('🦅', this)">🦅</button>
+              <button type="button" class="avatar-btn" onclick="selectSettingsAvatar('🔥', this)">🔥</button>
+              <button type="button" class="avatar-btn" onclick="selectSettingsAvatar('🐺', this)">🐺</button>
+              <button type="button" class="avatar-btn" onclick="selectSettingsAvatar('🛡️', this)">🛡️</button>
+              <button type="button" class="avatar-btn" onclick="selectSettingsAvatar('👑', this)">👑</button>
+            </div>
+          </div>
+
+          <div id="settingsFeedbackMsg" style="display: none; font-size: 0.82rem; margin-bottom: 12px; padding: 8px 12px; border-radius: 8px;"></div>
+
+          <div style="display: flex; gap: 8px; justify-content: space-between; align-items: center; margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+            <button type="button" class="btn-secondary" onclick="openPassportFromSettings()" style="padding: 8px 14px; font-size: 0.82rem;">
+              🪪 View Passport
+            </button>
+            <div style="display: flex; gap: 8px;">
+              <button type="button" class="btn-secondary" onclick="closeModal('profileSettingsModal')" style="padding: 8px 14px; font-size: 0.82rem;">
+                Cancel
+              </button>
+              <button type="submit" class="btn-live-session" id="btnSaveProfileSettings" style="padding: 8px 20px; font-size: 0.82rem; font-weight: 800;">
+                💾 Save Settings
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -11753,6 +11929,182 @@
         }
       }
     }
+
+    // ==========================================
+    // ⚙️ 100X ATHLETE PROFILE SETTINGS ENGINE
+    // ==========================================
+    let selectedSettingsAvatarVal = '⚡';
+
+    function openProfileSettingsModal() {
+      if (!currentUser) {
+        openModal('authModal');
+        loadQuickAccountChips();
+        switchAuthTab('login');
+        return;
+      }
+      populateProfileSettingsModal(currentUser);
+      closeModal('profilePassportModal');
+      closeHeaderToolsMenu();
+      openModal('profileSettingsModal');
+    }
+    window.openProfileSettingsModal = openProfileSettingsModal;
+
+    function populateProfileSettingsModal(user) {
+      if (!user) return;
+      const prevAvatar = document.getElementById('settingsPreviewAvatar');
+      const prevName = document.getElementById('settingsPreviewName');
+      const prevUname = document.getElementById('settingsPreviewUsername');
+      const prevRole = document.getElementById('settingsPreviewRole');
+
+      const avatarIcon = user.avatar || (user.role === 'admin' ? '👑' : '⚡');
+      selectedSettingsAvatarVal = avatarIcon;
+
+      if (prevAvatar) prevAvatar.textContent = avatarIcon;
+      if (prevName) prevName.textContent = user.displayName || user.username;
+      if (prevUname) prevUname.textContent = `@${user.username}`;
+      if (prevRole) {
+        prevRole.textContent = user.role === 'admin' ? '👑 Head Coach' : '⚡ Trainee';
+        prevRole.style.background = user.role === 'admin' ? 'rgba(168, 85, 247, 0.25)' : 'rgba(56, 189, 248, 0.18)';
+        prevRole.style.color = user.role === 'admin' ? '#c084fc' : '#38bdf8';
+      }
+
+      const nameInput = document.getElementById('settingsDisplayNameInput');
+      const goalInput = document.getElementById('settingsGoalInput');
+      const targetInput = document.getElementById('settingsTargetWeightInput');
+      const currentWeightInput = document.getElementById('settingsCurrentWeightInput');
+      const bioInput = document.getElementById('settingsBioInput');
+      const msg = document.getElementById('settingsFeedbackMsg');
+
+      if (nameInput) nameInput.value = user.displayName || user.username || '';
+      if (goalInput) goalInput.value = user.goal || 'recomp';
+      if (targetInput) targetInput.value = user.targetWeight || '';
+      if (currentWeightInput) currentWeightInput.value = userProfile?.weight || user.startingWeight || '';
+      if (bioInput) bioInput.value = user.bio || '';
+      if (msg) msg.style.display = 'none';
+
+      // Highlight selected avatar
+      const avatarPicker = document.getElementById('settingsAvatarPicker');
+      if (avatarPicker) {
+        avatarPicker.querySelectorAll('.avatar-btn').forEach(btn => {
+          btn.classList.toggle('selected', btn.textContent.trim() === selectedSettingsAvatarVal);
+        });
+      }
+    }
+    window.populateProfileSettingsModal = populateProfileSettingsModal;
+
+    function selectSettingsAvatar(emoji, btn) {
+      selectedSettingsAvatarVal = emoji;
+      selectedEditAvatarVal = emoji;
+      document.querySelectorAll('#settingsAvatarPicker .avatar-btn').forEach(b => b.classList.remove('selected'));
+      if (btn) btn.classList.add('selected');
+
+      const prevAvatar = document.getElementById('settingsPreviewAvatar');
+      if (prevAvatar) prevAvatar.textContent = emoji;
+      const passAvatar = document.getElementById('passportAvatar');
+      if (passAvatar) passAvatar.textContent = emoji;
+    }
+    window.selectSettingsAvatar = selectSettingsAvatar;
+
+    function openPassportFromSettings() {
+      closeModal('profileSettingsModal');
+      if (currentUser) {
+        populatePassportModal(currentUser);
+        openModal('profilePassportModal');
+      }
+    }
+    window.openPassportFromSettings = openPassportFromSettings;
+
+    async function handleProfileSettingsSubmit(event) {
+      if (event) event.preventDefault();
+      const token = localStorage.getItem('aethos_auth_token');
+      const msg = document.getElementById('settingsFeedbackMsg');
+      const saveBtn = document.getElementById('btnSaveProfileSettings');
+      if (!token) return;
+
+      const displayName = document.getElementById('settingsDisplayNameInput')?.value.trim();
+      const goal = document.getElementById('settingsGoalInput')?.value;
+      const targetWeight = document.getElementById('settingsTargetWeightInput')?.value;
+      const currentWeight = document.getElementById('settingsCurrentWeightInput')?.value;
+      const bio = document.getElementById('settingsBioInput')?.value.trim();
+
+      if (saveBtn) {
+        saveBtn.disabled = true;
+        saveBtn.textContent = 'Saving...';
+      }
+
+      try {
+        const res = await fetch('/api/auth/profile', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+          },
+          body: JSON.stringify({
+            displayName,
+            goal,
+            targetWeight,
+            bio,
+            avatar: selectedSettingsAvatarVal
+          })
+        });
+
+        const data = await res.json();
+        if (data.success && data.user) {
+          currentUser = data.user;
+          if (userProfile) {
+            userProfile.name = currentUser.displayName || currentUser.username;
+            userProfile.goal = currentUser.goal || userProfile.goal;
+            if (currentUser.targetWeight) userProfile.targetWeight = currentUser.targetWeight;
+            if (currentWeight) userProfile.weight = parseFloat(currentWeight);
+            localStorage.setItem(getProfileKey('gym_user_profile'), JSON.stringify(userProfile));
+          }
+
+          updateUserPillUI(currentUser);
+          populatePassportModal(currentUser);
+          populateProfileSettingsModal(currentUser);
+          updateProfileSwitcherUI();
+          if (typeof calculateMacros === 'function') calculateMacros();
+
+          if (msg) {
+            msg.style.display = 'block';
+            msg.style.background = 'rgba(16, 185, 129, 0.15)';
+            msg.style.color = '#34d399';
+            msg.style.border = '1px solid rgba(16, 185, 129, 0.3)';
+            msg.textContent = '✅ Profile settings saved & synchronized across system!';
+          }
+
+          if (typeof showToast === 'function') {
+            showToast('✅ Profile settings customized successfully!');
+          }
+
+          setTimeout(() => {
+            closeModal('profileSettingsModal');
+          }, 850);
+        } else {
+          if (msg) {
+            msg.style.display = 'block';
+            msg.style.background = 'rgba(244,63,94,0.15)';
+            msg.style.color = '#f43f5e';
+            msg.style.border = '1px solid rgba(244,63,94,0.3)';
+            msg.textContent = data.error || 'Failed to update profile settings.';
+          }
+        }
+      } catch (err) {
+        if (msg) {
+          msg.style.display = 'block';
+          msg.style.background = 'rgba(244,63,94,0.15)';
+          msg.style.color = '#f43f5e';
+          msg.style.border = '1px solid rgba(244,63,94,0.3)';
+          msg.textContent = 'Connection error saving settings.';
+        }
+      } finally {
+        if (saveBtn) {
+          saveBtn.disabled = false;
+          saveBtn.textContent = '💾 Save Settings';
+        }
+      }
+    }
+    window.handleProfileSettingsSubmit = handleProfileSettingsSubmit;
 
     let currentAuthTab = 'login';
     function switchAuthTab(tab) {
@@ -20708,6 +21060,7 @@ function stopGuidedCooldown() {
             closeModal('hotkeysModal');
             closeModal('authModal');
             closeModal('profilePassportModal');
+            closeModal('profileSettingsModal');
             closeModal('adminModal');
             closeHeaderToolsMenu();
             closeFocusHUD();
@@ -20720,6 +21073,7 @@ function stopGuidedCooldown() {
           closeModal('hotkeysModal');
           closeModal('authModal');
           closeModal('profilePassportModal');
+          closeModal('profileSettingsModal');
           closeModal('adminModal');
           closeHeaderToolsMenu();
           closeFocusHUD();
@@ -23005,6 +23359,10 @@ if (typeof window !== 'undefined') {
       window.openAdminModal = openAdminModal;
       window.switchAuthTab = switchAuthTab;
       window.togglePasswordVisibility = togglePasswordVisibility;
+      window.openProfileSettingsModal = openProfileSettingsModal;
+      window.selectSettingsAvatar = selectSettingsAvatar;
+      window.handleProfileSettingsSubmit = handleProfileSettingsSubmit;
+      window.openPassportFromSettings = openPassportFromSettings;
 
       // Direct element click binding to guarantee pill responsiveness
       const userPillEl = document.getElementById('headerUserPill');
