@@ -28,21 +28,21 @@
         if (el) el.classList.remove('active');
       };
       window.handleUserPillClick = window.handleUserPillClick || function() {
-        const token = localStorage.getItem('aethos_auth_token');
-        if (token) {
+        if (window.currentUser) {
           window.openModal('profilePassportModal');
         } else {
           window.openModal('authModal');
           if (typeof loadQuickAccountChips === 'function') loadQuickAccountChips();
+          if (typeof switchAuthTab === 'function') switchAuthTab('login');
         }
       };
       window.openProfileSettingsModal = window.openProfileSettingsModal || function() {
-        const token = localStorage.getItem('aethos_auth_token');
-        if (token) {
+        if (window.currentUser) {
           window.openModal('profileSettingsModal');
         } else {
           window.openModal('authModal');
           if (typeof loadQuickAccountChips === 'function') loadQuickAccountChips();
+          if (typeof switchAuthTab === 'function') switchAuthTab('login');
         }
       };
     })();
@@ -3045,6 +3045,15 @@
       font-weight: bold;
     }
 
+    .meal-card.consumed {
+      border-color: rgba(16, 185, 129, 0.45);
+      background: linear-gradient(145deg, rgba(16, 185, 129, 0.12) 0%, rgba(13, 20, 36, 0.85) 100%);
+    }
+
+    .meal-card.consumed .meal-name {
+      color: #a7f3d0;
+    }
+
     .meal-macros-badge {
       display: inline-block;
       margin-top: 10px;
@@ -3056,6 +3065,34 @@
       border: 1px solid rgba(16, 185, 129, 0.25);
       padding: 3px 8px;
       border-radius: 4px;
+    }
+
+    .btn-meal-consumed {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+      transition: all 0.2s ease;
+    }
+
+    .btn-meal-consumed:hover {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: rgba(16, 185, 129, 0.35);
+      color: #34d399;
+    }
+
+    .btn-meal-consumed.active {
+      background: rgba(16, 185, 129, 0.25);
+      border-color: var(--emerald);
+      color: #34d399;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
     }
 
     .supp-grid {
@@ -5219,9 +5256,10 @@
     .tier-elite { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
 
     /* Smart Grocery Checklist */
+    /* Smart Grocery Checklist 100X Architecture */
     .grocery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 16px;
       margin-top: 14px;
     }
@@ -5243,7 +5281,7 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 2px;
+      height: 3px;
       background: linear-gradient(90deg, var(--emerald), var(--cyan));
     }
     .grocery-cat-card:hover {
@@ -5252,28 +5290,89 @@
       transform: translateY(-2px);
     }
     .grocery-cat-title {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 800;
       color: var(--cyan);
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 8px;
       margin-bottom: 12px;
       border-bottom: 1px solid rgba(255,255,255,0.06);
       padding-bottom: 8px;
+    }
+    .grocery-cat-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 99px;
+      background: rgba(56, 189, 248, 0.12);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.25);
     }
     .grocery-item-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      padding: 7px 0;
+      padding: 8px 10px;
       font-size: 0.84rem;
-      border-bottom: 1px solid rgba(255,255,255,0.03);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      margin-bottom: 6px;
+      transition: all 0.2s ease;
     }
-    .grocery-item-row.checked span {
+    .grocery-item-row:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.09);
+    }
+    .grocery-item-row.checked {
+      background: rgba(16, 185, 129, 0.06);
+      border-color: rgba(16, 185, 129, 0.25);
+    }
+    .grocery-item-row.checked span.grocery-item-name {
       text-decoration: line-through;
       color: var(--text-dim);
+    }
+    .grocery-item-row.checked .grocery-qty-badge {
+      opacity: 0.5;
+    }
+    .grocery-progress-panel {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      margin-bottom: 14px;
+    }
+    .grocery-filter-bar {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      margin-bottom: 12px;
+    }
+    .grocery-filter-chip {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      padding: 5px 12px;
+      border-radius: 99px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+    .grocery-filter-chip:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+    .grocery-filter-chip.active {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: var(--emerald);
+      color: #34d399;
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.25);
     }
 
     /* ==========================================
@@ -7419,6 +7518,13 @@
                 <div class="tool-item-desc">Customize athlete goals & avatar</div>
               </div>
             </button>
+            <button type="button" class="tool-item-row" onclick="closeHeaderToolsMenu(); handleUserPillClick();" style="border-top: 1px solid rgba(255,255,255,0.06); margin-top: 4px; padding-top: 8px;">
+              <span class="tool-icon">⚡</span>
+              <div>
+                <div style="color: var(--cyan); font-weight: 700;">Sign In / Switch Account</div>
+                <div class="tool-item-desc">Trainee portal & instant switch</div>
+              </div>
+            </button>
           </div>
         </div>
 
@@ -8646,22 +8752,32 @@
   <div id="nutritionView" class="app-view">
     <main class="container">
       
-      <!-- INTERACTIVE TDEE & MACRO CALCULATOR -->
+      <!-- INTERACTIVE TDEE & MACRO CALCULATOR (100X CLINICAL SUITE) -->
       <div class="macro-calc-box">
         <div class="pro-section-head" style="margin-bottom: 20px;">
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-            <h2>⚡ Precision Macro & Calorie Calculator</h2>
-            <span style="font-size: 0.75rem; color: var(--emerald); font-weight: 700; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.25); padding: 4px 10px; border-radius: 6px;">
-              Mifflin-St Jeor Clinical Formula
-            </span>
+            <div>
+              <h2 style="display: flex; align-items: center; gap: 8px;">
+                <span>⚡ Precision Macro & Calorie Calculator</span>
+                <span style="font-size: 0.72rem; color: #000; font-weight: 800; background: var(--cyan); padding: 2px 8px; border-radius: 4px; letter-spacing: 0.5px;">PRO</span>
+              </h2>
+              <p>Mifflin-St Jeor Clinical Formula: Calibrated for hypertrophy, joint collagen synthesis, and fat loss without metabolic adaptation.</p>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+              <span id="bmrTelemetryBadge" style="font-size: 0.75rem; color: #94a3b8; font-weight: 700; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 4px 10px; border-radius: 6px;">
+                BMR: 1,760 kcal
+              </span>
+              <span id="tdeeTelemetryBadge" style="font-size: 0.75rem; color: var(--cyan); font-weight: 700; background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.25); padding: 4px 10px; border-radius: 6px;">
+                TDEE: 2,376 kcal
+              </span>
+            </div>
           </div>
-          <p>Fine-tune your daily calorie and macronutrient requirements according to your current weight, activity level, and body composition objective.</p>
         </div>
 
         <div class="calc-grid">
           <div class="calc-input-group">
             <label>Current Bodyweight (kg)</label>
-            <input type="number" id="calcWeight" min="50" max="150" step="0.5" value="82.0" oninput="calculateMacros()">
+            <input type="number" id="calcWeight" min="40" max="180" step="0.5" value="74.0" oninput="calculateMacros()">
           </div>
           <div class="calc-input-group">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
@@ -8673,53 +8789,74 @@
               </div>
             </div>
             <select id="calcGoal" onchange="syncQuickGoal(); calculateMacros()">
-              <option value="recomp" selected>Body Recomposition (Lose Fat + Build Muscle)</option>
-              <option value="bulk">Lean Hypertrophy (+250 kcal surplus)</option>
+              <option value="recomp" selected>Body Recomposition (Lose Fat + Build Muscle simultaneously)</option>
+              <option value="bulk">Lean Hypertrophy (+250 kcal controlled surplus)</option>
               <option value="cut">Fat Loss & Muscle Retention (-500 kcal deficit)</option>
             </select>
           </div>
           <div class="calc-input-group">
             <label>Daily Activity Profile</label>
             <select id="calcActivity" onchange="calculateMacros()">
-              <option value="1.35" selected>Sedentary Desk Job + Aethos 365 Home Workouts</option>
-              <option value="1.45">Lightly Active (8,000 daily steps + Workouts)</option>
-              <option value="1.6">Moderately Active (12,000 steps + Workouts)</option>
+              <option value="1.35" selected>Desk Job + Aethos 365 Home Workouts (1.35x)</option>
+              <option value="1.45">Lightly Active (8,000 daily steps + Workouts • 1.45x)</option>
+              <option value="1.6">Moderately Active (12,000 steps + Heavy Training • 1.6x)</option>
+              <option value="1.75">Very Active / Athlete (15,000 steps + Daily Sessions • 1.75x)</option>
             </select>
           </div>
         </div>
 
         <div class="macro-stat-cards">
           <div class="macro-stat-card macro-card-cals">
-            <div class="m-num" id="calcCalories" style="color: var(--cyan); text-shadow: 0 0 14px rgba(0, 242, 254, 0.4);">2,420</div>
+            <div class="m-num" id="calcCalories" style="color: var(--cyan); text-shadow: 0 0 14px rgba(0, 242, 254, 0.4);">2,376</div>
             <div class="m-label" style="color: #38bdf8; font-weight: 700;">Daily Calories (kcal)</div>
           </div>
           <div class="macro-stat-card macro-card-prot">
-            <div class="m-num" id="calcProtein" style="color: var(--emerald); text-shadow: 0 0 14px rgba(16, 185, 129, 0.4);">164g</div>
+            <div class="m-num" id="calcProtein" style="color: var(--emerald); text-shadow: 0 0 14px rgba(16, 185, 129, 0.4);">160g</div>
             <div class="m-label" style="color: #34d399; font-weight: 700;">Protein (2.0g/kg)</div>
           </div>
           <div class="macro-stat-card macro-card-carbs">
-            <div class="m-num" id="calcCarbs" style="color: var(--purple); text-shadow: 0 0 14px rgba(192, 132, 252, 0.4);">275g</div>
+            <div class="m-num" id="calcCarbs" style="color: var(--purple); text-shadow: 0 0 14px rgba(192, 132, 252, 0.4);">270g</div>
             <div class="m-label" style="color: #c084fc; font-weight: 700;">Carbohydrates</div>
           </div>
           <div class="macro-stat-card macro-card-fats">
-            <div class="m-num" id="calcFats" style="color: var(--amber); text-shadow: 0 0 14px rgba(251, 191, 36, 0.4);">74g</div>
+            <div class="m-num" id="calcFats" style="color: var(--amber); text-shadow: 0 0 14px rgba(251, 191, 36, 0.4);">72g</div>
             <div class="m-label" style="color: #fbbf24; font-weight: 700;">Healthy Fats</div>
           </div>
           <div class="macro-stat-card macro-card-water">
-            <div class="m-num" id="calcWater" style="color: #38bdf8; text-shadow: 0 0 14px rgba(56, 189, 248, 0.4);">3.4L</div>
+            <div class="m-num" id="calcWater" style="color: #38bdf8; text-shadow: 0 0 14px rgba(56, 189, 248, 0.4);">3.3L</div>
             <div class="m-label" style="color: #60a5fa; font-weight: 700;">Hydration Target</div>
           </div>
         </div>
 
-        <div style="margin-top: 14px;">
-          <div style="display: flex; justify-content: space-between; font-size: 0.76rem; color: var(--text-dim); margin-bottom: 4px;">
-            <span>Macro Distribution:</span>
-            <span id="macroRatioSummary">Protein 27% • Carbs 46% • Fats 27%</span>
+        <div style="margin-top: 14px; background: rgba(0,0,0,0.2); padding: 12px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+          <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--text-dim); margin-bottom: 6px; flex-wrap: wrap; gap: 8px;">
+            <span style="font-weight: 700; color: #fff;">Caloric Distribution Ratios:</span>
+            <span id="macroRatioSummary" style="font-family: 'JetBrains Mono', monospace; color: var(--cyan); font-weight: 700;">Protein 27% • Carbs 46% • Fats 27%</span>
           </div>
           <div class="macro-bar-wrap">
             <div class="macro-bar-p" id="macroBarP" style="width: 27%;"></div>
             <div class="macro-bar-c" id="macroBarC" style="width: 46%;"></div>
             <div class="macro-bar-f" id="macroBarF" style="width: 27%;"></div>
+          </div>
+          
+          <!-- 4-Meal Precision Distribution Breakdown -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin-top: 12px; font-size: 0.75rem; color: var(--text-muted);">
+            <div style="background: rgba(255,255,255,0.03); padding: 6px 10px; border-radius: 6px; border-left: 2px solid var(--emerald);">
+              <div style="color: #fff; font-weight: 700;">Breakfast (25%)</div>
+              <div id="mealDistB" style="color: #34d399; font-weight: 800;">40g P • 594 kcal</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); padding: 6px 10px; border-radius: 6px; border-left: 2px solid var(--cyan);">
+              <div style="color: #fff; font-weight: 700;">Lunch (35%)</div>
+              <div id="mealDistL" style="color: #38bdf8; font-weight: 800;">45g P • 832 kcal</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); padding: 6px 10px; border-radius: 6px; border-left: 2px solid var(--amber);">
+              <div style="color: #fff; font-weight: 700;">Pre-Workout (15%)</div>
+              <div id="mealDistS" style="color: #fbbf24; font-weight: 800;">30g P • 356 kcal</div>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); padding: 6px 10px; border-radius: 6px; border-left: 2px solid var(--purple);">
+              <div style="color: #fff; font-weight: 700;">Dinner (25%)</div>
+              <div id="mealDistD" style="color: #c084fc; font-weight: 800;">45g P • 594 kcal</div>
+            </div>
           </div>
         </div>
       </div>
@@ -8741,6 +8878,23 @@
           <button class="diet-btn active" onclick="switchDiet('omnivore')">🍗 Non-Vegetarian (Omnivore)</button>
           <button class="diet-btn" onclick="switchDiet('eggetarian')">🍳 Eggetarian (Eggs + Dairy)</button>
           <button class="diet-btn" onclick="switchDiet('vegetarian')">🌱 Pure Vegetarian / Indian Plant-Forward</button>
+        </div>
+
+        <!-- Live Daily Meal Compliance Tracker -->
+        <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: var(--radius-md); padding: 12px 18px; margin: 14px 0;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 1rem;">🍽️</span>
+              <span style="font-weight: 700; color: #fff; font-size: 0.85rem;">Today's Meal Compliance:</span>
+              <span id="mealComplianceStatus" style="font-size: 0.82rem; font-weight: 800; color: var(--emerald); font-family: 'JetBrains Mono', monospace;">0 / 4 Meals Eaten (0%)</span>
+            </div>
+            <button onclick="resetDailyMealCompliance()" style="background: none; border: 1px solid rgba(255,255,255,0.12); color: var(--text-dim); padding: 3px 10px; border-radius: 4px; font-size: 0.72rem; cursor: pointer;">
+              Reset Today's Meals
+            </button>
+          </div>
+          <div style="background: rgba(255, 255, 255, 0.08); height: 6px; border-radius: 99px; overflow: hidden;">
+            <div id="mealComplianceProgressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, var(--emerald), var(--cyan)); transition: width 0.3s ease;"></div>
+          </div>
         </div>
 
         <div class="meal-timeline" id="mealTimelineContainer"></div>
@@ -8873,12 +9027,18 @@
         </div>
       </div>
 
-      <!-- 7-DAY SMART SUPERMARKET GROCERY GENERATOR -->
+      <!-- 7-DAY SMART SUPERMARKET GROCERY GENERATOR (100X ARCHITECTURE) -->
       <div class="pro-section-card grocery-section">
         <div class="pro-section-head">
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-            <h2>🛒 7-Day Precision Supermarket Grocery Generator</h2>
-            <div style="display: flex; gap: 8px;">
+            <div>
+              <h2>🛒 7-Day Precision Supermarket Grocery Generator</h2>
+              <p>Automatically calculates weekly portions of bioavailable proteins, low-GI carbs, essential lipids, and micronutrients tailored to your diet profile.</p>
+            </div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <button onclick="clearCheckedGrocery()" style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: #f87171; padding: 7px 13px; border-radius: 6px; font-size: 0.78rem; font-weight: 700; cursor: pointer;">
+                🔄 Reset Checklist
+              </button>
               <button onclick="copyGroceryList()" style="background: var(--bg-card); border: 1px solid var(--border); color: #fff; padding: 7px 14px; border-radius: 6px; font-size: 0.78rem; font-weight: 700; cursor: pointer;">
                 📋 Copy for WhatsApp / Notes
               </button>
@@ -8887,7 +9047,42 @@
               </button>
             </div>
           </div>
-          <p>Automatically calculates the exact weekly quantities of whole foods, lean proteins, slow-burning carbs, and micronutrients required to fuel your current macro split without waste.</p>
+
+          <!-- Live Shopping Basket Progress & Filter Controls -->
+          <div class="grocery-progress-panel" style="margin-top: 14px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.1rem;">🧺</span>
+                <span style="font-weight: 800; color: #fff; font-size: 0.9rem;">Weekly Pantry & Basket Completion</span>
+              </div>
+              <span id="groceryCompletionStatus" style="font-size: 0.8rem; font-weight: 800; color: var(--emerald); font-family: 'JetBrains Mono', monospace;">
+                0 / 0 Items (0%)
+              </span>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.08); height: 8px; border-radius: 99px; overflow: hidden; margin-bottom: 14px;">
+              <div id="groceryProgressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, var(--emerald), var(--cyan)); transition: width 0.3s ease; box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);"></div>
+            </div>
+
+            <!-- Category Filter Tabs -->
+            <div class="grocery-filter-bar" id="groceryFilterBar">
+              <button class="grocery-filter-chip active" onclick="filterGroceryCategory('all')">🌟 All Categories</button>
+              <button class="grocery-filter-chip" onclick="filterGroceryCategory('proteins')">🥩 Proteins</button>
+              <button class="grocery-filter-chip" onclick="filterGroceryCategory('carbs')">🍚 Complex Carbs</button>
+              <button class="grocery-filter-chip" onclick="filterGroceryCategory('fats')">🥑 Healthy Fats</button>
+              <button class="grocery-filter-chip" onclick="filterGroceryCategory('produce')">🥦 Produce & Greens</button>
+              <button class="grocery-filter-chip" onclick="filterGroceryCategory('supplements')">💊 Supplements</button>
+            </div>
+
+            <!-- Quick Add Custom Item -->
+            <div style="display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap;">
+              <input type="text" id="customGroceryItemInput" placeholder="Add custom item (e.g. Sattu, Almond Milk, Chia seeds)..." style="flex: 1; min-width: 220px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); color: #fff; padding: 7px 12px; border-radius: 6px; font-size: 0.82rem;" onkeydown="if(event.key==='Enter') addCustomGroceryItem()">
+              <input type="text" id="customGroceryQtyInput" placeholder="Qty (e.g. 500g)" style="width: 110px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); color: #fff; padding: 7px 12px; border-radius: 6px; font-size: 0.82rem;" onkeydown="if(event.key==='Enter') addCustomGroceryItem()">
+              <button onclick="addCustomGroceryItem()" style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.35); color: #38bdf8; padding: 7px 16px; border-radius: 6px; font-size: 0.82rem; font-weight: 700; cursor: pointer;">
+                ➕ Add Item
+              </button>
+            </div>
+          </div>
+
           <div style="margin-top: 12px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 0.8rem; color: var(--text-muted);">
             <span style="font-weight:700; color:#fff;">⚡ Quick Whole-Food Delivery:</span>
             <a href="https://blinkit.com/" target="_blank" rel="noopener noreferrer" class="btn-supp-order btn-supp-blinkit">⚡ Blinkit (10-Min)</a>
@@ -13474,6 +13669,10 @@
         renderPhotoGallery();
       } else if (viewId === 'analyticsView') {
         renderVolumeChart();
+      } else if (viewId === 'nutritionView') {
+        if (typeof calculateMacros === 'function') calculateMacros();
+        if (typeof switchDiet === 'function') switchDiet(currentDietKey || 'omnivore');
+        if (typeof generateGroceryList === 'function') generateGroceryList();
       }
     }
     window.switchView = switchView;
@@ -14067,6 +14266,45 @@
 
     let currentDietKey = 'omnivore';
 
+    function getMealsDoneSet() {
+      try {
+        const raw = localStorage.getItem('gym_nutrition_meals_done');
+        return raw ? new Set(JSON.parse(raw)) : new Set();
+      } catch (e) {
+        return new Set();
+      }
+    }
+
+    function saveMealsDoneSet(set) {
+      try {
+        localStorage.setItem('gym_nutrition_meals_done', JSON.stringify(Array.from(set)));
+      } catch (e) {}
+    }
+
+    function toggleMealConsumed(mealIndex) {
+      const set = getMealsDoneSet();
+      const key = `${currentDietKey || 'omnivore'}_meal_${mealIndex}`;
+      if (set.has(key)) {
+        set.delete(key);
+      } else {
+        set.add(key);
+        if (typeof SoundFX !== 'undefined' && SoundFX.playSuccess) {
+          SoundFX.playSuccess();
+        } else if (typeof SoundFX !== 'undefined' && SoundFX.playBeep) {
+          SoundFX.playBeep(880, 'sine', 0.05, 0.05);
+        }
+      }
+      saveMealsDoneSet(set);
+      switchDiet(currentDietKey || 'omnivore');
+    }
+
+    function resetDailyMealCompliance() {
+      if (confirm("Reset today's meal compliance checklist?")) {
+        localStorage.removeItem('gym_nutrition_meals_done');
+        switchDiet(currentDietKey || 'omnivore');
+      }
+    }
+
     function switchDiet(dietKey) {
       currentDietKey = dietKey;
       document.querySelectorAll('.diet-btn').forEach(btn => btn.classList.remove('active'));
@@ -14078,19 +14316,47 @@
       container.innerHTML = '';
 
       const plan = MEAL_PLANS[dietKey] || MEAL_PLANS['omnivore'];
-      plan.forEach(meal => {
+      const mealsDone = getMealsDoneSet();
+      let doneCount = 0;
+
+      plan.forEach((meal, idx) => {
+        const mealKey = `${dietKey}_meal_${idx}`;
+        const isDone = mealsDone.has(mealKey);
+        if (isDone) doneCount++;
+
         let itemsHtml = '';
         meal.items.forEach(it => { itemsHtml += `<li>${it}</li>`; });
 
         container.innerHTML += `
-          <div class="meal-card">
-            <div class="meal-timing">${meal.timing}</div>
+          <div class="meal-card ${isDone ? 'consumed' : ''}" id="card_${mealKey}">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+              <div class="meal-timing">${meal.timing}</div>
+              <button type="button" class="btn-meal-consumed ${isDone ? 'active' : ''}" onclick="toggleMealConsumed(${idx})">
+                ${isDone ? '✅ Consumed' : '⭕ Mark Eaten'}
+              </button>
+            </div>
             <div class="meal-name">${meal.name}</div>
             <ul class="meal-items-list">${itemsHtml}</ul>
-            <div class="meal-macros-badge">Target: ${meal.macros}</div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; flex-wrap: wrap; gap: 6px;">
+              <div class="meal-macros-badge">Target: ${meal.macros}</div>
+              <span style="font-size: 0.72rem; color: var(--text-dim);">Meal ${idx + 1} of ${plan.length}</span>
+            </div>
           </div>
         `;
       });
+
+      // Update daily meal compliance status
+      const totalMeals = plan.length;
+      const pct = totalMeals > 0 ? Math.round((doneCount / totalMeals) * 100) : 0;
+      const statusEl = document.getElementById('mealComplianceStatus');
+      const barEl = document.getElementById('mealComplianceProgressBar');
+      if (statusEl) statusEl.innerText = `${doneCount} / ${totalMeals} Meals Eaten (${pct}%)`;
+      if (barEl) barEl.style.width = `${pct}%`;
+
+      // Auto-regenerate matching grocery list without blank screen
+      if (typeof generateGroceryList === 'function') {
+        generateGroceryList();
+      }
     }
 
     function getActiveDietKey() {
@@ -21836,12 +22102,41 @@ function stopGuidedCooldown() {
       if (document.getElementById('calcFats')) document.getElementById('calcFats').innerText = `${fatGrams}g`;
       if (document.getElementById('calcWater')) document.getElementById('calcWater').innerText = `${waterLiters}L`;
 
+      if (document.getElementById('bmrTelemetryBadge')) {
+        document.getElementById('bmrTelemetryBadge').innerText = `BMR: ${Math.round(bmr).toLocaleString()} kcal`;
+      }
+      if (document.getElementById('tdeeTelemetryBadge')) {
+        document.getElementById('tdeeTelemetryBadge').innerText = `TDEE: ${tdee.toLocaleString()} kcal`;
+      }
+
       if (document.getElementById('macroRatioSummary')) {
         document.getElementById('macroRatioSummary').innerText = `Protein ${pPct}% • Carbs ${cPct}% • Fats ${fPct}%`;
       }
       if (document.getElementById('macroBarP')) document.getElementById('macroBarP').style.width = `${pPct}%`;
       if (document.getElementById('macroBarC')) document.getElementById('macroBarC').style.width = `${cPct}%`;
       if (document.getElementById('macroBarF')) document.getElementById('macroBarF').style.width = `${fPct}%`;
+
+      // 4-Meal targets calculation
+      if (document.getElementById('mealDistB')) {
+        const bP = Math.round(proteinGrams * 0.25);
+        const bCal = Math.round(targetCals * 0.25);
+        document.getElementById('mealDistB').innerText = `${bP}g P • ${bCal} kcal`;
+      }
+      if (document.getElementById('mealDistL')) {
+        const lP = Math.round(proteinGrams * 0.35);
+        const lCal = Math.round(targetCals * 0.35);
+        document.getElementById('mealDistL').innerText = `${lP}g P • ${lCal} kcal`;
+      }
+      if (document.getElementById('mealDistS')) {
+        const sP = Math.round(proteinGrams * 0.15);
+        const sCal = Math.round(targetCals * 0.15);
+        document.getElementById('mealDistS').innerText = `${sP}g P • ${sCal} kcal`;
+      }
+      if (document.getElementById('mealDistD')) {
+        const dP = Math.round(proteinGrams * 0.25);
+        const dCal = Math.round(targetCals * 0.25);
+        document.getElementById('mealDistD').innerText = `${dP}g P • ${dCal} kcal`;
+      }
     }
 
     // ==========================================
@@ -23606,61 +23901,90 @@ if (typeof window !== 'undefined') {
     }
 
     // ==========================================
-    // 7-DAY SMART SUPERMARKET GROCERY GENERATOR
+    // 7-DAY SMART SUPERMARKET GROCERY GENERATOR (100X ARCHITECTURE)
     // ==========================================
     const GROCERY_DATA = {
       omnivore: [
-        { cat: "🥩 High-Yield Lean Proteins", items: [
+        { cat: "🥩 High-Yield Lean Proteins", key: "proteins", items: [
           { name: "Chicken Breast (Boneless/Skinless)", qty: "2.1 kg", tip: "Meal prep in 300g daily portions" },
           { name: "Fresh Grade-A Eggs", qty: "42 Eggs", tip: "6 eggs/day (3 whole + 3 whites)" },
           { name: "Low-Fat Greek Yogurt / Hung Curd", qty: "1.4 kg", tip: "Rich in slow-release casein protein" },
           { name: "Fish Fillet (Salmon or Whitefish)", qty: "800g", tip: "High in natural EPA/DHA omega-3s" }
         ]},
-        { cat: "🍚 Low-GI Complex Carbohydrates", items: [
+        { cat: "🍚 Low-GI Complex Carbohydrates", key: "carbs", items: [
           { name: "Rolled Whole Oats", qty: "1.2 kg", tip: "Beta-glucan fiber supports heart health" },
           { name: "Brown / Basmati Rice", qty: "2.0 kg", tip: "Clean muscle glycogen replenishment" },
           { name: "Sweet Potatoes / Yams", qty: "1.5 kg", tip: "Rich in potassium to prevent muscle cramps" }
         ]},
-        { cat: "🥑 Essential Lipids & Healthy Fats", items: [
+        { cat: "🥑 Essential Lipids & Healthy Fats", key: "fats", items: [
           { name: "Raw Almonds & Walnuts", qty: "400g", tip: "Magnesium and brain-healthy fats" },
           { name: "Cold-Pressed Extra Virgin Olive Oil", qty: "500 ml", tip: "Anti-inflammatory oleocanthal" },
           { name: "Natural Peanut Butter (100% Peanuts)", qty: "1 Jar (500g)", tip: "Zero hydrogenated oils or sugars" }
         ]},
-        { cat: "🥦 Anti-Inflammatory Produce & Greens", items: [
+        { cat: "🥦 Anti-Inflammatory Produce & Greens", key: "produce", items: [
           { name: "Fresh Baby Spinach (Palak)", qty: "1.0 kg", tip: "Nitrates boost nitric oxide & blood flow" },
           { name: "Fresh Broccoli", qty: "1.2 kg", tip: "Sulforaphane lowers joint inflammation" },
           { name: "Bananas & Mixed Berries", qty: "1.5 kg", tip: "Antioxidants reduce DOMS muscle soreness" }
         ]},
-        { cat: "💊 Ergogenic Longevity Stack", items: [
+        { cat: "💊 Ergogenic Longevity Stack", key: "supplements", items: [
           { name: "Creatine Monohydrate (Micronized)", qty: "250g Tub", tip: "5g daily for ATP power & brain clarity" },
           { name: "Whey Protein Isolate", qty: "1 kg Tub", tip: "Rapid post-workout leucine spike" },
-          { name: "Vitamin D3 (60k IU) + K2", qty: "1 Strip", tip: "Crucial for bone density, immune function & endocrine health" },
+          { name: "Vitamin D3 (60k IU) + K2", qty: "1 Strip", tip: "Crucial for bone density & testosterone" },
           { name: "Magnesium Glycinate (300mg)", qty: "1 Bottle", tip: "Deep slow-wave recovery before bed" }
         ]}
       ],
+      eggetarian: [
+        { cat: "🍳 Eggs & Dairy Bioavailable Proteins", key: "proteins", items: [
+          { name: "Fresh Grade-A Eggs", qty: "48 Eggs", tip: "6-8 eggs daily (scrambled, boiled, omelettes)" },
+          { name: "Fresh Low-Fat Paneer (Cottage Cheese)", qty: "1.8 kg", tip: "250g daily portion for rich casein & leucine" },
+          { name: "Greek Yogurt / Thick Curd", qty: "1.8 kg", tip: "Gut microbiome probiotics & continuous amino release" },
+          { name: "Yellow Moong Dal & Chana Dal", qty: "1.2 kg", tip: "Clean plant-protein foundation" }
+        ]},
+        { cat: "🍚 Complex Carbohydrates & Fiber", key: "carbs", items: [
+          { name: "Rolled Whole Oats", qty: "1.2 kg", tip: "Sustained morning mental focus" },
+          { name: "Brown Rice / Quinoa", qty: "2.0 kg", tip: "Low-glycemic endurance fuel" },
+          { name: "Multigrain / Sprouted Bread", qty: "2 Loaves", tip: "Complex carbs + B-vitamins" }
+        ]},
+        { cat: "🥑 Essential Lipids & Healthy Fats", key: "fats", items: [
+          { name: "Raw Walnuts & Almonds", qty: "400g", tip: "Brain-healthy omega-3s and vitamin E" },
+          { name: "Natural Peanut Butter (Unsweetened)", qty: "500g Jar", tip: "Dense calorie & healthy fat source" },
+          { name: "Pure Cow Ghee / Olive Oil", qty: "500 ml", tip: "Joint lubrication & fat-soluble vitamin uptake" }
+        ]},
+        { cat: "🥦 Anti-Inflammatory Greens & Produce", key: "produce", items: [
+          { name: "Fresh Baby Spinach (Palak)", qty: "1.5 kg", tip: "Plant iron, folate, and nitric oxide" },
+          { name: "Broccoli & Bell Peppers", qty: "1.5 kg", tip: "High vitamin C aids tendon collagen synthesis" },
+          { name: "Bananas & Seasonal Fruits", qty: "1.5 kg", tip: "Electrolytes and rapid glycogen replenishment" }
+        ]},
+        { cat: "💊 Evidence-Based Supplement Stack", key: "supplements", items: [
+          { name: "Creatine Monohydrate (Micronized)", qty: "250g Tub", tip: "5g daily for ATP energy and strength" },
+          { name: "Whey Protein Isolate", qty: "1 kg Tub", tip: "Post-workout 30g pure leucine trigger" },
+          { name: "Vitamin D3 + K2", qty: "1 Strip", tip: "Hormone and immune optimization" },
+          { name: "Magnesium Glycinate (300mg)", qty: "1 Bottle", tip: "Deep neuromuscular relaxation at night" }
+        ]}
+      ],
       vegetarian: [
-        { cat: "🌱 High-Bioavailability Vegetarian Proteins", items: [
+        { cat: "🌱 High-Bioavailability Vegetarian Proteins", key: "proteins", items: [
           { name: "Fresh Low-Fat Paneer / Organic Tofu", qty: "2.5 kg", tip: "350g daily portioned across meals" },
           { name: "Greek Yogurt / Fresh Homemade Curd", qty: "2.0 kg", tip: "Essential probiotics and slow casein" },
           { name: "Yellow Moong Dal & Chickpeas (Kabuli Chana)", qty: "1.5 kg", tip: "Sprout chickpeas for 30% higher bioavailability" },
           { name: "Green Edamame / Soya Chunks", qty: "800g", tip: "Complete amino acid profile (52g protein/100g)" }
         ]},
-        { cat: "🍚 Complex Carbohydrates & Fiber", items: [
+        { cat: "🍚 Complex Carbohydrates & Fiber", key: "carbs", items: [
           { name: "Rolled Whole Oats", qty: "1.2 kg", tip: "Sustained morning mental focus" },
           { name: "Brown Rice / Quinoa", qty: "2.0 kg", tip: "Low-glycemic endurance fuel" },
           { name: "Sweet Potatoes", qty: "1.5 kg", tip: "Alkaline complex carbohydrate" }
         ]},
-        { cat: "🥑 Healthy Fats & Omega-3s", items: [
+        { cat: "🥑 Healthy Fats & Omega-3s", key: "fats", items: [
           { name: "Raw Walnuts & Flaxseeds", qty: "400g", tip: "Rich in plant ALA omega-3 fatty acids" },
           { name: "Desi Gir Cow A2 Ghee (Cold-Clarified)", qty: "250g", tip: "Butyric acid for intestinal gut barrier" },
           { name: "Natural Peanut / Almond Butter", qty: "500g", tip: "Calorie-dense clean fats" }
         ]},
-        { cat: "🥦 Anti-Inflammatory Produce", items: [
+        { cat: "🥦 Anti-Inflammatory Produce", key: "produce", items: [
           { name: "Spinach / Methi / Palak Leaves", qty: "1.5 kg", tip: "Plant iron and lutein" },
           { name: "Broccoli & Bell Peppers", qty: "1.5 kg", tip: "High vitamin C aids collagen synthesis" },
           { name: "Fresh Indian Amla / Oranges", qty: "1.0 kg", tip: "Potent natural vitamin C antioxidant" }
         ]},
-        { cat: "💊 Essential Vegetarian Longevity Stack", items: [
+        { cat: "💊 Essential Vegetarian Longevity Stack", key: "supplements", items: [
           { name: "Creatine Monohydrate (100% Plant-Safe)", qty: "250g Tub", tip: "Non-meat eaters see largest cognitive & strength leap" },
           { name: "Whey Isolate or Pea/Rice Protein Blend", qty: "1 kg Tub", tip: "Ensures 160g+ daily target is met effortlessly" },
           { name: "Vitamin B12 (Methylcobalamin 1500mcg)", qty: "1 Strip", tip: "Non-negotiable for nerve sheath & blood health" },
@@ -23669,30 +23993,85 @@ if (typeof window !== 'undefined') {
       ]
     };
 
+    let currentGroceryFilter = 'all';
+
+    function getGroceryCheckedSet() {
+      try {
+        const raw = localStorage.getItem('gym_grocery_checked');
+        return raw ? new Set(JSON.parse(raw)) : new Set();
+      } catch (e) {
+        return new Set();
+      }
+    }
+
+    function saveGroceryCheckedSet(checkedSet) {
+      try {
+        localStorage.setItem('gym_grocery_checked', JSON.stringify(Array.from(checkedSet)));
+      } catch (e) {}
+    }
+
+    function getCustomGroceryItems() {
+      try {
+        const raw = localStorage.getItem('gym_custom_grocery_items');
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveCustomGroceryItems(items) {
+      try {
+        localStorage.setItem('gym_custom_grocery_items', JSON.stringify(items));
+      } catch (e) {}
+    }
+
+    function filterGroceryCategory(catKey) {
+      currentGroceryFilter = catKey;
+      document.querySelectorAll('.grocery-filter-chip').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('onclick')?.includes(`'${catKey}'`));
+      });
+      generateGroceryList();
+    }
+
     function generateGroceryList() {
       const container = document.getElementById('groceryGridContainer');
       if (!container) return;
 
-      const currentDiet = document.querySelector('.diet-btn.active')?.innerText.toLowerCase().includes('vegetarian') ? 'vegetarian' : 'omnivore';
+      const currentDiet = currentDietKey || (document.querySelector('.diet-btn.active')?.innerText.toLowerCase().includes('vegetarian') ? (document.querySelector('.diet-btn.active')?.innerText.toLowerCase().includes('eggetarian') ? 'eggetarian' : 'vegetarian') : 'omnivore');
       const list = GROCERY_DATA[currentDiet] || GROCERY_DATA.omnivore;
+      const checkedSet = getGroceryCheckedSet();
+      const customItems = getCustomGroceryItems();
+
+      let totalItemsCount = 0;
+      let checkedItemsCount = 0;
 
       container.innerHTML = '';
+
+      // Render standard categories
       list.forEach((category, cIdx) => {
+        if (currentGroceryFilter !== 'all' && category.key !== currentGroceryFilter) {
+          return;
+        }
+
         const card = document.createElement('div');
         card.className = 'grocery-cat-card';
 
         let itemsHtml = '';
         category.items.forEach((item, iIdx) => {
-          const id = `groc_${cIdx}_${iIdx}`;
+          totalItemsCount++;
+          const id = `groc_${currentDiet}_${cIdx}_${iIdx}`;
+          const isChecked = checkedSet.has(id);
+          if (isChecked) checkedItemsCount++;
+
           const amazonSearchUrl = `https://www.amazon.in/s?k=${encodeURIComponent(item.name)}`;
           itemsHtml += `
-            <div class="grocery-item-row" id="row_${id}">
+            <div class="grocery-item-row ${isChecked ? 'checked' : ''}" id="row_${id}">
               <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; flex: 1;">
-                <input type="checkbox" onchange="toggleGroceryCheck('${id}')" id="${id}">
-                <span style="font-weight: 600;">${item.name}</span>
+                <input type="checkbox" onchange="toggleGroceryCheck('${id}')" id="${id}" ${isChecked ? 'checked' : ''}>
+                <span class="grocery-item-name" style="font-weight: 600;">${item.name}</span>
               </label>
               <div style="display: flex; align-items: center; gap: 6px;">
-                <span style="font-size: 0.78rem; font-weight: 800; color: var(--cyan); background: rgba(56, 189, 248, 0.1); padding: 2px 8px; border-radius: 4px;">
+                <span class="grocery-qty-badge" style="font-size: 0.78rem; font-weight: 800; color: var(--cyan); background: rgba(56, 189, 248, 0.1); padding: 2px 8px; border-radius: 4px;">
                   ${item.qty}
                 </span>
                 <a href="${amazonSearchUrl}" target="_blank" rel="noopener noreferrer" class="grocery-buy-link" title="Order on Amazon India">🛒 Buy</a>
@@ -23703,38 +24082,149 @@ if (typeof window !== 'undefined') {
         });
 
         card.innerHTML = `
-          <div class="grocery-cat-title">${category.cat}</div>
+          <div class="grocery-cat-title">
+            <span>${category.cat}</span>
+            <span class="grocery-cat-badge">${category.items.length} items</span>
+          </div>
           ${itemsHtml}
         `;
         container.appendChild(card);
       });
+
+      // Render custom items card if any exist
+      if (customItems.length > 0 && (currentGroceryFilter === 'all' || currentGroceryFilter === 'custom')) {
+        const customCard = document.createElement('div');
+        customCard.className = 'grocery-cat-card';
+        let customRowsHtml = '';
+
+        customItems.forEach((cItem, cIdx) => {
+          totalItemsCount++;
+          const id = `groc_custom_${cIdx}`;
+          const isChecked = checkedSet.has(id);
+          if (isChecked) checkedItemsCount++;
+          const amazonSearchUrl = `https://www.amazon.in/s?k=${encodeURIComponent(cItem.name)}`;
+
+          customRowsHtml += `
+            <div class="grocery-item-row ${isChecked ? 'checked' : ''}" id="row_${id}">
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; flex: 1;">
+                <input type="checkbox" onchange="toggleGroceryCheck('${id}')" id="${id}" ${isChecked ? 'checked' : ''}>
+                <span class="grocery-item-name" style="font-weight: 600;">${cItem.name}</span>
+              </label>
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <span class="grocery-qty-badge" style="font-size: 0.78rem; font-weight: 800; color: var(--emerald); background: rgba(16, 185, 129, 0.1); padding: 2px 8px; border-radius: 4px;">
+                  ${cItem.qty || '1 unit'}
+                </span>
+                <a href="${amazonSearchUrl}" target="_blank" rel="noopener noreferrer" class="grocery-buy-link" title="Order on Amazon India">🛒 Buy</a>
+                <button type="button" onclick="deleteCustomGroceryItem(${cIdx})" style="background: none; border: none; color: #ef4444; font-size: 0.85rem; cursor: pointer; padding: 0 4px;" title="Delete custom item">🗑️</button>
+              </div>
+            </div>
+          `;
+        });
+
+        customCard.innerHTML = `
+          <div class="grocery-cat-title">
+            <span>⭐ My Custom Pantry Additions</span>
+            <span class="grocery-cat-badge" style="color: var(--emerald); border-color: rgba(16,185,129,0.3); background: rgba(16,185,129,0.1);">${customItems.length} items</span>
+          </div>
+          ${customRowsHtml}
+        `;
+        container.appendChild(customCard);
+      }
+
+      // Update progress bar & stats
+      const pct = totalItemsCount > 0 ? Math.round((checkedItemsCount / totalItemsCount) * 100) : 0;
+      const statusEl = document.getElementById('groceryCompletionStatus');
+      const barEl = document.getElementById('groceryProgressBar');
+      if (statusEl) statusEl.innerText = `${checkedItemsCount} / ${totalItemsCount} Items (${pct}%)`;
+      if (barEl) barEl.style.width = `${pct}%`;
     }
 
     function toggleGroceryCheck(id) {
       const cb = document.getElementById(id);
       const row = document.getElementById(`row_${id}`);
+      const checkedSet = getGroceryCheckedSet();
+
       if (cb && row) {
         if (cb.checked) {
           row.classList.add('checked');
-          SoundFX.playBeep(880, 'sine', 0.05, 0.05);
+          checkedSet.add(id);
+          if (typeof SoundFX !== 'undefined' && SoundFX.playBeep) {
+            SoundFX.playBeep(880, 'sine', 0.05, 0.05);
+          }
         } else {
           row.classList.remove('checked');
+          checkedSet.delete(id);
         }
+        saveGroceryCheckedSet(checkedSet);
+        generateGroceryList();
+      }
+    }
+
+    function clearCheckedGrocery() {
+      if (confirm("Reset and uncheck all items in your grocery checklist?")) {
+        localStorage.removeItem('gym_grocery_checked');
+        generateGroceryList();
+      }
+    }
+
+    function addCustomGroceryItem() {
+      const nameInput = document.getElementById('customGroceryItemInput');
+      const qtyInput = document.getElementById('customGroceryQtyInput');
+      if (!nameInput) return;
+
+      const name = nameInput.value.trim();
+      const qty = qtyInput ? qtyInput.value.trim() : '';
+
+      if (!name) {
+        alert("Please enter a name for the custom grocery item.");
+        nameInput.focus();
+        return;
+      }
+
+      const items = getCustomGroceryItems();
+      items.push({ name, qty: qty || '1 unit' });
+      saveCustomGroceryItems(items);
+
+      nameInput.value = '';
+      if (qtyInput) qtyInput.value = '';
+      generateGroceryList();
+    }
+
+    function deleteCustomGroceryItem(index) {
+      const items = getCustomGroceryItems();
+      if (index >= 0 && index < items.length) {
+        items.splice(index, 1);
+        saveCustomGroceryItems(items);
+        generateGroceryList();
       }
     }
 
     function copyGroceryList() {
-      const currentDiet = document.querySelector('.diet-btn.active')?.innerText.toLowerCase().includes('vegetarian') ? 'vegetarian' : 'omnivore';
+      const currentDiet = currentDietKey || 'omnivore';
       const list = GROCERY_DATA[currentDiet] || GROCERY_DATA.omnivore;
+      const checkedSet = getGroceryCheckedSet();
+      const customItems = getCustomGroceryItems();
       
-      let txt = `🛒 AETHOS 365 PRO • 7-DAY SUPERMARKET GROCERY LIST\nTarget: 160g+ Protein | 2,420 kcal Recomposition\n=========================================\n\n`;
-      list.forEach(cat => {
+      let txt = `🛒 AETHOS 365 PRO • 7-DAY SUPERMARKET GROCERY LIST (${currentDiet.toUpperCase()})\nTarget: 160g+ Protein | Precision Athletic Nutrition\n=========================================\n\n`;
+      list.forEach((cat, cIdx) => {
         txt += `${cat.cat.toUpperCase()}\n`;
-        cat.items.forEach(it => {
-          txt += `• [ ] ${it.name} - ${it.qty} (${it.tip})\n`;
+        cat.items.forEach((it, iIdx) => {
+          const id = `groc_${currentDiet}_${cIdx}_${iIdx}`;
+          const isDone = checkedSet.has(id);
+          txt += `• [${isDone ? 'X' : ' '}] ${it.name} - ${it.qty} (${it.tip})\n`;
         });
         txt += `\n`;
       });
+
+      if (customItems.length > 0) {
+        txt += `MY CUSTOM PANTRY ADDITIONS\n`;
+        customItems.forEach((it, cIdx) => {
+          const id = `groc_custom_${cIdx}`;
+          const isDone = checkedSet.has(id);
+          txt += `• [${isDone ? 'X' : ' '}] ${it.name} - ${it.qty}\n`;
+        });
+        txt += `\n`;
+      }
 
       navigator.clipboard.writeText(txt).then(() => {
         alert("📋 7-Day Grocery List copied to clipboard! You can paste it into WhatsApp, Google Keep, or Notes.");
@@ -23924,14 +24414,25 @@ if (typeof window !== 'undefined') {
       window.openPassportFromSettings = openPassportFromSettings;
       window.inspectTraineeDetails = inspectTraineeDetails;
       window.switchTraineeDetailTab = switchTraineeDetailTab;
+      window.toggleMealConsumed = toggleMealConsumed;
+      window.resetDailyMealCompliance = resetDailyMealCompliance;
+      window.filterGroceryCategory = filterGroceryCategory;
+      window.clearCheckedGrocery = clearCheckedGrocery;
+      window.addCustomGroceryItem = addCustomGroceryItem;
+      window.deleteCustomGroceryItem = deleteCustomGroceryItem;
+      window.generateGroceryList = generateGroceryList;
+      window.switchDiet = switchDiet;
+      window.calculateMacros = calculateMacros;
+      window.copyGroceryList = copyGroceryList;
+      window.printGroceryList = printGroceryList;
 
-      // Direct element click binding to guarantee pill responsiveness
+      // Guarantee pill click responsiveness
       const userPillEl = document.getElementById('headerUserPill');
       if (userPillEl) {
-        userPillEl.addEventListener('click', (e) => {
-          e.preventDefault();
+        userPillEl.onclick = function(e) {
+          if (e) e.preventDefault();
           handleUserPillClick();
-        });
+        };
       }
 
       window.__appReady = true;
