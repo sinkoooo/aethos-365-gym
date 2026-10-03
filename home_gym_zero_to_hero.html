@@ -2464,37 +2464,50 @@
     }
 
     .ex-crop-viewport {
+      position: relative;
       width: 100%;
-      height: 165px;
-      background-image: url('home_workout_guide.jpg');
-      background-size: 300% 200%;
+      height: 180px;
+      background-size: cover;
+      background-position: center center;
       background-repeat: no-repeat;
       border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      box-shadow: inset 0 0 15px rgba(0,0,0,0.6);
+      border: 1.5px solid rgba(56, 189, 248, 0.3);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5), inset 0 0 20px rgba(0,0,0,0.4);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
     }
 
-    .crop-box-squat      { background-position: 0% 18%; }
-    .crop-incline-pushup { background-position: 50% 18%; }
-    .crop-glute-bridge   { background-position: 100% 18%; }
-    .crop-door-row       { background-position: 0% 86%; }
-    .crop-dead-bug       { background-position: 50% 86%; }
-    .crop-reverse-lunge  { background-position: 100% 86%; }
-    .crop-wall-hinge {
-      background-image: url('https://img.youtube.com/vi/HMzTuz047Y8/hqdefault.jpg') !important;
-      background-size: cover !important;
-      background-position: center center !important;
+    .mobility-photo-viewport {
+      position: relative;
+      width: 100%;
+      height: 190px;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      border-radius: var(--radius-md);
+      border: 1.5px solid rgba(56, 189, 248, 0.35);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5), inset 0 0 20px rgba(0,0,0,0.4);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      margin-bottom: 14px;
     }
-    .crop-doorframe-rows {
-      background-image: url('https://img.youtube.com/vi/ytEalkENNiQ/hqdefault.jpg') !important;
-      background-size: cover !important;
-      background-position: center center !important;
+    .cooldown-card .mobility-photo-viewport {
+      border-color: rgba(16, 185, 129, 0.35);
     }
-    .crop-plank {
-      background-image: url('https://img.youtube.com/vi/ASdvN_XEl_c/hqdefault.jpg') !important;
-      background-size: cover !important;
-      background-position: center center !important;
-    }
+
+    .crop-box-squat      { background-image: url('https://img.youtube.com/vi/bEv6CCg2BC8/hqdefault.jpg'); }
+    .crop-incline-pushup { background-image: url('https://img.youtube.com/vi/IODxDxX7oi4/hqdefault.jpg'); }
+    .crop-glute-bridge   { background-image: url('https://img.youtube.com/vi/wPM8icPu6H8/hqdefault.jpg'); }
+    .crop-door-row       { background-image: url('https://img.youtube.com/vi/ytEalkENNiQ/hqdefault.jpg'); }
+    .crop-dead-bug       { background-image: url('https://img.youtube.com/vi/lqnuY3wiBzA/hqdefault.jpg'); }
+    .crop-reverse-lunge  { background-image: url('https://img.youtube.com/vi/C_P3Q-PssvY/hqdefault.jpg'); }
+    .crop-wall-hinge     { background-image: url('https://img.youtube.com/vi/HMzTuz047Y8/hqdefault.jpg'); }
+    .crop-doorframe-rows { background-image: url('https://img.youtube.com/vi/ytEalkENNiQ/hqdefault.jpg'); }
+    .crop-plank          { background-image: url('https://img.youtube.com/vi/ASdvN_XEl_c/hqdefault.jpg'); }
 
     .ex-cues-panel {
       display: grid;
@@ -8046,6 +8059,17 @@
                 </div>
               </div>
 
+              <!-- Real-Time Movement Technique Photo Display -->
+              <div id="warmupPlayerPhotoDeck" style="position: relative; height: 160px; border-radius: 8px; overflow: hidden; margin-top: 14px; border: 1px solid rgba(56, 189, 248, 0.35); background-size: cover; background-position: center center; background-repeat: no-repeat; box-shadow: inset 0 0 25px rgba(0,0,0,0.6);">
+                <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(180deg, transparent 0%, rgba(10, 16, 32, 0.95) 100%); padding: 8px 14px; display: flex; justify-content: space-between; align-items: flex-end;">
+                  <div>
+                    <span style="font-size: 0.65rem; color: var(--cyan); font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">LIVE MOVEMENT FORM REFERENCE</span>
+                    <div id="warmupPlayerPhotoLabel" style="font-size: 0.85rem; font-weight: 800; color: #fff;">Cat-Cow Spine Waves</div>
+                  </div>
+                  <span style="font-size: 0.68rem; color: #94a3b8; font-family: 'JetBrains Mono';">PRE-WORKOUT MOBILITY</span>
+                </div>
+              </div>
+
               <!-- Breathing Cadence Visualizer -->
               <div class="breathing-cadence-box" style="margin-top: 14px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem;">
@@ -8355,6 +8379,17 @@
                   <button type="button" class="btn-photo-action" onclick="stopGuidedCooldown()" style="background: rgba(244,63,94,0.15); border-color: rgba(244,63,94,0.3); color: #fda4af;">
                     ✕ Close
                   </button>
+                </div>
+              </div>
+
+              <!-- Real-Time Movement Technique Photo Display -->
+              <div id="cooldownPlayerPhotoDeck" style="position: relative; height: 160px; border-radius: 8px; overflow: hidden; margin-top: 14px; border: 1px solid rgba(16, 185, 129, 0.35); background-size: cover; background-position: center center; background-repeat: no-repeat; box-shadow: inset 0 0 25px rgba(0,0,0,0.6);">
+                <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(180deg, transparent 0%, rgba(10, 16, 32, 0.95) 100%); padding: 8px 14px; display: flex; justify-content: space-between; align-items: flex-end;">
+                  <div>
+                    <span style="font-size: 0.65rem; color: var(--emerald); font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">POST-WORKOUT DECOMPRESSION REFERENCE</span>
+                    <div id="cooldownPlayerPhotoLabel" style="font-size: 0.85rem; font-weight: 800; color: #fff;">90/90 Hip Capsule Rotations</div>
+                  </div>
+                  <span style="font-size: 0.68rem; color: #94a3b8; font-family: 'JetBrains Mono';">JOINT RESTORATION</span>
                 </div>
               </div>
 
@@ -16024,7 +16059,17 @@
           </div>
 
           <div class="ex-visual-grid" style="margin-top: 14px;">
-            <div class="ex-crop-viewport ${baseEx.cropClass}"></div>
+            <div class="ex-crop-viewport ${baseEx.cropClass}" style="background-image: url('https://img.youtube.com/vi/${EXERCISE_VIDEOS[item.key] || 'bEv6CCg2BC8'}/hqdefault.jpg');" title="${activeName}">
+              <div style="background: linear-gradient(180deg, transparent 0%, rgba(11, 17, 32, 0.95) 100%); padding: 8px 12px; display: flex; justify-content: space-between; align-items: flex-end;">
+                <div>
+                  <span style="font-size: 0.65rem; font-weight: 800; color: var(--cyan); text-transform: uppercase; letter-spacing: 0.5px;">Biomechanics</span>
+                  <div style="font-size: 0.78rem; font-weight: 700; color: #fff;">${activeName}</div>
+                </div>
+                <button type="button" class="btn-card-min-toggle" onclick="toggleInlineVideo(${idx}, '${EXERCISE_VIDEOS[item.key] || 'bEv6CCg2BC8'}', '${activeName.replace(/'/g, "\\'")}')" style="padding: 2px 8px; font-size: 0.7rem; border-color: rgba(56, 189, 248, 0.4); color: var(--cyan);" title="Play movement video">
+                  ▶ Video
+                </button>
+              </div>
+            </div>
             <div>
               <div class="ex-cues-panel">
                 ${cuesList}
@@ -16886,6 +16931,19 @@ function generateMovementCardHTML(m, isCooldown) {
       </div>
 
       <div class="tech-card-body" id="bodyCard_${m.id}">
+        <!-- Relevant High-Definition Movement Technique Photo -->
+        <div class="mobility-photo-viewport" style="background-image: url('https://img.youtube.com/vi/${m.videoId}/hqdefault.jpg');" title="${m.name}">
+          <div style="background: linear-gradient(180deg, transparent 0%, rgba(11, 17, 32, 0.95) 100%); padding: 10px 14px; display: flex; justify-content: space-between; align-items: flex-end;">
+            <div>
+              <span style="font-size: 0.68rem; font-weight: 800; color: ${accentColor}; text-transform: uppercase; letter-spacing: 0.5px;">${isCooldown ? 'Post-Workout Cool-Down' : 'Pre-Workout Warm-Up'} Form</span>
+              <div style="font-size: 0.88rem; font-weight: 800; color: #fff;">${m.shortName || m.name}</div>
+            </div>
+            <button type="button" class="btn-card-min-toggle" onclick="toggleMobilityVideo('${m.id}', '${m.videoId}', '${m.shortName.replace(/'/g, "\\'")}')" style="padding: 3px 10px; font-size: 0.72rem; border-color: ${accentColor}; color: ${accentColor};">
+              ▶ Video Tutorial
+            </button>
+          </div>
+        </div>
+
         <div id="mobVideoWrap_${m.id}" class="inline-video-wrap" style="display: none; margin-bottom: 14px;"></div>
 
         <div class="tech-why-callout ${calloutClass}">
@@ -17206,6 +17264,16 @@ function updateWarmupHUD(curr) {
   const pTarget = document.getElementById('warmupPlayerTarget');
   if (pTarget) pTarget.innerText = curr.target;
 
+  // Real-time movement photo display sync
+  const wPhotoDeck = document.getElementById('warmupPlayerPhotoDeck');
+  if (wPhotoDeck) {
+    wPhotoDeck.style.backgroundImage = `url('https://img.youtube.com/vi/${curr.videoId || 'y39PrKY_4JM'}/hqdefault.jpg')`;
+  }
+  const wPhotoLabel = document.getElementById('warmupPlayerPhotoLabel');
+  if (wPhotoLabel) {
+    wPhotoLabel.innerText = curr.shortName || curr.name;
+  }
+
   // Breathing metronome logic (4s inhale / 4s exhale cycle)
   const breathCycleSec = warmupSec % 8;
   const isExhale = breathCycleSec < 4; // 0,1,2,3 is Exhale, 4,5,6,7 is Inhale
@@ -17357,6 +17425,16 @@ function updateCooldownHUD(curr) {
 
   const pTarget = document.getElementById('cooldownPlayerTarget');
   if (pTarget) pTarget.innerText = curr.target;
+
+  // Real-time movement photo display sync
+  const cPhotoDeck = document.getElementById('cooldownPlayerPhotoDeck');
+  if (cPhotoDeck) {
+    cPhotoDeck.style.backgroundImage = `url('https://img.youtube.com/vi/${curr.videoId || 'bt5M8hy_rKI'}/hqdefault.jpg')`;
+  }
+  const cPhotoLabel = document.getElementById('cooldownPlayerPhotoLabel');
+  if (cPhotoLabel) {
+    cPhotoLabel.innerText = curr.shortName || curr.name;
+  }
 
   // Breathing metronome logic for cooldown
   const breathCycleSec = cooldownSec % 8;
