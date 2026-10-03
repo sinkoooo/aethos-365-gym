@@ -632,21 +632,29 @@
     .account-chip {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      gap: 7px;
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 99px;
-      padding: 4px 10px;
-      font-size: 0.76rem;
+      padding: 5px 12px;
+      font-size: 0.78rem;
       color: #cbd5e1;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(10px);
     }
     .account-chip:hover {
-      background: rgba(56, 189, 248, 0.15);
-      border-color: rgba(56, 189, 248, 0.4);
+      background: rgba(56, 189, 248, 0.2);
+      border-color: rgba(56, 189, 248, 0.5);
       color: #fff;
-      transform: translateY(-1px);
+      transform: translateY(-1.5px);
+      box-shadow: 0 4px 14px rgba(56, 189, 248, 0.25);
+    }
+    .account-chip.active-account {
+      border-color: var(--cyan);
+      background: rgba(56, 189, 248, 0.22);
+      color: #fff;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.35);
     }
 
     /* Trainee Passport VIP Card Styling */
@@ -9993,7 +10001,7 @@
           <div id="passportUsernameBadge" style="display: inline-block; background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.3); color: var(--cyan); padding: 2px 10px; border-radius: 99px; font-size: 0.75rem; font-weight: 700; margin: 6px 0 10px;">@username</div>
           <p id="passportBio" style="font-size: 0.82rem; color: #cbd5e1; margin: 0 0 14px; font-style: italic;">"365 Days of Zero Excuses"</p>
 
-          <div class="passport-stat-grid">
+          <div class="passport-stat-grid" style="grid-template-columns: repeat(4, 1fr);">
             <div class="passport-stat-item">
               <div class="passport-stat-val" id="passportDayVal" style="color: var(--cyan);">Day 1</div>
               <div class="passport-stat-lbl">Active Day</div>
@@ -10005,6 +10013,10 @@
             <div class="passport-stat-item">
               <div class="passport-stat-val" id="passportWorkoutsVal" style="color: #34d399;">0</div>
               <div class="passport-stat-lbl">Completed</div>
+            </div>
+            <div class="passport-stat-item">
+              <div class="passport-stat-val" id="passportWeightVal" style="color: #a855f7;">74.0 kg</div>
+              <div class="passport-stat-lbl">Target Wt</div>
             </div>
           </div>
 
@@ -11554,14 +11566,16 @@
           wrap.style.display = 'block';
           container.innerHTML = json.profiles.map(p => {
             const isAdmin = p.role === 'admin';
+            const isActive = currentUser && (currentUser.username === p.username || (isAdmin && currentUser.username === 'shivam'));
             const roleBadge = isAdmin ? '👑 Admin' : '⚡ Trainee';
-            const badgeBg = isAdmin ? 'rgba(168, 85, 247, 0.2)' : 'rgba(56, 189, 248, 0.12)';
+            const badgeBg = isAdmin ? 'rgba(168, 85, 247, 0.25)' : 'rgba(56, 189, 248, 0.15)';
             const badgeColor = isAdmin ? '#c084fc' : '#38bdf8';
+            const activeClass = isActive ? 'account-chip active-account' : 'account-chip';
             return `
-              <div class="account-chip" onclick="fillQuickAccount('${p.username.replace(/'/g, "\\'")}')" title="Click to autofill @${p.username}">
+              <div class="${activeClass}" onclick="fillQuickAccount('${p.username.replace(/'/g, "\\'")}')" title="${isActive ? 'Currently Logged In Profile' : 'Click to select @' + p.username}">
                 <span>${p.avatar || (isAdmin ? '👑' : '⚡')}</span>
                 <strong>${p.displayName || p.username}</strong>
-                <span style="font-size: 0.65rem; padding: 2px 6px; border-radius: 99px; background: ${badgeBg}; color: ${badgeColor}; font-weight: 700;">${roleBadge}</span>
+                <span style="font-size: 0.65rem; padding: 2px 6px; border-radius: 99px; background: ${badgeBg}; color: ${badgeColor}; font-weight: 700;">${roleBadge}${isActive ? ' (Active)' : ''}</span>
               </div>
             `;
           }).join('');
@@ -11621,6 +11635,10 @@
       const currentStreak = calculateTraineeStreak();
       if (streakVal) streakVal.textContent = `${currentStreak} 🔥`;
       if (workoutsVal) workoutsVal.textContent = `${completedDays ? completedDays.size : 0}`;
+
+      const weightVal = document.getElementById('passportWeightVal');
+      const uWeight = user.targetWeight || user.startingWeight || userProfile?.weight || 74.0;
+      if (weightVal) weightVal.textContent = `${parseFloat(uWeight).toFixed(1)} kg`;
 
       // Populate edit fields
       const editName = document.getElementById('editDisplayNameInput');
