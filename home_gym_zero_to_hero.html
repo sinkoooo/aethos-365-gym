@@ -11082,8 +11082,7 @@
         }
 
         await loadGymStateFromServer(true);
-        reloadStateAndRerender();
-        if (typeof playSound === 'function') playSound('badge');
+        location.reload();
       } catch (err) {
         if (errBox) {
           errBox.textContent = 'Server connection error. Please try again.';

