@@ -1526,7 +1526,7 @@
       border-radius: var(--radius-md);
       padding: 18px 22px;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-      transition: all 0.2s ease;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .technique-card.cooldown-card {
       border-left-color: var(--emerald);
@@ -1534,6 +1534,36 @@
     .technique-card:hover {
       border-color: rgba(0, 242, 254, 0.5);
       transform: translateY(-1px);
+    }
+    .technique-card.minimized {
+      padding: 12px 18px;
+      background: linear-gradient(145deg, rgba(17, 27, 49, 0.9) 0%, rgba(13, 21, 40, 0.9) 100%);
+    }
+    .technique-card.minimized .tech-header-row {
+      margin-bottom: 0;
+    }
+    .technique-card.minimized .tech-card-body {
+      display: none !important;
+    }
+
+    .btn-card-min-toggle {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #94a3b8;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s ease;
+    }
+    .btn-card-min-toggle:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--cyan);
+      color: #fff;
     }
 
     .tech-header-row {
@@ -8031,6 +8061,19 @@
             </div>
 
             <!-- Technique Guides Drawer (Expandable) -->
+            <div id="warmupGuidesToolbar" style="display: none; justify-content: space-between; align-items: center; margin-top: 14px; margin-bottom: -6px; padding: 6px 12px; background: rgba(255,255,255,0.03); border-radius: 8px; border: 1px solid rgba(255,255,255,0.06);">
+              <span style="font-size: 0.78rem; font-weight: 700; color: var(--cyan); display: flex; align-items: center; gap: 6px;">
+                <span>📖 5 Guided Warm-Up Movements</span>
+              </span>
+              <div style="display: flex; gap: 8px; align-items: center;">
+                <button type="button" class="btn-card-min-toggle" onclick="setAllWarmupCardsMinimized(false)" title="Maximize all warmup guides">
+                  <span>➕</span> Maximize All
+                </button>
+                <button type="button" class="btn-card-min-toggle" onclick="setAllWarmupCardsMinimized(true)" title="Minimize all warmup guides">
+                  <span>➖</span> Minimize All
+                </button>
+              </div>
+            </div>
             <div id="warmupGuidesDrawer" class="technique-guides-drawer" style="display: none; margin-top: 14px;">
               <!-- Populated by JavaScript with rich breakdown cards -->
             </div>
@@ -16761,17 +16804,22 @@ function generateMovementCardHTML(m, isCooldown) {
   return `
     <div class="technique-card ${cardClass}" id="guideCard_${m.id}">
       <div class="tech-header-row">
-        <div>
+        <div style="flex: 1; cursor: pointer;" onclick="toggleSingleMobilityCard('${m.id}')" title="Click to minimize or maximize this movement">
           <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 4px;">
             <span class="tech-badge-pill" style="border-color: ${accentColor}; color: ${accentColor};">${m.step} MOVEMENT</span>
             <span style="font-size: 0.74rem; color: var(--amber); font-weight: 700;">⏱️ ${m.duration}</span>
             <span style="font-size: 0.74rem; color: #94a3b8;">🎯 ${m.target}</span>
           </div>
-          <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin: 0;">${m.name}</h3>
+          <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin: 0; display: flex; align-items: center; gap: 8px;">
+            <span>${m.name}</span>
+          </h3>
         </div>
-        <div style="display: flex; gap: 8px; align-items: center;">
+        <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+          <button type="button" class="btn-card-min-toggle" id="btnToggleCard_${m.id}" onclick="toggleSingleMobilityCard('${m.id}')" title="Minimize / Maximize this movement">
+            <span id="iconToggleCard_${m.id}">➖</span> <span id="labelToggleCard_${m.id}">Minimize</span>
+          </button>
           <button type="button" class="btn-inline-video" onclick="toggleMobilityVideo('${m.id}', '${m.videoId}', '${m.shortName.replace(/'/g, "\\'")}')" id="btnMobVideo_${m.id}">
-            ▶ Watch Video Guide Inline
+            ▶ Video
           </button>
           <a href="https://www.youtube.com/results?search_query=${m.searchQuery || ''}" target="_blank" rel="noopener noreferrer" style="color: var(--rose); font-size: 0.78rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
             YouTube ↗
@@ -16779,43 +16827,125 @@ function generateMovementCardHTML(m, isCooldown) {
         </div>
       </div>
 
-      <div id="mobVideoWrap_${m.id}" class="inline-video-wrap" style="display: none; margin-bottom: 14px;"></div>
+      <div class="tech-card-body" id="bodyCard_${m.id}">
+        <div id="mobVideoWrap_${m.id}" class="inline-video-wrap" style="display: none; margin-bottom: 14px;"></div>
 
-      <div class="tech-why-callout ${calloutClass}">
-        <strong>💡 Why This Movement Matters:</strong> ${m.why}
+        <div class="tech-why-callout ${calloutClass}">
+          <strong>💡 Why This Movement Matters:</strong> ${m.why}
+        </div>
+
+        ${setupHTML}
+        ${phasesHTML}
+
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; background: rgba(255,255,255,0.04); padding: 8px 12px; border-radius: 6px; font-size: 0.78rem;">
+          <span style="color: ${accentColor}; font-weight: 700;">🌬️ Breathing Cadence:</span>
+          <span style="color: #fff; font-family: 'JetBrains Mono', monospace;">${m.breathing}</span>
+        </div>
+
+        ${mistakesHTML}
       </div>
-
-      ${setupHTML}
-      ${phasesHTML}
-
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; background: rgba(255,255,255,0.04); padding: 8px 12px; border-radius: 6px; font-size: 0.78rem;">
-        <span style="color: ${accentColor}; font-weight: 700;">🌬️ Breathing Cadence:</span>
-        <span style="color: #fff; font-family: 'JetBrains Mono', monospace;">${m.breathing}</span>
-      </div>
-
-      ${mistakesHTML}
     </div>
   `;
+}
+
+function getMobilityCardsMinSet() {
+  try {
+    const raw = localStorage.getItem('gym_mobility_cards_min');
+    return raw ? new Set(JSON.parse(raw)) : new Set();
+  } catch (e) {
+    return new Set();
+  }
+}
+
+function saveMobilityCardsMinSet(set) {
+  try {
+    localStorage.setItem('gym_mobility_cards_min', JSON.stringify(Array.from(set)));
+  } catch (e) {}
+}
+
+function toggleSingleMobilityCard(id) {
+  const card = document.getElementById(`guideCard_${id}`);
+  const iconEl = document.getElementById(`iconToggleCard_${id}`);
+  const labelEl = document.getElementById(`labelToggleCard_${id}`);
+  if (!card) return;
+
+  const minSet = getMobilityCardsMinSet();
+  const willMinimize = !card.classList.contains('minimized');
+
+  if (willMinimize) {
+    card.classList.add('minimized');
+    minSet.add(id);
+    if (iconEl) iconEl.innerText = '➕';
+    if (labelEl) labelEl.innerText = 'Expand';
+  } else {
+    card.classList.remove('minimized');
+    minSet.delete(id);
+    if (iconEl) iconEl.innerText = '➖';
+    if (labelEl) labelEl.innerText = 'Minimize';
+  }
+
+  saveMobilityCardsMinSet(minSet);
+}
+
+function setAllWarmupCardsMinimized(minimize) {
+  const minSet = getMobilityCardsMinSet();
+  WARMUP_DETAILS.forEach(m => {
+    const card = document.getElementById(`guideCard_${m.id}`);
+    const iconEl = document.getElementById(`iconToggleCard_${m.id}`);
+    const labelEl = document.getElementById(`labelToggleCard_${m.id}`);
+    if (card) {
+      if (minimize) {
+        card.classList.add('minimized');
+        minSet.add(m.id);
+        if (iconEl) iconEl.innerText = '➕';
+        if (labelEl) labelEl.innerText = 'Expand';
+      } else {
+        card.classList.remove('minimized');
+        minSet.delete(m.id);
+        if (iconEl) iconEl.innerText = '➖';
+        if (labelEl) labelEl.innerText = 'Minimize';
+      }
+    }
+  });
+  saveMobilityCardsMinSet(minSet);
+}
+
+function applyPersistedMobilityMinStates() {
+  const minSet = getMobilityCardsMinSet();
+  minSet.forEach(id => {
+    const card = document.getElementById(`guideCard_${id}`);
+    const iconEl = document.getElementById(`iconToggleCard_${id}`);
+    const labelEl = document.getElementById(`labelToggleCard_${id}`);
+    if (card) {
+      card.classList.add('minimized');
+      if (iconEl) iconEl.innerText = '➕';
+      if (labelEl) labelEl.innerText = 'Expand';
+    }
+  });
 }
 
 function renderWarmupGuidesDrawer() {
   const container = document.getElementById('warmupGuidesDrawer');
   if (!container) return;
   container.innerHTML = WARMUP_DETAILS.map(m => generateMovementCardHTML(m, false)).join('');
+  applyPersistedMobilityMinStates();
 }
 
 function renderCooldownGuidesDrawer() {
   const container = document.getElementById('cooldownGuidesDrawer');
   if (!container) return;
   container.innerHTML = COOLDOWN_DETAILS.map(m => generateMovementCardHTML(m, true)).join('');
+  applyPersistedMobilityMinStates();
 }
 
 function toggleWarmupGuidesDrawer() {
   const drawer = document.getElementById('warmupGuidesDrawer');
+  const toolbar = document.getElementById('warmupGuidesToolbar');
   const chev = document.getElementById('warmupGuideChevron');
   if (!drawer) return;
   const isHidden = drawer.style.display === 'none' || !drawer.style.display;
   drawer.style.display = isHidden ? 'flex' : 'none';
+  if (toolbar) toolbar.style.display = isHidden ? 'flex' : 'none';
   if (chev) chev.innerText = isHidden ? '▴' : '▾';
 }
 
@@ -16833,8 +16963,10 @@ function showWarmupMovementDetail(index) {
   if (!m) return;
   const drawer = document.getElementById('warmupGuidesDrawer');
   const chev = document.getElementById('warmupGuideChevron');
+  const toolbar = document.getElementById('warmupGuidesToolbar');
   if (drawer && (drawer.style.display === 'none' || !drawer.style.display)) {
     drawer.style.display = 'flex';
+    if (toolbar) toolbar.style.display = 'flex';
     if (chev) chev.innerText = '▴';
   }
   // highlight chip
@@ -16843,8 +16975,12 @@ function showWarmupMovementDetail(index) {
     if (i === index) c.classList.add('active');
     else c.classList.remove('active');
   });
-  // scroll into view
+  // maximize target card if minimized
   const card = document.getElementById(`guideCard_${m.id}`);
+  if (card && card.classList.contains('minimized')) {
+    toggleSingleMobilityCard(m.id);
+  }
+  // scroll into view
   if (card && typeof card.scrollIntoView === 'function') {
     card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
@@ -24425,6 +24561,8 @@ if (typeof window !== 'undefined') {
       window.calculateMacros = calculateMacros;
       window.copyGroceryList = copyGroceryList;
       window.printGroceryList = printGroceryList;
+      window.toggleSingleMobilityCard = toggleSingleMobilityCard;
+      window.setAllWarmupCardsMinimized = setAllWarmupCardsMinimized;
 
       // Guarantee pill click responsiveness
       const userPillEl = document.getElementById('headerUserPill');
