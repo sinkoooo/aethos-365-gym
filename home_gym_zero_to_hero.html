@@ -22506,13 +22506,36 @@ function stopGuidedCooldown() {
         selAfter.appendChild(optA);
       });
 
-      const firstKey = `${filteredPhotos[0].numericDay || 1}_${(filteredPhotos[0].angle || 'front').toLowerCase()}`;
+      // Default 'After' photo is the latest photo logged
       const lastP = filteredPhotos[filteredPhotos.length - 1];
-      const lastKey = `${lastP.numericDay || currentDay}_${(lastP.angle || 'front').toLowerCase()}`;
+      const defaultAfterKey = `${lastP.numericDay || currentDay}_${(lastP.angle || 'front').toLowerCase()}`;
+      const afterKeyToUse = (afterVal && selAfter.querySelector(`option[value="${afterVal}"]`)) ? afterVal : defaultAfterKey;
+      selAfter.value = afterKeyToUse;
 
-      // If user had a selected value that exists in the filtered options, keep it; otherwise default first & last
-      selBefore.value = (beforeVal && selBefore.querySelector(`option[value="${beforeVal}"]`)) ? beforeVal : firstKey;
-      selAfter.value = (afterVal && selAfter.querySelector(`option[value="${afterVal}"]`)) ? afterVal : lastKey;
+      // Extract the angle of the selected 'After' photo (e.g., 'front', 'back', 'side')
+      const targetAngle = afterKeyToUse.includes('_') ? afterKeyToUse.split('_')[1] : 'front';
+
+      // Find all photos with that SAME angle for like-for-like comparison
+      const sameAnglePhotos = filteredPhotos.filter(p => (p.angle || 'front').toLowerCase() === targetAngle);
+
+      let defaultBeforeKey = `${filteredPhotos[0].numericDay || 1}_${(filteredPhotos[0].angle || 'front').toLowerCase()}`;
+      if (sameAnglePhotos.length > 0) {
+        // Compare with baseline of the same angle (earliest front for latest front, earliest back for latest back)
+        const earliestSame = sameAnglePhotos[0];
+        defaultBeforeKey = `${earliestSame.numericDay || 1}_${(earliestSame.angle || 'front').toLowerCase()}`;
+      }
+
+      // If user had a selected beforeVal with matching angle, preserve it; otherwise use the angle-matched baseline
+      if (beforeVal && selBefore.querySelector(`option[value="${beforeVal}"]`)) {
+        const userAngle = beforeVal.includes('_') ? beforeVal.split('_')[1] : 'front';
+        if (userAngle === targetAngle) {
+          selBefore.value = beforeVal;
+        } else {
+          selBefore.value = defaultBeforeKey;
+        }
+      } else {
+        selBefore.value = defaultBeforeKey;
+      }
 
       baBeforeKey = selBefore.value;
       baAfterKey = selAfter.value;
@@ -22614,6 +22637,21 @@ function stopGuidedCooldown() {
 
     function onSelectComparisonAfter(val) {
       baAfterKey = val;
+      const targetAngle = val && val.includes('_') ? val.split('_')[1] : 'front';
+      const selBefore = document.getElementById('baSelectBefore');
+
+      // Automatically sync Before to the same angle for like-for-like comparison
+      if (selBefore) {
+        const curBeforeAngle = selBefore.value && selBefore.value.includes('_') ? selBefore.value.split('_')[1] : 'front';
+        if (curBeforeAngle !== targetAngle) {
+          const matchOpt = Array.from(selBefore.options).find(o => o.value.endsWith(`_${targetAngle}`));
+          if (matchOpt) {
+            selBefore.value = matchOpt.value;
+            baBeforeKey = matchOpt.value;
+          }
+        }
+      }
+
       loadComparisonPair(baBeforeKey, baAfterKey);
     }
 
@@ -22797,8 +22835,8 @@ function stopGuidedCooldown() {
         if (anyOpt) selAfter.value = anyOpt.value;
       }
 
-      // If Before select has an option with the same angle, ensure it matches for pure like-for-like comparison
-      if (selBefore && baComparisonAngleFilter !== 'all') {
+      // Ensure Before select matches the exact same angle (Front to Front, Back to Back)
+      if (selBefore) {
         const beforeHasAngle = Array.from(selBefore.options).find(o => o.value.endsWith(`_${targetAngle}`));
         if (beforeHasAngle && (!selBefore.value || !selBefore.value.endsWith(`_${targetAngle}`))) {
           selBefore.value = beforeHasAngle.value;
