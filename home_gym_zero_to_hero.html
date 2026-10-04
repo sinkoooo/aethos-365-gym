@@ -8553,7 +8553,7 @@
           <div class="side-widget">
             <div class="widget-head">
               <div class="widget-title">⏱️ Rep Cadence Pacer</div>
-              <span style="font-size: 0.72rem; color: var(--amber); font-weight: 700;">TEMPO 3-1-1</span>
+              <span style="font-size: 0.72rem; color: var(--amber); font-weight: 700;">TEMPO 2-1-1 (2.4s)</span>
             </div>
             <div class="tempo-pacer-box">
               <div style="font-size: 0.78rem; color: var(--text-muted);">Eliminate rushing. Match the visual pulse:</div>
@@ -8562,7 +8562,7 @@
                 <span style="font-size: 0.75rem; font-family: 'JetBrains Mono';" id="tempoSec">0s</span>
               </div>
               <button class="btn-tempo-start" id="btnTempo" onclick="toggleTempoPacer()">
-                Start 3-1-1 Tempo Guide
+                Start 2.4s Athletic Tempo Guide
               </button>
             </div>
           </div>
@@ -11884,7 +11884,7 @@
           <!-- Rep Cadence Metronome Pulse -->
           <div style="background: linear-gradient(135deg, rgba(16, 25, 48, 0.9) 0%, rgba(10, 16, 32, 0.9) 100%); padding: 14px 18px; border-radius: 10px; margin-top: 14px; border: 1px solid rgba(251, 191, 36, 0.35); box-shadow: inset 0 0 20px rgba(0,0,0,0.35);">
             <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span style="font-size: 0.78rem; color: var(--amber); font-weight: 700;">⏱️ Rep Tempo Cadence (3-0-1-0)</span>
+              <span style="font-size: 0.78rem; color: var(--amber); font-weight: 700;">⏱️ Rep Tempo Cadence (2.5s Athletic)</span>
               <button onclick="toggleLiveTempo()" id="btnLiveTempo" style="background: var(--bg-card); border: 1px solid var(--border); color: #fff; font-size: 0.75rem; padding: 4px 10px; border-radius: 4px; cursor: pointer;">
                 ▶ Start Tempo Audio
               </button>
@@ -11893,10 +11893,9 @@
               <div class="hud-tempo-fill" id="liveTempoFill"></div>
             </div>
             <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-dim);" id="liveTempoLabel">
-              <span>Lowering (3s)</span>
-              <span>Pause (0s)</span>
-              <span>Push (1s)</span>
-              <span>Squeeze (0s)</span>
+              <span>Drive Up (0.5s)</span>
+              <span>Squeeze (0.5s)</span>
+              <span>Descent (1.5s)</span>
             </div>
           </div>
 
@@ -11948,6 +11947,8 @@
         <button type="button" class="vis-mode-btn active" data-hudmode="bars" onclick="GymMusic.setVisualizerMode('bars')" title="Bars Spectrum">BARS</button>
         <button type="button" class="vis-mode-btn" data-hudmode="wave" onclick="GymMusic.setVisualizerMode('wave')" title="Oscilloscope Wave">WAVE</button>
         <button type="button" class="vis-mode-btn" data-hudmode="orbit" onclick="GymMusic.setVisualizerMode('orbit')" title="Cyber Pulse Orbit">ORBIT</button>
+        <button type="button" class="btn-micro-step" onclick="cycleSetHudTempoRate()" id="btnSetHudTempoSpeed" title="Rep Tempo Cadence (Brisk 2.4s / Dynamic 3.0s / Control 3.9s)" style="padding: 4px 10px; font-weight: 800; border-radius: 8px; color: var(--amber);">⚡ 2.4s TEMPO</button>
+        <button type="button" class="btn-micro-step" onclick="toggleSetHudTempoSound()" id="btnSetHudTempoAudio" title="Toggle Cadence Metronome Audio Ticks" style="padding: 4px 10px; font-weight: 800; border-radius: 8px; color: var(--emerald);">🔊 TICKS</button>
         <button type="button" class="btn-micro-step" onclick="GymMusic.toggleBassBoost()" id="btnSetHudBass" title="Toggle Bass Boost" style="padding: 4px 10px; font-weight: 800; border-radius: 8px;">⚡ BASS</button>
         <button type="button" class="btn-micro-step" onclick="toggleSetMusicHudDockMode()" title="Toggle Dock / Fullscreen (Hotkey: F)" id="btnDockSetHud" style="padding: 4px 10px; font-weight: 800; border-radius: 8px;">⤢ Dock</button>
         <button type="button" class="btn-micro-step" onclick="toggleNativeFullscreen()" title="Native Browser Fullscreen (F11)" id="btnNativeFsSetHud" style="padding: 4px 10px; font-weight: 800; border-radius: 8px;">⛶ FS</button>
@@ -14502,16 +14503,18 @@
     // Audio SFX synthesis using Web Audio API
     function playAudioTone(freq, type = 'sine', duration = 0.2) {
       if (typeof SoundFX !== 'undefined' && SoundFX && SoundFX.playBeep) {
-        SoundFX.playBeep(freq, type, duration, 0.15);
+        SoundFX.playBeep(freq, type, duration, 0.35);
         return;
       }
       try {
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
         osc.type = type;
         osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.35, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
         osc.connect(gain);
         gain.connect(audioCtx.destination);
         osc.start();
@@ -18833,11 +18836,11 @@ function stopGuidedCooldown() {
 
 
     // ==========================================
-    // TEMPO PACER ENGINE (3-1-1 CADENCE)
+    // TEMPO PACER ENGINE (2.4s ATHLETIC CADENCE)
     // ==========================================
     let tempoInterval = null;
-    let tempoState = 0; // 0: down (3s), 1: hold (1s), 2: up (1s)
-    let tempoTimer = 3;
+    let tempoState = 0; // 0: down (2 steps = 1.2s), 1: hold (1 step = 0.6s), 2: up (1 step = 0.6s)
+    let tempoTimer = 2;
 
     function toggleTempoPacer() {
       const btn = document.getElementById('btnTempo');
@@ -18848,47 +18851,50 @@ function stopGuidedCooldown() {
       if (tempoInterval) {
         clearInterval(tempoInterval);
         tempoInterval = null;
-        circle.className = 'tempo-circle';
-        action.innerText = "READY";
-        sec.innerText = "0s";
-        btn.innerText = "Start 3-1-1 Tempo Guide";
+        if (circle) circle.className = 'tempo-circle';
+        if (action) { action.innerText = "READY"; action.style.color = "var(--cyan)"; }
+        if (sec) sec.innerText = "0s";
+        if (btn) btn.innerText = "Start 2.4s Athletic Tempo Guide";
         return;
       }
 
-      btn.innerText = "⏹ Stop Pacer";
+      if (btn) btn.innerText = "⏹ Stop Pacer";
       tempoState = 0;
-      tempoTimer = 3;
+      tempoTimer = 2;
+
+      // Immediate first beat
+      if (typeof SoundFX !== 'undefined') SoundFX.playTempoTick('down');
+      if (circle) circle.className = 'tempo-circle down';
+      if (action) { action.innerText = "DOWN"; action.style.color = "var(--amber)"; }
+      if (sec) sec.innerText = "1.2s";
 
       tempoInterval = setInterval(() => {
         if (tempoState === 0) { // Lowering (Eccentric)
-          circle.className = 'tempo-circle down';
-          action.innerText = "DOWN";
-          action.style.color = "var(--amber)";
-          sec.innerText = `${tempoTimer}s`;
-          playAudioTone(220, 'sine', 0.08);
+          if (circle) circle.className = 'tempo-circle down';
+          if (action) { action.innerText = "DOWN"; action.style.color = "var(--amber)"; }
+          if (sec) sec.innerText = `${(tempoTimer * 0.6).toFixed(1)}s`;
+          if (typeof SoundFX !== 'undefined') SoundFX.playTempoTick('down');
           tempoTimer--;
           if (tempoTimer < 1) {
             tempoState = 1;
             tempoTimer = 1;
           }
         } else if (tempoState === 1) { // Pause (Isometric)
-          circle.className = 'tempo-circle hold';
-          action.innerText = "PAUSE";
-          action.style.color = "var(--rose)";
-          sec.innerText = "1s";
-          playAudioTone(330, 'triangle', 0.08);
+          if (circle) circle.className = 'tempo-circle hold';
+          if (action) { action.innerText = "PAUSE"; action.style.color = "var(--rose)"; }
+          if (sec) sec.innerText = "0.6s";
+          if (typeof SoundFX !== 'undefined') SoundFX.playTempoTick('peak');
           tempoState = 2;
           tempoTimer = 1;
         } else if (tempoState === 2) { // Drive Up (Concentric)
-          circle.className = 'tempo-circle up';
-          action.innerText = "DRIVE UP!";
-          action.style.color = "var(--emerald)";
-          sec.innerText = "1s";
-          playAudioTone(587.33, 'triangle', 0.15);
+          if (circle) circle.className = 'tempo-circle up';
+          if (action) { action.innerText = "DRIVE UP!"; action.style.color = "var(--emerald)"; }
+          if (sec) sec.innerText = "0.6s";
+          if (typeof SoundFX !== 'undefined') SoundFX.playTempoTick('up');
           tempoState = 0;
-          tempoTimer = 3;
+          tempoTimer = 2;
         }
-      }, 1000);
+      }, 600);
     }
 
     // ==========================================
@@ -21860,6 +21866,78 @@ function stopGuidedCooldown() {
     let activeWorkingSetInterval = null;
     let activeWorkingSetSecs = 0;
     let activeWorkingCadenceInterval = null;
+    const SET_HUD_TEMPOS = [
+      { id: 'brisk', label: '⚡ 2.4s TEMPO', stepMs: 400, totalSteps: 6, desc: 'Brisk Athletic (0.8s Up / 0.4s Hold / 1.2s Down)' },
+      { id: 'dynamic', label: '⏱️ 3.0s TEMPO', stepMs: 500, totalSteps: 6, desc: 'Hypertrophy Dynamic (1.0s Up / 0.5s Hold / 1.5s Down)' },
+      { id: 'strict', label: '🛡️ 3.9s TEMPO', stepMs: 650, totalSteps: 6, desc: 'Strict Negative (1.3s Up / 0.65s Hold / 1.95s Down)' }
+    ];
+    let currentSetHudTempoIdx = 0; // Default: Brisk 2.4s athletic tempo
+    let setHudTempoSoundEnabled = true;
+    let setHudCadenceStep = 0;
+
+    function startSetHudCadence(resetStep = true) {
+      if (activeWorkingCadenceInterval) {
+        clearInterval(activeWorkingCadenceInterval);
+        activeWorkingCadenceInterval = null;
+      }
+      if (resetStep) setHudCadenceStep = 0;
+
+      const pacerBar = document.getElementById('setHudCadencePacer');
+      const tempoCue = document.getElementById('setHudTempoCue');
+      const cfg = SET_HUD_TEMPOS[currentSetHudTempoIdx] || SET_HUD_TEMPOS[0];
+
+      // Instant first tick
+      if (pacerBar) pacerBar.style.width = `${((setHudCadenceStep + 1) / cfg.totalSteps) * 100}%`;
+      if (tempoCue) tempoCue.innerHTML = '⚡ <span style="color:#00f2fe;">EXPLOSIVE DRIVE (UP)</span>';
+      if (setHudTempoSoundEnabled && typeof SoundFX !== 'undefined') {
+        SoundFX.playTempoTick('up');
+      }
+
+      activeWorkingCadenceInterval = setInterval(() => {
+        setHudCadenceStep = (setHudCadenceStep + 1) % cfg.totalSteps;
+        if (pacerBar) pacerBar.style.width = `${((setHudCadenceStep + 1) / cfg.totalSteps) * 100}%`;
+        if (tempoCue) {
+          if (setHudCadenceStep <= 1) {
+            tempoCue.innerHTML = '⚡ <span style="color:#00f2fe;">EXPLOSIVE DRIVE (UP)</span>';
+            if (setHudTempoSoundEnabled && typeof SoundFX !== 'undefined') SoundFX.playTempoTick('up');
+          } else if (setHudCadenceStep === 2) {
+            tempoCue.innerHTML = '💥 <span style="color:#f43f5e;">PEAK CONTRACTION</span>';
+            if (setHudTempoSoundEnabled && typeof SoundFX !== 'undefined') SoundFX.playTempoTick('peak');
+          } else {
+            tempoCue.innerHTML = '🌊 <span style="color:#a855f7;">CONTROLLED NEGATIVE (DOWN)</span>';
+            if (setHudTempoSoundEnabled && typeof SoundFX !== 'undefined') SoundFX.playTempoTick('down');
+          }
+        }
+      }, cfg.stepMs);
+    }
+
+    function cycleSetHudTempoRate() {
+      currentSetHudTempoIdx = (currentSetHudTempoIdx + 1) % SET_HUD_TEMPOS.length;
+      updateSetHudTempoUI();
+      if (activeWorkingSetKey && activeWorkingCadenceInterval) {
+        startSetHudCadence(false);
+      }
+      if (typeof SoundFX !== 'undefined') SoundFX.playBeep(784, 'triangle', 0.08, 0.3);
+    }
+
+    function toggleSetHudTempoSound() {
+      setHudTempoSoundEnabled = !setHudTempoSoundEnabled;
+      updateSetHudTempoUI();
+      if (setHudTempoSoundEnabled && typeof SoundFX !== 'undefined') {
+        SoundFX.playTempoTick('up');
+      }
+    }
+
+    function updateSetHudTempoUI() {
+      const cfg = SET_HUD_TEMPOS[currentSetHudTempoIdx] || SET_HUD_TEMPOS[0];
+      const speedBtn = document.getElementById('btnSetHudTempoSpeed');
+      const soundBtn = document.getElementById('btnSetHudTempoAudio');
+      if (speedBtn) speedBtn.innerText = cfg.label;
+      if (soundBtn) {
+        soundBtn.innerText = setHudTempoSoundEnabled ? '🔊 TICKS' : '🔇 MUTED';
+        soundBtn.style.color = setHudTempoSoundEnabled ? 'var(--emerald)' : 'var(--text-muted)';
+      }
+    }
 
     function startWorkoutSet(logKey, exName, setNum, totalSets, targetReps, targetWt, btnEl) {
       activeWorkingSetKey = logKey;
@@ -21956,19 +22034,9 @@ function stopGuidedCooldown() {
         if (timerValEl) timerValEl.innerText = `${m}:${s}`;
       }, 1000);
 
-      // Start Cadence / Rep Tempo Metronome Pacer (2s Concentric, 1s Peak, 3s Eccentric)
-      const pacerBar = document.getElementById('setHudCadencePacer');
-      const tempoCue = document.getElementById('setHudTempoCue');
-      let cadenceStep = 0;
-      activeWorkingCadenceInterval = setInterval(() => {
-        cadenceStep = (cadenceStep + 1) % 6;
-        if (pacerBar) pacerBar.style.width = `${((cadenceStep + 1) / 6) * 100}%`;
-        if (tempoCue) {
-          if (cadenceStep <= 1) tempoCue.innerHTML = '⚡ <span style="color:#00f2fe;">EXPLOSIVE DRIVE (UP)</span>';
-          else if (cadenceStep === 2) tempoCue.innerHTML = '💥 <span style="color:#f43f5e;">PEAK CONTRACTION</span>';
-          else tempoCue.innerHTML = '🌊 <span style="color:#a855f7;">CONTROLLED NEGATIVE (DOWN)</span>';
-        }
-      }, 650);
+      // Start Cadence / Rep Tempo Metronome Pacer (Audible Rhythmic Metronome)
+      updateSetHudTempoUI();
+      startSetHudCadence(true);
 
       // Sound & Haptic Feedback
       playAudioTone(659.25, 'triangle', 0.2);
@@ -25258,37 +25326,78 @@ if (typeof window !== 'undefined') {
           this.ctx.resume();
         }
       },
-      playBeep(freq = 440, type = 'sine', duration = 0.12, gainVal = 0.15) {
+      playBeep(freq = 440, type = 'sine', duration = 0.12, gainVal = 0.35) {
         try {
           this.init();
           if (!this.ctx) return;
           const osc = this.ctx.createOscillator();
           const gain = this.ctx.createGain();
           osc.type = type;
-          osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
-          gain.gain.setValueAtTime(gainVal, this.ctx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + duration);
+          const t = this.ctx.currentTime;
+          osc.frequency.setValueAtTime(freq, t);
+          gain.gain.setValueAtTime(gainVal, t);
+          gain.gain.exponentialRampToValueAtTime(0.0001, t + duration);
           osc.connect(gain);
           gain.connect(this.ctx.destination);
-          osc.start();
-          osc.stop(this.ctx.currentTime + duration);
+          osc.start(t);
+          osc.stop(t + duration);
         } catch(e) {}
       },
       playSetComplete() {
-        setTimeout(() => this.playBeep(523.25, 'triangle', 0.12, 0.2), 0);
-        setTimeout(() => this.playBeep(659.25, 'triangle', 0.12, 0.2), 110);
-        setTimeout(() => this.playBeep(783.99, 'triangle', 0.25, 0.25), 220);
+        setTimeout(() => this.playBeep(523.25, 'triangle', 0.14, 0.35), 0);
+        setTimeout(() => this.playBeep(659.25, 'triangle', 0.14, 0.35), 110);
+        setTimeout(() => this.playBeep(783.99, 'triangle', 0.28, 0.40), 220);
       },
       playRestTimerAlert() {
-        this.playBeep(880, 'sine', 0.15, 0.3);
-        setTimeout(() => this.playBeep(880, 'sine', 0.25, 0.3), 180);
+        this.playBeep(880, 'sine', 0.18, 0.40);
+        setTimeout(() => this.playBeep(880, 'sine', 0.28, 0.40), 180);
       },
       playFanfare() {
         const notes = [523.25, 659.25, 783.99, 1046.50];
-        notes.forEach((f, i) => setTimeout(() => this.playBeep(f, 'triangle', 0.25, 0.25), i * 140));
+        notes.forEach((f, i) => setTimeout(() => this.playBeep(f, 'triangle', 0.28, 0.35), i * 140));
       },
-      playTempoTick(isHigh = false) {
-        this.playBeep(isHigh ? 880 : 440, 'sine', 0.05, 0.08);
+      playTempoTick(typeOrHigh = false, customGain = null) {
+        try {
+          this.init();
+          if (!this.ctx) return;
+          let freq = 659.25;
+          let wave = 'triangle';
+          let dur = 0.055;
+          let vol = customGain || 0.38;
+
+          if (typeOrHigh === true || typeOrHigh === 'up' || typeOrHigh === 'high') {
+            freq = 1174.66; // D6 - Crisp bright chime for explosive drive
+            wave = 'triangle';
+            dur = 0.09;
+            vol = customGain || 0.48;
+          } else if (typeOrHigh === 'peak' || typeOrHigh === 'hold') {
+            freq = 880; // A5 - Peak contraction
+            dur = 0.07;
+            vol = customGain || 0.42;
+          } else {
+            // Down / Eccentric / Metronome woodblock click
+            freq = 659.25; // E5
+            wave = 'triangle';
+            dur = 0.05;
+            vol = customGain || 0.36;
+          }
+
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = wave;
+          const t = this.ctx.currentTime;
+          osc.frequency.setValueAtTime(freq, t);
+          if (typeOrHigh === 'down' || typeOrHigh === false) {
+            // Fast pitch plunge simulates a punchy rimshot/woodblock click
+            osc.frequency.exponentialRampToValueAtTime(440, t + dur);
+          }
+          gain.gain.setValueAtTime(vol, t);
+          gain.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(t);
+          osc.stop(t + dur);
+        } catch(e) {}
       }
     };
 
@@ -25517,26 +25626,31 @@ if (typeof window !== 'undefined') {
       liveTempoActive = true;
       const btn = document.getElementById('btnLiveTempo');
       if (btn) {
-        btn.innerText = '⏹ Stop Audio Tempo';
+        btn.innerText = '⏹ Stop Tempo (2.5s)';
         btn.style.borderColor = 'var(--rose)';
         btn.style.color = '#fda4af';
       }
       liveTempoStep = 0;
+      const fill = document.getElementById('liveTempoFill');
+      const label = document.getElementById('liveTempoLabel');
+      if (fill) fill.style.width = '20%';
+      if (label) label.innerHTML = '<strong style="color:var(--emerald);">⚡ EXPLODE UP (0.5s)!</strong>';
+      SoundFX.playTempoTick('up');
+
       liveTempoInterval = setInterval(() => {
         liveTempoStep = (liveTempoStep + 1) % 5;
-        const fill = document.getElementById('liveTempoFill');
-        const label = document.getElementById('liveTempoLabel');
         if (fill) fill.style.width = `${((liveTempoStep + 1) / 5) * 100}%`;
         if (liveTempoStep === 0) {
-          SoundFX.playTempoTick(true);
-          if (label) label.innerHTML = '<strong style="color:var(--cyan);">LOWERING (3s)...</strong>';
-        } else if (liveTempoStep === 3) {
-          SoundFX.playTempoTick(false);
-          if (label) label.innerHTML = '<strong style="color:var(--emerald);">EXPLODE UP (1s)!</strong>';
+          SoundFX.playTempoTick('up');
+          if (label) label.innerHTML = '<strong style="color:var(--emerald);">⚡ EXPLODE UP (0.5s)!</strong>';
+        } else if (liveTempoStep === 1) {
+          SoundFX.playTempoTick('peak');
+          if (label) label.innerHTML = '<strong style="color:var(--rose);">💥 SQUEEZE / HOLD</strong>';
         } else {
-          SoundFX.playTempoTick(false);
+          SoundFX.playTempoTick('down');
+          if (label) label.innerHTML = '<strong style="color:var(--cyan);">🌊 LOWERING (1.5s)...</strong>';
         }
-      }, 1000);
+      }, 500);
     }
 
     function stopLiveTempo() {
@@ -25551,6 +25665,10 @@ if (typeof window !== 'undefined') {
       }
       const fill = document.getElementById('liveTempoFill');
       if (fill) fill.style.width = '0%';
+      const label = document.getElementById('liveTempoLabel');
+      if (label) {
+        label.innerHTML = '<span>Drive Up (0.5s)</span><span>Squeeze (0.5s)</span><span>Descent (1.5s)</span>';
+      }
     }
 
     function finishLiveWorkoutSession() {
