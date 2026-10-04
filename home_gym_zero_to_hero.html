@@ -3170,23 +3170,30 @@
       padding: 3px;
       margin-bottom: 10px;
       border: 1px solid rgba(255, 255, 255, 0.06);
-      gap: 4px;
+      gap: 3px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .heatmap-tab-btn {
-      flex: 1;
+      flex: 1 1 0;
+      min-width: 0;
       background: transparent;
-      border: none;
+      border: 1px solid transparent;
       color: var(--text-muted);
-      font-size: 0.68rem;
+      font-size: 0.72rem;
       font-weight: 700;
-      padding: 5px 6px;
+      padding: 5px 4px;
       border-radius: 6px;
       cursor: pointer;
       transition: all 0.2s ease;
       text-transform: uppercase;
       letter-spacing: 0.3px;
+      text-align: center;
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      box-sizing: border-box;
     }
 
     .heatmap-tab-btn:hover {
@@ -3198,7 +3205,7 @@
       background: rgba(56, 189, 248, 0.15);
       color: var(--cyan);
       box-shadow: inset 0 0 10px rgba(56, 189, 248, 0.2), 0 1px 3px rgba(0,0,0,0.3);
-      border: 1px solid rgba(56, 189, 248, 0.3);
+      border: 1px solid rgba(56, 189, 248, 0.35);
     }
 
     .heatmap-display-stage {
@@ -8982,9 +8989,9 @@
             <div class="heatmap-visual">
               <!-- Perspective View Toggles -->
               <div class="heatmap-tabs-bar">
-                <button type="button" class="heatmap-tab-btn active" id="btnHeatmapFront" onclick="setHeatmapPerspective('front')">Anterior (Front)</button>
-                <button type="button" class="heatmap-tab-btn" id="btnHeatmapBack" onclick="setHeatmapPerspective('back')">Posterior (Back)</button>
-                <button type="button" class="heatmap-tab-btn" id="btnHeatmapMatrix" onclick="setHeatmapPerspective('matrix')">Load Matrix</button>
+                <button type="button" class="heatmap-tab-btn active" id="btnHeatmapFront" onclick="setHeatmapPerspective('front')" title="Anterior (Front View)">Front</button>
+                <button type="button" class="heatmap-tab-btn" id="btnHeatmapBack" onclick="setHeatmapPerspective('back')" title="Posterior (Back View)">Back</button>
+                <button type="button" class="heatmap-tab-btn" id="btnHeatmapMatrix" onclick="setHeatmapPerspective('matrix')" title="Volume & Stimulus Matrix">Matrix</button>
               </div>
 
               <!-- Heatmap Display Stage (Front, Back & Matrix Views) -->
