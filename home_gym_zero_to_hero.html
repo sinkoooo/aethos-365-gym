@@ -12554,6 +12554,7 @@
         <button type="button" class="vis-mode-btn active" data-hudmode="bars" onclick="GymMusic.setVisualizerMode('bars')" title="Bars Spectrum">BARS</button>
         <button type="button" class="vis-mode-btn" data-hudmode="wave" onclick="GymMusic.setVisualizerMode('wave')" title="Oscilloscope Wave">WAVE</button>
         <button type="button" class="vis-mode-btn" data-hudmode="orbit" onclick="GymMusic.setVisualizerMode('orbit')" title="Cyber Pulse Orbit">ORBIT</button>
+        <button type="button" class="btn-micro-step" onclick="toggleSetHudCadence()" id="btnSetHudTempoToggle" title="Start / Stop Metronome Tempo Cadence" style="padding: 4px 10px; font-weight: 800; border-radius: 8px; color: #f43f5e; border-color: rgba(244, 63, 94, 0.4); background: rgba(244, 63, 94, 0.12);">⏹ STOP TEMPO</button>
         <button type="button" class="btn-micro-step" onclick="cycleSetHudTempoRate()" id="btnSetHudTempoSpeed" title="Rep Tempo Cadence (Brisk 2.4s / Dynamic 3.0s / Control 3.9s)" style="padding: 4px 10px; font-weight: 800; border-radius: 8px; color: var(--amber);">⚡ 2.4s TEMPO</button>
         <button type="button" class="btn-micro-step" onclick="toggleSetHudTempoSound()" id="btnSetHudTempoAudio" title="Toggle Cadence Metronome Audio Ticks" style="padding: 4px 10px; font-weight: 800; border-radius: 8px; color: var(--emerald);">🔊 TICKS</button>
         <button type="button" class="btn-micro-step" onclick="GymMusic.toggleBassBoost()" id="btnSetHudBass" title="Toggle Bass Boost" style="padding: 4px 10px; font-weight: 800; border-radius: 8px;">⚡ BASS</button>
@@ -12618,7 +12619,7 @@
         <span>🏆 ✓ CONQUER SET &amp; START REST (60s)</span>
       </button>
       <div style="font-size: 0.72rem; color: var(--text-dim); text-align: center; letter-spacing: 0.5px;">
-        Hotkeys: <kbd style="background:rgba(255,255,255,0.1); padding:1px 5px; border-radius:4px; color:#fff;">Enter</kbd> Conquer Set &bull; <kbd style="background:rgba(255,255,255,0.1); padding:1px 5px; border-radius:4px; color:#fff;">Space</kbd> Play/Pause &bull; <kbd style="background:rgba(255,255,255,0.1); padding:1px 5px; border-radius:4px; color:#fff;">F</kbd> Dock/Fullscreen &bull; <kbd style="background:rgba(255,255,255,0.1); padding:1px 5px; border-radius:4px; color:#fff;">Esc</kbd> Exit
+        Hotkeys: <kbd style="background:rgba(255,255,255,0.1); padding:1px 5px; border-radius:4px; color:#fff;">Enter</kbd> Conquer Set &bull; <kbd style="background:rgba(255,255,255,0.1); padding:1px 5px; border-radius:4px; color:#fff;">Space</kbd> Play/Pause &bull; <kbd style="background:rgba(255,255,255,0.1); padding:1px 5px; border-radius:4px; color:#fff;">T</kbd> Tempo On/Off &bull; <kbd style="background:rgba(255,255,255,0.1); padding:1px 5px; border-radius:4px; color:#fff;">F</kbd> Dock/Fullscreen &bull; <kbd style="background:rgba(255,255,255,0.1); padding:1px 5px; border-radius:4px; color:#fff;">Esc</kbd> Exit
       </div>
     </div>
   </div>
@@ -22839,7 +22840,8 @@ function stopGuidedCooldown() {
       { id: 'strict', label: '🛡️ 3.9s TEMPO', stepMs: 650, totalSteps: 6, desc: 'Strict Negative (1.3s Up / 0.65s Hold / 1.95s Down)' }
     ];
     let currentSetHudTempoIdx = 0; // Default: Brisk 2.4s athletic tempo
-    let setHudTempoSoundEnabled = true;
+    let setHudTempoSoundEnabled = (localStorage.getItem('gym_hud_tempo_sound') !== 'false');
+    let setHudTempoAutoEnabled = (localStorage.getItem('gym_hud_tempo_auto') !== 'false');
     let setHudCadenceStep = 0;
 
     function startSetHudCadence(resetStep = true) {
@@ -22851,11 +22853,25 @@ function stopGuidedCooldown() {
 
       const pacerBar = document.getElementById('setHudCadencePacer');
       const tempoCue = document.getElementById('setHudTempoCue');
+      const toggleBtn = document.getElementById('btnSetHudTempoToggle');
       const cfg = SET_HUD_TEMPOS[currentSetHudTempoIdx] || SET_HUD_TEMPOS[0];
 
+      if (toggleBtn) {
+        toggleBtn.innerText = '⏹ STOP TEMPO';
+        toggleBtn.style.color = '#f43f5e';
+        toggleBtn.style.borderColor = 'rgba(244, 63, 94, 0.4)';
+        toggleBtn.style.background = 'rgba(244, 63, 94, 0.12)';
+      }
+
       // Instant first tick
-      if (pacerBar) pacerBar.style.width = `${((setHudCadenceStep + 1) / cfg.totalSteps) * 100}%`;
-      if (tempoCue) tempoCue.innerHTML = '⚡ <span style="color:#00f2fe;">EXPLOSIVE DRIVE (UP)</span>';
+      if (pacerBar) {
+        pacerBar.style.display = 'block';
+        pacerBar.style.width = `${((setHudCadenceStep + 1) / cfg.totalSteps) * 100}%`;
+      }
+      if (tempoCue) {
+        tempoCue.style.display = 'block';
+        tempoCue.innerHTML = '⚡ <span style="color:#00f2fe;">EXPLOSIVE DRIVE (UP)</span>';
+      }
       if (setHudTempoSoundEnabled && typeof SoundFX !== 'undefined') {
         SoundFX.playTempoTick('up');
       }
@@ -22878,6 +22894,42 @@ function stopGuidedCooldown() {
       }, cfg.stepMs);
     }
 
+    function stopSetHudCadence() {
+      if (activeWorkingCadenceInterval) {
+        clearInterval(activeWorkingCadenceInterval);
+        activeWorkingCadenceInterval = null;
+      }
+      const pacerBar = document.getElementById('setHudCadencePacer');
+      const tempoCue = document.getElementById('setHudTempoCue');
+      const toggleBtn = document.getElementById('btnSetHudTempoToggle');
+
+      if (pacerBar) {
+        pacerBar.style.width = '0%';
+        pacerBar.style.display = 'none';
+      }
+      if (tempoCue) {
+        tempoCue.innerHTML = '<span style="color:var(--text-dim); font-size: 0.85rem;">Tempo Metronome Inactive</span>';
+      }
+      if (toggleBtn) {
+        toggleBtn.innerText = '▶ START TEMPO';
+        toggleBtn.style.color = 'var(--cyan)';
+        toggleBtn.style.borderColor = 'rgba(0, 242, 254, 0.35)';
+        toggleBtn.style.background = 'rgba(0, 242, 254, 0.08)';
+      }
+    }
+
+    function toggleSetHudCadence() {
+      if (activeWorkingCadenceInterval) {
+        stopSetHudCadence();
+        setHudTempoAutoEnabled = false;
+        localStorage.setItem('gym_hud_tempo_auto', 'false');
+      } else {
+        setHudTempoAutoEnabled = true;
+        localStorage.setItem('gym_hud_tempo_auto', 'true');
+        startSetHudCadence(true);
+      }
+    }
+
     function cycleSetHudTempoRate() {
       currentSetHudTempoIdx = (currentSetHudTempoIdx + 1) % SET_HUD_TEMPOS.length;
       updateSetHudTempoUI();
@@ -22889,6 +22941,7 @@ function stopGuidedCooldown() {
 
     function toggleSetHudTempoSound() {
       setHudTempoSoundEnabled = !setHudTempoSoundEnabled;
+      localStorage.setItem('gym_hud_tempo_sound', String(setHudTempoSoundEnabled));
       updateSetHudTempoUI();
       if (setHudTempoSoundEnabled && typeof SoundFX !== 'undefined') {
         SoundFX.playTempoTick('up');
@@ -22899,10 +22952,18 @@ function stopGuidedCooldown() {
       const cfg = SET_HUD_TEMPOS[currentSetHudTempoIdx] || SET_HUD_TEMPOS[0];
       const speedBtn = document.getElementById('btnSetHudTempoSpeed');
       const soundBtn = document.getElementById('btnSetHudTempoAudio');
+      const toggleBtn = document.getElementById('btnSetHudTempoToggle');
       if (speedBtn) speedBtn.innerText = cfg.label;
       if (soundBtn) {
         soundBtn.innerText = setHudTempoSoundEnabled ? '🔊 TICKS' : '🔇 MUTED';
         soundBtn.style.color = setHudTempoSoundEnabled ? 'var(--emerald)' : 'var(--text-muted)';
+      }
+      if (toggleBtn) {
+        const isRunning = !!activeWorkingCadenceInterval;
+        toggleBtn.innerText = isRunning ? '⏹ STOP TEMPO' : '▶ START TEMPO';
+        toggleBtn.style.color = isRunning ? '#f43f5e' : 'var(--cyan)';
+        toggleBtn.style.borderColor = isRunning ? 'rgba(244, 63, 94, 0.4)' : 'rgba(0, 242, 254, 0.35)';
+        toggleBtn.style.background = isRunning ? 'rgba(244, 63, 94, 0.12)' : 'rgba(0, 242, 254, 0.08)';
       }
     }
 
@@ -23001,9 +23062,13 @@ function stopGuidedCooldown() {
         if (timerValEl) timerValEl.innerText = `${m}:${s}`;
       }, 1000);
 
-      // Start Cadence / Rep Tempo Metronome Pacer (Audible Rhythmic Metronome)
+      // Cadence / Rep Tempo Metronome Pacer (Audible Rhythmic Metronome)
       updateSetHudTempoUI();
-      startSetHudCadence(true);
+      if (setHudTempoAutoEnabled) {
+        startSetHudCadence(true);
+      } else {
+        stopSetHudCadence();
+      }
 
       // Sound & Haptic Feedback
       playAudioTone(659.25, 'triangle', 0.2);
@@ -23141,6 +23206,9 @@ function stopGuidedCooldown() {
         } else if (e.key === 'Escape') {
           e.preventDefault();
           closeSetMusicGraphicsHUD();
+        } else if (e.key === 't' || e.key === 'T') {
+          e.preventDefault();
+          toggleSetHudCadence();
         } else if (e.key === 'f' || e.key === 'F') {
           e.preventDefault();
           toggleSetMusicHudDockMode();
