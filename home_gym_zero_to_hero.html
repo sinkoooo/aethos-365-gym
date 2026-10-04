@@ -3151,27 +3151,254 @@
       transform: translateY(-1px);
     }
 
+    /* ── 1000X TARGETED MUSCLE HEATMAP & KINETIC LOAD COCKPIT ── */
     .heatmap-visual {
-      background: rgba(10, 16, 30, 0.6);
+      background: linear-gradient(145deg, rgba(10, 16, 30, 0.75) 0%, rgba(6, 10, 20, 0.85) 100%);
       border-radius: var(--radius-md);
-      padding: 14px;
+      padding: 12px;
       display: flex;
       flex-direction: column;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      position: relative;
+    }
+
+    .heatmap-tabs-bar {
+      display: flex;
+      background: rgba(15, 23, 42, 0.65);
+      border-radius: 8px;
+      padding: 3px;
+      margin-bottom: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      gap: 4px;
+    }
+
+    .heatmap-tab-btn {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 5px 6px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+
+    .heatmap-tab-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .heatmap-tab-btn.active {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--cyan);
+      box-shadow: inset 0 0 10px rgba(56, 189, 248, 0.2), 0 1px 3px rgba(0,0,0,0.3);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .heatmap-display-stage {
+      display: flex;
+      justify-content: center;
       align-items: center;
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      position: relative;
+      min-height: 185px;
+      background: radial-gradient(circle at center, rgba(30, 41, 59, 0.3) 0%, rgba(10, 16, 30, 0) 70%);
+      border-radius: 8px;
+      margin-bottom: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .heatmap-svg-model {
+      max-width: 140px;
+      height: 185px;
+      filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.6));
+    }
+
+    .heat-part {
+      transition: fill 0.35s cubic-bezier(0.4, 0, 0.2, 1), stroke 0.3s ease, filter 0.3s ease, transform 0.2s ease;
+      cursor: pointer;
+    }
+
+    .heat-part:hover {
+      filter: brightness(1.35) drop-shadow(0 0 8px currentColor);
+    }
+
+    .heat-part.highlighted {
+      stroke: #fff !important;
+      stroke-width: 1.5px !important;
+      filter: drop-shadow(0 0 12px var(--cyan)) !important;
+    }
+
+    /* Kinetic Stimulus Bar */
+    .kinetic-split-wrap {
+      margin-bottom: 10px;
+      background: rgba(15, 23, 42, 0.55);
+      border-radius: 8px;
+      padding: 8px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .kinetic-split-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.67rem;
+      font-weight: 700;
+      color: var(--text-dim);
+      margin-bottom: 5px;
+    }
+
+    .kinetic-split-bar {
+      height: 6px;
+      border-radius: 99px;
+      display: flex;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.08);
+      gap: 1px;
+    }
+
+    .kinetic-seg-upper { background: linear-gradient(90deg, #00f2fe, #38bdf8); transition: width 0.4s ease; }
+    .kinetic-seg-lower { background: linear-gradient(90deg, #f59e0b, #ef4444); transition: width 0.4s ease; }
+    .kinetic-seg-core  { background: linear-gradient(90deg, #10b981, #06b6d4); transition: width 0.4s ease; }
+
+    /* Muscle Telemetry Cards */
+    .muscle-cards-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      max-height: 220px;
+      overflow-y: auto;
+      padding-right: 2px;
+      margin-bottom: 6px;
+    }
+
+    .muscle-cards-list::-webkit-scrollbar {
+      width: 4px;
+    }
+    .muscle-cards-list::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 99px;
+    }
+
+    .muscle-intel-card {
+      background: rgba(15, 23, 42, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      padding: 7px 10px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .muscle-intel-card:hover, .muscle-intel-card.active {
+      border-color: rgba(56, 189, 248, 0.4);
+      background: rgba(20, 32, 58, 0.75);
+      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.15);
+      transform: translateX(2px);
+    }
+
+    .mic-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mic-name {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .mic-badge {
+      font-size: 0.60rem;
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 99px;
+      text-transform: uppercase;
+      letter-spacing: 0.2px;
+    }
+
+    .mic-badge.primary {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--cyan);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .mic-badge.synergist {
+      background: rgba(168, 85, 247, 0.15);
+      color: #c084fc;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+    }
+
+    .mic-metrics {
+      display: flex;
+      gap: 8px;
+      font-size: 0.66rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: #94a3b8;
+    }
+
+    .mic-exercises {
+      font-size: 0.67rem;
+      color: var(--text-dim);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .mic-role {
+      font-size: 0.66rem;
+      color: #38bdf8;
+      font-style: italic;
+    }
+
+    .heatmap-intel-footer {
+      margin-top: 6px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.70rem;
+      color: var(--text-dim);
+    }
+
+    .btn-heatmap-modal {
+      background: transparent;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--cyan);
+      font-size: 0.70rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-heatmap-modal:hover {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--cyan);
     }
 
     .heatmap-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      margin-top: 10px;
+      margin-top: 8px;
     }
 
     .muscle-tag {
-      font-size: 0.7rem;
-      padding: 3px 8px;
+      font-size: 0.68rem;
+      padding: 2px 7px;
       border-radius: 4px;
       font-weight: 700;
       text-transform: uppercase;
@@ -8745,31 +8972,138 @@
             </div>
           </div>
 
-          <!-- Muscle Heatmap Tool Widget -->
-          <div class="side-widget">
+          <!-- 1000X TARGETED MUSCLE HEATMAP & KINETIC LOAD COCKPIT -->
+          <div class="side-widget" id="sidebarHeatmapWidget">
             <div class="widget-head">
               <div class="widget-title">🧬 Targeted Muscle Heatmap</div>
-              <span style="font-size: 0.72rem; color: var(--cyan); font-weight: 700;" id="heatmapMode">TODAY'S ACTIVATION</span>
+              <span style="font-size: 0.70rem; color: var(--cyan); font-weight: 800; background: rgba(56,189,248,0.12); padding: 2px 7px; border-radius: 99px; border: 1px solid rgba(56,189,248,0.25);" id="heatmapMode">TODAY'S ACTIVATION</span>
             </div>
+            
             <div class="heatmap-visual">
-              <svg width="180" height="200" viewBox="0 0 100 130">
-                <circle cx="50" cy="14" r="8" fill="#1e293b" />
-                <rect x="47" y="22" width="6" height="5" fill="#1e293b" />
-                <path id="heat-chest" d="M36 28 Q50 36 64 28 L62 42 Q50 48 38 42 Z" fill="#1e293b" />
-                <path id="heat-lats" d="M33 28 L30 48 Q50 56 70 48 L67 28 Q50 32 33 28 Z" fill="#1e293b" />
-                <rect id="heat-abs" x="42" y="44" width="16" height="20" rx="3" fill="#1e293b" />
-                <path id="heat-glutes" d="M38 65 Q50 72 62 65 L66 78 Q50 82 34 78 Z" fill="#1e293b" />
-                <path id="heat-quads" d="M38 78 L36 102 L47 100 L48 78 Z" fill="#1e293b" />
-                <path id="heat-quads-r" d="M62 78 L64 102 L53 100 L52 78 Z" fill="#1e293b" />
-                <rect id="heat-calves" x="38" y="104" width="7" height="18" rx="2" fill="#1e293b" />
-                <rect id="heat-calves-r" x="55" y="104" width="7" height="18" rx="2" fill="#1e293b" />
-                <circle id="heat-delts-l" cx="30" cy="30" r="5" fill="#1e293b" />
-                <circle id="heat-delts-r" cx="70" cy="30" r="5" fill="#1e293b" />
-              </svg>
-              <div class="heatmap-tags" id="heatmapTagsContainer">
-                <span class="muscle-tag mt-active">Quads</span>
-                <span class="muscle-tag mt-active">Chest</span>
-                <span class="muscle-tag mt-secondary">Core</span>
+              <!-- Perspective View Toggles -->
+              <div class="heatmap-tabs-bar">
+                <button type="button" class="heatmap-tab-btn active" id="btnHeatmapFront" onclick="setHeatmapPerspective('front')">Anterior (Front)</button>
+                <button type="button" class="heatmap-tab-btn" id="btnHeatmapBack" onclick="setHeatmapPerspective('back')">Posterior (Back)</button>
+                <button type="button" class="heatmap-tab-btn" id="btnHeatmapMatrix" onclick="setHeatmapPerspective('matrix')">Load Matrix</button>
+              </div>
+
+              <!-- Heatmap Display Stage (Front, Back & Matrix Views) -->
+              <div class="heatmap-display-stage" id="heatmapSvgStage">
+                <!-- Anterior (Front) Anatomical Model -->
+                <svg class="heatmap-svg-model" id="svgModelFront" width="140" height="185" viewBox="0 0 140 185">
+                  <circle cx="70" cy="14" r="8" fill="#1e293b" />
+                  <rect x="67" y="22" width="6" height="5" fill="#1e293b" />
+                  
+                  <!-- Left & Right Anterior Deltoids -->
+                  <path id="heat-front-delts-l" class="heat-part" onclick="inspectMuscleGroup('delts')" d="M48 28 C42 29, 39 36, 41 43 C45 44, 48 38, 50 32 Z" fill="#1e293b"><title>Anterior Deltoids</title></path>
+                  <path id="heat-front-delts-r" class="heat-part" onclick="inspectMuscleGroup('delts')" d="M92 28 C98 29, 101 36, 99 43 C95 44, 92 38, 90 32 Z" fill="#1e293b"><title>Anterior Deltoids</title></path>
+                  
+                  <!-- Chest Pectorals (Left & Right) -->
+                  <path id="heat-front-chest-l" class="heat-part" onclick="inspectMuscleGroup('chest')" d="M51 30 Q68 31, 68 46 Q54 49, 49 40 Z" fill="#1e293b"><title>Pectoralis Major (Chest)</title></path>
+                  <path id="heat-front-chest-r" class="heat-part" onclick="inspectMuscleGroup('chest')" d="M89 30 Q72 31, 72 46 Q86 49, 91 40 Z" fill="#1e293b"><title>Pectoralis Major (Chest)</title></path>
+                  
+                  <!-- Biceps (Left & Right) -->
+                  <path id="heat-front-biceps-l" class="heat-part" onclick="inspectMuscleGroup('biceps')" d="M39 44 C36 49, 36 57, 40 62 C43 60, 44 52, 42 46 Z" fill="#1e293b"><title>Biceps Brachii</title></path>
+                  <path id="heat-front-biceps-r" class="heat-part" onclick="inspectMuscleGroup('biceps')" d="M101 44 C104 49, 104 57, 100 62 C97 60, 96 52, 98 46 Z" fill="#1e293b"><title>Biceps Brachii</title></path>
+                  
+                  <!-- Forearms -->
+                  <path id="heat-front-forearms-l" class="heat-part" d="M38 64 C35 72, 33 80, 31 87 C34 88, 38 81, 40 73 Z" fill="#1e293b" />
+                  <path id="heat-front-forearms-r" class="heat-part" d="M102 64 C105 72, 107 80, 109 87 C106 88, 102 81, 100 73 Z" fill="#1e293b" />
+
+                  <!-- Core / Abs (Rectus Abdominis Pack) -->
+                  <rect id="heat-front-abs-1" class="heat-part" onclick="inspectMuscleGroup('abs')" x="61" y="49" width="8" height="7" rx="1.5" fill="#1e293b"><title>Rectus Abdominis (Abs)</title></rect>
+                  <rect id="heat-front-abs-2" class="heat-part" onclick="inspectMuscleGroup('abs')" x="71" y="49" width="8" height="7" rx="1.5" fill="#1e293b"><title>Rectus Abdominis (Abs)</title></rect>
+                  <rect id="heat-front-abs-3" class="heat-part" onclick="inspectMuscleGroup('abs')" x="61" y="58" width="8" height="7" rx="1.5" fill="#1e293b"><title>Rectus Abdominis (Abs)</title></rect>
+                  <rect id="heat-front-abs-4" class="heat-part" onclick="inspectMuscleGroup('abs')" x="71" y="58" width="8" height="7" rx="1.5" fill="#1e293b"><title>Rectus Abdominis (Abs)</title></rect>
+                  <rect id="heat-front-abs-5" class="heat-part" onclick="inspectMuscleGroup('abs')" x="61" y="67" width="8" height="7" rx="1.5" fill="#1e293b"><title>Rectus Abdominis (Abs)</title></rect>
+                  <rect id="heat-front-abs-6" class="heat-part" onclick="inspectMuscleGroup('abs')" x="71" y="67" width="8" height="7" rx="1.5" fill="#1e293b"><title>Rectus Abdominis (Abs)</title></rect>
+
+                  <!-- Obliques (Left & Right Flanks) -->
+                  <path id="heat-front-obliques-l" class="heat-part" onclick="inspectMuscleGroup('obliques')" d="M52 48 C51 58, 54 68, 58 74 C59 70, 59 56, 57 48 Z" fill="#1e293b"><title>External Obliques</title></path>
+                  <path id="heat-front-obliques-r" class="heat-part" onclick="inspectMuscleGroup('obliques')" d="M88 48 C89 58, 86 68, 82 74 C81 70, 81 56, 83 48 Z" fill="#1e293b"><title>External Obliques</title></path>
+
+                  <!-- Quadriceps (Left & Right) -->
+                  <path id="heat-front-quads-l" class="heat-part" onclick="inspectMuscleGroup('quads')" d="M53 79 C49 93, 49 110, 54 125 C60 126, 65 113, 67 96 C67 86, 61 79, 53 79 Z" fill="#1e293b"><title>Quadriceps Femoris</title></path>
+                  <path id="heat-front-quads-r" class="heat-part" onclick="inspectMuscleGroup('quads')" d="M87 79 C91 93, 91 110, 86 125 C80 126, 75 113, 73 96 C73 86, 79 79, 87 79 Z" fill="#1e293b"><title>Quadriceps Femoris</title></path>
+
+                  <!-- Calves (Anterior) -->
+                  <circle cx="56" cy="129" r="3.5" fill="#1e293b" />
+                  <circle cx="84" cy="129" r="3.5" fill="#1e293b" />
+                  <path id="heat-front-calves-l" class="heat-part" onclick="inspectMuscleGroup('calves')" d="M53 134 C49 146, 50 162, 53 172 C57 172, 60 158, 60 144 C60 137, 57 134, 53 134 Z" fill="#1e293b"><title>Calves</title></path>
+                  <path id="heat-front-calves-r" class="heat-part" onclick="inspectMuscleGroup('calves')" d="M87 134 C91 146, 90 162, 87 172 C83 172, 80 158, 80 144 C80 137, 83 134, 87 134 Z" fill="#1e293b"><title>Calves</title></path>
+                </svg>
+
+                <!-- Posterior (Back) Anatomical Model -->
+                <svg class="heatmap-svg-model" id="svgModelBack" width="140" height="185" viewBox="0 0 140 185" style="display: none;">
+                  <circle cx="70" cy="14" r="8" fill="#1e293b" />
+                  <rect x="67" y="22" width="6" height="5" fill="#1e293b" />
+
+                  <!-- Trapezius & Rhomboids -->
+                  <path id="heat-back-traps" class="heat-part" onclick="inspectMuscleGroup('rhomboids')" d="M55 27 L85 27 L78 48 L62 48 Z" fill="#1e293b"><title>Trapezius & Rhomboids</title></path>
+
+                  <!-- Posterior Deltoids -->
+                  <path id="heat-back-delts-l" class="heat-part" onclick="inspectMuscleGroup('delts')" d="M48 28 C42 29, 39 36, 41 43 C45 44, 48 38, 50 32 Z" fill="#1e293b"><title>Posterior Deltoids</title></path>
+                  <path id="heat-back-delts-r" class="heat-part" onclick="inspectMuscleGroup('delts')" d="M92 28 C98 29, 101 36, 99 43 C95 44, 92 38, 90 32 Z" fill="#1e293b"><title>Posterior Deltoids</title></path>
+
+                  <!-- Triceps -->
+                  <path id="heat-back-triceps-l" class="heat-part" onclick="inspectMuscleGroup('triceps')" d="M39 44 C36 49, 36 57, 40 62 C43 60, 44 52, 42 46 Z" fill="#1e293b"><title>Triceps Brachii</title></path>
+                  <path id="heat-back-triceps-r" class="heat-part" onclick="inspectMuscleGroup('triceps')" d="M101 44 C104 49, 104 57, 100 62 C97 60, 96 52, 98 46 Z" fill="#1e293b"><title>Triceps Brachii</title></path>
+
+                  <!-- Latissimus Dorsi (Lats) -->
+                  <path id="heat-back-lats-l" class="heat-part" onclick="inspectMuscleGroup('lats')" d="M50 38 Q65 48, 63 68 Q52 64, 48 48 Z" fill="#1e293b"><title>Latissimus Dorsi (Lats)</title></path>
+                  <path id="heat-back-lats-r" class="heat-part" onclick="inspectMuscleGroup('lats')" d="M90 38 Q75 48, 77 68 Q88 64, 92 48 Z" fill="#1e293b"><title>Latissimus Dorsi (Lats)</title></path>
+
+                  <!-- Lower Back (Erectors) -->
+                  <path id="heat-back-lowerback" class="heat-part" onclick="inspectMuscleGroup('abs')" d="M63 50 L77 50 L74 72 L66 72 Z" fill="#1e293b"><title>Erector Spinae (Lower Back)</title></path>
+
+                  <!-- Gluteus Maximus -->
+                  <path id="heat-back-glutes-l" class="heat-part" onclick="inspectMuscleGroup('glutes')" d="M52 74 Q68 76, 68 94 Q50 94, 48 82 Z" fill="#1e293b"><title>Gluteus Maximus</title></path>
+                  <path id="heat-back-glutes-r" class="heat-part" onclick="inspectMuscleGroup('glutes')" d="M88 74 Q72 76, 72 94 Q90 94, 92 82 Z" fill="#1e293b"><title>Gluteus Maximus</title></path>
+
+                  <!-- Hamstrings -->
+                  <path id="heat-back-hams-l" class="heat-part" onclick="inspectMuscleGroup('hamstrings')" d="M52 95 C49 108, 50 120, 54 125 C60 126, 66 116, 67 100 C67 96, 61 95, 52 95 Z" fill="#1e293b"><title>Hamstrings</title></path>
+                  <path id="heat-back-hams-r" class="heat-part" onclick="inspectMuscleGroup('hamstrings')" d="M88 95 C91 108, 90 120, 86 125 C80 126, 74 116, 73 100 C73 96, 79 95, 88 95 Z" fill="#1e293b"><title>Hamstrings</title></path>
+
+                  <!-- Calves (Gastrocnemius) -->
+                  <path id="heat-back-calves-l" class="heat-part" onclick="inspectMuscleGroup('calves')" d="M53 134 C48 146, 49 162, 53 172 C58 172, 61 158, 61 144 C61 137, 58 134, 53 134 Z" fill="#1e293b"><title>Calves (Gastrocnemius)</title></path>
+                  <path id="heat-back-calves-r" class="heat-part" onclick="inspectMuscleGroup('calves')" d="M87 134 C92 146, 91 162, 87 172 C82 172, 79 158, 79 144 C79 137, 82 134, 87 134 Z" fill="#1e293b"><title>Calves (Gastrocnemius)</title></path>
+                </svg>
+
+                <!-- High-Density Load Matrix Panel (Hidden until tab selected) -->
+                <div id="heatmapMatrixView" style="display: none; width: 100%; font-size: 0.72rem; padding: 4px;">
+                  <div style="font-weight: 800; color: #fff; margin-bottom: 6px; font-size: 0.78rem;">📊 Hypertrophy Load Matrix:</div>
+                  <div id="heatmapMatrixTable" style="display: flex; flex-direction: column; gap: 4px;"></div>
+                </div>
+              </div>
+
+              <!-- Kinetic Stimulus Balance Bar -->
+              <div class="kinetic-split-wrap" id="heatmapKineticSplitWrap">
+                <div class="kinetic-split-labels">
+                  <span id="labelSplitUpper" style="color: var(--cyan);">Upper: 0%</span>
+                  <span id="labelSplitLower" style="color: var(--amber);">Lower: 0%</span>
+                  <span id="labelSplitCore" style="color: var(--emerald);">Core: 0%</span>
+                </div>
+                <div class="kinetic-split-bar">
+                  <div class="kinetic-seg-upper" id="barSegUpper" style="width: 33%;"></div>
+                  <div class="kinetic-seg-lower" id="barSegLower" style="width: 33%;"></div>
+                  <div class="kinetic-seg-core" id="barSegCore" style="width: 34%;"></div>
+                </div>
+              </div>
+
+              <!-- Live Interactive Muscle Telemetry Cards -->
+              <div class="muscle-cards-list" id="heatmapMuscleCardsContainer">
+                <!-- Populated dynamically with rich interactive telemetry cards -->
+              </div>
+
+              <!-- Backward-compatibility container -->
+              <div class="heatmap-tags" id="heatmapTagsContainer" style="display: none;"></div>
+
+              <!-- Footer with Full Inspector Modal Trigger -->
+              <div class="heatmap-intel-footer">
+                <span id="heatmapActiveSummary" style="font-weight: 700; color: #fff;">0 Groups Engaged</span>
+                <button type="button" class="btn-heatmap-modal" onclick="openMuscleIntelModal()" title="Open Full Screen Biomechanics Lab">
+                  🔍 Biomechanics Lab ↗
+                </button>
               </div>
             </div>
           </div>
@@ -11860,6 +12194,74 @@
           💡 <em>Tip: In the print dialog destination dropdown, choose <strong>"Save as PDF"</strong> to keep a digital offline copy on your phone or tablet.</em>
         </div>
 
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: BIOMECHANICS & TARGETED MUSCLE INTELLIGENCE LAB -->
+  <div id="muscleIntelModal" class="app-modal" onclick="closeModalOnBackdrop(event, 'muscleIntelModal')">
+    <div class="modal-box" style="max-width: 860px; background: linear-gradient(150deg, rgba(15, 23, 42, 0.98) 0%, rgba(10, 15, 30, 0.98) 100%); border: 1.5px solid rgba(0, 242, 254, 0.4); box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 50px rgba(0, 242, 254, 0.2);">
+      <div class="modal-header" style="background: linear-gradient(135deg, rgba(20, 31, 58, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%); border-bottom: 1px solid rgba(56, 189, 248, 0.3);">
+        <div>
+          <span style="font-size: 0.72rem; color: var(--cyan); font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px;">● 3D BIOMECHANICAL STIMULUS MATRIX</span>
+          <div class="modal-title" id="muscleIntelModalTitle" style="color: #fff; font-size: 1.25rem;">🧬 Biomechanics & Neuromuscular Load Lab</div>
+        </div>
+        <button class="modal-close" onclick="closeMuscleIntelModal()">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 20px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
+          <!-- Left: Dual Anterior + Posterior Side-by-Side Stage -->
+          <div style="background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 16px; text-align: center;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <span style="font-size: 0.78rem; font-weight: 800; color: #94a3b8; text-transform: uppercase;">ANTERIOR (FRONT)</span>
+              <span style="font-size: 0.78rem; font-weight: 800; color: #94a3b8; text-transform: uppercase;">POSTERIOR (BACK)</span>
+            </div>
+            <div style="display: flex; justify-content: space-around; align-items: center; gap: 10px;">
+              <div id="modalAnteriorStage">
+                <!-- Cloned anterior SVG rendered dynamically -->
+              </div>
+              <div style="width: 1px; height: 180px; background: rgba(255,255,255,0.1);"></div>
+              <div id="modalPosteriorStage">
+                <!-- Cloned posterior SVG rendered dynamically -->
+              </div>
+            </div>
+            <div style="display: flex; justify-content: center; gap: 14px; margin-top: 14px; font-size: 0.72rem; color: #94a3b8;">
+              <span style="display: flex; align-items: center; gap: 4px;"><span style="width: 9px; height: 9px; background: #00f2fe; border-radius: 2px; box-shadow: 0 0 6px #00f2fe;"></span> Primary</span>
+              <span style="display: flex; align-items: center; gap: 4px;"><span style="width: 9px; height: 9px; background: #c084fc; border-radius: 2px;"></span> Synergist</span>
+              <span style="display: flex; align-items: center; gap: 4px;"><span style="width: 9px; height: 9px; background: #10b981; border-radius: 2px;"></span> Core</span>
+              <span style="display: flex; align-items: center; gap: 4px;"><span style="width: 9px; height: 9px; background: #1e293b; border-radius: 2px;"></span> Inactive</span>
+            </div>
+          </div>
+
+          <!-- Right: Neuromuscular Load & Recovery Telemetry -->
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <div style="background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 16px;">
+              <div style="font-size: 0.75rem; font-weight: 800; color: var(--cyan); text-transform: uppercase; margin-bottom: 8px;">Kinetic Stimulus Breakdown</div>
+              <div id="modalKineticBreakdownText" style="font-size: 0.84rem; color: #e2e8f0; line-height: 1.5;"></div>
+              <div class="kinetic-split-bar" style="margin-top: 10px; height: 10px;">
+                <div id="modalBarUpper" class="kinetic-seg-upper" style="width: 33%;"></div>
+                <div id="modalBarLower" class="kinetic-seg-lower" style="width: 33%;"></div>
+                <div id="modalBarCore" class="kinetic-seg-core" style="width: 34%;"></div>
+              </div>
+            </div>
+
+            <div style="background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 16px; flex: 1;">
+              <div style="font-size: 0.75rem; font-weight: 800; color: var(--emerald); text-transform: uppercase; margin-bottom: 8px;">Biological Recovery Window</div>
+              <div id="modalRecoveryWindow" style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.5;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detailed Muscle Inventory Grid -->
+        <div style="margin-top: 20px;">
+          <div style="font-size: 0.82rem; font-weight: 800; color: #fff; text-transform: uppercase; margin-bottom: 10px; display: flex; justify-content: space-between;">
+            <span>Target Muscle Volume, Motor Unit Density & Roles</span>
+            <span id="modalTotalVolumeSets" style="color: var(--cyan); font-family: 'JetBrains Mono';">0 Total Sets</span>
+          </div>
+          <div id="modalMuscleDetailsGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; max-height: 260px; overflow-y: auto; padding-right: 4px;">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -19216,47 +19618,383 @@ function stopGuidedCooldown() {
     }
 
     // ==========================================
-    // HEATMAP, MIRROR, AUDIO & STATS
+    // 🧬 1000X TARGETED MUSCLE HEATMAP & BIOMECHANICAL INTEL ENGINE
     // ==========================================
+    const MUSCLE_METADATA = {
+      chest: { label: 'Pectoralis Major', region: 'upper', color: '#00f2fe', glow: 'rgba(0, 242, 254, 0.6)', recovery: '48h', role: 'Horizontal adduction & pressing', frontIds: ['heat-front-chest-l', 'heat-front-chest-r'], backIds: [] },
+      delts: { label: 'Deltoids (Shoulders)', region: 'upper', color: '#38bdf8', glow: 'rgba(56, 189, 248, 0.6)', recovery: '48h', role: 'Overhead abduction & stabilization', frontIds: ['heat-front-delts-l', 'heat-front-delts-r'], backIds: ['heat-back-delts-l', 'heat-back-delts-r'] },
+      biceps: { label: 'Biceps Brachii', region: 'upper', color: '#818cf8', glow: 'rgba(129, 140, 248, 0.6)', recovery: '36h', role: 'Elbow flexion & supination', frontIds: ['heat-front-biceps-l', 'heat-front-biceps-r'], backIds: [] },
+      triceps: { label: 'Triceps Brachii', region: 'upper', color: '#a78bfa', glow: 'rgba(167, 139, 250, 0.6)', recovery: '48h', role: 'Elbow extension & lockout lock', frontIds: [], backIds: ['heat-back-triceps-l', 'heat-back-triceps-r'] },
+      lats: { label: 'Latissimus Dorsi', region: 'upper', color: '#c084fc', glow: 'rgba(192, 132, 252, 0.6)', recovery: '48h - 72h', role: 'Vertical pulling & shoulder adduction', frontIds: [], backIds: ['heat-back-lats-l', 'heat-back-lats-r'] },
+      rhomboids: { label: 'Traps & Rhomboids', region: 'upper', color: '#e879f9', glow: 'rgba(232, 121, 249, 0.6)', recovery: '48h', role: 'Scapular retraction & posture lock', frontIds: [], backIds: ['heat-back-traps'] },
+      abs: { label: 'Rectus Abdominis & Core', region: 'core', color: '#10b981', glow: 'rgba(16, 185, 129, 0.6)', recovery: '24h - 36h', role: 'Spinal flexion & intra-abdominal pressure', frontIds: ['heat-front-abs-1', 'heat-front-abs-2', 'heat-front-abs-3', 'heat-front-abs-4', 'heat-front-abs-5', 'heat-front-abs-6'], backIds: ['heat-back-lowerback'] },
+      obliques: { label: 'External Obliques', region: 'core', color: '#34d399', glow: 'rgba(52, 211, 153, 0.6)', recovery: '24h - 36h', role: 'Rotational power & lateral stability', frontIds: ['heat-front-obliques-l', 'heat-front-obliques-r'], backIds: [] },
+      quads: { label: 'Quadriceps Femoris', region: 'lower', color: '#00f2fe', glow: 'rgba(0, 242, 254, 0.6)', recovery: '48h - 72h', role: 'Knee extension & squat locomotion', frontIds: ['heat-front-quads-l', 'heat-front-quads-r'], backIds: [] },
+      glutes: { label: 'Gluteus Maximus', region: 'lower', color: '#f59e0b', glow: 'rgba(245, 158, 11, 0.6)', recovery: '48h - 72h', role: 'Hip extension & pelvic drive', frontIds: [], backIds: ['heat-back-glutes-l', 'heat-back-glutes-r'] },
+      hamstrings: { label: 'Hamstrings Biceps Fem.', region: 'lower', color: '#fb923c', glow: 'rgba(251, 146, 60, 0.6)', recovery: '48h - 72h', role: 'Hip hinge & knee flexion', frontIds: [], backIds: ['heat-back-hams-l', 'heat-back-hams-r'] },
+      calves: { label: 'Gastrocnemius & Soleus', region: 'lower', color: '#fbbf24', glow: 'rgba(251, 191, 36, 0.6)', recovery: '24h - 48h', role: 'Plantarflexion & ankle stability', frontIds: ['heat-front-calves-l', 'heat-front-calves-r'], backIds: ['heat-back-calves-l', 'heat-back-calves-r'] }
+    };
+
+    let currentHeatmapPerspective = 'front';
+    let currentDayHeatmapData = {
+      activeMuscles: {},
+      upperSets: 0,
+      lowerSets: 0,
+      coreSets: 0,
+      totalSets: 0,
+      dayTitle: 'Today'
+    };
+
+    function setHeatmapPerspective(view) {
+      currentHeatmapPerspective = view;
+      const btnFront = document.getElementById('btnHeatmapFront');
+      const btnBack = document.getElementById('btnHeatmapBack');
+      const btnMatrix = document.getElementById('btnHeatmapMatrix');
+      const svgFront = document.getElementById('svgModelFront');
+      const svgBack = document.getElementById('svgModelBack');
+      const matrixView = document.getElementById('heatmapMatrixView');
+
+      if (btnFront) btnFront.classList.toggle('active', view === 'front');
+      if (btnBack) btnBack.classList.toggle('active', view === 'back');
+      if (btnMatrix) btnMatrix.classList.toggle('active', view === 'matrix');
+
+      if (svgFront) svgFront.style.display = (view === 'front') ? 'block' : 'none';
+      if (svgBack) svgBack.style.display = (view === 'back') ? 'block' : 'none';
+      if (matrixView) matrixView.style.display = (view === 'matrix') ? 'block' : 'none';
+
+      // Play soft audio feedback
+      playHudSound('click');
+    }
+
+    function inspectMuscleGroup(muscleKey) {
+      const meta = MUSCLE_METADATA[muscleKey];
+      if (!meta) return;
+
+      // Audio blip
+      playHudSound('pop');
+
+      // Highlight corresponding SVG parts temporarily with pulse
+      const allIds = [...meta.frontIds, ...meta.backIds];
+      allIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.style.transform = 'scale(1.05)';
+          el.style.transformOrigin = 'center';
+          el.style.filter = 'brightness(1.5) drop-shadow(0 0 10px #00f2fe)';
+          setTimeout(() => {
+            el.style.transform = '';
+            el.style.filter = '';
+          }, 800);
+        }
+      });
+
+      // Highlight the corresponding card in the list if present
+      const card = document.getElementById(`mic-card-${muscleKey}`);
+      if (card) {
+        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        card.style.borderColor = '#00f2fe';
+        card.style.background = 'rgba(0, 242, 254, 0.15)';
+        setTimeout(() => {
+          card.style.borderColor = '';
+          card.style.background = '';
+        }, 1200);
+      }
+    }
+
     function updateHeatmap(plan) {
-      const activeMuscles = new Set();
-      if (plan.exercises) {
+      if (!plan) return;
+
+      const activeMuscles = {};
+      let upperSets = 0;
+      let lowerSets = 0;
+      let coreSets = 0;
+      let totalSets = 0;
+
+      // 1. Gather muscle involvement from workout plan
+      if (plan.exercises && Array.isArray(plan.exercises)) {
         plan.exercises.forEach(item => {
-          const ex = CATALOG[item.key];
-          if (ex && ex.muscles) ex.muscles.forEach(m => activeMuscles.add(m));
+          const ex = (typeof CATALOG !== 'undefined' && CATALOG[item.key]) ? CATALOG[item.key] : null;
+          const setsCount = parseInt(item.sets) || 3;
+          totalSets += setsCount;
+
+          if (ex && ex.muscles && Array.isArray(ex.muscles)) {
+            ex.muscles.forEach((m, idx) => {
+              if (!activeMuscles[m]) {
+                activeMuscles[m] = {
+                  sets: 0,
+                  exercises: [],
+                  isPrimary: false,
+                  role: MUSCLE_METADATA[m]?.role || 'Movement stabilizer'
+                };
+              }
+              activeMuscles[m].sets += setsCount;
+              if (idx === 0) activeMuscles[m].isPrimary = true;
+              if (!activeMuscles[m].exercises.includes(ex.name)) {
+                activeMuscles[m].exercises.push(ex.name);
+              }
+
+              // Categorize kinetic regions
+              const region = MUSCLE_METADATA[m]?.region || 'upper';
+              if (region === 'upper') upperSets += setsCount;
+              else if (region === 'lower') lowerSets += setsCount;
+              else if (region === 'core') coreSets += setsCount;
+            });
+          }
         });
       }
 
-      const parts = ['chest', 'lats', 'abs', 'glutes', 'quads', 'quads-r', 'calves', 'calves-r', 'delts-l', 'delts-r'];
-      parts.forEach(p => {
+      currentDayHeatmapData = {
+        activeMuscles,
+        upperSets,
+        lowerSets,
+        coreSets,
+        totalSets,
+        dayTitle: plan.day ? `Day ${plan.day}: ${plan.title || 'Workout'}` : 'Today\'s Session'
+      };
+
+      // 2. Reset and color all SVG anatomy nodes
+      const allMuscleKeys = Object.keys(MUSCLE_METADATA);
+      allMuscleKeys.forEach(key => {
+        const meta = MUSCLE_METADATA[key];
+        const isActive = !!activeMuscles[key];
+        const data = activeMuscles[key];
+
+        const targetColor = isActive ? (data.isPrimary ? meta.color : '#c084fc') : '#1e293b';
+        const targetGlow = isActive ? (data.isPrimary ? `drop-shadow(0 0 6px ${meta.glow})` : 'drop-shadow(0 0 3px rgba(192, 132, 252, 0.4))') : 'none';
+
+        [...meta.frontIds, ...meta.backIds].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.setAttribute('fill', targetColor);
+            el.style.filter = targetGlow;
+            el.style.transition = 'all 0.35s ease';
+          }
+        });
+      });
+
+      // Backward compatibility for legacy IDs if any external code queries them
+      const legacyParts = ['chest', 'lats', 'abs', 'glutes', 'quads', 'quads-r', 'calves', 'calves-r', 'delts-l', 'delts-r'];
+      legacyParts.forEach(p => {
         const el = document.getElementById(`heat-${p}`);
         if (el) el.setAttribute('fill', '#1e293b');
       });
 
-      activeMuscles.forEach(m => {
-        if (m === 'chest') document.getElementById('heat-chest')?.setAttribute('fill', 'var(--cyan)');
-        if (m === 'lats') document.getElementById('heat-lats')?.setAttribute('fill', 'var(--purple)');
-        if (m === 'abs') document.getElementById('heat-abs')?.setAttribute('fill', 'var(--emerald)');
-        if (m === 'glutes') document.getElementById('heat-glutes')?.setAttribute('fill', 'var(--amber)');
-        if (m === 'quads') {
-          document.getElementById('heat-quads')?.setAttribute('fill', 'var(--cyan)');
-          document.getElementById('heat-quads-r')?.setAttribute('fill', 'var(--cyan)');
-        }
-        if (m === 'delts') {
-          document.getElementById('heat-delts-l')?.setAttribute('fill', 'var(--cyan)');
-          document.getElementById('heat-delts-r')?.setAttribute('fill', 'var(--cyan)');
-        }
-      });
+      // 3. Update Kinetic Stimulus Split Bar
+      const totalKinetic = (upperSets + lowerSets + coreSets) || 1;
+      const upperPct = Math.round((upperSets / totalKinetic) * 100);
+      const lowerPct = Math.round((lowerSets / totalKinetic) * 100);
+      const corePct = Math.max(0, 100 - upperPct - lowerPct);
 
-      const tagContainer = document.getElementById('heatmapTagsContainer');
-      tagContainer.innerHTML = '';
-      if (activeMuscles.size === 0) {
-        tagContainer.innerHTML = `<span class="muscle-tag mt-secondary">Rest & Recovery</span>`;
-      } else {
-        activeMuscles.forEach(m => {
-          tagContainer.innerHTML += `<span class="muscle-tag mt-active">${m}</span>`;
-        });
+      const barUpper = document.getElementById('barSegUpper');
+      const barLower = document.getElementById('barSegLower');
+      const barCore = document.getElementById('barSegCore');
+      const lblUpper = document.getElementById('labelSplitUpper');
+      const lblLower = document.getElementById('labelSplitLower');
+      const lblCore = document.getElementById('labelSplitCore');
+
+      if (barUpper) barUpper.style.width = `${upperPct}%`;
+      if (barLower) barLower.style.width = `${lowerPct}%`;
+      if (barCore) barCore.style.width = `${corePct}%`;
+
+      if (lblUpper) lblUpper.innerText = `Upper: ${upperPct}%`;
+      if (lblLower) lblLower.innerText = `Lower: ${lowerPct}%`;
+      if (lblCore) lblCore.innerText = `Core: ${corePct}%`;
+
+      // 4. Populate Live Muscle Telemetry Cards
+      const cardsContainer = document.getElementById('heatmapMuscleCardsContainer');
+      const matrixTable = document.getElementById('heatmapMatrixTable');
+      const activeSummary = document.getElementById('heatmapActiveSummary');
+      const activeKeys = Object.keys(activeMuscles);
+
+      if (activeSummary) {
+        activeSummary.innerText = activeKeys.length === 0 
+          ? 'Active Recovery Day' 
+          : `${activeKeys.length} Muscle Groups (${totalSets} Sets)`;
       }
+
+      if (cardsContainer) {
+        if (activeKeys.length === 0) {
+          cardsContainer.innerHTML = `
+            <div style="text-align: center; padding: 16px 8px; color: #94a3b8; font-size: 0.78rem;">
+              <div style="font-size: 1.5rem; margin-bottom: 4px;">🧘</div>
+              <strong>Full Biological Recovery Window</strong>
+              <div style="font-size: 0.70rem; color: #64748b; margin-top: 4px;">No heavy mechanical tension scheduled today. Muscle protein synthesis and glycogen restoration underway.</div>
+            </div>`;
+        } else {
+          cardsContainer.innerHTML = activeKeys.map(key => {
+            const mData = activeMuscles[key];
+            const meta = MUSCLE_METADATA[key] || { label: key, recovery: '48h', role: 'Support' };
+            const badgeClass = mData.isPrimary ? 'primary' : 'synergist';
+            const badgeLabel = mData.isPrimary ? 'PRIMARY' : 'SYNERGIST';
+            const exercisesStr = mData.exercises.slice(0, 2).join(', ') + (mData.exercises.length > 2 ? ` +${mData.exercises.length - 2}` : '');
+
+            return `
+              <div class="muscle-intel-card" id="mic-card-${key}" onclick="inspectMuscleGroup('${key}')" title="Click to pulse on anatomical diagram">
+                <div class="mic-header">
+                  <span class="mic-name">${meta.label}</span>
+                  <span class="mic-badge ${badgeClass}">${badgeLabel}</span>
+                </div>
+                <div class="mic-stats">
+                  <span class="mic-volume">${mData.sets} sets &bull; ~${mData.sets * 10} reps</span>
+                  <span>Rec: ${meta.recovery}</span>
+                </div>
+                <div class="mic-ex-list">${exercisesStr}</div>
+              </div>
+            `;
+          }).join('');
+        }
+      }
+
+      // 5. Populate Matrix View Table
+      if (matrixTable) {
+        if (activeKeys.length === 0) {
+          matrixTable.innerHTML = `<div style="color: #64748b; font-size: 0.72rem; padding: 6px;">Zero load scheduled. Focus on mobility & hydration.</div>`;
+        } else {
+          matrixTable.innerHTML = activeKeys.map(key => {
+            const mData = activeMuscles[key];
+            const meta = MUSCLE_METADATA[key] || { label: key };
+            const pct = Math.min(100, Math.round((mData.sets / Math.max(1, totalSets)) * 100));
+            return `
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; background: rgba(0,0,0,0.3); padding: 4px 8px; border-radius: 4px;">
+                <span style="color: #e2e8f0; font-weight: 700; width: 85px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${meta.label}</span>
+                <div style="flex: 1; height: 6px; background: rgba(255,255,255,0.08); border-radius: 99px; overflow: hidden;">
+                  <div style="height: 100%; width: ${pct}%; background: ${mData.isPrimary ? 'var(--cyan)' : '#c084fc'}; border-radius: 99px;"></div>
+                </div>
+                <span style="font-family: 'JetBrains Mono'; color: var(--cyan); font-weight: 800; font-size: 0.70rem; width: 42px; text-align: right;">${mData.sets}s (${pct}%)</span>
+              </div>
+            `;
+          }).join('');
+        }
+      }
+
+      // 6. Populate legacy tag container for backwards compatibility
+      const tagContainer = document.getElementById('heatmapTagsContainer');
+      if (tagContainer) {
+        tagContainer.innerHTML = '';
+        if (activeKeys.length === 0) {
+          tagContainer.innerHTML = `<span class="muscle-tag mt-secondary">Rest & Recovery</span>`;
+        } else {
+          activeKeys.forEach(m => {
+            tagContainer.innerHTML += `<span class="muscle-tag mt-active">${m}</span>`;
+          });
+        }
+      }
+    }
+
+    // Modal Handlers: Biomechanics & Neuromuscular Load Lab
+    function openMuscleIntelModal() {
+      const modal = document.getElementById('muscleIntelModal');
+      if (!modal) return;
+
+      const titleEl = document.getElementById('muscleIntelModalTitle');
+      if (titleEl) titleEl.innerText = `🧬 ${currentDayHeatmapData.dayTitle} • Neuromuscular Lab`;
+
+      // Clone anterior & posterior SVGs into modal side-by-side stages
+      const modalAnt = document.getElementById('modalAnteriorStage');
+      const modalPost = document.getElementById('modalPosteriorStage');
+      const svgFront = document.getElementById('svgModelFront');
+      const svgBack = document.getElementById('svgModelBack');
+
+      if (modalAnt && svgFront) {
+        modalAnt.innerHTML = svgFront.outerHTML;
+        const clonedSvg = modalAnt.querySelector('svg');
+        if (clonedSvg) {
+          clonedSvg.id = 'modalClonedSvgFront';
+          clonedSvg.style.display = 'block';
+          clonedSvg.setAttribute('width', '150');
+          clonedSvg.setAttribute('height', '190');
+        }
+      }
+
+      if (modalPost && svgBack) {
+        modalPost.innerHTML = svgBack.outerHTML;
+        const clonedSvg = modalPost.querySelector('svg');
+        if (clonedSvg) {
+          clonedSvg.id = 'modalClonedSvgBack';
+          clonedSvg.style.display = 'block';
+          clonedSvg.setAttribute('width', '150');
+          clonedSvg.setAttribute('height', '190');
+        }
+      }
+
+      // Kinetic breakdown text & bars
+      const totalKinetic = (currentDayHeatmapData.upperSets + currentDayHeatmapData.lowerSets + currentDayHeatmapData.coreSets) || 1;
+      const upperPct = Math.round((currentDayHeatmapData.upperSets / totalKinetic) * 100);
+      const lowerPct = Math.round((currentDayHeatmapData.lowerSets / totalKinetic) * 100);
+      const corePct = Math.max(0, 100 - upperPct - lowerPct);
+
+      const kineticText = document.getElementById('modalKineticBreakdownText');
+      if (kineticText) {
+        kineticText.innerHTML = `
+          <strong>Kinetic Distribution:</strong> Upper Body <strong>${upperPct}%</strong> (${currentDayHeatmapData.upperSets} sets), Lower Body <strong>${lowerPct}%</strong> (${currentDayHeatmapData.lowerSets} sets), Core/Stabilizers <strong>${corePct}%</strong> (${currentDayHeatmapData.coreSets} sets).
+          ${upperPct > 60 ? '⚡ Upper-body dominant hypertrophic stimulus focus.' : (lowerPct > 60 ? '⚡ Lower-body posterior chain & knee-extension focus.' : '⚡ Balanced full-body kinetic motor unit engagement.')}
+        `;
+      }
+
+      const mBarUp = document.getElementById('modalBarUpper');
+      const mBarLow = document.getElementById('modalBarLower');
+      const mBarCore = document.getElementById('modalBarCore');
+      if (mBarUp) mBarUp.style.width = `${upperPct}%`;
+      if (mBarLow) mBarLow.style.width = `${lowerPct}%`;
+      if (mBarCore) mBarCore.style.width = `${corePct}%`;
+
+      // Recovery Window recommendation
+      const recWin = document.getElementById('modalRecoveryWindow');
+      if (recWin) {
+        const activeCount = Object.keys(currentDayHeatmapData.activeMuscles).length;
+        if (activeCount === 0) {
+          recWin.innerHTML = `🟢 <strong>Active Recovery:</strong> Parasympathetic nervous system recovery, connective tissue repair, and glycogen supercompensation. Ideal for brisk walking, mobility work, and hydration.`;
+        } else {
+          recWin.innerHTML = `
+            🟢 <strong>48-Hour Supercompensation Window:</strong> Protein synthesis for the targeted groups peaks at 24-36 hours post-session.
+            <div style="margin-top: 6px; font-size: 0.78rem; color: #94a3b8;">
+              Recommended Post-Workout Protocol: 30-40g high-leucine protein + 50g complex carbohydrates within 2 hours, plus 7-9 hours of restorative sleep.
+            </div>
+          `;
+        }
+      }
+
+      // Volume & Motor Unit Details Grid
+      const grid = document.getElementById('modalMuscleDetailsGrid');
+      const totalVolSets = document.getElementById('modalTotalVolumeSets');
+      if (totalVolSets) totalVolSets.innerText = `${currentDayHeatmapData.totalSets} Total Direct Sets`;
+
+      if (grid) {
+        const activeKeys = Object.keys(currentDayHeatmapData.activeMuscles);
+        if (activeKeys.length === 0) {
+          grid.innerHTML = `<div style="color: #64748b; font-size: 0.82rem; grid-column: 1 / -1; text-align: center; padding: 20px;">No target muscle tension scheduled for this day. Full recovery active.</div>`;
+        } else {
+          grid.innerHTML = activeKeys.map(key => {
+            const mData = currentDayHeatmapData.activeMuscles[key];
+            const meta = MUSCLE_METADATA[key] || { label: key, recovery: '48h', role: 'Support' };
+            return `
+              <div style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 10px 12px; display: flex; flex-direction: column; gap: 4px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <strong style="color: #fff; font-size: 0.85rem;">${meta.label}</strong>
+                  <span class="mic-badge ${mData.isPrimary ? 'primary' : 'synergist'}">${mData.isPrimary ? 'PRIMARY' : 'SYNERGIST'}</span>
+                </div>
+                <div style="font-size: 0.74rem; color: var(--cyan); font-family: 'JetBrains Mono';">
+                  ${mData.sets} Sets &bull; ~${mData.sets * 10} Reps &bull; ${meta.recovery}
+                </div>
+                <div style="font-size: 0.72rem; color: #94a3b8; line-height: 1.35; margin-top: 2px;">
+                  ${meta.role}
+                </div>
+                <div style="font-size: 0.70rem; color: #64748b; margin-top: 4px; font-style: italic;">
+                  Exercises: ${mData.exercises.join(', ')}
+                </div>
+              </div>
+            `;
+          }).join('');
+        }
+      }
+
+      modal.classList.add('active');
+      playHudSound('modal');
+    }
+
+    function closeMuscleIntelModal() {
+      const modal = document.getElementById('muscleIntelModal');
+      if (modal) modal.classList.remove('active');
     }
 
     let modalWebcamStream = null;
