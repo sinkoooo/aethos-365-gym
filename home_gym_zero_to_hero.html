@@ -4672,56 +4672,221 @@
     }
 
     /* FLOATING TIMER */
+    /* ── 1000X FLOATING REST CHRONOMETER HUD ── */
     .floating-timer {
       position: fixed;
       bottom: 24px;
       right: 24px;
-      background: rgba(13, 20, 36, 0.85);
-      backdrop-filter: blur(24px) saturate(180%);
-      -webkit-backdrop-filter: blur(24px) saturate(180%);
-      border: 1px solid rgba(56, 189, 248, 0.4);
-      border-radius: 99px;
-      padding: 10px 18px;
-      box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.6), 0 0 20px rgba(56, 189, 248, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      background: linear-gradient(135deg, rgba(13, 20, 36, 0.92) 0%, rgba(6, 11, 22, 0.96) 100%);
+      backdrop-filter: blur(28px) saturate(200%);
+      -webkit-backdrop-filter: blur(28px) saturate(200%);
+      border: 1.5px solid rgba(0, 242, 254, 0.35);
+      border-radius: 20px;
+      padding: 10px 16px;
+      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 242, 254, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.12);
       display: flex;
       align-items: center;
       gap: 14px;
-      z-index: 99;
-      transition: all 0.25s ease;
+      z-index: 9999;
+      transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      user-select: none;
+    }
+
+    .floating-timer.active-running {
+      border-color: var(--cyan);
+      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.75), 0 0 35px rgba(0, 242, 254, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .floating-timer.active-warning {
+      border-color: var(--amber);
+      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.75), 0 0 35px rgba(245, 158, 11, 0.45);
+      animation: timerWarningGlow 1s infinite alternate;
+    }
+
+    .floating-timer.active-complete {
+      border-color: var(--emerald);
+      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.75), 0 0 40px rgba(16, 185, 129, 0.55);
+    }
+
+    @keyframes timerWarningGlow {
+      from { box-shadow: 0 0 15px rgba(245, 158, 11, 0.3); }
+      to { box-shadow: 0 0 35px rgba(245, 158, 11, 0.7); }
+    }
+
+    /* Circular SVG Progress Ring Container */
+    .timer-ring-wrap {
+      position: relative;
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .timer-ring-svg {
+      transform: rotate(-90deg);
+      width: 52px;
+      height: 52px;
+    }
+
+    .timer-ring-track {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.08);
+      stroke-width: 4;
+    }
+
+    .timer-ring-fill {
+      fill: none;
+      stroke: var(--cyan);
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-dasharray: 138;
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 0.35s linear, stroke 0.3s ease;
+      filter: drop-shadow(0 0 5px currentColor);
+    }
+
+    .timer-ring-icon {
+      position: absolute;
+      font-size: 1.15rem;
+      pointer-events: none;
+    }
+
+    /* Primary Digits Display */
+    .timer-readout-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      min-width: 82px;
+    }
+
+    .timer-header-tag {
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
 
     .timer-digits {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 1.45rem;
-      font-weight: 800;
-      color: var(--cyan);
-      min-width: 68px;
+      font-size: 1.65rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+      text-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
     }
 
+    .timer-sub-status {
+      font-size: 0.68rem;
+      color: var(--cyan);
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Action Deck */
     .timer-actions {
       display: flex;
+      flex-direction: column;
       gap: 5px;
     }
 
+    .timer-preset-row {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
     .t-btn {
-      background: rgba(15, 23, 42, 0.7);
+      background: rgba(15, 23, 42, 0.8);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      color: #fff;
-      padding: 5px 11px;
-      border-radius: 99px;
-      font-size: 0.76rem;
-      font-weight: 700;
+      color: #cbd5e1;
+      padding: 4px 9px;
+      border-radius: 6px;
+      font-size: 0.74rem;
+      font-weight: 800;
       cursor: pointer;
       transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      font-family: 'JetBrains Mono', monospace;
+      white-space: nowrap;
     }
 
     .t-btn:hover {
+      background: rgba(0, 242, 254, 0.2);
+      color: #fff;
+      border-color: var(--cyan);
+      box-shadow: 0 0 10px rgba(0, 242, 254, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .t-btn.active-preset {
       background: var(--cyan);
       color: #000;
       border-color: var(--cyan);
-      box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
-      transform: translateY(-1px);
+      box-shadow: 0 0 14px rgba(0, 242, 254, 0.5);
+    }
+
+    .t-btn-step {
+      padding: 4px 7px;
+      color: var(--cyan);
+      background: rgba(0, 242, 254, 0.1);
+      border-color: rgba(0, 242, 254, 0.25);
+    }
+
+    .t-btn-step:hover {
+      background: var(--cyan);
+      color: #000;
+    }
+
+    .t-btn-ctrl {
+      font-size: 0.72rem;
+      padding: 3px 8px;
+    }
+
+    .t-btn-play {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: rgba(16, 185, 129, 0.4);
+      color: var(--emerald);
+    }
+
+    .t-btn-play:hover {
+      background: var(--emerald);
+      color: #000;
+      border-color: var(--emerald);
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+    }
+
+    .t-btn-reset {
+      background: rgba(244, 63, 94, 0.15);
+      border-color: rgba(244, 63, 94, 0.35);
+      color: #fda4af;
+    }
+
+    .t-btn-reset:hover {
+      background: var(--rose);
+      color: #fff;
+      border-color: var(--rose);
+      box-shadow: 0 0 10px rgba(244, 63, 94, 0.4);
+    }
+
+    .t-btn-skip {
+      background: rgba(168, 85, 247, 0.15);
+      border-color: rgba(168, 85, 247, 0.35);
+      color: #e879f9;
+    }
+
+    .t-btn-skip:hover {
+      background: var(--purple);
+      color: #fff;
+      border-color: var(--purple);
+      box-shadow: 0 0 10px rgba(168, 85, 247, 0.4);
     }
 
     /* MODALS */
@@ -11129,17 +11294,46 @@
     </main>
   </div>
 
-  <!-- FLOATING REST STOPWATCH WIDGET -->
-  <div class="floating-timer">
-    <div>
-      <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted);" id="timerLabel">Rest Timer</div>
-      <div class="timer-digits" id="timerDigits">01:00</div>
+  <!-- 1000X FLOATING REST CHRONOMETER HUD -->
+  <div class="floating-timer" id="floatingRestTimer">
+    <!-- Interactive Circular Progress Ring -->
+    <div class="timer-ring-wrap" onclick="togglePauseRestTimer()" title="Click to Pause / Resume Rest Timer">
+      <svg class="timer-ring-svg" viewBox="0 0 52 52">
+        <circle class="timer-ring-track" cx="26" cy="26" r="22"></circle>
+        <circle class="timer-ring-fill" id="timerRingFill" cx="26" cy="26" r="22"></circle>
+      </svg>
+      <div class="timer-ring-icon" id="timerRingIcon">⏳</div>
     </div>
+
+    <!-- Readout & Dynamic State -->
+    <div class="timer-readout-col">
+      <div class="timer-header-tag">
+        <span id="timerLabel">Rest Timer</span>
+        <button type="button" onclick="toggleTimerSound()" id="btnTimerSoundMute" title="Toggle Beep Sounds" style="background:transparent; border:none; color:var(--text-dim); font-size:0.72rem; cursor:pointer; padding:0 2px;">🔊</button>
+      </div>
+      <div class="timer-digits" id="timerDigits">01:00</div>
+      <div class="timer-sub-status" id="timerSubStatus">ATP Regeneration</div>
+    </div>
+
+    <!-- Control Deck: Presets, Steppers & Actions -->
     <div class="timer-actions">
-      <button class="t-btn" onclick="startTimer(45)">45s</button>
-      <button class="t-btn" onclick="startTimer(60)">60s</button>
-      <button class="t-btn" onclick="startTimer(90)">90s</button>
-      <button class="t-btn" style="background: rgba(244, 63, 94, 0.2); border-color: rgba(244, 63, 94, 0.4);" onclick="resetTimer()">Reset</button>
+      <!-- Quick Interval Presets -->
+      <div class="timer-preset-row">
+        <button type="button" class="t-btn" id="btnPreset30" onclick="startTimer(30)" title="Quick 30s Mobility Rest">30s</button>
+        <button type="button" class="t-btn" id="btnPreset45" onclick="startTimer(45)" title="Endurance 45s Rest">45s</button>
+        <button type="button" class="t-btn active-preset" id="btnPreset60" onclick="startTimer(60)" title="Hypertrophy 60s Rest">60s</button>
+        <button type="button" class="t-btn" id="btnPreset90" onclick="startTimer(90)" title="Strength 90s Rest">90s</button>
+        <button type="button" class="t-btn" id="btnPreset120" onclick="startTimer(120)" title="Heavy Compound 120s Rest">120s</button>
+      </div>
+
+      <!-- Micro Adjusters & Player Controls -->
+      <div class="timer-preset-row">
+        <button type="button" class="t-btn t-btn-step" onclick="adjustTimerTime(15)" title="Add +15 seconds">+15s</button>
+        <button type="button" class="t-btn t-btn-step" onclick="adjustTimerTime(-15)" title="Subtract -15 seconds">-15s</button>
+        <button type="button" class="t-btn t-btn-ctrl t-btn-play" id="btnTimerPlayPause" onclick="togglePauseRestTimer()" title="Pause / Resume">⏸ Pause</button>
+        <button type="button" class="t-btn t-btn-ctrl t-btn-reset" onclick="resetTimer()" title="Reset to Default">↺ Reset</button>
+        <button type="button" class="t-btn t-btn-ctrl t-btn-skip" onclick="skipRestTimer()" title="Skip Remaining Rest">⏭ Skip</button>
+      </div>
     </div>
   </div>
 
@@ -22999,63 +23193,228 @@ function stopGuidedCooldown() {
       renderActiveDay(val, true);
     }
 
+    // ==========================================
+    // ⏳ 1000X CYBER REST CHRONOMETER ENGINE
+    // ==========================================
     let timerInt = null;
     let secLeft = 60;
+    let timerTotalSec = 60;
+    let timerIsPaused = false;
+    let timerSoundEnabled = (localStorage.getItem('gym_timer_sound_enabled') !== 'false');
 
     function startTimer(s) {
       clearInterval(timerInt);
       secLeft = s;
-      const td = document.getElementById('timerDigits');
-      const tl = document.getElementById('timerLabel');
-      const ft = document.querySelector('.floating-timer');
-      if (td) td.style.color = '';
-      if (tl) {
-        tl.innerText = 'Rest Timer';
-        tl.style.color = '';
-      }
-      if (ft) {
-        ft.style.borderColor = '';
-        ft.style.boxShadow = '';
-      }
+      timerTotalSec = Math.max(1, s);
+      timerIsPaused = false;
+
+      // Update preset buttons styling
+      [30, 45, 60, 90, 120].forEach(p => {
+        const btn = document.getElementById(`btnPreset${p}`);
+        if (btn) btn.classList.toggle('active-preset', p === s);
+      });
+
+      const playBtn = document.getElementById('btnTimerPlayPause');
+      if (playBtn) playBtn.innerHTML = '⏸ Pause';
+
       if (typeof GymMusic !== 'undefined') {
         GymMusic.transitionForPhase('rest');
       }
+
       updateTimerUI();
+      playTimerAudio('start');
+
       timerInt = setInterval(() => {
+        if (timerIsPaused) return;
+
         secLeft--;
         updateTimerUI();
+
+        // 3-2-1 Audio Countdown Warning
+        if (secLeft <= 3 && secLeft > 0) {
+          playTimerAudio('tick');
+        }
+
         if (secLeft <= 0) {
           clearInterval(timerInt);
           timerInt = null;
-          if (typeof SoundFX !== 'undefined' && SoundFX.playRestTimerAlert) {
-            SoundFX.playRestTimerAlert();
-          } else {
-            playAudioTone(880, 'sine', 0.5);
-          }
-          triggerHaptic([100, 50, 100]);
-          speakAnnouncement("Rest period complete. Begin next set!");
+          onRestTimerComplete();
         }
       }, 1000);
+    }
+
+    function togglePauseRestTimer() {
+      if (!timerInt && secLeft <= 0) {
+        startTimer(timerTotalSec || 60);
+        return;
+      }
+      timerIsPaused = !timerIsPaused;
+      const playBtn = document.getElementById('btnTimerPlayPause');
+      const ringIcon = document.getElementById('timerRingIcon');
+      if (playBtn) playBtn.innerHTML = timerIsPaused ? '▶ Resume' : '⏸ Pause';
+      if (ringIcon) ringIcon.innerText = timerIsPaused ? '⏸' : '⏳';
+      updateTimerUI();
+      playTimerAudio('click');
+    }
+
+    function adjustTimerTime(delta) {
+      secLeft = Math.max(5, secLeft + delta);
+      if (secLeft > timerTotalSec) timerTotalSec = secLeft;
+      updateTimerUI();
+      playTimerAudio('click');
+      triggerHaptic([25]);
+    }
+
+    function skipRestTimer() {
+      clearInterval(timerInt);
+      timerInt = null;
+      secLeft = 0;
+      onRestTimerComplete(true);
     }
 
     function resetTimer() {
       clearInterval(timerInt);
       timerInt = null;
       secLeft = 60;
+      timerTotalSec = 60;
+      timerIsPaused = false;
+
+      [30, 45, 60, 90, 120].forEach(p => {
+        const btn = document.getElementById(`btnPreset${p}`);
+        if (btn) btn.classList.toggle('active-preset', p === 60);
+      });
+
+      const playBtn = document.getElementById('btnTimerPlayPause');
+      if (playBtn) playBtn.innerHTML = '▶ Start';
+
+      const ringIcon = document.getElementById('timerRingIcon');
+      if (ringIcon) ringIcon.innerText = '⏳';
+
+      const ringFill = document.getElementById('timerRingFill');
+      if (ringFill) {
+        ringFill.style.strokeDashoffset = '0';
+        ringFill.style.stroke = 'var(--cyan)';
+      }
+
       const td = document.getElementById('timerDigits');
       const tl = document.getElementById('timerLabel');
-      const ft = document.querySelector('.floating-timer');
-      if (td) {
-        td.innerText = '01:00';
-        td.style.color = '';
-      }
-      if (tl) {
-        tl.innerText = 'Rest Timer';
-        tl.style.color = '';
-      }
+      const sub = document.getElementById('timerSubStatus');
+      const ft = document.getElementById('floatingRestTimer');
+
+      if (td) { td.innerText = '01:00'; td.style.color = '#fff'; }
+      if (tl) { tl.innerText = 'Rest Timer'; tl.style.color = ''; }
+      if (sub) { sub.innerText = 'ATP Regeneration'; sub.style.color = 'var(--cyan)'; }
       if (ft) {
+        ft.className = 'floating-timer';
         ft.style.borderColor = '';
         ft.style.boxShadow = '';
+      }
+    }
+
+    function toggleTimerSound() {
+      timerSoundEnabled = !timerSoundEnabled;
+      localStorage.setItem('gym_timer_sound_enabled', String(timerSoundEnabled));
+      const btn = document.getElementById('btnTimerSoundMute');
+      if (btn) btn.innerText = timerSoundEnabled ? '🔊' : '🔇';
+      if (timerSoundEnabled) playTimerAudio('click');
+    }
+
+    function playTimerAudio(type) {
+      if (!timerSoundEnabled) return;
+      if (typeof SoundFX === 'undefined') return;
+
+      if (type === 'start') {
+        SoundFX.playBeep(587.33, 'triangle', 0.1, 0.25);
+      } else if (type === 'tick') {
+        SoundFX.playBeep(880, 'sine', 0.08, 0.35);
+      } else if (type === 'complete') {
+        if (SoundFX.playRestTimerAlert) SoundFX.playRestTimerAlert();
+        else SoundFX.playBeep(1046.50, 'triangle', 0.3, 0.5);
+      } else if (type === 'click') {
+        SoundFX.playBeep(440, 'sine', 0.05, 0.2);
+      }
+    }
+
+    function onRestTimerComplete(skipped = false) {
+      const td = document.getElementById('timerDigits');
+      const tl = document.getElementById('timerLabel');
+      const sub = document.getElementById('timerSubStatus');
+      const ft = document.getElementById('floatingRestTimer');
+      const ringIcon = document.getElementById('timerRingIcon');
+      const ringFill = document.getElementById('timerRingFill');
+      const playBtn = document.getElementById('btnTimerPlayPause');
+
+      if (playBtn) playBtn.innerHTML = '▶ Restart';
+      if (ringIcon) ringIcon.innerText = '⚡';
+      if (ringFill) {
+        ringFill.style.strokeDashoffset = '138';
+        ringFill.style.stroke = 'var(--emerald)';
+      }
+
+      if (td) {
+        td.innerText = skipped ? 'SKIPPED' : 'READY! ⚡';
+        td.style.color = 'var(--emerald)';
+      }
+      if (tl) {
+        tl.innerText = 'REST COMPLETE';
+        tl.style.color = 'var(--emerald)';
+      }
+      if (sub) {
+        sub.innerText = 'Next Set Ready';
+        sub.style.color = 'var(--emerald)';
+      }
+
+      if (ft) {
+        ft.className = 'floating-timer active-complete';
+      }
+
+      if (!skipped) {
+        playTimerAudio('complete');
+        triggerHaptic([100, 50, 100, 50, 100]);
+        speakAnnouncement("Rest complete! Lock in for your next set.");
+      }
+    }
+
+    function updateTimerUI() {
+      const m = Math.floor(secLeft / 60).toString().padStart(2, '0');
+      const s = (secLeft % 60).toString().padStart(2, '0');
+      const td = document.getElementById('timerDigits');
+      const tl = document.getElementById('timerLabel');
+      const sub = document.getElementById('timerSubStatus');
+      const ft = document.getElementById('floatingRestTimer');
+      const ringFill = document.getElementById('timerRingFill');
+      const ringIcon = document.getElementById('timerRingIcon');
+
+      if (td) td.innerText = `${m}:${s}`;
+
+      // Update Circular SVG Ring (Circumference of r=22 is ~138.2)
+      const circumference = 138.2;
+      const progress = Math.max(0, Math.min(1, secLeft / Math.max(1, timerTotalSec)));
+      const offset = circumference * (1 - progress);
+
+      if (ringFill) {
+        ringFill.style.strokeDashoffset = String(offset);
+      }
+
+      if (secLeft > 0) {
+        if (ft) {
+          if (secLeft <= 5) {
+            ft.className = 'floating-timer active-warning';
+            if (ringFill) ringFill.style.stroke = 'var(--rose)';
+            if (ringIcon) ringIcon.innerText = '🔥';
+            if (sub) { sub.innerText = 'Get Ready to Lift'; sub.style.color = 'var(--rose)'; }
+          } else if (secLeft <= 15) {
+            ft.className = 'floating-timer active-warning';
+            if (ringFill) ringFill.style.stroke = 'var(--amber)';
+            if (ringIcon) ringIcon.innerText = '⚠️';
+            if (sub) { sub.innerText = 'Final Preparation'; sub.style.color = 'var(--amber)'; }
+          } else {
+            ft.className = 'floating-timer active-running';
+            if (ringFill) ringFill.style.stroke = 'var(--cyan)';
+            if (ringIcon) ringIcon.innerText = timerIsPaused ? '⏸' : '⏳';
+            if (sub) { sub.innerText = timerIsPaused ? 'Rest Paused' : 'ATP Recovery Active'; sub.style.color = 'var(--cyan)'; }
+          }
+        }
       }
     }
 
