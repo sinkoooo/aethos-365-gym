@@ -2418,89 +2418,108 @@
       font-size: 1.25rem;
     }
     .set-music-graphics-hud.docked .btn-set-hud-finish {
-      padding: 8px 18px;
-      font-size: 0.88rem;
-      max-width: 420px;
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      max-width: 360px;
     }
     .set-hud-top-bar {
+      position: relative;
+      z-index: 10;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 14px;
+      gap: 10px;
       flex-wrap: wrap;
       width: 100%;
-      margin-bottom: clamp(8px, 1.8vh, 18px);
+      margin-bottom: 6px;
+      pointer-events: auto;
     }
     .set-hud-pill-track {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      padding: 6px 14px;
+      gap: 8px;
+      padding: 3px 10px;
       border-radius: 99px;
-      background: rgba(0, 242, 254, 0.1);
-      border: 1px solid rgba(0, 242, 254, 0.3);
+      background: rgba(0, 242, 254, 0.08);
+      border: 1px solid rgba(0, 242, 254, 0.25);
       color: #38bdf8;
       font-weight: 700;
-      font-size: 0.82rem;
+      font-size: 0.74rem;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
     .set-hud-badge {
-      font-size: 0.7rem;
+      font-size: 0.64rem;
       font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      padding: 3px 9px;
+      letter-spacing: 0.4px;
+      padding: 2px 7px;
       border-radius: 99px;
-      background: linear-gradient(135deg, rgba(0, 242, 254, 0.2), rgba(168, 85, 247, 0.25));
-      border: 1px solid rgba(0, 242, 254, 0.45);
+      background: linear-gradient(135deg, rgba(0, 242, 254, 0.18), rgba(168, 85, 247, 0.22));
+      border: 1px solid rgba(0, 242, 254, 0.4);
       color: #38bdf8;
     }
     .set-hud-hero {
+      position: relative;
+      z-index: 10;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
       width: 100%;
-      max-width: 1060px;
+      max-width: 1100px;
       margin: 0 auto;
       flex: 1;
       justify-content: center;
+      pointer-events: none;
+    }
+    .set-hud-hero > * {
+      pointer-events: auto;
     }
     .set-hud-hero-badge {
-      font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+      font-size: clamp(0.7rem, 1vw, 0.85rem);
       font-weight: 900;
       text-transform: uppercase;
-      letter-spacing: 2px;
-      padding: 5px 18px;
+      letter-spacing: 1.5px;
+      padding: 3px 12px;
       border-radius: 99px;
-      background: linear-gradient(135deg, rgba(0, 242, 254, 0.22), rgba(168, 85, 247, 0.28));
-      border: 1.5px solid rgba(0, 242, 254, 0.6);
+      background: linear-gradient(135deg, rgba(0, 242, 254, 0.18), rgba(168, 85, 247, 0.22));
+      border: 1px solid rgba(0, 242, 254, 0.5);
       color: #00f2fe;
-      margin-bottom: 8px;
-      box-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
+      margin-bottom: 6px;
+      box-shadow: 0 0 16px rgba(0, 242, 254, 0.25);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
     .set-hud-hero-ex {
-      font-size: clamp(1.8rem, 4.4vw, 3.5rem);
+      font-size: clamp(1.8rem, 4.2vw, 3.2rem);
       font-weight: 950;
       color: #fff;
       text-transform: uppercase;
       letter-spacing: -0.5px;
       line-height: 1.1;
-      margin-bottom: 12px;
-      text-shadow: 0 0 45px rgba(0, 242, 254, 0.5);
+      margin-bottom: 10px;
+      text-shadow: 0 0 35px rgba(0, 242, 254, 0.6), 0 2px 10px rgba(0,0,0,0.8);
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
     }
+    /* WHOLE SCREEN BACKGROUND CANVAS & PACER */
     .set-hud-canvas-wrap {
-      position: relative;
-      width: 100%;
-      height: clamp(180px, 32vh, 360px);
-      background: radial-gradient(circle at center, rgba(14, 25, 55, 0.6) 0%, rgba(3, 7, 18, 0.85) 100%);
-      border: 1.5px solid rgba(0, 242, 254, 0.35);
-      border-radius: 20px;
+      position: absolute;
+      inset: 0;
+      width: 100% !important;
+      height: 100% !important;
+      background: transparent;
+      border: none;
+      border-radius: 0;
       overflow: hidden;
-      box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.85), 0 10px 40px rgba(0, 0, 0, 0.6);
-      margin-bottom: 12px;
+      box-shadow: none;
+      margin: 0;
+      z-index: 1;
+      pointer-events: none;
     }
     #onScreenSetCanvas {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       display: block;
@@ -2513,46 +2532,58 @@
       background: linear-gradient(90deg, #00f2fe, #a855f7, #f43f5e, #10b981);
       width: 0%;
       transition: width 0.1s linear;
-      box-shadow: 0 0 16px #00f2fe;
+      box-shadow: 0 0 20px #00f2fe;
+      z-index: 5;
     }
     .set-hud-tempo-callout {
-      font-size: clamp(0.95rem, 1.8vw, 1.35rem);
+      font-size: clamp(0.85rem, 1.5vw, 1.2rem);
       font-weight: 850;
-      letter-spacing: 1px;
+      letter-spacing: 0.8px;
       text-transform: uppercase;
       text-align: center;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
+      padding: 4px 14px;
+      border-radius: 99px;
+      background: rgba(10, 18, 36, 0.65);
+      border: 1px solid rgba(0, 242, 254, 0.25);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
     .set-hud-telemetry {
+      position: relative;
+      z-index: 10;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: clamp(10px, 2vw, 24px);
+      gap: clamp(8px, 1.5vw, 16px);
       flex-wrap: wrap;
       width: 100%;
-      margin-bottom: clamp(10px, 2vh, 20px);
+      margin-bottom: clamp(6px, 1.4vh, 14px);
+      pointer-events: auto;
     }
     .set-hud-telemetry-card {
-      background: rgba(15, 23, 42, 0.75);
+      background: rgba(10, 18, 36, 0.65);
       border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 16px;
-      padding: 10px 18px;
+      border-radius: 12px;
+      padding: 6px 14px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-width: 130px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      min-width: 110px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
     .set-hud-telemetry-label {
-      font-size: 0.7rem;
+      font-size: 0.64rem;
       font-weight: 800;
       color: var(--text-dim);
       text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 4px;
+      letter-spacing: 0.8px;
+      margin-bottom: 2px;
     }
     .set-hud-telemetry-val {
-      font-size: clamp(1.3rem, 2.2vw, 2.1rem);
+      font-size: clamp(1.15rem, 1.8vw, 1.6rem);
       font-weight: 900;
       color: #fff;
       font-family: 'JetBrains Mono', monospace;
@@ -2562,51 +2593,55 @@
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.2);
       color: #fff;
-      font-size: 0.95rem;
-      width: 26px;
-      height: 26px;
-      border-radius: 6px;
+      font-size: 0.78rem;
+      width: 20px;
+      height: 20px;
+      border-radius: 5px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s;
+      transition: all 0.15s ease;
+      padding: 0;
     }
     .set-hud-stepper-btn:hover {
       background: var(--cyan);
       color: #000;
       border-color: var(--cyan);
-      box-shadow: 0 0 10px var(--cyan);
+      box-shadow: 0 0 8px var(--cyan);
     }
     .set-hud-cta-footer {
+      position: relative;
+      z-index: 10;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       width: 100%;
+      pointer-events: auto;
     }
     .btn-set-hud-finish {
       width: auto;
-      min-width: 240px;
-      max-width: 380px;
+      min-width: 200px;
+      max-width: 340px;
       background: linear-gradient(135deg, #10b981 0%, #059669 100%);
       border: none;
       color: #fff;
       font-weight: 850;
-      padding: 9px 24px;
-      border-radius: 10px;
-      font-size: 0.9rem;
+      padding: 6px 18px;
+      border-radius: 8px;
+      font-size: 0.82rem;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      box-shadow: 0 0 25px rgba(16, 185, 129, 0.35);
+      gap: 6px;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.35);
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .btn-set-hud-finish:hover {
       transform: scale(1.02);
-      box-shadow: 0 0 35px rgba(16, 185, 129, 0.55);
+      box-shadow: 0 0 30px rgba(16, 185, 129, 0.55);
     }
     .btn-start-set {
       background: linear-gradient(135deg, rgba(0, 242, 254, 0.15), rgba(168, 85, 247, 0.2));
@@ -12888,17 +12923,17 @@
           </div>
         </div>
       </div>
-      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-        <button type="button" class="vis-mode-btn active" data-hudmode="bars" onclick="GymMusic.setVisualizerMode('bars')" title="Bars Spectrum">BARS</button>
-        <button type="button" class="vis-mode-btn" data-hudmode="wave" onclick="GymMusic.setVisualizerMode('wave')" title="Oscilloscope Wave">WAVE</button>
-        <button type="button" class="vis-mode-btn" data-hudmode="orbit" onclick="GymMusic.setVisualizerMode('orbit')" title="Cyber Pulse Orbit">ORBIT</button>
-        <button type="button" class="btn-micro-step" onclick="toggleSetHudCadence()" id="btnSetHudTempoToggle" title="Start / Stop Metronome Tempo Cadence" style="padding: 4px 10px; font-weight: 800; border-radius: 8px; color: #f43f5e; border-color: rgba(244, 63, 94, 0.4); background: rgba(244, 63, 94, 0.12);">⏹ STOP TEMPO</button>
-        <button type="button" class="btn-micro-step" onclick="cycleSetHudTempoRate()" id="btnSetHudTempoSpeed" title="Rep Tempo Cadence (Brisk 2.4s / Dynamic 3.0s / Control 3.9s)" style="padding: 4px 10px; font-weight: 800; border-radius: 8px; color: var(--amber);">⚡ 2.4s TEMPO</button>
-        <button type="button" class="btn-micro-step" onclick="toggleSetHudTempoSound()" id="btnSetHudTempoAudio" title="Toggle Cadence Metronome Audio Ticks" style="padding: 4px 10px; font-weight: 800; border-radius: 8px; color: var(--emerald);">🔊 TICKS</button>
-        <button type="button" class="btn-micro-step" onclick="GymMusic.toggleBassBoost()" id="btnSetHudBass" title="Toggle Bass Boost" style="padding: 4px 10px; font-weight: 800; border-radius: 8px;">⚡ BASS</button>
-        <button type="button" class="btn-micro-step" onclick="toggleSetMusicHudDockMode()" title="Toggle Dock / Fullscreen (Hotkey: F)" id="btnDockSetHud" style="padding: 4px 10px; font-weight: 800; border-radius: 8px;">⤢ Dock</button>
-        <button type="button" class="btn-micro-step" onclick="toggleNativeFullscreen()" title="Native Browser Fullscreen (F11)" id="btnNativeFsSetHud" style="padding: 4px 10px; font-weight: 800; border-radius: 8px;">⛶ FS</button>
-        <button type="button" class="btn-micro-step" onclick="closeSetMusicGraphicsHUD()" title="Exit Music Stage (Esc)" style="color: #f87171; padding: 4px 10px; font-weight: 800; border-radius: 8px;">✕ Exit</button>
+      <div style="display: flex; align-items: center; gap: 4px; flex-wrap: wrap;">
+        <button type="button" class="vis-mode-btn active" data-hudmode="bars" onclick="GymMusic.setVisualizerMode('bars')" title="Bars Spectrum" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">BARS</button>
+        <button type="button" class="vis-mode-btn" data-hudmode="wave" onclick="GymMusic.setVisualizerMode('wave')" title="Oscilloscope Wave" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">WAVE</button>
+        <button type="button" class="vis-mode-btn" data-hudmode="orbit" onclick="GymMusic.setVisualizerMode('orbit')" title="Cyber Pulse Orbit" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">ORBIT</button>
+        <button type="button" class="btn-micro-step" onclick="toggleSetHudCadence()" id="btnSetHudTempoToggle" title="Start / Stop Metronome Tempo Cadence" style="padding: 2px 6px; font-size: 0.65rem; font-weight: 800; border-radius: 5px; color: #f43f5e; border-color: rgba(244, 63, 94, 0.4); background: rgba(244, 63, 94, 0.12);">⏹ STOP TEMPO</button>
+        <button type="button" class="btn-micro-step" onclick="cycleSetHudTempoRate()" id="btnSetHudTempoSpeed" title="Rep Tempo Cadence (Brisk 2.4s / Dynamic 3.0s / Control 3.9s)" style="padding: 2px 6px; font-size: 0.65rem; font-weight: 800; border-radius: 5px; color: var(--amber);">⚡ 2.4s TEMPO</button>
+        <button type="button" class="btn-micro-step" onclick="toggleSetHudTempoSound()" id="btnSetHudTempoAudio" title="Toggle Cadence Metronome Audio Ticks" style="padding: 2px 6px; font-size: 0.65rem; font-weight: 800; border-radius: 5px; color: var(--emerald);">🔊 TICKS</button>
+        <button type="button" class="btn-micro-step" onclick="GymMusic.toggleBassBoost()" id="btnSetHudBass" title="Toggle Bass Boost" style="padding: 2px 6px; font-size: 0.65rem; font-weight: 800; border-radius: 5px;">⚡ BASS</button>
+        <button type="button" class="btn-micro-step" onclick="toggleSetMusicHudDockMode()" title="Toggle Dock / Fullscreen (Hotkey: F)" id="btnDockSetHud" style="padding: 2px 6px; font-size: 0.65rem; font-weight: 800; border-radius: 5px;">⤢ Dock</button>
+        <button type="button" class="btn-micro-step" onclick="toggleNativeFullscreen()" title="Native Browser Fullscreen (F11)" id="btnNativeFsSetHud" style="padding: 2px 6px; font-size: 0.65rem; font-weight: 800; border-radius: 5px;">⛶ FS</button>
+        <button type="button" class="btn-micro-step" onclick="closeSetMusicGraphicsHUD()" title="Exit Music Stage (Esc)" style="color: #f87171; padding: 2px 6px; font-size: 0.65rem; font-weight: 800; border-radius: 5px;">✕ Exit</button>
       </div>
     </div>
 
@@ -12941,12 +12976,12 @@
           <button type="button" class="set-hud-stepper-btn" onclick="adjustActiveSetStat('wt', 2.5)" title="+2.5 kg">+</button>
         </div>
       </div>
-      <div class="set-hud-telemetry-card" style="min-width: 140px; padding: 6px 12px;">
+      <div class="set-hud-telemetry-card" style="min-width: 120px; padding: 5px 10px;">
         <span class="set-hud-telemetry-label">Workout Beats</span>
-        <div style="display: flex; align-items: center; gap: 5px; margin-top: 3px;">
-          <button type="button" class="btn-micro-step" onclick="GymMusic.prevTrack()" title="Previous Track" style="padding: 3px 8px; font-size: 0.72rem; border-radius: 6px;">⏮</button>
-          <button type="button" class="btn-micro-step" id="btnSetHudMusicToggle" onclick="GymMusic.togglePlay()" title="Play / Pause Workout Beats" style="padding: 3px 10px; border-radius: 6px; background: rgba(0,242,254,0.18); border-color: var(--cyan); color: #38bdf8; font-weight: 800; font-size: 0.72rem;">⏸ Pause</button>
-          <button type="button" class="btn-micro-step" onclick="GymMusic.nextTrack()" title="Next Track" style="padding: 3px 8px; font-size: 0.72rem; border-radius: 6px;">⏭</button>
+        <div style="display: flex; align-items: center; gap: 3px; margin-top: 2px;">
+          <button type="button" class="btn-micro-step" onclick="GymMusic.prevTrack()" title="Previous Track" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">⏮</button>
+          <button type="button" class="btn-micro-step" id="btnSetHudMusicToggle" onclick="GymMusic.togglePlay()" title="Play / Pause Workout Beats" style="padding: 2px 7px; border-radius: 5px; background: rgba(0,242,254,0.18); border-color: var(--cyan); color: #38bdf8; font-weight: 800; font-size: 0.65rem;">⏸ Pause</button>
+          <button type="button" class="btn-micro-step" onclick="GymMusic.nextTrack()" title="Next Track" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">⏭</button>
         </div>
       </div>
     </div>
@@ -26020,90 +26055,140 @@ const GymMusic = {
           return;
         }
 
+        const isFullScreenHud = (canvas.id === 'onScreenSetCanvas' && !canvas.closest('.docked'));
+
         if (this.visualizerMode === 'bars') {
-          const barCount = Math.min(48, Math.floor(w / 12));
-          const barWidth = Math.max(3, (w / barCount) - 3);
-          let x = 3;
+          // Dynamic bar count: fill entire width beautifully whether 300px or 2560px
+          const step = isFullScreenHud ? 14 : 12;
+          const barCount = Math.max(24, Math.min(128, Math.floor(w / step)));
+          const barWidth = Math.max(4, (w / barCount) - (isFullScreenHud ? 4 : 3));
+          let x = (w - (barCount * (barWidth + (isFullScreenHud ? 4 : 3)))) / 2;
+          if (x < 0) x = 2;
 
           for (let i = 0; i < barCount; i++) {
-            const sampleIdx = Math.floor(i * (bufferLength / barCount) * 0.75);
+            const sampleIdx = Math.floor(i * (bufferLength / barCount) * 0.82);
             const val = freqData[sampleIdx] || 0;
-            const barHeight = Math.max(4, (val / 255) * (h - 10));
+            const barHeight = Math.max(isFullScreenHud ? 8 : 4, (val / 255) * (h * (isFullScreenHud ? 0.88 : 0.95)));
 
             const grad = ctx.createLinearGradient(0, h, 0, h - barHeight);
-            grad.addColorStop(0, '#00f2fe');
-            grad.addColorStop(0.5, '#38bdf8');
-            grad.addColorStop(0.85, '#a855f7');
+            grad.addColorStop(0, 'rgba(0, 242, 254, 0.25)');
+            grad.addColorStop(0.35, '#00f2fe');
+            grad.addColorStop(0.7, '#a855f7');
             grad.addColorStop(1, '#f43f5e');
 
             ctx.fillStyle = grad;
-            const radius = Math.min(3, barWidth / 2);
+            const radius = Math.min(4, barWidth / 2);
             const topY = h - barHeight;
             ctx.beginPath();
             if (ctx.roundRect) ctx.roundRect(x, topY, barWidth, barHeight, [radius, radius, 0, 0]);
             else ctx.rect(x, topY, barWidth, barHeight);
             ctx.fill();
 
-            // Peak glowing dot
+            // Peak glowing dot / crest
             ctx.fillStyle = '#ffffff';
+            ctx.shadowColor = '#00f2fe';
+            ctx.shadowBlur = isFullScreenHud ? 8 : 3;
             ctx.beginPath();
-            ctx.arc(x + barWidth / 2, Math.max(3, topY - 3), 1.5, 0, Math.PI * 2);
+            ctx.arc(x + barWidth / 2, Math.max(4, topY - 3), isFullScreenHud ? 2.2 : 1.5, 0, Math.PI * 2);
             ctx.fill();
+            ctx.shadowBlur = 0;
 
-            x += barWidth + 3;
+            x += barWidth + (isFullScreenHud ? 4 : 3);
           }
         } else if (this.visualizerMode === 'wave') {
-          ctx.lineWidth = 2.5;
+          // Multi-layer full-screen oscilloscope wave
+          const midY = h / 2;
+          
+          // Layer 1: Ambient background wave glow
+          if (isFullScreenHud) {
+            ctx.lineWidth = 6;
+            ctx.strokeStyle = 'rgba(0, 242, 254, 0.15)';
+            ctx.beginPath();
+            const sliceWidth = w * 1.0 / timeData.length;
+            let wx = 0;
+            for (let i = 0; i < timeData.length; i++) {
+              const v = timeData[i] / 128.0;
+              const y = midY + ((v - 1) * (h * 0.42));
+              if (i === 0) ctx.moveTo(wx, y);
+              else ctx.lineTo(wx, y);
+              wx += sliceWidth;
+            }
+            ctx.stroke();
+          }
+
+          // Layer 2: Vivid neon gradient core waveform
+          ctx.lineWidth = isFullScreenHud ? 3.5 : 2.5;
           const grad = ctx.createLinearGradient(0, 0, w, 0);
           grad.addColorStop(0, '#00f2fe');
-          grad.addColorStop(0.5, '#34d399');
-          grad.addColorStop(0.8, '#a855f7');
+          grad.addColorStop(0.3, '#34d399');
+          grad.addColorStop(0.7, '#a855f7');
           grad.addColorStop(1, '#f43f5e');
           ctx.strokeStyle = grad;
-          ctx.shadowColor = 'rgba(0, 242, 254, 0.85)';
-          ctx.shadowBlur = 8;
+          ctx.shadowColor = 'rgba(0, 242, 254, 0.9)';
+          ctx.shadowBlur = isFullScreenHud ? 16 : 8;
 
           ctx.beginPath();
           const sliceWidth = w * 1.0 / timeData.length;
           let x = 0;
           for (let i = 0; i < timeData.length; i++) {
             const v = timeData[i] / 128.0;
-            const y = (v * h) / 2;
+            const y = midY + ((v - 1) * (h * (isFullScreenHud ? 0.38 : 0.45)));
             if (i === 0) ctx.moveTo(x, y);
             else ctx.lineTo(x, y);
             x += sliceWidth;
           }
-          ctx.lineTo(w, h / 2);
+          ctx.lineTo(w, midY);
           ctx.stroke();
           ctx.shadowBlur = 0;
         } else if (this.visualizerMode === 'orbit') {
+          // Massive reactive cyber orbit spanning the viewport
           const bassVal = bassAvg;
-          const radius = Math.min(h / 2 - 6, 16 + (bassVal / 255) * 20);
+          const maxRadius = Math.min(w, h) * 0.42;
+          const baseRadius = isFullScreenHud ? Math.min(260, maxRadius) : Math.min(h / 2 - 6, 22);
+          const radius = baseRadius + ((bassVal / 255) * (isFullScreenHud ? 70 : 18));
           const cx = w / 2;
           const cy = h / 2;
 
-          ctx.strokeStyle = 'rgba(56, 189, 248, 0.6)';
-          ctx.lineWidth = 2;
+          // Outer sonic aura
+          if (isFullScreenHud) {
+            const auraGrad = ctx.createRadialGradient(cx, cy, radius * 0.2, cx, cy, radius * 1.5);
+            auraGrad.addColorStop(0, 'rgba(0, 242, 254, 0.12)');
+            auraGrad.addColorStop(0.6, 'rgba(168, 85, 247, 0.08)');
+            auraGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+            ctx.fillStyle = auraGrad;
+            ctx.beginPath();
+            ctx.arc(cx, cy, radius * 1.5, 0, Math.PI * 2);
+            ctx.fill();
+          }
+
+          // Main Orbit Ring
+          ctx.strokeStyle = 'rgba(56, 189, 248, 0.65)';
+          ctx.lineWidth = isFullScreenHud ? 3 : 2;
+          ctx.shadowColor = '#00f2fe';
+          ctx.shadowBlur = isFullScreenHud ? 18 : 8;
           ctx.beginPath();
           ctx.arc(cx, cy, radius, 0, Math.PI * 2);
           ctx.stroke();
+          ctx.shadowBlur = 0;
 
-          ctx.fillStyle = 'rgba(0, 242, 254, 0.35)';
+          // Pulsing Core
+          ctx.fillStyle = 'rgba(0, 242, 254, 0.28)';
           ctx.shadowColor = '#00f2fe';
-          ctx.shadowBlur = (bassVal / 255) * 26;
+          ctx.shadowBlur = (bassVal / 255) * (isFullScreenHud ? 38 : 24);
           ctx.beginPath();
-          ctx.arc(cx, cy, Math.max(2, radius * 0.65), 0, Math.PI * 2);
+          ctx.arc(cx, cy, Math.max(3, radius * 0.62), 0, Math.PI * 2);
           ctx.fill();
           ctx.shadowBlur = 0;
 
-          // Wave lines around orbit
+          // Reactive Wave Perimeter around orbit
           ctx.strokeStyle = '#c084fc';
-          ctx.lineWidth = 1.8;
+          ctx.lineWidth = isFullScreenHud ? 2.5 : 1.8;
           ctx.beginPath();
-          const pts = 36;
+          const pts = isFullScreenHud ? 64 : 36;
           for (let p = 0; p < pts; p++) {
             const ang = (p / pts) * Math.PI * 2;
-            const amp = (freqData[p * 2] || 0) / 255 * 18;
+            const freqIdx = Math.floor((p / pts) * (bufferLength * 0.65));
+            const amp = (freqData[freqIdx] || 0) / 255 * (isFullScreenHud ? 42 : 18);
             const px = cx + Math.cos(ang) * (radius + amp);
             const py = cy + Math.sin(ang) * (radius + amp);
             if (p === 0) ctx.moveTo(px, py);
