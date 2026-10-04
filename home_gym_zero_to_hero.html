@@ -7678,6 +7678,13 @@
                 <div class="tool-item-desc">Customize athlete goals & avatar</div>
               </div>
             </button>
+            <button type="button" class="tool-item-row" onclick="closeHeaderToolsMenu(); openModal('hotkeysModal');">
+              <span class="tool-icon">⌨️</span>
+              <div>
+                <div>Keyboard Hotkeys <span style="font-size: 0.72rem; color: var(--cyan); font-weight: 700;">(?)</span></div>
+                <div class="tool-item-desc">Shortcuts & hands-free controls</div>
+              </div>
+            </button>
             <button type="button" class="tool-item-row" onclick="closeHeaderToolsMenu(); handleUserPillClick();" style="border-top: 1px solid rgba(255,255,255,0.06); margin-top: 4px; padding-top: 8px;">
               <span class="tool-icon">⚡</span>
               <div>
@@ -7854,9 +7861,6 @@
           </button>
           <button class="btn-reset-dock" onclick="confirmResetCurrentTimeline()" title="Reset current profile workout timeline back to clean Day 1 (0 XP, clean slate)">
             🔄 Reset Timeline
-          </button>
-          <button type="button" class="nav-pill-btn" onclick="openModal('hotkeysModal')" style="font-size: 0.78rem; padding: 7px 12px; border-color: rgba(255,255,255,0.25);" title="Keyboard Shortcuts Cheat Sheet (Hotkey: ?)">
-            ⌨️ Hotkeys (?)
           </button>
           <label style="font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; cursor: pointer;">
             <input type="checkbox" id="voiceCoachToggle" checked> 🔊 Audio Coach
@@ -8594,6 +8598,26 @@
                 <span class="muscle-tag mt-secondary">Core</span>
               </div>
             </div>
+          </div>
+
+          <!-- Keyboard Hotkeys Tool Widget -->
+          <div class="side-widget">
+            <div class="widget-head">
+              <div class="widget-title">⌨️ Keyboard Shortcuts</div>
+              <span style="font-size: 0.72rem; color: var(--cyan); font-weight: 700;">PRO TOOLS</span>
+            </div>
+            <div style="font-size: 0.76rem; color: var(--text-muted); margin-bottom: 8px;">
+              Hands-free training controls:
+            </div>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px;">
+              <span style="background: rgba(255,255,255,0.06); padding: 3px 7px; border-radius: 4px; font-size: 0.72rem; font-family: 'JetBrains Mono'; color: #fff;"><strong style="color:var(--cyan);">Space</strong> Rest/Tempo</span>
+              <span style="background: rgba(255,255,255,0.06); padding: 3px 7px; border-radius: 4px; font-size: 0.72rem; font-family: 'JetBrains Mono'; color: #fff;"><strong style="color:var(--cyan);">Enter</strong> Log Set</span>
+              <span style="background: rgba(255,255,255,0.06); padding: 3px 7px; border-radius: 4px; font-size: 0.72rem; font-family: 'JetBrains Mono'; color: #fff;"><strong style="color:var(--cyan);">F</strong> Focus HUD</span>
+              <span style="background: rgba(255,255,255,0.06); padding: 3px 7px; border-radius: 4px; font-size: 0.72rem; font-family: 'JetBrains Mono'; color: #fff;"><strong style="color:var(--cyan);">M</strong> Music</span>
+            </div>
+            <button class="btn-tempo-start" onclick="openModal('hotkeysModal')" style="margin-top: 4px; font-size: 0.75rem; padding: 7px 12px; background: rgba(56,189,248,0.1); border-color: rgba(56,189,248,0.3); color: var(--cyan);">
+              ⌨️ View All Shortcuts (?)
+            </button>
           </div>
         </aside>
 
