@@ -1101,72 +1101,163 @@
       box-shadow: 0 0 6px rgba(56, 189, 248, 0.5);
     }
 
-    /* DAILY READINESS / AUTOREGULATION BAR */
+    /* ── 100X DAILY READINESS & HYDRATION BIOMETRIC COCKPIT ── */
     .readiness-strip {
-      background: rgba(13, 19, 33, 0.7);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      box-shadow: 0 8px 30px -10px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.06);
-      border-radius: var(--radius-md);
-      padding: 12px 18px;
+      background: linear-gradient(135deg, rgba(13, 20, 36, 0.85) 0%, rgba(8, 14, 26, 0.92) 100%);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid rgba(56, 189, 248, 0.18);
+      box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-lg);
+      padding: 14px 20px;
       margin-bottom: 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .readiness-cluster {
+      display: flex;
+      align-items: center;
       gap: 14px;
       flex-wrap: wrap;
     }
 
-    .readiness-title {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--text);
+    .readiness-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .readiness-brand-title {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #fff;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+      letter-spacing: 0.3px;
+    }
+
+    .readiness-brand-sub {
+      font-size: 0.70rem;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
     }
 
     .readiness-btns {
       display: flex;
-      gap: 8px;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 3px;
+      border-radius: 99px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .btn-energy {
-      background: rgba(15, 23, 42, 0.65);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: transparent;
+      border: 1px solid transparent;
       color: var(--text-muted);
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: 700;
-      padding: 6px 13px;
+      padding: 6px 14px;
       border-radius: 99px;
       cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      user-select: none;
     }
 
     .btn-energy:hover {
-      transform: translateY(-1px);
-      border-color: rgba(255, 255, 255, 0.2);
       color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-1px);
     }
 
-    .btn-energy.active-high { background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.5); color: #34d399; box-shadow: 0 0 14px rgba(16, 185, 129, 0.3); }
-    .btn-energy.active-norm { background: rgba(56, 189, 248, 0.15); border-color: rgba(56, 189, 248, 0.5); color: #38bdf8; box-shadow: 0 0 14px rgba(56, 189, 248, 0.3); }
-    .btn-energy.active-low  { background: rgba(245, 158, 11, 0.15); border-color: rgba(245, 158, 11, 0.5); color: #fbbf24; box-shadow: 0 0 14px rgba(245, 158, 11, 0.3); }
+    .btn-energy.active-prime {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(99, 102, 241, 0.25));
+      border-color: rgba(168, 85, 247, 0.6);
+      color: #e879f9;
+      box-shadow: 0 0 16px rgba(168, 85, 247, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
 
-    /* WATER LOGGING DOCK */
-    .water-row {
+    .btn-energy.active-high {
+      background: linear-gradient(135deg, rgba(0, 242, 254, 0.2), rgba(56, 189, 248, 0.2));
+      border-color: rgba(0, 242, 254, 0.6);
+      color: var(--cyan);
+      box-shadow: 0 0 16px rgba(0, 242, 254, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-energy.active-norm {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.2));
+      border-color: rgba(16, 185, 129, 0.6);
+      color: var(--emerald);
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-energy.active-low {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(217, 119, 6, 0.2));
+      border-color: rgba(245, 158, 11, 0.6);
+      color: var(--amber);
+      box-shadow: 0 0 16px rgba(245, 158, 11, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    /* ── HYDRATION BIO-POD ── */
+    .hydration-cluster {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .hydration-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      text-align: right;
+    }
+
+    @media (max-width: 768px) {
+      .hydration-info { text-align: left; }
+    }
+
+    .hydration-title-wrap {
       display: flex;
       align-items: center;
       gap: 6px;
+      font-size: 0.80rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .hydration-sub {
+      font-size: 0.70rem;
+      color: var(--cyan);
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+    }
+
+    .water-pod-strip {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(0, 0, 0, 0.35);
+      padding: 4px 8px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .water-cup {
       width: 28px;
-      height: 30px;
-      background: rgba(15, 23, 42, 0.65);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      height: 32px;
+      background: rgba(15, 23, 42, 0.75);
+      border: 1.5px solid rgba(56, 189, 248, 0.2);
       border-radius: 6px;
       display: flex;
       align-items: center;
@@ -1174,21 +1265,47 @@
       font-size: 0.78rem;
       cursor: pointer;
       user-select: none;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
     }
 
     .water-cup:hover {
-      transform: translateY(-2px);
+      transform: translateY(-2px) scale(1.08);
       border-color: var(--cyan);
-      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.25);
+      box-shadow: 0 4px 14px rgba(0, 242, 254, 0.4);
     }
 
     .water-cup.filled {
-      background: linear-gradient(180deg, rgba(56, 189, 248, 0.3) 0%, rgba(37, 99, 235, 0.35) 100%);
+      background: linear-gradient(180deg, rgba(0, 242, 254, 0.45) 0%, rgba(37, 99, 235, 0.6) 100%);
       border-color: var(--cyan);
       color: #fff;
-      box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
+      box-shadow: 0 0 12px rgba(0, 242, 254, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      animation: waterCupSplash 0.35s ease;
+    }
+
+    @keyframes waterCupSplash {
+      0% { transform: scale(0.85); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+
+    .water-quick-btn {
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      color: var(--cyan);
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 4px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .water-quick-btn:hover {
+      background: var(--cyan);
+      color: #000;
+      box-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
     }
 
     /* DAY CONTROLLER DOCK */
@@ -8216,22 +8333,49 @@
       </div>
     </section>
 
-    <!-- DAILY READINESS AUTOREGULATION & WATER DOCK -->
+    <!-- 100X DAILY READINESS AUTOREGULATION & HYDRATION COCKPIT -->
     <section class="container">
-      <div class="readiness-strip">
-        <div class="readiness-title">
-          <span>⚡ Daily Energy & Autoregulation:</span>
+      <div class="readiness-strip" id="readinessDockStrip">
+        <!-- Energy Autoregulation Biometric Pod -->
+        <div class="readiness-cluster">
+          <div class="readiness-brand">
+            <div class="readiness-brand-title">
+              <span>⚡ Daily Energy &amp; Autoregulation</span>
+              <span id="readinessVolumeBadge" style="font-size: 0.70rem; color: var(--cyan); background: rgba(0, 242, 254, 0.12); border: 1px solid rgba(0, 242, 254, 0.25); padding: 1px 6px; border-radius: 4px; font-weight: 800;">100% VOLUME</span>
+            </div>
+            <div class="readiness-brand-sub" id="readinessStatusSub">Adaptive neurological load &amp; volume scaling</div>
+          </div>
           <div class="readiness-btns">
-            <button class="btn-energy" id="btnEnergyHigh" onclick="setReadiness('high')">⚡ High (100%)</button>
-            <button class="btn-energy active-norm" id="btnEnergyNorm" onclick="setReadiness('norm')">🔋 Normal (80%)</button>
-            <button class="btn-energy" id="btnEnergyLow" onclick="setReadiness('low')">😴 Sore/Low (Autoscale)</button>
+            <button class="btn-energy" id="btnEnergyPrime" onclick="setReadiness('prime')" title="Peak Neurological State • Overload +1 Set">
+              <span>🔥</span> <span>Peak (115%)</span>
+            </button>
+            <button class="btn-energy" id="btnEnergyHigh" onclick="setReadiness('high')" title="Full Energy • Prescribed Standard Volume (100%)">
+              <span>⚡</span> <span>High (100%)</span>
+            </button>
+            <button class="btn-energy active-norm" id="btnEnergyNorm" onclick="setReadiness('norm')" title="Standard Energy • Moderate Baseline (85%)">
+              <span>🔋</span> <span>Normal (85%)</span>
+            </button>
+            <button class="btn-energy" id="btnEnergyLow" onclick="setReadiness('low')" title="High Fatigue or Soreness • Autoscale -1 Set to Protect Recovery">
+              <span>😴</span> <span>Sore/Low (Autoscale)</span>
+            </button>
           </div>
         </div>
 
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <span style="font-size: 0.8rem; color: var(--cyan); font-weight: 700;" id="waterTargetLabel">💧 Water (3.6L Target):</span>
-          <div class="water-row" id="waterTrackerRow">
-            <!-- 8 Water Glasses (400ml each) rendered by JS -->
+        <!-- Dermal & Systemic Hydration Pod -->
+        <div class="hydration-cluster">
+          <div class="hydration-info">
+            <div class="hydration-title-wrap">
+              <span>💧 Dermal Hydration</span>
+              <span id="waterMlDisplay" style="color: var(--cyan); font-family: 'JetBrains Mono'; font-size: 0.76rem;">0 / 3,300 ml</span>
+            </div>
+            <div class="hydration-sub" id="waterTargetLabel">Target: 3.3L (8×412ml Cups)</div>
+          </div>
+          <div class="water-pod-strip">
+            <div class="water-row" id="waterTrackerRow">
+              <!-- 8 Water Glasses rendered dynamically with live fill splash -->
+            </div>
+            <button type="button" class="water-quick-btn" onclick="quickFillWater()" title="Log Quick +400ml Glass">+400ml</button>
+            <button type="button" class="water-quick-btn" onclick="resetDayWater()" title="Reset Today's Water" style="color: #94a3b8; border-color: rgba(255,255,255,0.1); background: transparent;">↺</button>
           </div>
         </div>
       </div>
@@ -17119,10 +17263,12 @@
       const isDeload = (week % 7 === 0);
       let setQty = isDeload ? 2 : 3;
 
-      // Check Readiness Autoregulation
+      // 4-Tier Neurological Readiness & Autoregulation
       const energyLevel = dailyReadiness[day] || 'norm';
-      if (energyLevel === 'low') {
-        setQty = Math.max(2, setQty - 1); // Auto-scale back by 1 set on low recovery days
+      if (energyLevel === 'prime') {
+        setQty = Math.min(4, setQty + 1); // Peak neurological day: +1 bonus overload set
+      } else if (energyLevel === 'low') {
+        setQty = Math.max(2, setQty - 1); // Sore/Low fatigue day: Autoscale -1 set to preserve nervous system
       }
 
       if (dayOfWeek === 7) {
@@ -17352,7 +17498,8 @@
       }
 
       if (isDeload) workoutName += " (Deload Active Recovery Week)";
-      if (energyLevel === 'low') workoutName += " [Autoscaled Volume]";
+      if (energyLevel === 'prime') workoutName += " [🔥 Peak Overload +1 Set]";
+      else if (energyLevel === 'low') workoutName += " [🛡️ Autoscaled -1 Set]";
 
       return {
         day, month, week, phaseName, bpClass, equipText,
@@ -19506,44 +19653,129 @@ function stopGuidedCooldown() {
     }
 
     // ==========================================
-    // READINESS AUTOREGULATION & WATER TRACKER
+    // 🧬 100X BIOMETRIC READINESS AUTOREGULATION & DERMAL HYDRATION CONTROLLER
     // ==========================================
+    const READINESS_CONFIG = {
+      prime: {
+        label: 'Peak Overload',
+        volumeBadge: '115% VOLUME (+1 SET)',
+        sub: '⚡ Optimal CNS & glycogen recovery. +1 bonus overload set unlocked.',
+        badgeColor: '#e879f9',
+        soundFreq: 880
+      },
+      high: {
+        label: 'High Performance',
+        volumeBadge: '100% VOLUME (STANDARD)',
+        sub: '⚡ Full neurological drive. Standard prescribed training volume.',
+        badgeColor: 'var(--cyan)',
+        soundFreq: 659.25
+      },
+      norm: {
+        label: 'Normal Baseline',
+        volumeBadge: '85% VOLUME (BALANCED)',
+        sub: '🔋 Steady autonomic state. Smooth athletic baseline stimulus.',
+        badgeColor: 'var(--emerald)',
+        soundFreq: 523.25
+      },
+      low: {
+        label: 'Autoscaled Fatigue',
+        volumeBadge: 'AUTOSCALED (-1 SET)',
+        sub: '🛡️ Elevated muscle soreness/DOMS. Volume scaled down by 1 set to prevent overtraining.',
+        badgeColor: 'var(--amber)',
+        soundFreq: 392
+      }
+    };
+
     function setReadiness(level) {
       dailyReadiness[currentDay] = level;
       localStorage.setItem(getProfileKey('gym_readiness_log'), JSON.stringify(dailyReadiness));
+      
+      const cfg = READINESS_CONFIG[level] || READINESS_CONFIG.norm;
+      playAudioTone(cfg.soundFreq, 'triangle', 0.15);
+      triggerHaptic([40, 30, 40]);
+      
       updateReadinessUI();
-      renderActiveDay(currentDay); // Re-renders plan with autoscaled sets if low
+      renderActiveDay(currentDay); // Dynamically recalibrates workout sets & exercises
     }
 
     function updateReadinessUI() {
       const level = dailyReadiness[currentDay] || 'norm';
-      document.getElementById('btnEnergyHigh').className = `btn-energy ${level === 'high' ? 'active-high' : ''}`;
-      document.getElementById('btnEnergyNorm').className = `btn-energy ${level === 'norm' ? 'active-norm' : ''}`;
-      document.getElementById('btnEnergyLow').className = `btn-energy ${level === 'low' ? 'active-low' : ''}`;
+      const cfg = READINESS_CONFIG[level] || READINESS_CONFIG.norm;
+
+      const btnPrime = document.getElementById('btnEnergyPrime');
+      const btnHigh = document.getElementById('btnEnergyHigh');
+      const btnNorm = document.getElementById('btnEnergyNorm');
+      const btnLow = document.getElementById('btnEnergyLow');
+
+      if (btnPrime) btnPrime.className = `btn-energy ${level === 'prime' ? 'active-prime' : ''}`;
+      if (btnHigh) btnHigh.className = `btn-energy ${level === 'high' ? 'active-high' : ''}`;
+      if (btnNorm) btnNorm.className = `btn-energy ${level === 'norm' ? 'active-norm' : ''}`;
+      if (btnLow) btnLow.className = `btn-energy ${level === 'low' ? 'active-low' : ''}`;
+
+      const vBadge = document.getElementById('readinessVolumeBadge');
+      if (vBadge) {
+        vBadge.innerText = cfg.volumeBadge;
+        vBadge.style.color = cfg.badgeColor;
+        vBadge.style.borderColor = cfg.badgeColor;
+      }
+
+      const rSub = document.getElementById('readinessStatusSub');
+      if (rSub) rSub.innerText = cfg.sub;
     }
 
     function renderWaterTracker() {
       const row = document.getElementById('waterTrackerRow');
+      const mlDisplay = document.getElementById('waterMlDisplay');
       if (!row) return;
+
       row.innerHTML = '';
-      const cupsFilled = waterLog[currentDay] || 0;
+      const cupsFilled = Math.min(8, Math.max(0, waterLog[currentDay] || 0));
+      const totalMl = cupsFilled * 412; // 8 cups * 412.5ml = 3,300ml target
+
+      if (mlDisplay) {
+        mlDisplay.innerText = `${totalMl.toLocaleString()} / 3,300 ml`;
+        mlDisplay.style.color = (cupsFilled >= 8) ? 'var(--emerald)' : 'var(--cyan)';
+      }
 
       for (let i = 1; i <= 8; i++) {
         const isFilled = i <= cupsFilled;
         const cup = document.createElement('div');
         cup.className = `water-cup ${isFilled ? 'filled' : ''}`;
-        cup.innerText = '💧';
-        cup.title = `Glass ${i} (400ml)`;
+        cup.innerText = isFilled ? '💧' : '○';
+        cup.title = `Cup ${i} of 8 (~412ml) • Click to toggle`;
         cup.onclick = () => {
           waterLog[currentDay] = (cupsFilled === i) ? i - 1 : i;
           localStorage.setItem(getProfileKey('gym_water_log'), JSON.stringify(waterLog));
           renderWaterTracker();
           updateMissionChecklist();
-          playAudioTone(440, 'sine', 0.1);
+          playAudioTone(isFilled ? 330 : 587.33, 'sine', 0.12);
+          triggerHaptic([30]);
         };
         row.appendChild(cup);
       }
       updateMissionChecklist();
+    }
+
+    function quickFillWater() {
+      const cur = waterLog[currentDay] || 0;
+      if (cur < 8) {
+        waterLog[currentDay] = cur + 1;
+        localStorage.setItem(getProfileKey('gym_water_log'), JSON.stringify(waterLog));
+        renderWaterTracker();
+        updateMissionChecklist();
+        playAudioTone(659.25, 'triangle', 0.15);
+        triggerHaptic([50]);
+      } else {
+        showToast('💧 Daily hydration goal (3.3L) reached! Outstanding job.');
+      }
+    }
+
+    function resetDayWater() {
+      waterLog[currentDay] = 0;
+      localStorage.setItem(getProfileKey('gym_water_log'), JSON.stringify(waterLog));
+      renderWaterTracker();
+      updateMissionChecklist();
+      playAudioTone(220, 'sine', 0.1);
     }
 
     // ==========================================
