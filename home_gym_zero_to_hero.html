@@ -7747,7 +7747,7 @@
             <div class="quest-progress-bar" id="questProgressBar" style="width: 0%;"></div>
           </div>
           <button class="nav-pill-btn" onclick="event.stopPropagation(); switchView('milestonesView')" style="margin-top: 4px; padding: 4px 10px; font-size: 0.75rem; border-color: rgba(168,85,247,0.4); color: var(--purple);">
-            View 28 Milestones Hub ↗
+            View 30 Milestones Hub ↗
           </button>
         </div>
       </div>
@@ -7910,30 +7910,30 @@
             </button>
           </div>
 
-          <div class="mission-chip" id="chipNutrition" onclick="toggleChecklistItemManual('nutrition')" title="Click anywhere to toggle Daily Nutrition complete / pending">
+          <div class="mission-chip" id="chipNutrition" onclick="toggleChecklistItemManual('nutrition')" title="Click anywhere to toggle Daily Nutrition complete / pending (Includes Skin & Hair Micronutrients)">
             <div class="chip-left">
               <button class="chip-check-toggle" id="btnCheckNutrition" onclick="event.stopPropagation(); toggleChecklistItemManual('nutrition')" title="Toggle Complete">
                 ○
               </button>
               <span class="chip-icon">🥗</span>
               <div>
-                <span class="chip-label">Daily Nutrition</span>
+                <span class="chip-label">Nutrition & Glow Bioactives</span>
                 <span class="chip-status" id="chipNutritionStatus">What to Eat Today</span>
               </div>
             </div>
-            <button class="chip-jump-btn" onclick="event.stopPropagation(); openNutritionExportModal()" title="View & Export Today's Meals">
+            <button class="chip-jump-btn" onclick="event.stopPropagation(); openNutritionExportModal()" title="View & Export Today's Meals & Skin/Hair Stack">
               🥗
             </button>
           </div>
 
-          <div class="mission-chip" id="chipWater" onclick="toggleChecklistItemManual('water')" title="Click anywhere to toggle 8 Glasses Hydration Target">
+          <div class="mission-chip" id="chipWater" onclick="toggleChecklistItemManual('water')" title="Click anywhere to toggle 8 Glasses (3.2L+) Dermal Hydration Target">
             <div class="chip-left">
               <button class="chip-check-toggle" id="btnCheckWater" onclick="event.stopPropagation(); toggleChecklistItemManual('water')" title="Toggle Complete">
                 ○
               </button>
               <span class="chip-icon">💧</span>
               <div>
-                <span class="chip-label">Hydration Target</span>
+                <span class="chip-label">Dermal Hydration (3.2L+)</span>
                 <span class="chip-status" id="chipWaterStatus">0 / 8 Glasses</span>
               </div>
             </div>
@@ -8417,6 +8417,15 @@
                   <button type="button" class="mobility-chip cooldown-chip" onclick="showCooldownMovementDetail(4)">5. Diaphragmatic Box Breathing</button>
                 </div>
               </div>
+
+              <!-- Post-Workout Skin & Follicle Longevity Hygiene Reminder -->
+              <div style="margin-top: 10px; background: rgba(56, 189, 248, 0.06); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 8px; padding: 10px 14px; display: flex; align-items: flex-start; gap: 10px;">
+                <span style="font-size: 1.3rem; line-height: 1;">✨</span>
+                <div style="flex: 1; font-size: 0.8rem; color: #cbd5e1; line-height: 1.45;">
+                  <strong style="color: var(--cyan);">Post-Workout 15-Minute Rule (Skin & Hair Follicle Shield):</strong>
+                  Rinse dried sweat within 15 min to prevent salt-crystal pore clogging & bacterial acne. Wash hairline gently with lukewarm water to remove sebum DHT build-up, and hydrate with 500ml water + vitamin C for dermal collagen protection.
+                </div>
+              </div>
             </div>
 
             <!-- Follow-Along Active Player HUD -->
@@ -8563,7 +8572,7 @@
               Trainee Milestone & Tier Hub
             </h2>
             <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; max-width: 550px;">
-              28 Unlockable Discipline & Strength Milestones across Habit Streaks, Tonnage, Transformation Photography, and Movement Mastery. Earn XP to ascend through 20 warrior tiers.
+              30 Unlockable Discipline & Strength Milestones across Habit Streaks, Tonnage, Transformation Photography, and Cellular Skin & Hair Longevity Mastery. Earn XP to ascend through 20 warrior tiers.
             </p>
           </div>
         </div>
@@ -8577,7 +8586,7 @@
             <div class="lvl-fill" id="hubXpFill" style="width: 0%;"></div>
           </div>
           <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted);">
-            <span>Milestones Unlocked: <strong style="color: var(--cyan);" id="hubUnlockedCount">0 / 28</strong></span>
+            <span>Milestones Unlocked: <strong style="color: var(--cyan);" id="hubUnlockedCount">0 / 30</strong></span>
             <span id="hubNextLvlNeeded">250 XP to LVL 2</span>
           </div>
         </div>
@@ -8585,11 +8594,11 @@
 
       <!-- FILTER TABS -->
       <div class="milestone-filters">
-        <button class="milestone-filter-btn active" onclick="filterMilestones('all', this)">All Milestones (28)</button>
+        <button class="milestone-filter-btn active" onclick="filterMilestones('all', this)">All Milestones (30)</button>
         <button class="milestone-filter-btn" onclick="filterMilestones('streak', this)">🔥 Habit & Streaks (7)</button>
         <button class="milestone-filter-btn" onclick="filterMilestones('volume', this)">🏋️ Volume & Tonnage (7)</button>
         <button class="milestone-filter-btn" onclick="filterMilestones('photo', this)">📸 Visual & Photos (7)</button>
-        <button class="milestone-filter-btn" onclick="filterMilestones('mastery', this)">🏆 Mastery & Form (7)</button>
+        <button class="milestone-filter-btn" onclick="filterMilestones('mastery', this)">🏆 Mastery, Skin & Hair (9)</button>
       </div>
 
       <!-- 28 HOLOGRAPHIC MILESTONE CARDS GRID -->
@@ -8633,11 +8642,13 @@
             <span style="font-size: 1.1rem; font-weight: 800; color: #fff;">🎬 Transformation Time-Lapse Reel</span>
             <span class="badge" style="background: rgba(56, 189, 248, 0.2); color: var(--cyan); font-size: 0.72rem; padding: 2px 8px; border-radius: 4px;">MORPH ENGINE</span>
           </div>
-          <div style="display: flex; gap: 6px;" id="timelapseAngleSelector">
+          <div style="display: flex; gap: 6px; flex-wrap: wrap;" id="timelapseAngleSelector">
             <button class="nav-pill-btn active" id="tlAngleAll" onclick="setTimeLapseAngle('all')">All Angles</button>
             <button class="nav-pill-btn" id="tlAngleFront" onclick="setTimeLapseAngle('front')">Front</button>
             <button class="nav-pill-btn" id="tlAngleSide" onclick="setTimeLapseAngle('side')">Side</button>
             <button class="nav-pill-btn" id="tlAngleBack" onclick="setTimeLapseAngle('back')">Back</button>
+            <button class="nav-pill-btn" id="tlAngleFace" onclick="setTimeLapseAngle('face')">✨ Face</button>
+            <button class="nav-pill-btn" id="tlAngleScalp" onclick="setTimeLapseAngle('scalp')">💆 Scalp</button>
           </div>
         </div>
         <div class="timelapse-screen" id="timelapseScreen">
@@ -8662,8 +8673,8 @@
         <div class="ba-toolbar-top">
           <!-- Left: Before / After Selector Dropdowns, Swap & Angle Sync -->
           <div class="ba-picker-group">
-            <!-- Angle Filter (Front to Front, Back to Back, Side to Side, All) -->
-            <div style="display: flex; align-items: center; gap: 6px;">
+            <!-- Angle Filter (Front to Front, Back to Back, Side to Side, Face to Face, Scalp to Scalp, All) -->
+            <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
               <span style="font-size: 0.72rem; color: #94a3b8; font-weight: 800; text-transform: uppercase;">Angle:</span>
               <div class="ba-angle-bar" id="baAngleBar">
                 <button type="button" class="ba-angle-btn active" id="baAngleBtn_all" onclick="setComparisonAngleFilter('all')" title="Compare Any Angle">
@@ -8677,6 +8688,12 @@
                 </button>
                 <button type="button" class="ba-angle-btn" id="baAngleBtn_side" onclick="setComparisonAngleFilter('side')" title="Compare Side Profile to Side Profile photos">
                   🚶 Side to Side
+                </button>
+                <button type="button" class="ba-angle-btn" id="baAngleBtn_face" onclick="setComparisonAngleFilter('face')" title="Compare Facial Skin Radiance & Complexion">
+                  ✨ Face to Face
+                </button>
+                <button type="button" class="ba-angle-btn" id="baAngleBtn_scalp" onclick="setComparisonAngleFilter('scalp')" title="Compare Scalp & Hairline Density">
+                  💆 Scalp to Scalp
                 </button>
               </div>
             </div>
@@ -9245,6 +9262,32 @@
               <a href="https://www.amazon.in/s?k=plant+protein+powder+pea+rice" target="_blank" rel="noopener noreferrer" class="btn-supp-order btn-supp-amazon">🛒 Plant Protein</a>
             </div>
           </div>
+
+          <div class="supp-card" style="border: 1.5px solid rgba(236, 72, 153, 0.4); background: linear-gradient(145deg, rgba(236, 72, 153, 0.08) 0%, rgba(13, 21, 40, 0.95) 100%);">
+            <span class="supp-tier" style="background: rgba(236, 72, 153, 0.2); color: #f472b6; border-color: rgba(236, 72, 153, 0.4);">Tier 2: Dermal Elasticity & Tendons</span>
+            <h3 style="color: #fff; margin: 4px 0 6px;">Hydrolyzed Collagen Peptides (Type I & III)</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+              <strong>Dose:</strong> 10g to 15g daily with morning coffee, water, or Vitamin C fruit.<br>
+              <strong>Benefits:</strong> Delivers bioavailable pro-hyp dipeptides that trigger dermal fibroblast collagen synthesis, reduces facial fine lines, increases skin hydration, and thickens hair follicle roots while speeding joint tendon repair.
+            </p>
+            <div class="supp-actions">
+              <a href="https://www.amazon.in/s?k=hydrolyzed+collagen+peptides+type+1+3" target="_blank" rel="noopener noreferrer" class="btn-supp-order btn-supp-amazon">🛒 Amazon (Collagen)</a>
+              <a href="https://www.1mg.com/search/all?name=collagen+peptides" target="_blank" rel="noopener noreferrer" class="btn-supp-order btn-supp-pharma">💊 Tata 1mg</a>
+            </div>
+          </div>
+
+          <div class="supp-card" style="border: 1.5px solid rgba(168, 85, 247, 0.4); background: linear-gradient(145deg, rgba(168, 85, 247, 0.08) 0%, rgba(13, 21, 40, 0.95) 100%);">
+            <span class="supp-tier" style="background: rgba(168, 85, 247, 0.2); color: #c084fc; border-color: rgba(168, 85, 247, 0.4);">Tier 2: Scalp & Follicle Shield</span>
+            <h3 style="color: #fff; margin: 4px 0 6px;">Zinc Picolinate & Rosemary Scalp Protocol</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+              <strong>Dose:</strong> 15mg Zinc Picolinate daily with food + 2-3x weekly rosemary scalp massage.<br>
+              <strong>Benefits:</strong> Zinc regulates 5-alpha reductase to protect hair roots and clears skin blemishes. Topical rosemary oil clinical trials showed equal hair regrowth efficacy to 2% minoxidil without scalp dryness or irritation.
+            </p>
+            <div class="supp-actions">
+              <a href="https://www.amazon.in/s?k=zinc+picolinate+15mg" target="_blank" rel="noopener noreferrer" class="btn-supp-order btn-supp-amazon">🛒 Zinc Picolinate</a>
+              <a href="https://www.amazon.in/s?k=pure+rosemary+essential+oil+cold+pressed" target="_blank" rel="noopener noreferrer" class="btn-supp-order" style="background: linear-gradient(135deg, #a855f7, #7e22ce); color: #fff !important; font-weight: 800;">🌿 Rosemary Oil ↗</a>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -9292,6 +9335,7 @@
               <button class="grocery-filter-chip" onclick="filterGroceryCategory('fats')">🥑 Healthy Fats</button>
               <button class="grocery-filter-chip" onclick="filterGroceryCategory('produce')">🥦 Produce & Greens</button>
               <button class="grocery-filter-chip" onclick="filterGroceryCategory('supplements')">💊 Supplements</button>
+              <button class="grocery-filter-chip" onclick="filterGroceryCategory('skinhair')">✨ Skin & Hair Bioactives</button>
             </div>
 
             <!-- Quick Add Custom Item -->
@@ -9821,21 +9865,22 @@
            ========================================== -->
       <section id="codexSecBiomech" class="codex-tab-section" style="display: none;">
         <div style="margin-bottom: 20px;">
-          <h2 style="color: #fff; font-size: 1.3rem; margin: 0 0 6px;">🔬 Biomechanics & Kinetic Chain Codex (6 Modules)</h2>
+          <h2 style="color: #fff; font-size: 1.3rem; margin: 0 0 6px;">🔬 Biomechanics, Joint & Cellular Health Codex (7 Modules)</h2>
           <p style="color: var(--text-muted); font-size: 0.85rem; margin: 0;">
-            Evidence-based kinesiology, vector angles, subacromial clearance, and Dr. Stuart McGill spinal mechanics.
+            Evidence-based kinesiology, vector angles, subacromial clearance, Dr. Stuart McGill spinal mechanics, and dermatological cellular health.
           </p>
         </div>
 
         <!-- CATEGORY FILTER TABS -->
         <div class="codex-filter-bar">
-          <button class="codex-filter-btn active" onclick="filterCodexModules('all', this)">🔬 All Protocols (6 Modules)</button>
+          <button class="codex-filter-btn active" onclick="filterCodexModules('all', this)">🔬 All Protocols (7 Modules)</button>
           <button class="codex-filter-btn" onclick="filterCodexModules('footwear', this)">🦶 Ground & Foot Dynamics</button>
           <button class="codex-filter-btn" onclick="filterCodexModules('spine', this)">🫁 McGill Spine Hygiene & IAP</button>
           <button class="codex-filter-btn" onclick="filterCodexModules('shoulder', this)">⚡ Scapulothoracic Centration</button>
           <button class="codex-filter-btn" onclick="filterCodexModules('tissue', this)">🧬 Tissue Pathology (Pain vs DOMS)</button>
           <button class="codex-filter-btn" onclick="filterCodexModules('circadian', this)">🧠 Circadian Neuro-Endocrine Axis</button>
           <button class="codex-filter-btn" onclick="filterCodexModules('recovery', this)">❄️ Autonomic Reset & Recovery</button>
+          <button class="codex-filter-btn" onclick="filterCodexModules('skinhair', this)">✨ Skin & Hair Longevity Axis</button>
         </div>
 
         <!-- MODULE 1: GROUND REACTION & FOOT MECHANICS -->
@@ -10094,6 +10139,41 @@
               <h4 style="color: var(--purple);">🔥 Heat vs Cold Timing Protocol</h4>
               <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin: 0;">
                 <strong>Avoid ice baths / cryotherapy within 4 hours of resistance training:</strong> Cold blunts the essential mTOR and p70S6K inflammatory signaling cascade required for muscle hypertrophy. Instead, use warm water or sauna 60+ minutes post-workout to stimulate heat shock proteins (HSP) and blood flow.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <!-- MODULE 7: DERMATOLOGICAL & HAIR FOLLICLE LONGEVITY AXIS -->
+        <article class="codex-module" data-module-cat="skinhair">
+          <div class="codex-module-head">
+            <div class="codex-module-title">
+              <span>✨ Module 07: Dermatological Radiance & Hair Follicle Longevity Axis</span>
+            </div>
+            <span class="codex-pill" style="border-color: rgba(236,72,153,0.4); color: #f472b6;">Collagen & Follicle Shield</span>
+          </div>
+
+          <div class="codex-thesis">
+            <strong>Dermatological & Follicular Thesis:</strong> Skin dermis and hair follicles share the identical biological scaffolding as skeletal muscle tendons: Type I/III collagen fibrils, microvascular perfusion, and androgen-regulated cellular metabolism. Proper post-sweat cleansing, DHT mitigation, microcirculation potentiation, and targeted nutritional cofactors dramatically upgrade skin texture, reduce hormonal acne, and prevent follicle miniaturization.
+          </div>
+
+          <div class="codex-protocol-grid">
+            <div class="codex-protocol-card" style="border-left: 3px solid #ec4899;">
+              <h4 style="color: #f472b6;">🧬 1. Post-Workout Sweat & Skin Barrier Hygiene (The 15-Minute Rule)</h4>
+              <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin: 0;">
+                Exercise increases dermal blood flow by 400% (the "post-workout glow"), but sweat contains urea, sodium, and sebum that rapidly feed <em>Malassezia</em> and <em>C. acnes</em> if left sitting on the skin. <strong>Wash face with lukewarm water within 15 minutes post-workout</strong> using a gentle salicylic acid (BHA) or non-stripping cleanser. Avoid steaming hot showers immediately post-training as they strip the stratum corneum lipid bilayer, causing compensatory oil rebound and premature skin dehydration.
+              </p>
+            </div>
+            <div class="codex-protocol-card" style="border-left: 3px solid #c084fc;">
+              <h4 style="color: #c084fc;">🌿 2. Scalp Microcirculation & 5-Alpha Reductase Defense</h4>
+              <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin: 0;">
+                Heavy resistance training optimizes healthy testosterone levels. However, in predisposed individuals, scalp 5-alpha reductase converts excess testosterone to DHT, causing hair follicle miniaturization. <strong>Clinical Countermeasures:</strong> (1) Ingest green tea (EGCG) and pumpkin seeds (zinc) which naturally downregulate 5-alpha reductase, (2) Perform 4-minute scalp massages with cold-pressed rosemary oil 2–3x weekly (clinically proven equivalent to 2% minoxidil in increasing hair count without scalp dryness), and (3) Shampoo post-sweat to eliminate scalp DHT-laden sebum.
+              </p>
+            </div>
+            <div class="codex-protocol-card" style="border-left: 3px solid #38bdf8;">
+              <h4 style="color: #38bdf8;">💧 3. Dermal Fibroblast Collagen & Turgor Synthesis</h4>
+              <p style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin: 0;">
+                From age 20 onward, the body loses ~1% of dermal collagen annually. Resistance training stimulates natural growth hormone pulses during sleep, while <strong>10g daily hydrolyzed collagen peptides combined with 500mg Vitamin C</strong> directly stimulate dermal fibroblasts to produce procollagen and hyaluronic acid. Maintaining 3.5L daily hydration ensures optimal intercellular ground substance turgor, preventing sunken dark eye circles and facial fatigue.
               </p>
             </div>
           </div>
@@ -11146,6 +11226,8 @@
           <button type="button" class="photo-angle-btn active" id="angleBtn_front" onclick="selectPhotoAngle('front')">🧍 Front View</button>
           <button type="button" class="photo-angle-btn" id="angleBtn_side" onclick="selectPhotoAngle('side')">🚶 Side Profile</button>
           <button type="button" class="photo-angle-btn" id="angleBtn_back" onclick="selectPhotoAngle('back')">🧗 Back / Posterior</button>
+          <button type="button" class="photo-angle-btn" id="angleBtn_face" onclick="selectPhotoAngle('face')" title="Skin Tone, Clarity & Facial Vascular Radiance">✨ Face & Skin</button>
+          <button type="button" class="photo-angle-btn" id="angleBtn_scalp" onclick="selectPhotoAngle('scalp')" title="Crown & Hairline Follicle Density Tracker">💆 Scalp & Hair</button>
         </div>
 
         <!-- Dropzone / Live Preview Area -->
@@ -14389,132 +14471,132 @@
       } catch (e) {}
     }
 
-    // Meal Blueprints Data
+    // Meal Blueprints Data (Infused with Dermatological & Follicle Bioactives)
     const MEAL_PLANS = {
       omnivore: [
         {
           timing: "8:00 AM • Breakfast",
-          name: "High-Protein Power Oats & Eggs",
+          name: "High-Protein Power Oats, Eggs & Biotin Fuel",
           items: [
-            "3 Whole Eggs (scrambled or boiled) + 1 slice whole wheat toast",
-            "50g Rolled Oats cooked with 1 cup milk, cinnamon, and 1 sliced banana",
-            "1 glass warm water + 2,000 IU Vitamin D3"
+            "3 Whole Eggs (rich in choline, sulfur & hair-building keratin amino acids) + 1 slice whole wheat toast",
+            "50g Rolled Oats cooked with 1 cup milk, cinnamon, sliced banana & 1 tbsp chia/flaxseeds (plant ALA omega-3)",
+            "1 glass warm water + 2,000 IU Vitamin D3 + 500mg Vitamin C (collagen synthesis cofactor)"
           ],
-          macros: "38g Protein • 520 kcal"
+          macros: "38g Protein • 520 kcal • Rich in Biotin & Zinc"
         },
         {
           timing: "1:00 PM • Lunch",
-          name: "Lean Chicken Breast & Complex Carbs",
+          name: "Lean Chicken Breast, Antioxidant Greens & Complex Carbs",
           items: [
-            "150g Grilled or Curry Chicken Breast (seasoned with turmeric, garlic, ginger)",
-            "1 cup cooked Basmati rice or Quinoa",
-            "1 large bowl mixed greens, cucumber, and steamed broccoli drizzled with olive oil"
+            "150g Grilled Chicken Breast (seasoned with turmeric, black pepper, garlic & ginger for skin anti-glycation)",
+            "1 cup cooked Basmati rice or Quinoa (clean glycogen + zinc)",
+            "1 large bowl baby spinach, cucumber, steamed broccoli & bell peppers (vitamin C) drizzled with extra virgin olive oil (skin barrier lipids)"
           ],
-          macros: "44g Protein • 580 kcal"
+          macros: "44g Protein • 580 kcal • Dermis Collagen Shield"
         },
         {
           timing: "5:00 PM • Pre-Workout Fuel",
-          name: "Energy Booster Snack",
+          name: "Cellular Hydration & Follicle Amino Snack",
           items: [
-            "1 cup Greek yogurt OR 1 scoop Whey Protein in water",
-            "1 ripe apple or banana + 10 almonds",
-            "1 tall glass of water + pinch of salt"
+            "1 cup probiotic Greek yogurt OR 1 scoop Whey Protein in water (speeds skin microbiome recovery)",
+            "1 ripe apple or bowl of blueberries (rich in polyphenols & anthocyanins that combat UV oxidative stress)",
+            "10 raw almonds (vitamin E & biotin for scalp microcirculation) + tall glass water with pink salt"
           ],
-          macros: "26g Protein • 280 kcal"
+          macros: "26g Protein • 280 kcal • Antioxidant UV Armor"
         },
         {
           timing: "8:30 PM • Dinner",
-          name: "Fish / Dal & Cellular Repair",
+          name: "Wild Salmon / Fish, Collagen Stew & Cellular Night Repair",
           items: [
-            "150g Fish fillet (Salmon, Tilapia, or Rohu) OR 1 bowl thick Dal",
-            "2 whole wheat rotis or baked sweet potato",
-            "Sauteed spinach with garlic"
+            "150g Wild Salmon / Mackerel / Rohu fish (dense EPA/DHA omega-3s to hydrate skin barrier & prevent hair follicle miniaturization)",
+            "2 whole wheat rotis or baked sweet potato (beta-carotene precursor to vitamin A for skin cell turnover)",
+            "Sauteed garlic spinach & bone broth/lentil stew (hydrolyzed collagen & hyaluronic acid precursors)"
           ],
-          macros: "40g Protein • 540 kcal"
+          macros: "40g Protein • 540 kcal • Omega-3 & Dermis Rejuvenation"
         }
       ],
       eggetarian: [
         {
           timing: "8:00 AM • Breakfast",
-          name: "3-Egg Veggie Omelette & Sprouted Toast",
+          name: "3-Egg Veggie Omelette, Zinc & Sprouted Toast",
           items: [
-            "3 Whole Eggs cooked with onions, tomatoes, spinach, and bell peppers",
-            "2 slices multigrain bread with light peanut butter",
-            "1 cup black coffee or green tea + Vitamin D3"
+            "3 Whole Eggs cooked with onions, tomatoes, spinach, and bell peppers (sulfur-rich cysteine for thick hair shaft diameter)",
+            "2 slices multigrain bread with light natural peanut butter or crushed pumpkin seeds (zinc)",
+            "1 cup green tea with lemon (EGCG polyphenol inhibits 5-alpha reductase) + Vitamin D3"
           ],
-          macros: "32g Protein • 480 kcal"
+          macros: "32g Protein • 480 kcal • Keratin Cysteine & Zinc"
         },
         {
           timing: "1:00 PM • Lunch",
-          name: "Paneer, Dal & Brown Rice Bowl",
+          name: "Paneer, Yellow Dal, Brown Rice & Vitamin C Boost",
           items: [
-            "100g Paneer (Cottage cheese) pan-seared with spices",
-            "1 big bowl Yellow Moong / Toor Dal (thick preparation)",
-            "1 cup cooked brown rice + large fresh cucumber salad"
+            "100g Fresh Low-Fat Paneer (Cottage cheese) pan-seared with turmeric and black pepper",
+            "1 big bowl Yellow Moong / Toor Dal (thick preparation rich in iron and folate for hair oxygenation)",
+            "1 cup cooked brown rice + large fresh cucumber, tomato & bell pepper salad (high vitamin C to stabilize procollagen fibrils)"
           ],
-          macros: "38g Protein • 620 kcal"
+          macros: "38g Protein • 620 kcal • Casein & Collagen Support"
         },
         {
           timing: "5:00 PM • Pre-Workout Fuel",
-          name: "Anabolic Whey Shake",
+          name: "Anabolic Whey & Scalp Micro-Circulation Shake",
           items: [
-            "1 scoop Whey Protein Isolate blended with water/almond milk",
-            "1 medium banana (fast-acting carbs for workout)",
-            "5-6 walnuts (brain & joint omega-3s)"
+            "1 scoop Whey Protein Isolate blended with water or almond milk (pure leucine + glutamine)",
+            "1 medium banana + 6 raw walnuts (omega-3 alpha-linolenic acid for sebum balance)",
+            "1 glass water with a squeeze of lemon (vitamin C + bioflavonoids)"
           ],
-          macros: "28g Protein • 290 kcal"
+          macros: "28g Protein • 290 kcal • Follicle Blood Flow"
         },
         {
           timing: "8:30 PM • Dinner",
-          name: "Egg Bhurji & High-Fiber Roti",
+          name: "Egg Bhurji, High-Fiber Roti & Night Gut Probiotics",
           items: [
-            "3 Eggs scrambled (Bhurji) with herbs and green chilies",
-            "2 Whole wheat rotis",
-            "1 cup curd / plain Greek yogurt"
+            "3 Eggs scrambled (Bhurji) with herbs, green chilies, and cold-pressed coconut oil",
+            "2 Whole wheat rotis + baked carrots/pumpkin (retinol precursors for smooth skin texture)",
+            "1 cup fresh homemade curd/Greek yogurt with 1 tsp ground flaxseeds (gut-skin microbiome axis)"
           ],
-          macros: "36g Protein • 510 kcal"
+          macros: "36g Protein • 510 kcal • Gut-Skin Axis Probiotics"
         }
       ],
       vegetarian: [
         {
           timing: "8:00 AM • Breakfast",
-          name: "Besan Chilla with Paneer Filling",
+          name: "Besan Chilla, Paneer Stuffing & Biotin Seed Crunch",
           items: [
-            "2 Besan (Chickpea flour) chillas stuffed with 80g grated paneer",
-            "Mint coriander chutney + 1 cup soy milk or skim milk",
-            "Vitamin D3 + Omega-3 supplement"
+            "2 Besan (Chickpea flour) chillas stuffed with 80g grated paneer (chickpeas provide zinc, molybdenum & protein)",
+            "Fresh mint-coriander amla chutney (Indian gooseberry has 20x the vitamin C of oranges for radiant skin)",
+            "1 cup soy milk or fortified almond milk + Vitamin D3 + Plant Algal Omega-3"
           ],
-          macros: "30g Protein • 460 kcal"
+          macros: "30g Protein • 460 kcal • Amla Vitamin C & Zinc"
         },
         {
           timing: "1:00 PM • Lunch",
-          name: "High-Protein Soya Chunks & Dal",
+          name: "High-Protein Soya, Iron-Rich Chana Dal & Antioxidant Bowl",
           items: [
-            "50g Soya Chunks cooked in tomato-onion gravy (packed with 26g protein!)",
-            "1 bowl thick Chana Dal or Rajma (kidney beans)",
-            "1 cup cooked rice or 2 rotis + cucumber carrot salad"
+            "50g Soya Chunks cooked in tomato-onion-turmeric gravy (52% bioavailable amino acids including lysine and proline)",
+            "1 bowl thick Chana Dal or Rajma (plant iron, folate & potassium to nourish hair papilla cells)",
+            "1 cup cooked rice or 2 rotis + beet, carrot & cucumber salad with lemon squeeze (enhances plant non-heme iron absorption)"
           ],
-          macros: "45g Protein • 590 kcal"
+          macros: "45g Protein • 590 kcal • Proline & Iron Delivery"
         },
         {
           timing: "5:00 PM • Pre-Workout Fuel",
-          name: "Plant Protein & Fruit Fuel",
+          name: "Plant Protein, Roasted Chana & Polyphenol Fuel",
           items: [
-            "1 scoop Plant or Whey Protein in water",
-            "1 banana or handful of roasted chana (black roasted chickpeas)",
-            "Water with pinch of pink salt"
+            "1 scoop Plant (Pea/Rice) or Whey Protein in 300ml cold water",
+            "Handful of roasted black chana (Bengal gram - high zinc & resistant starch) + 1 sliced guava or apple",
+            "Electrolyte water with pink salt & pinch of cinnamon (stabilizes blood sugar to prevent collagen cross-linking AGEs)"
           ],
-          macros: "28g Protein • 270 kcal"
+          macros: "28g Protein • 270 kcal • Anti-AGEs & Follicle Zinc"
         },
         {
           timing: "8:30 PM • Dinner",
-          name: "Tofu / Paneer Tikka & Quinoa",
+          name: "Tofu / Paneer Tikka, Quinoa & Dermis Recovery Soup",
           items: [
-            "120g Tofu or Paneer grilled with capsicum and spices",
-            "1 cup cooked quinoa or 2 multigrain rotis",
-            "1 bowl mixed vegetable soup"
+            "120g Tofu or Paneer grilled with capsicum, tomatoes & spices (soy isoflavones support dermal skin elasticity)",
+            "1 cup cooked quinoa or 2 multigrain rotis (complete plant amino acid profile)",
+            "1 bowl warm vegetable lentil soup with 1 tsp Desi Cow Ghee (butyric acid restores gut barrier, reducing inflammatory acne)"
           ],
-          macros: "35g Protein • 530 kcal"
+          macros: "35g Protein • 530 kcal • Dermal Elasticity & Gut Shield"
         }
       ]
     };
@@ -14653,13 +14735,13 @@
       });
 
       out += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
-      out += `💧 HYDRATION TARGET: ${water} (8 x 400ml glasses)\n`;
-      out += `  • 500ml upon waking • 750ml during workout with pinch of salt • finish rest before 8:30 PM\n\n`;
-      out += `💊 SUPPLEMENT SCHEDULE (EVIDENCE-BASED):\n`;
-      out += `  • 08:00 AM (Breakfast): Vitamin D3 (2,000 IU) + Vitamin K2\n`;
-      out += `  • 01:00 PM (Lunch): Omega-3 (1,000mg EPA/DHA) — take WITH fat meal for 300% absorption\n`;
-      out += `  • Post-Workout: 1 scoop Whey Protein Isolate in 300ml cold water\n`;
-      out += `  • 09:30 PM (Pre-Sleep): Magnesium Glycinate (400mg) for deep slow-wave cellular repair\n`;
+      out += `💧 HYDRATION & DERMAL ELASTICITY TARGET: ${water} (8 x 400ml glasses)\n`;
+      out += `  • 500ml upon waking • 750ml intra-workout with pink salt • maintain cellular turgor for radiant skin\n\n`;
+      out += `💊 CLINICAL SUPPLEMENT SCHEDULE (MUSCLE, HAIR & SKIN):\n`;
+      out += `  • 08:00 AM (Breakfast): Vitamin D3 (2,000 IU) + K2 &bull; 500mg Vitamin C (collagen synthesis cofactor)\n`;
+      out += `  • 01:00 PM (Lunch): Triple-Strength Omega-3 (1,000mg EPA/DHA) — anti-inflammatory lipid barrier for glowing skin & hair roots\n`;
+      out += `  • Post-Workout: 1 scoop Whey/Plant Isolate (leucine + cysteine hair keratin amino acids)\n`;
+      out += `  • 09:30 PM (Pre-Sleep): Magnesium Glycinate (400mg) — lowers cortisol, accelerates nocturnal dermal repair & slow-wave GH surge\n`;
 
       return out;
     }
@@ -14778,8 +14860,17 @@
             <span>💧</span> <span>Hydration Target &amp; 💊 Daily Supplements</span>
           </div>
           <div style="font-size: 0.78rem; color: #cbd5e1; line-height: 1.45;">
-            <div><strong>💧 Water Target:</strong> ${waterTarget} (8 x 400ml glasses scheduled across waking hours)</div>
-            <div style="margin-top: 4px;"><strong>💊 Daily Protocol:</strong> 08:00 AM Vit D3+K2 &bull; 01:00 PM Omega-3 (1,000mg with Lunch fat) &bull; Post-WO Whey &bull; 09:30 PM Mag Glycinate (400mg)</div>
+            <div><strong>💧 Dermal Hydration:</strong> ${waterTarget} (8 x 400ml glasses scheduled across waking hours for cellular turgor)</div>
+            <div style="margin-top: 4px;"><strong>💊 Daily Protocol:</strong> 08:00 AM Vit D3+K2 + 500mg Vit C &bull; 01:00 PM Omega-3 (1,000mg with Lunch fat) &bull; Post-WO Whey/Plant Protein &bull; 09:30 PM Mag Glycinate (400mg)</div>
+          </div>
+        </div>
+        <div style="background: rgba(14, 21, 38, 0.7); border: 1px solid rgba(236, 72, 153, 0.25); border-left: 3.5px solid #ec4899; border-radius: var(--radius-sm); padding: 12px 14px;">
+          <div style="font-weight: 800; font-size: 0.86rem; color: #fff; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+            <span>✨</span> <span style="color: #f472b6;">Skin Glow &amp; Hair Follicle Stack</span>
+          </div>
+          <div style="font-size: 0.78rem; color: #cbd5e1; line-height: 1.45;">
+            <div><strong>🧬 Dermis Procollagen:</strong> 10g Hydrolyzed Collagen Peptides + raw pumpkin seeds (zinc + sulfur)</div>
+            <div style="margin-top: 4px;"><strong>🌿 Follicle Protection:</strong> Scalp rosemary oil massage 2x/wk + green tea (EGCG) to suppress DHT miniaturization</div>
           </div>
         </div>
       `;
@@ -14921,9 +15012,13 @@
       <div><strong>Date:</strong> ${todayStr} (Day ${currentDay})</div>
     </div>
   </div>
-  <div style="background: #f8fafc; border: 1px solid #ccc; padding: 8px 12px; border-radius: 4px; font-size: 0.8rem; margin-bottom: 14px; display: flex; justify-content: space-between;">
-    <div><strong>💧 Hydration:</strong> [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] (8 x 400ml)</div>
-    <div><strong>💊 Supps:</strong> [ ] D3+K2 &nbsp; [ ] Omega-3 &nbsp; [ ] Whey &nbsp; [ ] Mag Glycinate</div>
+  <div style="background: #f8fafc; border: 1px solid #ccc; padding: 8px 12px; border-radius: 4px; font-size: 0.8rem; margin-bottom: 8px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+    <div><strong>💧 Dermal Hydration:</strong> [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] (8 x 400ml glasses for skin turgor)</div>
+    <div><strong>💊 Core Supps:</strong> [ ] D3+K2 &nbsp; [ ] Omega-3 &nbsp; [ ] Whey &nbsp; [ ] Mag Glycinate</div>
+  </div>
+  <div style="background: #fdf2f8; border: 1px solid #fbcfe8; padding: 6px 12px; border-radius: 4px; font-size: 0.78rem; margin-bottom: 14px; color: #9d174d; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+    <div><strong>✨ Skin Glow:</strong> [ ] 10g Hydrolyzed Collagen Peptides &nbsp; [ ] 500mg Vitamin C &nbsp; [ ] Zinc/Pumpkin Seeds</div>
+    <div><strong>🌿 Hair Follicle:</strong> [ ] Scalp Rosemary Massage (2x/wk) &nbsp; [ ] Green Tea EGCG</div>
   </div>
   ${mealsHtml}
   <' + 'script>
@@ -14977,11 +15072,13 @@
       { id: 'photo_century', category: 'photo', title: "Century Photo Vault", icon: "🌠", rarity: 'legendary', xp: 1000, target: 100, unit: 'Photos', desc: "100 transformation snapshots recorded into private IndexedDB." },
       { id: 'photo_archive', category: 'photo', title: "Master Visual Odyssey", icon: "🌌", rarity: 'mythic', xp: 1600, target: 150, unit: 'Photos', desc: "150 photos logged. Complete photographic metamorphosis." },
 
-      // 4. MOVEMENT & BIOMECHANICAL MASTERY (7 Milestones)
+      // 4. MOVEMENT, CELLULAR HYDRATION & FOLLICULAR MASTERY (9 Milestones)
       { id: 'mastery_form', category: 'mastery', title: "Joint Mechanics Disciple", icon: "📐", rarity: 'common', xp: 75, target: 5, unit: 'Workouts', desc: "Maintained clean 3-1-1 tempo across first 5 workouts." },
-      { id: 'mastery_hydration', category: 'mastery', title: "Hydration Standard", icon: "💧", rarity: 'common', xp: 100, target: 7, unit: 'Days', desc: "Reached daily 3.2L water target across 7 training sessions." },
+      { id: 'mastery_hydration', category: 'mastery', title: "Dermal & Fascial Hydration", icon: "💧", rarity: 'common', xp: 100, target: 7, unit: 'Days', desc: "Reached daily 3.2L+ water target across 7 training sessions for cellular skin turgor." },
+      { id: 'mastery_collagen_glow', category: 'mastery', title: "Dermal Collagen & Scalp Shield", icon: "✨", rarity: 'rare', xp: 200, target: 14, unit: 'Days', desc: "Adhered to 14 days of post-workout sebum hygiene, collagen & antioxidant fueling." },
       { id: 'mastery_rings', category: 'mastery', title: "Ring Lord", icon: "🤸", rarity: 'rare', xp: 250, target: 61, unit: 'Days', desc: "Reached Month 3 & integrated gymnastic rings into pull days." },
       { id: 'mastery_progressive', category: 'mastery', title: "Overload Practitioner", icon: "📈", rarity: 'rare', xp: 350, target: 20, unit: 'Logged Sets', desc: "Logged 20 sets with recorded weight & rep progress." },
+      { id: 'mastery_skin_streak', category: 'mastery', title: "Radiance Cellular Master", icon: "🌟", rarity: 'epic', xp: 450, target: 30, unit: 'Days', desc: "Maintained 30 days of dermal hydration (3.2L+) and clean post-workout sweat recovery." },
       { id: 'mastery_recovery', category: 'mastery', title: "Longevity Mobility", icon: "🧘", rarity: 'epic', xp: 500, target: 30, unit: 'Workouts', desc: "Completed 30 follow-along warmups & joint decompression resets." },
       { id: 'mastery_tempo', category: 'mastery', title: "Cadence Master", icon: "⏱️", rarity: 'legendary', xp: 750, target: 50, unit: 'Workouts', desc: "Logged 50 sessions adhering strictly to eccentric tempo pacing." },
       { id: 'mastery_apex', category: 'mastery', title: "Zero-to-Hero Apex", icon: "⚡", rarity: 'mythic', xp: 2500, target: 200, unit: 'Workouts', desc: "Surpassed 200 workouts logged. Supreme functional fitness reached." }
@@ -19050,8 +19147,10 @@ function stopGuidedCooldown() {
         } else if (a.category === 'mastery') {
           if (a.id === 'mastery_form') isUnlocked = completedCount >= 5;
           else if (a.id === 'mastery_hydration') isUnlocked = Object.values(waterLog).filter(v => v >= 8).length >= 7;
+          else if (a.id === 'mastery_collagen_glow') isUnlocked = (nutritionDoneDays.size >= 14 || completedCount >= 14);
           else if (a.id === 'mastery_rings') isUnlocked = completedCount >= 61;
           else if (a.id === 'mastery_progressive') isUnlocked = Object.values(loggedSetData).filter(s => s && s.done).length >= 20;
+          else if (a.id === 'mastery_skin_streak') isUnlocked = Object.values(waterLog).filter(v => v >= 8).length >= 30;
           else if (a.id === 'mastery_recovery') isUnlocked = completedCount >= 30;
           else if (a.id === 'mastery_tempo') isUnlocked = completedCount >= 50;
           else if (a.id === 'mastery_apex') isUnlocked = completedCount >= 200;
@@ -19118,11 +19217,12 @@ function stopGuidedCooldown() {
       const unlockedBadgesCount = document.getElementById('unlockedBadgesCount');
       const loggedPhotosCount = document.getElementById('loggedPhotosCount');
 
+      const totalAchieveCount = ACHIEVEMENTS.length;
       if (headerLvlBadge) headerLvlBadge.innerText = `LVL ${stats.currentLevel.lvl}`;
       if (headerLvlTitle) headerLvlTitle.innerText = stats.currentLevel.title;
       if (headerXpVal) headerXpVal.innerText = `${stats.xpInTier} / ${stats.xpNeededForNext} XP`;
       if (headerXpFill) headerXpFill.style.width = `${stats.pct}%`;
-      if (unlockedBadgesCount) unlockedBadgesCount.innerText = `${stats.unlockedCount}/28`;
+      if (unlockedBadgesCount) unlockedBadgesCount.innerText = `${stats.unlockedCount}/${totalAchieveCount}`;
       if (loggedPhotosCount) loggedPhotosCount.innerText = `${stats.photosCount}`;
 
       const hubRankLvl = document.getElementById('hubRankLvl');
@@ -19136,7 +19236,7 @@ function stopGuidedCooldown() {
       if (hubRankTitle) hubRankTitle.innerText = stats.currentLevel.title;
       if (hubXpFraction) hubXpFraction.innerText = `${stats.totalXP.toLocaleString()} XP (${stats.xpInTier}/${stats.xpNeededForNext} Tier)`;
       if (hubXpFill) hubXpFill.style.width = `${stats.pct}%`;
-      if (hubUnlockedCount) hubUnlockedCount.innerText = `${stats.unlockedCount} / 28`;
+      if (hubUnlockedCount) hubUnlockedCount.innerText = `${stats.unlockedCount} / ${totalAchieveCount}`;
       if (hubNextLvlNeeded) {
         hubNextLvlNeeded.innerText = stats.nextLevel ? `${stats.xpNeededForNext - stats.xpInTier} XP to LVL ${stats.nextLevel.lvl} (${stats.nextLevel.title})` : "Max Rank Achieved";
       }
@@ -19479,6 +19579,8 @@ function stopGuidedCooldown() {
         else if (m.category === 'photo') curVal = stats.photosCount;
         else if (m.category === 'mastery') {
           if (m.id === 'mastery_hydration') curVal = Object.values(waterLog).filter(v => v >= 8).length;
+          else if (m.id === 'mastery_skin_streak') curVal = Object.values(waterLog).filter(v => v >= 8).length;
+          else if (m.id === 'mastery_collagen_glow') curVal = Math.max(nutritionDoneDays.size, stats.completedCount);
           else if (m.id === 'mastery_progressive') curVal = Object.values(loggedSetData).filter(s => s && s.done).length;
           else curVal = stats.completedCount;
         }
@@ -20050,7 +20152,7 @@ function stopGuidedCooldown() {
 
     function selectPhotoAngle(angle) {
       currentPhotoAngle = (angle || 'front').toLowerCase();
-      ['front', 'side', 'back'].forEach(a => {
+      ['front', 'side', 'back', 'face', 'scalp'].forEach(a => {
         const btn = document.getElementById(`angleBtn_${a}`);
         if (btn) {
           if (a === currentPhotoAngle) btn.classList.add('active');
@@ -20813,7 +20915,7 @@ function stopGuidedCooldown() {
 
     async function setComparisonAngleFilter(angle) {
       baComparisonAngleFilter = angle || 'all';
-      ['all', 'front', 'back', 'side'].forEach(a => {
+      ['all', 'front', 'back', 'side', 'face', 'scalp'].forEach(a => {
         const btn = document.getElementById(`baAngleBtn_${a}`);
         if (btn) {
           if (a === baComparisonAngleFilter) btn.classList.add('active');
@@ -20831,7 +20933,7 @@ function stopGuidedCooldown() {
 
       await loadComparisonPair(baBeforeKey, baAfterKey);
 
-      const angleLabel = angle === 'all' ? 'All Angles' : (angle === 'front' ? 'Front-to-Front' : (angle === 'back' ? 'Back-to-Back' : 'Side-to-Side'));
+      const angleLabel = angle === 'all' ? 'All Angles' : (angle === 'front' ? 'Front-to-Front' : (angle === 'back' ? 'Back-to-Back' : (angle === 'side' ? 'Side-to-Side' : (angle === 'face' ? 'Face-to-Face (Skin Radiance)' : 'Scalp-to-Scalp (Hair Density)'))));
       showToast(`📐 Studio Angle: ${angleLabel} comparison activated`);
       if (typeof SoundFX !== 'undefined' && SoundFX.playBeep) {
         SoundFX.playBeep(587.33, 'sine', 0.1, 0.12);
@@ -21381,7 +21483,7 @@ function stopGuidedCooldown() {
 
     function setTimeLapseAngle(angle) {
       timelapseAngleFilter = angle;
-      ['all', 'front', 'side', 'back'].forEach(a => {
+      ['all', 'front', 'side', 'back', 'face', 'scalp'].forEach(a => {
         const btn = document.getElementById(`tlAngle${a.charAt(0).toUpperCase() + a.slice(1)}`);
         if (btn) {
           if (a === angle) btn.classList.add('active');
@@ -25572,6 +25674,12 @@ if (typeof window !== 'undefined') {
           { name: "Whey Protein Isolate", qty: "1 kg Tub", tip: "Rapid post-workout leucine spike" },
           { name: "Vitamin D3 (60k IU) + K2", qty: "1 Strip", tip: "Crucial for bone density & testosterone" },
           { name: "Magnesium Glycinate (300mg)", qty: "1 Bottle", tip: "Deep slow-wave recovery before bed" }
+        ]},
+        { cat: "✨ Skin Glow & Hair Follicle Bioactives", key: "skinhair", items: [
+          { name: "Hydrolyzed Collagen Peptides (Type I & III)", qty: "300g Tub", tip: "10g daily with vitamin C increases skin procollagen & follicle matrix" },
+          { name: "Raw Pumpkin Seeds & Chia Seeds", qty: "300g", tip: "High natural zinc, magnesium & ALA omega-3 prevents hair thinning" },
+          { name: "Indian Amla (Gooseberry) or Fresh Lemons", qty: "500g", tip: "Essential ascorbic acid cofactor for endogenous collagen cross-linking" },
+          { name: "Cold-Pressed Rosemary / Virgin Coconut Oil", qty: "200 ml", tip: "Antioxidant scalp massage stimulates dermal papilla microcirculation" }
         ]}
       ],
       eggetarian: [
@@ -25601,6 +25709,12 @@ if (typeof window !== 'undefined') {
           { name: "Whey Protein Isolate", qty: "1 kg Tub", tip: "Post-workout 30g pure leucine trigger" },
           { name: "Vitamin D3 + K2", qty: "1 Strip", tip: "Hormone and immune optimization" },
           { name: "Magnesium Glycinate (300mg)", qty: "1 Bottle", tip: "Deep neuromuscular relaxation at night" }
+        ]},
+        { cat: "✨ Skin Glow & Hair Follicle Bioactives", key: "skinhair", items: [
+          { name: "Hydrolyzed Collagen Peptides (or Eggshell Membrane)", qty: "300g Tub", tip: "Stimulates fibroblast hyaluronic acid & skin hydration" },
+          { name: "Pumpkin Seeds & Sunflower Seeds", qty: "300g", tip: "Zinc & selenium for scalp sebum balance & strong nails" },
+          { name: "Fresh Amla / Oranges & Green Tea", qty: "1.0 kg", tip: "EGCG & bioflavonoids combat hair follicle 5-alpha reductase" },
+          { name: "Cold-Pressed Rosemary Oil & Jojoba Oil", qty: "200 ml", tip: "Clinically proven topical scalp support equivalent to 2% minoxidil" }
         ]}
       ],
       vegetarian: [
@@ -25630,6 +25744,12 @@ if (typeof window !== 'undefined') {
           { name: "Whey Isolate or Pea/Rice Protein Blend", qty: "1 kg Tub", tip: "Ensures 160g+ daily target is met effortlessly" },
           { name: "Vitamin B12 (Methylcobalamin 1500mcg)", qty: "1 Strip", tip: "Non-negotiable for nerve sheath & blood health" },
           { name: "Magnesium Glycinate (300mg)", qty: "1 Bottle", tip: "Calms nervous system for deep restorative sleep" }
+        ]},
+        { cat: "✨ Skin Glow & Hair Follicle Bioactives", key: "skinhair", items: [
+          { name: "Plant Collagen Builder (Proline, Lysine & Silica)", qty: "300g Tub", tip: "Bamboo extract silica + amino building blocks for vegan collagen" },
+          { name: "Raw Pumpkin Seeds & Roasted Chana", qty: "400g", tip: "Bioavailable zinc, iron & sulfur for thick hair growth" },
+          { name: "Fresh Amla Juice / Indian Gooseberries", qty: "1.0 kg", tip: "Highest natural concentration of vitamin C for clear skin" },
+          { name: "Cold-Pressed Rosemary Oil", qty: "100 ml", tip: "Weekly scalp oiling increases follicle dermal circulation" }
         ]}
       ]
     };
