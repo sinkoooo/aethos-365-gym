@@ -2753,6 +2753,314 @@
       display: block;
     }
 
+    /* ==========================================================================
+       COMMAND PALETTE (CTRL+K) & QUICK FINDER STYLING
+       ========================================================================== */
+    .cmd-palette-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100000;
+      background: rgba(4, 7, 18, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding: clamp(40px, 10vh, 120px) 16px 20px;
+      animation: cmdFadeIn 0.18s ease-out;
+    }
+    .cmd-palette-modal.active {
+      display: flex;
+    }
+    @keyframes cmdFadeIn {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .cmd-palette-box {
+      width: 100%;
+      max-width: 660px;
+      background: rgba(13, 22, 42, 0.94);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.8), 0 0 40px rgba(56, 189, 248, 0.15);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      outline: none;
+    }
+    .cmd-search-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .cmd-search-icon {
+      font-size: 1.15rem;
+      color: var(--cyan);
+      flex-shrink: 0;
+    }
+    .cmd-search-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 600;
+      font-family: inherit;
+    }
+    .cmd-search-input::placeholder {
+      color: var(--text-dim);
+      font-weight: 400;
+    }
+    .cmd-badge-shortcut {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--text-muted);
+      font-size: 0.68rem;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 3px 7px;
+      border-radius: 5px;
+      letter-spacing: 0.5px;
+    }
+    .cmd-results-list {
+      max-height: 380px;
+      overflow-y: auto;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .cmd-group-label {
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 8px 12px 4px;
+    }
+    .cmd-item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: transparent;
+      border: 1px solid transparent;
+      color: #fff;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.12s ease;
+      font-size: 0.88rem;
+    }
+    .cmd-item-row:hover,
+    .cmd-item-row.selected {
+      background: rgba(56, 189, 248, 0.12);
+      border-color: rgba(56, 189, 248, 0.35);
+      box-shadow: inset 0 0 15px rgba(56, 189, 248, 0.08);
+      transform: translateX(2px);
+    }
+    .cmd-item-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+    .cmd-item-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      width: 24px;
+      text-align: center;
+    }
+    .cmd-item-text {
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .cmd-item-desc {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+    .cmd-item-badge {
+      font-size: 0.66rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+      flex-shrink: 0;
+    }
+    .cmd-footer-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(0, 0, 0, 0.25);
+      font-size: 0.72rem;
+      color: var(--text-dim);
+    }
+    .cmd-footer-keys {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* ==========================================================================
+       WORKOUT MOVEMENT FILTER & SEARCH DOCK
+       ========================================================================== */
+    .workout-filter-dock {
+      background: rgba(13, 20, 36, 0.7);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(56, 189, 248, 0.22);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      margin-bottom: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    }
+    .workout-filter-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .workout-filter-search-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      padding: 6px 12px;
+      flex: 1;
+      min-width: 200px;
+    }
+    .workout-filter-search-box:focus-within {
+      border-color: var(--cyan);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
+    }
+    .workout-filter-search-box input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-size: 0.82rem;
+      width: 100%;
+    }
+    .workout-filter-pills {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .wf-pill-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      font-size: 0.73rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .wf-pill-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+    .wf-pill-btn.active {
+      background: rgba(56, 189, 248, 0.18);
+      border-color: var(--cyan);
+      color: var(--cyan);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+    }
+    .workout-filter-meta {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ==========================================================================
+       BARBELL PLATE LOADING CALCULATOR STYLING
+       ========================================================================== */
+    .plate-calc-box {
+      background: rgba(13, 20, 36, 0.75);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      margin-top: 18px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+    .barbell-visualizer {
+      margin-top: 14px;
+      padding: 20px 10px;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-x: auto;
+      min-height: 120px;
+    }
+    .barbell-bar {
+      height: 14px;
+      background: linear-gradient(180deg, #94a3b8, #475569);
+      border-radius: 4px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3);
+    }
+    .barbell-sleeve {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      padding: 0 6px;
+    }
+    .barbell-collar {
+      width: 10px;
+      height: 38px;
+      background: #cbd5e1;
+      border: 1px solid #64748b;
+      border-radius: 3px;
+    }
+    .plate-disc {
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.62rem;
+      font-weight: 900;
+      color: #fff;
+      font-family: 'JetBrains Mono', monospace;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .plate-disc:hover {
+      transform: scaleY(1.05);
+    }
+    .plate-25 { width: 14px; height: 90px; background: #dc2626; border: 1px solid #b91c1c; } /* Red */
+    .plate-20 { width: 13px; height: 86px; background: #2563eb; border: 1px solid #1d4ed8; } /* Blue */
+    .plate-15 { width: 12px; height: 74px; background: #eab308; border: 1px solid #ca8a04; color: #000; } /* Yellow */
+    .plate-10 { width: 11px; height: 64px; background: #16a34a; border: 1px solid #15803d; } /* Green */
+    .plate-5  { width: 10px; height: 50px; background: #fff; border: 1px solid #cbd5e1; color: #000; } /* White */
+    .plate-2-5 { width: 9px; height: 40px; background: #1e293b; border: 1px solid #475569; } /* Black/Collars */
+    .plate-1-25 { width: 8px; height: 32px; background: #94a3b8; border: 1px solid #64748b; color: #000; } /* Chrome/Micro */
+
     /* EXERCISE CARDS FLOW */
     .exercise-cards-flow {
       display: flex;
@@ -8343,6 +8651,13 @@
           </button>
         </div>
 
+        <!-- Global Command Palette Quick Trigger -->
+        <button type="button" class="cmd-trigger-btn" onclick="openCommandPalette()" title="Command Palette (Ctrl+K / Cmd+K)" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(56, 189, 248, 0.28); color: #fff; padding: 5px 10px; border-radius: 8px; font-size: 0.76rem; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
+          <span style="color: var(--cyan);">🔍</span>
+          <span style="font-family: inherit; font-size: 0.72rem; color: var(--text-muted);">Search</span>
+          <kbd style="background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; padding: 1px 5px; border-radius: 4px; color: var(--cyan);">⌘K</kbd>
+        </button>
+
         <!-- Unified Quick Tools & Action Menu -->
         <div class="tools-menu-wrapper" id="headerToolsMenuWrapper">
           <button type="button" class="tools-menu-btn" id="btnToolsMenuToggle" onclick="toggleHeaderToolsMenu(event)" title="Quick Tools, Logs & Sheets">
@@ -9084,6 +9399,29 @@
                 <button type="button" class="btn-action-print print-btn-no-print" onclick="openPrintSheetModal()" title="Print pristine A4 daily workout cheat sheet (or Save as PDF)">
                   🖨️ Print Sheet
                 </button>
+              </div>
+            </div>
+
+            <!-- WORKOUT MOVEMENT QUICK FILTER & SEARCH DOCK -->
+            <div class="workout-filter-dock print-btn-no-print" id="workoutFilterDock">
+              <div class="workout-filter-top-row">
+                <div class="workout-filter-search-box">
+                  <span style="font-size: 0.9rem; color: var(--cyan);">🔍</span>
+                  <input type="text" id="workoutExerciseSearchInput" placeholder="Quick filter exercises (e.g. Squat, Push, Core, Chest)..." oninput="applyWorkoutCardFilter()">
+                </div>
+                <div class="workout-filter-meta" id="workoutFilterCountBadge">
+                  Showing All Exercises
+                </div>
+              </div>
+              <div class="workout-filter-pills" id="workoutMuscleFilterPills">
+                <button type="button" class="wf-pill-btn active" data-filter="all" onclick="setWorkoutMuscleFilter('all', this)">✨ All</button>
+                <button type="button" class="wf-pill-btn" data-filter="chest" onclick="setWorkoutMuscleFilter('chest', this)">🛡️ Chest</button>
+                <button type="button" class="wf-pill-btn" data-filter="back" onclick="setWorkoutMuscleFilter('back', this)">🦅 Back</button>
+                <button type="button" class="wf-pill-btn" data-filter="legs" onclick="setWorkoutMuscleFilter('legs', this)">🦵 Legs / Quads</button>
+                <button type="button" class="wf-pill-btn" data-filter="glutes" onclick="setWorkoutMuscleFilter('glutes', this)">🍑 Posterior / Glutes</button>
+                <button type="button" class="wf-pill-btn" data-filter="shoulders" onclick="setWorkoutMuscleFilter('shoulders', this)">⚡ Shoulders</button>
+                <button type="button" class="wf-pill-btn" data-filter="arms" onclick="setWorkoutMuscleFilter('arms', this)">💪 Arms</button>
+                <button type="button" class="wf-pill-btn" data-filter="core" onclick="setWorkoutMuscleFilter('core', this)">🧱 Core / Anti-Flexion</button>
               </div>
             </div>
 
@@ -9935,6 +10273,51 @@
             </div>
           </div>
         </div>
+
+        <!-- 100X BARBELL & DUMBBELL PLATE LOADING CALCULATOR -->
+        <div class="plate-calc-box" id="plateCalcBox">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+            <div>
+              <h3 style="color: #fff; font-size: 1.05rem; margin: 0 0 4px;">🏋️ Barbell & Dumbbell Plate Loading Optimizer</h3>
+              <p style="color: var(--text-muted); font-size: 0.8rem; margin: 0;">Instant Olympic disc math & visual bar loadout per side (25kg, 20kg, 15kg, 10kg, 5kg, 2.5kg, 1.25kg).</p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 0.75rem; color: var(--text-dim);">Barbell Weight:</span>
+              <select id="plateBarbellType" style="background: var(--bg-surface); border: 1px solid var(--border); color: #fff; padding: 4px 8px; border-radius: 6px; font-size: 0.78rem;" onchange="calculatePlateLoading()">
+                <option value="20">20 kg (Olympic Mens Bar)</option>
+                <option value="15">15 kg (Olympic Womens Bar)</option>
+                <option value="10">10 kg (Technique / EZ Bar)</option>
+                <option value="0">0 kg (Plate-Loaded Machine / DB)</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; align-items: end;">
+            <div>
+              <label style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 5px;">Target Total Weight (kg)</label>
+              <input type="number" id="plateTargetWeightInput" min="0" max="350" step="2.5" value="60" style="width: 100%; background: var(--bg-surface); border: 1px solid var(--border); padding: 8px 12px; color: #fff; border-radius: 6px; font-weight: 700;" oninput="calculatePlateLoading()">
+            </div>
+            <div>
+              <button type="button" onclick="setPlateFrom1RM()" style="width: 100%; background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.35); color: #38bdf8; padding: 8px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer;">
+                ⚡ Sync From E1RM Result
+              </button>
+            </div>
+            <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 6px; padding: 7px 12px;">
+              <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase;">Per-Side Load:</div>
+              <div style="font-size: 1.15rem; font-weight: 800; color: var(--cyan); font-family: 'JetBrains Mono';" id="platePerSideText">20.0 kg / side</div>
+            </div>
+          </div>
+
+          <!-- Interactive Barbell Graphic -->
+          <div class="barbell-visualizer" id="barbellVisualizer">
+            <!-- Populated dynamically by calculatePlateLoading() -->
+          </div>
+
+          <div id="plateBreakdownSummary" style="margin-top: 10px; font-size: 0.8rem; color: var(--text-muted); text-align: center; font-family: 'JetBrains Mono', monospace;">
+            Loading plates per side...
+          </div>
+        </div>
+
       </div>
 
       <!-- INTERACTIVE SVG VOLUME PROGRESSION CHART -->
@@ -10272,6 +10655,9 @@
               </button>
               <button onclick="copyGroceryList()" style="background: var(--bg-card); border: 1px solid var(--border); color: #fff; padding: 7px 14px; border-radius: 6px; font-size: 0.78rem; font-weight: 700; cursor: pointer;">
                 📋 Copy for WhatsApp / Notes
+              </button>
+              <button onclick="exportGroceryCSV()" style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.35); color: #38bdf8; padding: 7px 14px; border-radius: 6px; font-size: 0.78rem; font-weight: 700; cursor: pointer;" title="Download clean CSV table for Excel, Google Sheets, or Numbers">
+                📥 Export CSV
               </button>
               <button onclick="printGroceryList()" style="background: var(--emerald); border: none; color: #000; padding: 7px 14px; border-radius: 6px; font-size: 0.78rem; font-weight: 800; cursor: pointer;">
                 🖨️ Print Shopping Checklist
@@ -12722,6 +13108,10 @@
             <span class="hotkey-desc">Jump to Next Day</span>
           </div>
           <div class="hotkey-row">
+            <span class="hotkey-badge">Ctrl+K / Cmd+K</span>
+            <span class="hotkey-desc">Open Command Palette & Quick Navigation</span>
+          </div>
+          <div class="hotkey-row">
             <span class="hotkey-badge">?</span>
             <span class="hotkey-desc">Toggle Keyboard Shortcuts</span>
           </div>
@@ -12730,6 +13120,27 @@
             <span class="hotkey-desc">Close Any Open Modal / HUD</span>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: GLOBAL GYM COMMAND PALETTE (CTRL+K) -->
+  <div id="commandPaletteModal" class="cmd-palette-modal" onclick="closeCmdPaletteOnBackdrop(event)">
+    <div class="cmd-palette-box" onclick="event.stopPropagation()">
+      <div class="cmd-search-header">
+        <span class="cmd-search-icon">⚡</span>
+        <input type="text" id="cmdPaletteInput" class="cmd-search-input" placeholder="Search any view, day (1-365), action, or tool..." autocomplete="off" spellcheck="false" oninput="filterCommandPalette(this.value)">
+        <span class="cmd-badge-shortcut">ESC to Exit</span>
+      </div>
+      <div class="cmd-results-list" id="cmdPaletteResults">
+        <!-- Rendered dynamically by filterCommandPalette() -->
+      </div>
+      <div class="cmd-footer-bar">
+        <div class="cmd-footer-keys">
+          <span><kbd style="background:rgba(255,255,255,0.1); padding:2px 5px; border-radius:3px;">↑</kbd> <kbd style="background:rgba(255,255,255,0.1); padding:2px 5px; border-radius:3px;">↓</kbd> Navigate</span>
+          <span><kbd style="background:rgba(255,255,255,0.1); padding:2px 5px; border-radius:3px;">↵</kbd> Select</span>
+        </div>
+        <span style="color: var(--cyan); font-weight:700;">AETHOS 365 OMNI-CONTROL</span>
       </div>
     </div>
   </div>
@@ -18156,6 +18567,9 @@
 
         const card = document.createElement('div');
         card.className = 'pro-ex-card';
+        card.dataset.exName = (activeName || '').toLowerCase();
+        card.dataset.exTarget = (activeTarget || '').toLowerCase();
+        card.dataset.exMuscles = (musclesList || []).join(' ').toLowerCase();
 
         let cuesList = '';
         for (const [title, cue] of Object.entries(activeCues)) {
@@ -18346,6 +18760,10 @@
 
         flow.appendChild(card);
       });
+
+      if (typeof applyWorkoutCardFilter === 'function') {
+        applyWorkoutCardFilter();
+      }
     }
 
     function openVideoPopout(videoId, title) {
@@ -25430,9 +25848,22 @@ function stopGuidedCooldown() {
     function initKeyboardShortcuts() {
       if (typeof window === 'undefined' || !window.addEventListener) return;
       window.addEventListener('keydown', (e) => {
+        // Global Command Palette Shortcut: Ctrl+K or Cmd+K
+        if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) {
+          e.preventDefault();
+          const cmdModal = document.getElementById('commandPaletteModal');
+          if (cmdModal && cmdModal.classList.contains('active')) {
+            closeCommandPalette();
+          } else {
+            openCommandPalette();
+          }
+          return;
+        }
+
         const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : '';
         if (tag === 'input' || tag === 'textarea' || tag === 'select') {
           if (e.key === 'Escape') {
+            closeCommandPalette();
             closeModal('exerciseSwapModal');
             closeModal('hotkeysModal');
             closeModal('authModal');
@@ -25447,6 +25878,7 @@ function stopGuidedCooldown() {
         }
 
         if (e.key === 'Escape') {
+          closeCommandPalette();
           closeModal('exerciseSwapModal');
           closeModal('hotkeysModal');
           closeModal('authModal');
@@ -27536,6 +27968,396 @@ if (typeof window !== 'undefined') {
       }
     }
 
+    // ==========================================
+    // 100X BARBELL & DUMBBELL PLATE LOADING ENGINE
+    // ==========================================
+    function calculatePlateLoading() {
+      const targetWeightInput = document.getElementById('plateTargetWeightInput');
+      const barSelect = document.getElementById('plateBarbellType');
+      const visualizer = document.getElementById('barbellVisualizer');
+      const summaryText = document.getElementById('plateBreakdownSummary');
+      const perSideLabel = document.getElementById('platePerSideText');
+
+      if (!targetWeightInput || !barSelect || !visualizer) return;
+
+      const totalTarget = Math.max(0, parseFloat(targetWeightInput.value) || 0);
+      const barWeight = parseFloat(barSelect.value) || 0;
+
+      if (totalTarget < barWeight) {
+        if (perSideLabel) perSideLabel.innerText = '0.0 kg / side';
+        visualizer.innerHTML = `<div style="color: var(--rose); font-size: 0.85rem; font-weight:700;">⚠️ Target weight (${totalTarget}kg) is lighter than bar (${barWeight}kg).</div>`;
+        if (summaryText) summaryText.innerText = 'Empty bar or decrease barbell baseline weight.';
+        return;
+      }
+
+      const netWeight = totalTarget - barWeight;
+      const perSide = netWeight / 2;
+
+      if (perSideLabel) {
+        perSideLabel.innerText = `${perSide.toFixed(2)} kg / side`;
+      }
+
+      // Olympic standard denominations available per side (kg)
+      const plateDenoms = [
+        { wt: 25, cls: 'plate-25', name: '25kg (Red)' },
+        { wt: 20, cls: 'plate-20', name: '20kg (Blue)' },
+        { wt: 15, cls: 'plate-15', name: '15kg (Yellow)' },
+        { wt: 10, cls: 'plate-10', name: '10kg (Green)' },
+        { wt: 5,  cls: 'plate-5',  name: '5kg (White)' },
+        { wt: 2.5, cls: 'plate-2-5', name: '2.5kg (Black)' },
+        { wt: 1.25, cls: 'plate-1-25', name: '1.25kg (Chrome)' }
+      ];
+
+      let remaining = perSide;
+      const loadedPlates = [];
+      const plateCounts = {};
+
+      for (const p of plateDenoms) {
+        while (remaining >= p.wt - 0.001) {
+          loadedPlates.push(p);
+          plateCounts[p.wt] = (plateCounts[p.wt] || 0) + 1;
+          remaining = Math.round((remaining - p.wt) * 100) / 100;
+        }
+      }
+
+      // Render Barbell Visualizer (Left sleeve + Bar shaft + Right sleeve)
+      let platesLeftHtml = '';
+      let platesRightHtml = '';
+
+      // Outer to inner or inner to outer
+      // Left side: discs loaded from inside collar outward
+      [...loadedPlates].reverse().forEach(p => {
+        platesLeftHtml += `<div class="plate-disc ${p.cls}" title="${p.name}">${p.wt}</div>`;
+      });
+
+      loadedPlates.forEach(p => {
+        platesRightHtml += `<div class="plate-disc ${p.cls}" title="${p.name}">${p.wt}</div>`;
+      });
+
+      visualizer.innerHTML = `
+        <div class="barbell-sleeve">
+          ${platesLeftHtml}
+          <div class="barbell-collar" title="Left Barbell Collar"></div>
+        </div>
+        <div class="barbell-bar" style="width: clamp(100px, 20vw, 220px); text-align: center; color: #cbd5e1; font-size: 0.65rem; font-weight: 800; justify-content: center;">
+          ${barWeight > 0 ? `${barWeight}kg BAR` : 'COLLAR / AXLE'}
+        </div>
+        <div class="barbell-sleeve">
+          <div class="barbell-collar" title="Right Barbell Collar"></div>
+          ${platesRightHtml}
+        </div>
+      `;
+
+      // Summary string
+      const breakdownItems = [];
+      for (const [wt, count] of Object.entries(plateCounts)) {
+        breakdownItems.push(`${count}×${wt}kg`);
+      }
+
+      if (breakdownItems.length === 0) {
+        if (summaryText) summaryText.innerHTML = `Barbell loaded empty: <strong>${barWeight} kg</strong> total load.`;
+      } else {
+        const remainderNote = remaining > 0 ? ` <span style="color:var(--amber);">(${remaining}kg fractional delta)</span>` : '';
+        if (summaryText) {
+          summaryText.innerHTML = `Per side loadout: <strong>${breakdownItems.join(' + ')}</strong> = ${perSide.toFixed(2)} kg per sleeve${remainderNote}`;
+        }
+      }
+    }
+
+    function setPlateFrom1RM() {
+      const e1rmEl = document.getElementById('calc1rmResult');
+      if (!e1rmEl) return;
+      const num = parseFloat(e1rmEl.innerText) || 60;
+      const targetInput = document.getElementById('plateTargetWeightInput');
+      if (targetInput) {
+        targetInput.value = num;
+        calculatePlateLoading();
+        showToast(`🏋️ Barbell plate load synced to ${num} kg E1RM!`, 2200);
+      }
+    }
+
+    // ==========================================
+    // WORKOUT MOVEMENT FILTER & SEARCH ENGINE
+    // ==========================================
+    let activeWorkoutMuscleFilter = 'all';
+
+    function setWorkoutMuscleFilter(muscle, btnEl) {
+      activeWorkoutMuscleFilter = muscle || 'all';
+      const pillsContainer = document.getElementById('workoutMuscleFilterPills');
+      if (pillsContainer) {
+        pillsContainer.querySelectorAll('.wf-pill-btn').forEach(btn => btn.classList.remove('active'));
+      }
+      if (btnEl) btnEl.classList.add('active');
+      applyWorkoutCardFilter();
+    }
+
+    function applyWorkoutCardFilter() {
+      const searchInput = document.getElementById('workoutExerciseSearchInput');
+      const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
+      const cards = document.querySelectorAll('#exerciseCardsFlow .pro-ex-card');
+      const badge = document.getElementById('workoutFilterCountBadge');
+      if (!cards || cards.length === 0) return;
+
+      let visibleCount = 0;
+      cards.forEach(card => {
+        const name = card.dataset.exName || '';
+        const target = card.dataset.exTarget || '';
+        const muscles = card.dataset.exMuscles || '';
+
+        const matchesQuery = !query || name.includes(query) || target.includes(query) || muscles.includes(query);
+        let matchesMuscle = true;
+
+        if (activeWorkoutMuscleFilter !== 'all') {
+          const filterKey = activeWorkoutMuscleFilter;
+          if (filterKey === 'chest') {
+            matchesMuscle = target.includes('chest') || muscles.includes('chest') || muscles.includes('pectoral') || name.includes('push');
+          } else if (filterKey === 'back') {
+            matchesMuscle = target.includes('back') || muscles.includes('back') || muscles.includes('lat') || muscles.includes('rhomboid') || name.includes('row') || name.includes('pull');
+          } else if (filterKey === 'legs') {
+            matchesMuscle = target.includes('quad') || target.includes('leg') || muscles.includes('quad') || muscles.includes('femur') || name.includes('squat') || name.includes('lunge');
+          } else if (filterKey === 'glutes') {
+            matchesMuscle = target.includes('glute') || target.includes('posterior') || target.includes('hamstring') || muscles.includes('glute') || muscles.includes('hamstring') || name.includes('deadlift') || name.includes('bridge') || name.includes('hinge');
+          } else if (filterKey === 'shoulders') {
+            matchesMuscle = target.includes('shoulder') || target.includes('deltoid') || muscles.includes('deltoid') || name.includes('press') || name.includes('pike');
+          } else if (filterKey === 'arms') {
+            matchesMuscle = target.includes('arm') || target.includes('bicep') || target.includes('tricep') || muscles.includes('bicep') || muscles.includes('tricep') || name.includes('dip') || name.includes('curl');
+          } else if (filterKey === 'core') {
+            matchesMuscle = target.includes('core') || target.includes('abs') || muscles.includes('core') || muscles.includes('abdom') || muscles.includes('transverse') || name.includes('plank') || name.includes('dead bug') || name.includes('hold');
+          }
+        }
+
+        if (matchesQuery && matchesMuscle) {
+          card.style.display = '';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (badge) {
+        if (!query && activeWorkoutMuscleFilter === 'all') {
+          badge.innerText = `Showing All (${cards.length}) Exercises`;
+        } else {
+          badge.innerText = `Showing ${visibleCount} of ${cards.length} Exercises`;
+        }
+      }
+    }
+
+    // ==========================================
+    // GLOBAL COMMAND PALETTE (CTRL+K) CONTROLLER
+    // ==========================================
+    let cmdPaletteSelectedIndex = 0;
+    let currentCmdItems = [];
+
+    const GLOBAL_COMMAND_ITEMS = [
+      // Quick View Switchers
+      { id: 'view_workout', group: 'Navigation', icon: '🏋️', title: 'Daily Workout Execution', desc: 'Jump to current workout view & exercise logging', action: () => switchView('workoutView') },
+      { id: 'view_milestones', group: 'Navigation', icon: '🏆', title: 'Milestones & Level Progression', desc: 'Inspect XP, ranks, badges & training milestones', action: () => switchView('milestonesView') },
+      { id: 'view_photos', group: 'Navigation', icon: '📸', title: 'Photo Comparison Studio', desc: 'Review posture evolution, time-lapse & zoom', action: () => switchView('photosView') },
+      { id: 'view_analytics', group: 'Navigation', icon: '📊', title: 'Analytics & Strength Standards', desc: '1RM calculator, volume curve, and plate math', action: () => switchView('analyticsView') },
+      { id: 'view_nutrition', group: 'Navigation', icon: '🥗', title: 'Nutrition & Macro Blueprint', desc: 'Mifflin-St Jeor TDEE, meal plan & smart grocery', action: () => switchView('nutritionView') },
+      { id: 'view_roadmap', group: 'Navigation', icon: '🗺️', title: '12-Month Master Roadmap', desc: 'Living room equipment phases & timeline', action: () => switchView('roadmapView') },
+      { id: 'view_codex', group: 'Navigation', icon: '🎒', title: 'Biomechanics & Recovery Codex', desc: 'Iron laws, Dr. McGill spine hygiene, joint health', action: () => switchView('essentialsView') },
+
+      // Quick Tools & Overlays
+      { id: 'hud_fullscreen', group: 'Actions', icon: '⚡', title: 'Cinematic Fullscreen Focus HUD (F)', desc: 'Large across-the-room workout display with rest timer', action: () => openFocusHUD() },
+      { id: 'music_toggle', group: 'Audio', icon: '💿', title: 'Play / Pause Workout Beats (M)', desc: 'Toggle cyber heavy pump synthesized soundtrack', action: () => { if (typeof GymMusic !== 'undefined' && GymMusic.toggle) GymMusic.toggle(); } },
+      { id: 'music_lab', group: 'Audio', icon: '🎧', title: 'Open Beats Sound Lab & Equalizer', desc: 'Select track styles, ambient rain, and metronome', action: () => openModal('musicModal') },
+      { id: 'calendar_matrix', group: 'Tools', icon: '📅', title: '365-Day Consistency Calendar', desc: 'View complete year calendar and streak history', action: () => openModal('calendarModal') },
+      { id: 'body_metrics', group: 'Tools', icon: '⚖️', title: 'Weight & Waistline Logger', desc: 'Log morning weight, body fat %, and tape measurements', action: () => openModal('metricsModal') },
+      { id: 'print_sheet', group: 'Tools', icon: '🖨️', title: 'Print Daily Cheat Sheet (PDF)', desc: 'Pristine A4 printable sheet for distraction-free workouts', action: () => openPrintSheetModal() },
+      { id: 'plate_calc', group: 'Tools', icon: '🏋️', title: 'Olympic Barbell Plate Loading Calculator', desc: 'Jump to analytics and configure barbell plate layout', action: () => { switchView('analyticsView'); const el = document.getElementById('plateCalcBox'); if (el) el.scrollIntoView({ behavior: 'smooth' }); } },
+      { id: 'hotkeys_help', group: 'Help', icon: '⌨️', title: 'Keyboard Shortcuts Cheat Sheet (?)', desc: 'Inspect all keyboard shortcuts & hotkeys', action: () => openModal('hotkeysModal') },
+      { id: 'profile_settings', group: 'Profile', icon: '⚙️', title: 'Edit Athlete Profile & Target Weight', desc: 'Update name, weight, fitness goals, and avatar', action: () => openProfileSettingsModal() },
+      { id: 'json_backup', group: 'Data', icon: '💾', title: 'Export Full JSON Backup', desc: 'Save all your workouts, sets, and progress locally', action: () => exportDataJSON() },
+      { id: 'json_restore', group: 'Data', icon: '📥', title: 'Import JSON Backup File', desc: 'Restore data from previous JSON backup export', action: () => { const input = document.getElementById('importFileInput'); if (input) input.click(); } }
+    ];
+
+    function openCommandPalette() {
+      const modal = document.getElementById('commandPaletteModal');
+      const input = document.getElementById('cmdPaletteInput');
+      if (!modal || !input) return;
+
+      modal.classList.add('active');
+      input.value = '';
+      cmdPaletteSelectedIndex = 0;
+      filterCommandPalette('');
+      setTimeout(() => input.focus(), 50);
+
+      // Bind arrow key navigation inside palette
+      input.onkeydown = handleCmdPaletteKeydown;
+    }
+
+    function closeCommandPalette() {
+      const modal = document.getElementById('commandPaletteModal');
+      if (modal) modal.classList.remove('active');
+    }
+
+    function closeCmdPaletteOnBackdrop(e) {
+      if (e.target && e.target.id === 'commandPaletteModal') {
+        closeCommandPalette();
+      }
+    }
+
+    function filterCommandPalette(val) {
+      const resultsContainer = document.getElementById('cmdPaletteResults');
+      if (!resultsContainer) return;
+
+      const q = (val || '').trim().toLowerCase();
+      let matched = [];
+
+      // Check for Day Jump commands (e.g. "day 45", "45", "d12")
+      const dayMatch = q.match(/^(?:day|d)?\s*(\d{1,3})$/i);
+      if (dayMatch) {
+        const targetD = parseInt(dayMatch[1], 10);
+        if (targetD >= 1 && targetD <= 365) {
+          const plan = typeof getDayPlan === 'function' ? getDayPlan(targetD) : null;
+          const planName = plan ? plan.workoutName : `Day ${targetD}`;
+          matched.push({
+            id: `jump_day_${targetD}`,
+            group: 'Day Jump',
+            icon: '⚡',
+            title: `Jump to Day ${targetD}: ${planName}`,
+            desc: `Instantly load training day ${targetD} of 365`,
+            badge: `Day ${targetD}`,
+            action: () => { switchView('workoutView'); renderActiveDay(targetD, true); }
+          });
+        }
+      }
+
+      GLOBAL_COMMAND_ITEMS.forEach(it => {
+        if (!q || it.title.toLowerCase().includes(q) || it.desc.toLowerCase().includes(q) || it.group.toLowerCase().includes(q)) {
+          matched.push(it);
+        }
+      });
+
+      currentCmdItems = matched;
+      if (cmdPaletteSelectedIndex >= currentCmdItems.length) {
+        cmdPaletteSelectedIndex = 0;
+      }
+
+      if (matched.length === 0) {
+        resultsContainer.innerHTML = `
+          <div style="text-align: center; padding: 30px 10px; color: var(--text-dim);">
+            <div style="font-size: 1.5rem; margin-bottom: 6px;">🔍</div>
+            No matching commands found for "${val}".<br>
+            <span style="font-size: 0.76rem; color: var(--text-muted);">Try typing a Day number (e.g. "Day 15") or "Workout", "Music", "Analytics", "Export".</span>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '';
+      let currentGroup = '';
+
+      matched.forEach((it, idx) => {
+        if (it.group !== currentGroup) {
+          currentGroup = it.group;
+          html += `<div class="cmd-group-label">${currentGroup}</div>`;
+        }
+        const isSel = idx === cmdPaletteSelectedIndex;
+        html += `
+          <button type="button" class="cmd-item-row ${isSel ? 'selected' : ''}" onclick="executeCmdItem(${idx})">
+            <div class="cmd-item-left">
+              <span class="cmd-item-icon">${it.icon}</span>
+              <div>
+                <div class="cmd-item-text">${it.title}</div>
+                <div class="cmd-item-desc">${it.desc}</div>
+              </div>
+            </div>
+            ${it.badge ? `<span class="cmd-item-badge">${it.badge}</span>` : ''}
+          </button>
+        `;
+      });
+
+      resultsContainer.innerHTML = html;
+    }
+
+    function handleCmdPaletteKeydown(e) {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (currentCmdItems.length > 0) {
+          cmdPaletteSelectedIndex = (cmdPaletteSelectedIndex + 1) % currentCmdItems.length;
+          updateCmdPaletteSelection();
+        }
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (currentCmdItems.length > 0) {
+          cmdPaletteSelectedIndex = (cmdPaletteSelectedIndex - 1 + currentCmdItems.length) % currentCmdItems.length;
+          updateCmdPaletteSelection();
+        }
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        executeCmdItem(cmdPaletteSelectedIndex);
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        closeCommandPalette();
+      }
+    }
+
+    function updateCmdPaletteSelection() {
+      const rows = document.querySelectorAll('#cmdPaletteResults .cmd-item-row');
+      rows.forEach((r, idx) => {
+        if (idx === cmdPaletteSelectedIndex) {
+          r.classList.add('selected');
+          r.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        } else {
+          r.classList.remove('selected');
+        }
+      });
+    }
+
+    function executeCmdItem(idx) {
+      if (currentCmdItems && currentCmdItems[idx] && currentCmdItems[idx].action) {
+        closeCommandPalette();
+        try {
+          currentCmdItems[idx].action();
+        } catch(err) {
+          console.error('Command execution error:', err);
+        }
+      }
+    }
+
+    // ==========================================
+    // NUTRITION & GROCERY CSV EXPORT ENGINE
+    // ==========================================
+    function exportGroceryCSV() {
+      const currentDiet = currentDietKey || 'omnivore';
+      const list = GROCERY_DATA[currentDiet] || GROCERY_DATA.omnivore;
+      const checkedSet = getGroceryCheckedSet();
+      const customItems = getCustomGroceryItems();
+
+      let csv = 'Category,Item Name,Quantity,Nutrition Tip,Purchased\n';
+
+      list.forEach((cat, cIdx) => {
+        const catName = `"${cat.cat.replace(/"/g, '""')}"`;
+        cat.items.forEach((it, iIdx) => {
+          const id = `groc_${currentDiet}_${cIdx}_${iIdx}`;
+          const isDone = checkedSet.has(id) ? 'YES' : 'NO';
+          csv += `${catName},"${(it.name || '').replace(/"/g, '""')}","${(it.qty || '').replace(/"/g, '""')}","${(it.tip || '').replace(/"/g, '""')}",${isDone}\n`;
+        });
+      });
+
+      if (customItems.length > 0) {
+        customItems.forEach((it, cIdx) => {
+          const id = `groc_custom_${cIdx}`;
+          const isDone = checkedSet.has(id) ? 'YES' : 'NO';
+          csv += `"Custom Additions","${(it.name || '').replace(/"/g, '""')}","${(it.qty || '').replace(/"/g, '""')}","Personal Pantry",${isDone}\n`;
+        });
+      }
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', `Aethos_365_Grocery_Plan_${currentDiet}_${new Date().toISOString().slice(0,10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      showToast('📥 Downloaded 7-Day Supermarket Grocery CSV!', 2800);
+    }
+
     function recordVolumeEntry(volumeKg) {
       let volumeLogs = JSON.parse(localStorage.getItem('gym_volume_logs') || '[]');
       volumeLogs.push({ date: new Date().toISOString(), vol: Math.round(volumeKg) });
@@ -28143,9 +28965,23 @@ if (typeof window !== 'undefined') {
       window.switchDiet = switchDiet;
       window.calculateMacros = calculateMacros;
       window.copyGroceryList = copyGroceryList;
-      window.printGroceryList = printGroceryList;
       window.toggleSingleMobilityCard = toggleSingleMobilityCard;
       window.setAllWarmupCardsMinimized = setAllWarmupCardsMinimized;
+      window.openCommandPalette = openCommandPalette;
+      window.closeCommandPalette = closeCommandPalette;
+      window.closeCmdPaletteOnBackdrop = closeCmdPaletteOnBackdrop;
+      window.filterCommandPalette = filterCommandPalette;
+      window.executeCmdItem = executeCmdItem;
+      window.setWorkoutMuscleFilter = setWorkoutMuscleFilter;
+      window.applyWorkoutCardFilter = applyWorkoutCardFilter;
+      window.calculatePlateLoading = calculatePlateLoading;
+      window.setPlateFrom1RM = setPlateFrom1RM;
+      window.exportGroceryCSV = exportGroceryCSV;
+
+      // Initialize barbell plate optimizer with default values
+      if (typeof calculatePlateLoading === 'function') {
+        calculatePlateLoading();
+      }
 
       // Guarantee pill click responsiveness
       const userPillEl = document.getElementById('headerUserPill');
