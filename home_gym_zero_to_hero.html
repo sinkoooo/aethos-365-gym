@@ -10362,10 +10362,14 @@
           </div>
         </div>
 
-        <div class="calc-grid">
+        <div class="calc-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
           <div class="calc-input-group">
             <label>Current Bodyweight (kg)</label>
             <input type="number" id="calcWeight" min="40" max="180" step="0.5" value="74.0" oninput="calculateMacros()">
+          </div>
+          <div class="calc-input-group">
+            <label>Estimated Body Fat % (Optional)</label>
+            <input type="number" id="calcBodyFat" min="5" max="50" step="0.5" placeholder="e.g. 15%" oninput="calculateMacros()" title="Katch-McArdle LBM precision formula applied when entered">
           </div>
           <div class="calc-input-group">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
@@ -10391,16 +10395,26 @@
               <option value="1.75">Very Active / Athlete (15,000 steps + Daily Sessions • 1.75x)</option>
             </select>
           </div>
+          <div class="calc-input-group">
+            <label>Protein Target Multiplier</label>
+            <select id="calcProteinRate" onchange="calculateMacros()">
+              <option value="auto" selected>⚡ Adaptive (2.0–2.2g/kg based on goal)</option>
+              <option value="1.8">1.8g / kg (Maintenance / Budget)</option>
+              <option value="2.0">2.0g / kg (Hypertrophy Standard)</option>
+              <option value="2.2">2.2g / kg (Aggressive Cut / High MPS)</option>
+              <option value="2.4">2.4g / kg (Contest Prep / Maximum Satiety)</option>
+            </select>
+          </div>
         </div>
 
-        <div class="macro-stat-cards">
+        <div class="macro-stat-cards" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));">
           <div class="macro-stat-card macro-card-cals">
             <div class="m-num" id="calcCalories" style="color: var(--cyan); text-shadow: 0 0 14px rgba(0, 242, 254, 0.4);">2,376</div>
             <div class="m-label" style="color: #38bdf8; font-weight: 700;">Daily Calories (kcal)</div>
           </div>
           <div class="macro-stat-card macro-card-prot">
             <div class="m-num" id="calcProtein" style="color: var(--emerald); text-shadow: 0 0 14px rgba(16, 185, 129, 0.4);">160g</div>
-            <div class="m-label" style="color: #34d399; font-weight: 700;">Protein (2.0g/kg)</div>
+            <div class="m-label" style="color: #34d399; font-weight: 700;">Protein Target</div>
           </div>
           <div class="macro-stat-card macro-card-carbs">
             <div class="m-num" id="calcCarbs" style="color: var(--purple); text-shadow: 0 0 14px rgba(192, 132, 252, 0.4);">270g</div>
@@ -10409,6 +10423,10 @@
           <div class="macro-stat-card macro-card-fats">
             <div class="m-num" id="calcFats" style="color: var(--amber); text-shadow: 0 0 14px rgba(251, 191, 36, 0.4);">72g</div>
             <div class="m-label" style="color: #fbbf24; font-weight: 700;">Healthy Fats</div>
+          </div>
+          <div class="macro-stat-card" style="border-top: 3px solid #f472b6;">
+            <div class="m-num" id="calcFiber" style="color: #f472b6; text-shadow: 0 0 14px rgba(244, 114, 182, 0.4);">35g</div>
+            <div class="m-label" style="color: #f472b6; font-weight: 700;">Dietary Fiber (Gut)</div>
           </div>
           <div class="macro-stat-card macro-card-water">
             <div class="m-num" id="calcWater" style="color: #38bdf8; text-shadow: 0 0 14px rgba(56, 189, 248, 0.4);">3.3L</div>
@@ -10532,9 +10550,31 @@
           <p>90% of fitness supplements are a waste of money. Here are the clinically proven compounds with direct 1-click order links:</p>
         </div>
 
+        <!-- Interactive Daily Supplement Compliance Tracker -->
+        <div style="background: rgba(15, 23, 42, 0.7); border: 1.5px solid rgba(56, 189, 248, 0.25); border-radius: var(--radius-md); padding: 14px 18px; margin-bottom: 18px; box-shadow: 0 4px 18px rgba(0,0,0,0.3);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 1.2rem;">💊</span>
+              <span style="font-weight: 800; color: #fff; font-size: 0.9rem;">Today's Supplement Compliance Tracker:</span>
+              <span id="suppComplianceStatus" style="font-size: 0.82rem; font-weight: 800; color: var(--cyan); font-family: 'JetBrains Mono', monospace;">0 / 8 Taken (0%)</span>
+            </div>
+            <button type="button" onclick="resetDailySupplementCompliance()" style="background: none; border: 1px solid rgba(255,255,255,0.14); color: var(--text-dim); padding: 3px 10px; border-radius: 4px; font-size: 0.72rem; cursor: pointer;">
+              Reset Today's Pills
+            </button>
+          </div>
+          <div style="background: rgba(255, 255, 255, 0.08); height: 7px; border-radius: 99px; overflow: hidden; margin-bottom: 12px;">
+            <div id="suppComplianceProgressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #38bdf8, #a855f7); transition: width 0.3s ease; box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);"></div>
+          </div>
+          <!-- Quick Checklist Pills -->
+          <div id="suppQuickChecklist" style="display: flex; gap: 6px; flex-wrap: wrap;"></div>
+        </div>
+
         <div class="supp-grid">
-          <div class="supp-card">
-            <span class="supp-tier tier-gold">Tier 1: Essential #1</span>
+          <div class="supp-card" id="card_supp_creatine">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="supp-tier tier-gold">Tier 1: Essential #1</span>
+              <button type="button" class="btn-supp-check" id="btn_supp_creatine" onclick="toggleSupplementTaken('creatine')">⭕ Mark Taken</button>
+            </div>
             <h3 style="color: #fff; margin: 4px 0 6px;">Creatine Monohydrate</h3>
             <p style="font-size: 0.85rem; color: var(--text-muted);">
               <strong>Dose:</strong> 5 grams daily (every day, any time with water).<br>
@@ -10546,8 +10586,11 @@
             </div>
           </div>
 
-          <div class="supp-card">
-            <span class="supp-tier tier-gold">Tier 1: Essential #2</span>
+          <div class="supp-card" id="card_supp_whey">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="supp-tier tier-gold">Tier 1: Essential #2</span>
+              <button type="button" class="btn-supp-check" id="btn_supp_whey" onclick="toggleSupplementTaken('whey')">⭕ Mark Taken</button>
+            </div>
             <h3 style="color: #fff; margin: 4px 0 6px;">Whey Protein Isolate</h3>
             <p style="font-size: 0.85rem; color: var(--text-muted);">
               <strong>Dose:</strong> 1–2 scoops daily (25g–50g protein).<br>
@@ -10560,8 +10603,11 @@
             </div>
           </div>
 
-          <div class="supp-card">
-            <span class="supp-tier tier-green">Tier 2: Joint & Longevity</span>
+          <div class="supp-card" id="card_supp_omega3">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="supp-tier tier-green">Tier 2: Joint & Longevity</span>
+              <button type="button" class="btn-supp-check" id="btn_supp_omega3" onclick="toggleSupplementTaken('omega3')">⭕ Mark Taken</button>
+            </div>
             <h3 style="color: #fff; margin: 4px 0 6px;">Omega-3 Fish Oil / Algal</h3>
             <p style="font-size: 0.85rem; color: var(--text-muted);">
               <strong>Dose:</strong> 1,500mg–2,000mg combined EPA + DHA daily with meals.<br>
@@ -10574,8 +10620,11 @@
             </div>
           </div>
 
-          <div class="supp-card">
-            <span class="supp-tier tier-green">Tier 2: Hormone Health</span>
+          <div class="supp-card" id="card_supp_vitamind">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="supp-tier tier-green">Tier 2: Hormone Health</span>
+              <button type="button" class="btn-supp-check" id="btn_supp_vitamind" onclick="toggleSupplementTaken('vitamind')">⭕ Mark Taken</button>
+            </div>
             <h3 style="color: #fff; margin: 4px 0 6px;">Vitamin D3 + K2</h3>
             <p style="font-size: 0.85rem; color: var(--text-muted);">
               <strong>Dose:</strong> 2,000 to 4,000 IU daily (or 60k IU weekly) with morning breakfast.<br>
@@ -10587,8 +10636,11 @@
             </div>
           </div>
 
-          <div class="supp-card">
-            <span class="supp-tier tier-green">Tier 2: Deep Sleep</span>
+          <div class="supp-card" id="card_supp_magnesium">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="supp-tier tier-green">Tier 2: Deep Sleep</span>
+              <button type="button" class="btn-supp-check" id="btn_supp_magnesium" onclick="toggleSupplementTaken('magnesium')">⭕ Mark Taken</button>
+            </div>
             <h3 style="color: #fff; margin: 4px 0 6px;">Magnesium Glycinate</h3>
             <p style="font-size: 0.85rem; color: var(--text-muted);">
               <strong>Dose:</strong> 300mg taken 45 minutes before sleep.<br>
@@ -10600,8 +10652,11 @@
             </div>
           </div>
 
-          <div class="supp-card">
-            <span class="supp-tier tier-green">Tier 2: Vegetarian & Female Energy</span>
+          <div class="supp-card" id="card_supp_b12">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="supp-tier tier-green">Tier 2: Vegetarian & Female Energy</span>
+              <button type="button" class="btn-supp-check" id="btn_supp_b12" onclick="toggleSupplementTaken('b12')">⭕ Mark Taken</button>
+            </div>
             <h3 style="color: #fff; margin: 4px 0 6px;">Vitamin B12 & Plant Protein</h3>
             <p style="font-size: 0.85rem; color: var(--text-muted);">
               <strong>Dose:</strong> Methylcobalamin 1500mcg (1–2x weekly) + 1 scoop Pea/Rice Protein.<br>
@@ -10613,8 +10668,11 @@
             </div>
           </div>
 
-          <div class="supp-card" style="border: 1.5px solid rgba(236, 72, 153, 0.4); background: linear-gradient(145deg, rgba(236, 72, 153, 0.08) 0%, rgba(13, 21, 40, 0.95) 100%);">
-            <span class="supp-tier" style="background: rgba(236, 72, 153, 0.2); color: #f472b6; border-color: rgba(236, 72, 153, 0.4);">Tier 2: Dermal Elasticity & Tendons</span>
+          <div class="supp-card" id="card_supp_collagen" style="border: 1.5px solid rgba(236, 72, 153, 0.4); background: linear-gradient(145deg, rgba(236, 72, 153, 0.08) 0%, rgba(13, 21, 40, 0.95) 100%);">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="supp-tier" style="background: rgba(236, 72, 153, 0.2); color: #f472b6; border-color: rgba(236, 72, 153, 0.4);">Tier 2: Dermal Elasticity & Tendons</span>
+              <button type="button" class="btn-supp-check" id="btn_supp_collagen" onclick="toggleSupplementTaken('collagen')">⭕ Mark Taken</button>
+            </div>
             <h3 style="color: #fff; margin: 4px 0 6px;">Hydrolyzed Collagen Peptides (Type I & III)</h3>
             <p style="font-size: 0.85rem; color: var(--text-muted);">
               <strong>Dose:</strong> 10g to 15g daily with morning coffee, water, or Vitamin C fruit.<br>
@@ -10626,8 +10684,11 @@
             </div>
           </div>
 
-          <div class="supp-card" style="border: 1.5px solid rgba(168, 85, 247, 0.4); background: linear-gradient(145deg, rgba(168, 85, 247, 0.08) 0%, rgba(13, 21, 40, 0.95) 100%);">
-            <span class="supp-tier" style="background: rgba(168, 85, 247, 0.2); color: #c084fc; border-color: rgba(168, 85, 247, 0.4);">Tier 2: Scalp & Follicle Shield</span>
+          <div class="supp-card" id="card_supp_zinc" style="border: 1.5px solid rgba(168, 85, 247, 0.4); background: linear-gradient(145deg, rgba(168, 85, 247, 0.08) 0%, rgba(13, 21, 40, 0.95) 100%);">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="supp-tier" style="background: rgba(168, 85, 247, 0.2); color: #c084fc; border-color: rgba(168, 85, 247, 0.4);">Tier 2: Scalp & Follicle Shield</span>
+              <button type="button" class="btn-supp-check" id="btn_supp_zinc" onclick="toggleSupplementTaken('zinc')">⭕ Mark Taken</button>
+            </div>
             <h3 style="color: #fff; margin: 4px 0 6px;">Zinc Picolinate & Rosemary Scalp Protocol</h3>
             <p style="font-size: 0.85rem; color: var(--text-muted);">
               <strong>Dose:</strong> 15mg Zinc Picolinate daily with food + 2-3x weekly rosemary scalp massage.<br>
@@ -10636,6 +10697,22 @@
             <div class="supp-actions">
               <a href="https://www.amazon.in/s?k=zinc+picolinate+15mg" target="_blank" rel="noopener noreferrer" class="btn-supp-order btn-supp-amazon">🛒 Zinc Picolinate</a>
               <a href="https://www.amazon.in/s?k=pure+rosemary+essential+oil+cold+pressed" target="_blank" rel="noopener noreferrer" class="btn-supp-order" style="background: linear-gradient(135deg, #a855f7, #7e22ce); color: #fff !important; font-weight: 800;">🌿 Rosemary Oil ↗</a>
+            </div>
+          </div>
+
+          <div class="supp-card" id="card_supp_ashwagandha" style="border: 1.5px solid rgba(245, 158, 11, 0.4); background: linear-gradient(145deg, rgba(245, 158, 11, 0.08) 0%, rgba(13, 21, 40, 0.95) 100%);">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="supp-tier" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border-color: rgba(245, 158, 11, 0.4);">Tier 2: Cortisol & Testosterone Adaptogen</span>
+              <button type="button" class="btn-supp-check" id="btn_supp_ashwagandha" onclick="toggleSupplementTaken('ashwagandha')">⭕ Mark Taken</button>
+            </div>
+            <h3 style="color: #fff; margin: 4px 0 6px;">KSM-66 Ashwagandha Root Extract</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+              <strong>Dose:</strong> 600mg standardized KSM-66 root extract daily (with evening meal or pre-bed).<br>
+              <strong>Benefits:</strong> Clinically proven to reduce serum cortisol levels by up to 27.9%, boost VO2 max, accelerate strength recovery, and support natural free testosterone.
+            </p>
+            <div class="supp-actions">
+              <a href="https://www.amazon.in/s?k=ksm+66+ashwagandha+root+extract" target="_blank" rel="noopener noreferrer" class="btn-supp-order btn-supp-amazon">🛒 Amazon (KSM-66)</a>
+              <a href="https://www.1mg.com/search/all?name=ashwagandha+ksm+66" target="_blank" rel="noopener noreferrer" class="btn-supp-order btn-supp-pharma">💊 Tata 1mg</a>
             </div>
           </div>
         </div>
@@ -26054,34 +26131,55 @@ function stopGuidedCooldown() {
     function calculateMacros() {
       syncQuickGoal();
       const wt = parseFloat(document.getElementById('calcWeight')?.value) || (userProfile?.weight || 74.0);
+      const bodyFatInput = parseFloat(document.getElementById('calcBodyFat')?.value);
+      const hasBodyFat = !isNaN(bodyFatInput) && bodyFatInput >= 4 && bodyFatInput <= 50;
       const goal = document.getElementById('calcGoal')?.value || 'recomp';
       const activity = parseFloat(document.getElementById('calcActivity')?.value) || 1.35;
+      const proteinRateSel = document.getElementById('calcProteinRate')?.value || 'auto';
 
-      // Mifflin-St Jeor Formula for 74kg Athletic Recomposition (35yo Male 183cm)
       const age = userProfile?.age || 35;
       const height = userProfile?.height || 183;
       const gender = userProfile?.gender || 'male';
-      const bmrOffset = gender === 'female' ? -161 : 5;
-      const bmr = (10 * wt) + (6.25 * height) - (5 * age) + bmrOffset;
+
+      let bmr = 0;
+      let formulaUsed = 'Mifflin-St Jeor';
+
+      if (hasBodyFat) {
+        // Katch-McArdle Formula: BMR = 370 + (21.6 * Lean Body Mass in kg)
+        const lbm = wt * (1 - (bodyFatInput / 100));
+        bmr = 370 + (21.6 * lbm);
+        formulaUsed = `Katch-McArdle (${lbm.toFixed(1)}kg LBM)`;
+      } else {
+        // Mifflin-St Jeor Formula
+        const bmrOffset = gender === 'female' ? -161 : 5;
+        bmr = (10 * wt) + (6.25 * height) - (5 * age) + bmrOffset;
+      }
+
       const tdee = Math.round(bmr * activity);
 
       let targetCals = tdee;
       let proteinPerKg = 2.0;
 
+      if (proteinRateSel !== 'auto') {
+        proteinPerKg = parseFloat(proteinRateSel) || 2.0;
+      } else {
+        if (goal === 'bulk') proteinPerKg = 2.0;
+        else if (goal === 'cut') proteinPerKg = 2.2;
+        else proteinPerKg = 2.0;
+      }
+
       if (goal === 'bulk') {
         targetCals = tdee + 250;
-        proteinPerKg = 2.0;
       } else if (goal === 'cut') {
         targetCals = tdee - 500;
-        proteinPerKg = 2.2;
       } else {
         targetCals = tdee;
-        proteinPerKg = 2.0;
       }
 
       const proteinGrams = Math.round(wt * proteinPerKg);
       const fatGrams = Math.round((targetCals * 0.25) / 9);
       const carbGrams = Math.max(50, Math.round((targetCals - (proteinGrams * 4) - (fatGrams * 9)) / 4));
+      const fiberGrams = Math.round(Math.max(28, (targetCals / 1000) * 14)); // 14g fiber per 1,000 kcal standard
       const waterLiters = ((wt * 0.035) + 0.5).toFixed(1);
 
       const pCals = proteinGrams * 4;
@@ -26097,10 +26195,11 @@ function stopGuidedCooldown() {
       if (document.getElementById('calcProtein')) document.getElementById('calcProtein').innerText = `${proteinGrams}g`;
       if (document.getElementById('calcCarbs')) document.getElementById('calcCarbs').innerText = `${carbGrams}g`;
       if (document.getElementById('calcFats')) document.getElementById('calcFats').innerText = `${fatGrams}g`;
+      if (document.getElementById('calcFiber')) document.getElementById('calcFiber').innerText = `${fiberGrams}g`;
       if (document.getElementById('calcWater')) document.getElementById('calcWater').innerText = `${waterLiters}L`;
 
       if (document.getElementById('bmrTelemetryBadge')) {
-        document.getElementById('bmrTelemetryBadge').innerText = `BMR: ${Math.round(bmr).toLocaleString()} kcal`;
+        document.getElementById('bmrTelemetryBadge').innerText = `BMR: ${Math.round(bmr).toLocaleString()} kcal (${formulaUsed})`;
       }
       if (document.getElementById('tdeeTelemetryBadge')) {
         document.getElementById('tdeeTelemetryBadge').innerText = `TDEE: ${tdee.toLocaleString()} kcal`;
@@ -26133,6 +26232,101 @@ function stopGuidedCooldown() {
         const dP = Math.round(proteinGrams * 0.25);
         const dCal = Math.round(targetCals * 0.25);
         document.getElementById('mealDistD').innerText = `${dP}g P • ${dCal} kcal`;
+      }
+    }
+
+    // ==========================================
+    // DAILY SUPPLEMENT COMPLIANCE & PROTOCOL ENGINE (100X SCIENCE)
+    // ==========================================
+    const SUPPLEMENT_REGIMEN = [
+      { id: 'creatine', name: 'Creatine Monohydrate', dose: '5g with water', timing: 'Anytime / Post-Workout', tier: 'Tier 1' },
+      { id: 'whey', name: 'Whey Protein Isolate', dose: '1–2 scoops (25–50g)', timing: 'Post-Workout / Snack', tier: 'Tier 1' },
+      { id: 'omega3', name: 'Omega-3 Fish Oil / Algal', dose: '2,000mg EPA+DHA', timing: 'With Lunch / Dinner', tier: 'Tier 2' },
+      { id: 'vitamind', name: 'Vitamin D3 + K2', dose: '2,000–4,000 IU', timing: 'Morning Breakfast', tier: 'Tier 2' },
+      { id: 'magnesium', name: 'Magnesium Glycinate', dose: '300mg elemental', timing: '45m Before Sleep', tier: 'Tier 2' },
+      { id: 'b12', name: 'Vitamin B12 (Methylcobalamin)', dose: '1,500mcg', timing: 'Morning Breakfast', tier: 'Tier 2' },
+      { id: 'collagen', name: 'Hydrolyzed Collagen', dose: '10–15g with Vit C', timing: 'Morning Coffee / Shake', tier: 'Tier 2' },
+      { id: 'zinc', name: 'Zinc Picolinate', dose: '15mg with food', timing: 'With Lunch', tier: 'Tier 2' },
+      { id: 'ashwagandha', name: 'KSM-66 Ashwagandha', dose: '600mg extract', timing: 'Dinner / Pre-Bed', tier: 'Tier 2' }
+    ];
+
+    function getSupplementsDoneSet() {
+      try {
+        const raw = localStorage.getItem('gym_supplements_done');
+        return raw ? new Set(JSON.parse(raw)) : new Set();
+      } catch (e) {
+        return new Set();
+      }
+    }
+
+    function saveSupplementsDoneSet(set) {
+      try {
+        localStorage.setItem('gym_supplements_done', JSON.stringify(Array.from(set)));
+      } catch (e) {}
+    }
+
+    function toggleSupplementTaken(suppId) {
+      const set = getSupplementsDoneSet();
+      if (set.has(suppId)) {
+        set.delete(suppId);
+      } else {
+        set.add(suppId);
+        if (typeof SoundFX !== 'undefined' && SoundFX.playBeep) {
+          SoundFX.playBeep(988, 'triangle', 0.08, 0.28);
+        }
+      }
+      saveSupplementsDoneSet(set);
+      updateSupplementUI();
+    }
+
+    function resetDailySupplementCompliance() {
+      if (confirm("Reset today's supplement compliance checklist?")) {
+        localStorage.removeItem('gym_supplements_done');
+        updateSupplementUI();
+      }
+    }
+
+    function updateSupplementUI() {
+      const set = getSupplementsDoneSet();
+      let takenCount = 0;
+      const total = SUPPLEMENT_REGIMEN.length;
+
+      SUPPLEMENT_REGIMEN.forEach(supp => {
+        const isTaken = set.has(supp.id);
+        if (isTaken) takenCount++;
+
+        const btn = document.getElementById(`btn_supp_${supp.id}`);
+        const card = document.getElementById(`card_supp_${supp.id}`);
+        if (btn) {
+          btn.innerText = isTaken ? '✅ Taken' : '⭕ Mark Taken';
+          btn.style.background = isTaken ? 'rgba(16, 185, 129, 0.2)' : 'rgba(255, 255, 255, 0.06)';
+          btn.style.color = isTaken ? '#34d399' : '#94a3b8';
+          btn.style.borderColor = isTaken ? 'rgba(16, 185, 129, 0.4)' : 'rgba(255, 255, 255, 0.12)';
+        }
+        if (card) {
+          card.classList.toggle('supp-card-taken', isTaken);
+        }
+      });
+
+      const pct = Math.round((takenCount / total) * 100);
+      const statusEl = document.getElementById('suppComplianceStatus');
+      const barEl = document.getElementById('suppComplianceProgressBar');
+      if (statusEl) statusEl.innerText = `${takenCount} / ${total} Taken (${pct}%)`;
+      if (barEl) barEl.style.width = `${pct}%`;
+
+      // Render Quick Checklist Pills
+      const quickContainer = document.getElementById('suppQuickChecklist');
+      if (quickContainer) {
+        quickContainer.innerHTML = '';
+        SUPPLEMENT_REGIMEN.forEach(supp => {
+          const isTaken = set.has(supp.id);
+          const pill = document.createElement('button');
+          pill.type = 'button';
+          pill.className = `quick-supp-chip ${isTaken ? 'active' : ''}`;
+          pill.innerHTML = `${isTaken ? '✓' : '+'} ${supp.name.split(' ')[0]} <span style="font-size:0.65rem; opacity:0.8;">(${supp.dose.split(' ')[0]})</span>`;
+          pill.onclick = () => toggleSupplementTaken(supp.id);
+          quickContainer.appendChild(pill);
+        });
       }
     }
 
@@ -28633,7 +28827,8 @@ if (typeof window !== 'undefined') {
           { name: "Creatine Monohydrate (Micronized)", qty: "250g Tub", tip: "5g daily for ATP power & brain clarity" },
           { name: "Whey Protein Isolate", qty: "1 kg Tub", tip: "Rapid post-workout leucine spike" },
           { name: "Vitamin D3 (60k IU) + K2", qty: "1 Strip", tip: "Crucial for bone density & testosterone" },
-          { name: "Magnesium Glycinate (300mg)", qty: "1 Bottle", tip: "Deep slow-wave recovery before bed" }
+          { name: "Magnesium Glycinate (300mg)", qty: "1 Bottle", tip: "Deep slow-wave recovery before bed" },
+          { name: "KSM-66 Ashwagandha (600mg)", qty: "60 Capsules", tip: "Clinically proven cortisol reduction & VO2 max support" }
         ]},
         { cat: "✨ Skin Glow & Hair Follicle Bioactives", key: "skinhair", items: [
           { name: "Hydrolyzed Collagen Peptides (Type I & III)", qty: "300g Tub", tip: "10g daily with vitamin C increases skin procollagen & follicle matrix" },
@@ -28668,7 +28863,8 @@ if (typeof window !== 'undefined') {
           { name: "Creatine Monohydrate (Micronized)", qty: "250g Tub", tip: "5g daily for ATP energy and strength" },
           { name: "Whey Protein Isolate", qty: "1 kg Tub", tip: "Post-workout 30g pure leucine trigger" },
           { name: "Vitamin D3 + K2", qty: "1 Strip", tip: "Hormone and immune optimization" },
-          { name: "Magnesium Glycinate (300mg)", qty: "1 Bottle", tip: "Deep neuromuscular relaxation at night" }
+          { name: "Magnesium Glycinate (300mg)", qty: "1 Bottle", tip: "Deep neuromuscular relaxation at night" },
+          { name: "KSM-66 Ashwagandha (600mg)", qty: "60 Capsules", tip: "Clinically proven cortisol reduction & VO2 max support" }
         ]},
         { cat: "✨ Skin Glow & Hair Follicle Bioactives", key: "skinhair", items: [
           { name: "Hydrolyzed Collagen Peptides (or Eggshell Membrane)", qty: "300g Tub", tip: "Stimulates fibroblast hyaluronic acid & skin hydration" },
@@ -28703,7 +28899,8 @@ if (typeof window !== 'undefined') {
           { name: "Creatine Monohydrate (100% Plant-Safe)", qty: "250g Tub", tip: "Non-meat eaters see largest cognitive & strength leap" },
           { name: "Whey Isolate or Pea/Rice Protein Blend", qty: "1 kg Tub", tip: "Ensures 160g+ daily target is met effortlessly" },
           { name: "Vitamin B12 (Methylcobalamin 1500mcg)", qty: "1 Strip", tip: "Non-negotiable for nerve sheath & blood health" },
-          { name: "Magnesium Glycinate (300mg)", qty: "1 Bottle", tip: "Calms nervous system for deep restorative sleep" }
+          { name: "Magnesium Glycinate (300mg)", qty: "1 Bottle", tip: "Calms nervous system for deep restorative sleep" },
+          { name: "KSM-66 Ashwagandha (600mg)", qty: "60 Capsules", tip: "Clinically proven cortisol reduction & VO2 max support" }
         ]},
         { cat: "✨ Skin Glow & Hair Follicle Bioactives", key: "skinhair", items: [
           { name: "Plant Collagen Builder (Proline, Lysine & Silica)", qty: "300g Tub", tip: "Bamboo extract silica + amino building blocks for vegan collagen" },
@@ -29028,6 +29225,7 @@ if (typeof window !== 'undefined') {
       calculate1RM();
       renderVolumeChart();
       generateGroceryList();
+      updateSupplementUI();
       checkAchievements();
       initVoices();
       renderHeatmapGrid();
@@ -29040,6 +29238,16 @@ if (typeof window !== 'undefined') {
           setRIR: setSetRIR,
           getOverloadTip: getExerciseOverloadTip,
           estimateVelocity: (rir) => (0.15 + (rir * 0.16)).toFixed(2)
+        },
+        Nutrition: {
+          calculateMacros: calculateMacros,
+          switchDiet: switchDiet,
+          toggleMeal: toggleMealConsumed,
+          resetMeals: resetDailyMealCompliance,
+          toggleSupplement: toggleSupplementTaken,
+          resetSupplements: resetDailySupplementCompliance,
+          updateSupplements: updateSupplementUI,
+          getSupplements: () => SUPPLEMENT_REGIMEN
         },
         Persistence: {
           db: AethosDB,
@@ -29137,6 +29345,9 @@ if (typeof window !== 'undefined') {
       window.switchTraineeDetailTab = switchTraineeDetailTab;
       window.toggleMealConsumed = toggleMealConsumed;
       window.resetDailyMealCompliance = resetDailyMealCompliance;
+      window.toggleSupplementTaken = toggleSupplementTaken;
+      window.resetDailySupplementCompliance = resetDailySupplementCompliance;
+      window.updateSupplementUI = updateSupplementUI;
       window.filterGroceryCategory = filterGroceryCategory;
       window.clearCheckedGrocery = clearCheckedGrocery;
       window.addCustomGroceryItem = addCustomGroceryItem;
