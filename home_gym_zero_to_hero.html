@@ -12373,6 +12373,8 @@
               <button type="button" class="vis-mode-btn active" data-mode="bars" onclick="GymMusic.setVisualizerMode('bars')">📊 Bars</button>
               <button type="button" class="vis-mode-btn" data-mode="wave" onclick="GymMusic.setVisualizerMode('wave')">〰️ Wave</button>
               <button type="button" class="vis-mode-btn" data-mode="orbit" onclick="GymMusic.setVisualizerMode('orbit')">⭕ Orbit</button>
+              <button type="button" class="vis-mode-btn" data-mode="matrix" onclick="GymMusic.setVisualizerMode('matrix')">⚡ Matrix</button>
+              <button type="button" class="vis-mode-btn" data-mode="cyber_hex" onclick="GymMusic.setVisualizerMode('cyber_hex')">🛑 Hex</button>
             </div>
           </div>
 
@@ -13374,6 +13376,8 @@
         <button type="button" class="vis-mode-btn active" data-hudmode="bars" onclick="GymMusic.setVisualizerMode('bars')" title="Bars Spectrum" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">BARS</button>
         <button type="button" class="vis-mode-btn" data-hudmode="wave" onclick="GymMusic.setVisualizerMode('wave')" title="Oscilloscope Wave" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">WAVE</button>
         <button type="button" class="vis-mode-btn" data-hudmode="orbit" onclick="GymMusic.setVisualizerMode('orbit')" title="Cyber Pulse Orbit" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">ORBIT</button>
+        <button type="button" class="vis-mode-btn" data-hudmode="matrix" onclick="GymMusic.setVisualizerMode('matrix')" title="Sub-Bass Matrix Pillars" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">MATRIX</button>
+        <button type="button" class="vis-mode-btn" data-hudmode="cyber_hex" onclick="GymMusic.setVisualizerMode('cyber_hex')" title="Cyber Hexagonal Portal" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">HEX</button>
         <button type="button" class="btn-micro-step" onclick="toggleSetHudCadence()" id="btnSetHudTempoToggle" title="Toggle Cadence Metronome & Audio Ticks (Hotkey: T)" style="padding: 2px 7px; font-size: 0.65rem; font-weight: 800; border-radius: 5px; color: #f43f5e; border-color: rgba(244, 63, 94, 0.4); background: rgba(244, 63, 94, 0.12);">⏹ TEMPO &amp; TICKS</button>
         <button type="button" class="btn-micro-step" onclick="cycleSetHudTempoRate()" id="btnSetHudTempoSpeed" title="Rep Tempo Cadence (Brisk 2.4s / Dynamic 3.0s / Control 3.9s)" style="padding: 2px 6px; font-size: 0.65rem; font-weight: 800; border-radius: 5px; color: var(--amber);">⚡ 2.4s TEMPO</button>
         <button type="button" class="btn-micro-step" onclick="GymMusic.toggleBassBoost()" id="btnSetHudBass" title="Toggle Bass Boost" style="padding: 2px 6px; font-size: 0.65rem; font-weight: 800; border-radius: 5px;">⚡ BASS</button>
@@ -23756,14 +23760,20 @@ function stopGuidedCooldown() {
         secLeft--;
         updateTimerUI();
 
-        // 3-2-1 Audio Countdown Warning
+        // 3-2-1 Audio Countdown Warning & Dynamic Audio Ducking
         if (secLeft <= 3 && secLeft > 0) {
-          playTimerAudio('tick');
+          if (typeof GymMusic !== 'undefined' && GymMusic.isPlaying) {
+            GymMusic.duckVolume();
+          }
+          playTimerAudio('tick', secLeft);
         }
 
         if (secLeft <= 0) {
           clearInterval(timerInt);
           timerInt = null;
+          if (typeof GymMusic !== 'undefined' && GymMusic.isDucked) {
+            GymMusic.restoreVolume();
+          }
           onRestTimerComplete();
         }
       }, 1000);
@@ -23845,14 +23855,15 @@ function stopGuidedCooldown() {
       if (timerSoundEnabled) playTimerAudio('click');
     }
 
-    function playTimerAudio(type) {
+    function playTimerAudio(type, step = 1) {
       if (!timerSoundEnabled) return;
       if (typeof SoundFX === 'undefined') return;
 
       if (type === 'start') {
         SoundFX.playBeep(587.33, 'triangle', 0.1, 0.25);
       } else if (type === 'tick') {
-        SoundFX.playBeep(880, 'sine', 0.08, 0.35);
+        if (SoundFX.playCountdownRiser) SoundFX.playCountdownRiser(step);
+        else SoundFX.playBeep(880, 'sine', 0.08, 0.35);
       } else if (type === 'complete') {
         if (SoundFX.playRestTimerAlert) SoundFX.playRestTimerAlert();
         else SoundFX.playBeep(1046.50, 'triangle', 0.3, 0.5);
@@ -26370,6 +26381,14 @@ const GymMusic = {
       this.bassFilter.frequency.setValueAtTime(85, this.ctx.currentTime);
       this.bassFilter.gain.setValueAtTime(this.bassBoostActive ? 8.5 : 0, this.ctx.currentTime);
 
+      // Studio-Grade Mastering Dynamics Compressor (Punchy, Clean, Zero-Clipping)
+      this.compressor = this.ctx.createDynamicsCompressor();
+      this.compressor.threshold.setValueAtTime(-14, this.ctx.currentTime);
+      this.compressor.knee.setValueAtTime(12, this.ctx.currentTime);
+      this.compressor.ratio.setValueAtTime(4.5, this.ctx.currentTime);
+      this.compressor.attack.setValueAtTime(0.003, this.ctx.currentTime);
+      this.compressor.release.setValueAtTime(0.18, this.ctx.currentTime);
+
       if (this.ctx.createAnalyser) {
         this.analyser = this.ctx.createAnalyser();
         this.analyser.fftSize = 256;
@@ -26381,14 +26400,15 @@ const GymMusic = {
         this.duckGain.gain.setValueAtTime(1.0, this.ctx.currentTime);
       }
 
-      // Audio Graph: Synth/Media -> duckGain -> bassFilter -> masterGain -> analyser -> destination
+      // Audio Graph: Synth/Media -> duckGain -> bassFilter -> masterGain -> compressor -> analyser -> destination
       this.duckGain.connect(this.bassFilter);
       this.bassFilter.connect(this.masterGain);
+      this.masterGain.connect(this.compressor);
       if (this.analyser && this.analyser.connect) {
-        this.masterGain.connect(this.analyser);
+        this.compressor.connect(this.analyser);
         this.analyser.connect(this.ctx.destination);
       } else {
-        this.masterGain.connect(this.ctx.destination);
+        this.compressor.connect(this.ctx.destination);
       }
     }
 
@@ -26536,8 +26556,13 @@ const GymMusic = {
 
       targetCanvases.forEach(canvas => {
         const parent = canvas.parentElement;
-        const w = canvas.width = parent ? parent.clientWidth : 580;
-        const h = canvas.height = parent ? parent.clientHeight : 72;
+        const isFullScreenHud = (canvas.id === 'onScreenSetCanvas' && !canvas.closest('.docked'));
+        const w = canvas.width = (isFullScreenHud && parent && parent.clientWidth < 400)
+          ? window.innerWidth
+          : (parent ? (parent.clientWidth || 580) : 580);
+        const h = canvas.height = (isFullScreenHud && parent && parent.clientHeight < 50)
+          ? 120
+          : (parent ? (parent.clientHeight || 72) : 72);
         if (w === 0 || h === 0) return;
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
@@ -26556,8 +26581,6 @@ const GymMusic = {
           ctx.stroke();
           return;
         }
-
-        const isFullScreenHud = (canvas.id === 'onScreenSetCanvas' && !canvas.closest('.docked'));
 
         if (this.visualizerMode === 'bars') {
           // Dynamic bar count: fill entire width beautifully whether 300px or 2560px
@@ -26698,6 +26721,66 @@ const GymMusic = {
           }
           ctx.closePath();
           ctx.stroke();
+        } else if (this.visualizerMode === 'matrix') {
+          // Futuristic Cyber Matrix Digital Cascade & Mirror Pillars
+          const colWidth = isFullScreenHud ? 12 : 8;
+          const cols = Math.floor(w / colWidth);
+          const midY = h / 2;
+          const bassBoost = (bassAvg / 255) * 1.5;
+
+          for (let c = 0; c < cols; c++) {
+            const fIdx = Math.floor((c / cols) * (bufferLength * 0.75));
+            const val = freqData[fIdx] || 0;
+            const colHeight = (val / 255) * (h * 0.46) * (1 + bassBoost * 0.4);
+            const cx = c * colWidth;
+
+            // Mirror vertical columns (top & bottom from center)
+            const grad = ctx.createLinearGradient(0, midY - colHeight, 0, midY + colHeight);
+            grad.addColorStop(0, '#00f2fe');
+            grad.addColorStop(0.5, 'rgba(16, 185, 129, 0.85)');
+            grad.addColorStop(1, '#00f2fe');
+            ctx.fillStyle = grad;
+
+            ctx.fillRect(cx + 1, midY - colHeight, colWidth - 2, colHeight * 2);
+
+            // Digital matrix cap sparks
+            if (val > 140) {
+              ctx.fillStyle = '#ffffff';
+              ctx.shadowColor = '#00f2fe';
+              ctx.shadowBlur = 6;
+              ctx.fillRect(cx + 1, midY - colHeight - 2, colWidth - 2, 2);
+              ctx.fillRect(cx + 1, midY + colHeight, colWidth - 2, 2);
+              ctx.shadowBlur = 0;
+            }
+          }
+        } else if (this.visualizerMode === 'cyber_hex') {
+          // Cyber Hexagonal Portal & Sonic Shockwave Rings
+          const cx = w / 2;
+          const cy = h / 2;
+          const maxR = Math.min(w, h) * 0.44;
+          const bassRatio = bassAvg / 255;
+          const ringCount = isFullScreenHud ? 5 : 3;
+
+          for (let r = 1; r <= ringCount; r++) {
+            const ringR = (maxR / ringCount) * r * (0.8 + bassRatio * 0.35);
+            ctx.beginPath();
+            for (let side = 0; side < 6; side++) {
+              const ang = (side / 6) * Math.PI * 2 + (Date.now() * 0.0008 * (r % 2 === 0 ? 1 : -1));
+              const fIdx = Math.floor((side / 6) * 32);
+              const hexAmp = (freqData[fIdx] || 0) / 255 * (isFullScreenHud ? 18 : 8);
+              const hx = cx + Math.cos(ang) * (ringR + hexAmp);
+              const hy = cy + Math.sin(ang) * (ringR + hexAmp);
+              if (side === 0) ctx.moveTo(hx, hy);
+              else ctx.lineTo(hx, hy);
+            }
+            ctx.closePath();
+            ctx.strokeStyle = r === ringCount ? '#00f2fe' : (r % 2 === 0 ? '#ec4899' : '#a855f7');
+            ctx.lineWidth = isFullScreenHud ? (r === ringCount ? 3 : 1.8) : 1.5;
+            ctx.shadowColor = '#00f2fe';
+            ctx.shadowBlur = isFullScreenHud ? (bassRatio * 16) : 6;
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+          }
         }
       });
     };
@@ -26979,23 +27062,40 @@ const GymMusic = {
   // Procedural Drum & Synth Oscillators
   playKick(time, punch = 1.0) {
     if (!this.ctx) return;
-    const osc = this.ctx.createOscillator();
-    const gain = this.ctx.createGain();
-    osc.connect(gain);
-    gain.connect(this.duckGain);
+    try {
+      // Body oscillator (Pitch envelope plunge for deep sub thump)
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.frequency.setValueAtTime(155 * punch, time);
+      if (osc.frequency.exponentialRampToValueAtTime) {
+        osc.frequency.exponentialRampToValueAtTime(38, time + 0.08);
+      }
+      gain.gain.setValueAtTime(0.95, time);
+      if (gain.gain.exponentialRampToValueAtTime) {
+        gain.gain.exponentialRampToValueAtTime(0.001, time + 0.28);
+      }
+      osc.connect(gain);
+      gain.connect(this.duckGain);
+      osc.start(time);
+      osc.stop(time + 0.28);
 
-    osc.frequency.setValueAtTime(145 * punch, time);
-    if (osc.frequency.exponentialRampToValueAtTime) {
-      osc.frequency.exponentialRampToValueAtTime(36, time + 0.08);
-    }
-
-    gain.gain.setValueAtTime(0.9, time);
-    if (gain.gain.exponentialRampToValueAtTime) {
-      gain.gain.exponentialRampToValueAtTime(0.001, time + 0.26);
-    }
-
-    osc.start(time);
-    osc.stop(time + 0.26);
+      // Attack click transient (High-frequency punch for chest impact)
+      const clickOsc = this.ctx.createOscillator();
+      const clickGain = this.ctx.createGain();
+      clickOsc.type = 'triangle';
+      clickOsc.frequency.setValueAtTime(800, time);
+      if (clickOsc.frequency.exponentialRampToValueAtTime) {
+        clickOsc.frequency.exponentialRampToValueAtTime(80, time + 0.025);
+      }
+      clickGain.gain.setValueAtTime(0.45 * punch, time);
+      if (clickGain.gain.exponentialRampToValueAtTime) {
+        clickGain.gain.exponentialRampToValueAtTime(0.001, time + 0.03);
+      }
+      clickOsc.connect(clickGain);
+      clickGain.connect(this.duckGain);
+      clickOsc.start(time);
+      clickOsc.stop(time + 0.03);
+    } catch(e) {}
   },
 
   play808Sub(freq, time, dur = 0.35) {
@@ -27526,14 +27626,18 @@ if (typeof window !== 'undefined') {
 
 
     // ==========================================
-    // ZERO-DEPENDENCY WEB AUDIO API SOUND ENGINE
+    // ZERO-DEPENDENCY WEB AUDIO API SOUND ENGINE (100X ACOUSTICS)
     // ==========================================
     const SoundFX = {
       ctx: null,
       init() {
         if (!this.ctx) {
-          const AudioCtx = window.AudioContext || window.webkitAudioContext;
-          if (AudioCtx) this.ctx = new AudioCtx();
+          if (typeof GymMusic !== 'undefined' && GymMusic.ctx) {
+            this.ctx = GymMusic.ctx;
+          } else {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (AudioCtx) this.ctx = new AudioCtx();
+          }
         }
         if (this.ctx && this.ctx.state === 'suspended') {
           this.ctx.resume();
@@ -27557,59 +27661,135 @@ if (typeof window !== 'undefined') {
         } catch(e) {}
       },
       playSetComplete() {
-        setTimeout(() => this.playBeep(523.25, 'triangle', 0.14, 0.35), 0);
-        setTimeout(() => this.playBeep(659.25, 'triangle', 0.14, 0.35), 110);
-        setTimeout(() => this.playBeep(783.99, 'triangle', 0.28, 0.40), 220);
+        try {
+          this.init();
+          if (!this.ctx) return;
+          const chord = [523.25, 659.25, 783.99, 1046.50]; // C Major Triumph chord
+          chord.forEach((f, idx) => {
+            setTimeout(() => {
+              try {
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'triangle';
+                const t = this.ctx.currentTime;
+                osc.frequency.setValueAtTime(f, t);
+                gain.gain.setValueAtTime(0.32, t);
+                gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.38);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start(t);
+                osc.stop(t + 0.38);
+              } catch(e) {}
+            }, idx * 95);
+          });
+        } catch(e) {}
       },
       playRestTimerAlert() {
-        this.playBeep(880, 'sine', 0.18, 0.40);
-        setTimeout(() => this.playBeep(880, 'sine', 0.28, 0.40), 180);
+        try {
+          this.init();
+          if (!this.ctx) return;
+          // Triumphant dual-harmonic chime + low gong resonance
+          const t = this.ctx.currentTime;
+          [880, 1318.51, 1760].forEach((freq, i) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(freq, t + i * 0.08);
+            gain.gain.setValueAtTime(0.36, t + i * 0.08);
+            gain.gain.exponentialRampToValueAtTime(0.0001, t + i * 0.08 + 0.35);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(t + i * 0.08);
+            osc.stop(t + i * 0.08 + 0.35);
+          });
+        } catch(e) {}
+      },
+      playCountdownRiser(stepNumber = 1) {
+        try {
+          this.init();
+          if (!this.ctx) return;
+          const t = this.ctx.currentTime;
+          const baseFreq = stepNumber === 1 ? 1046.5 : (stepNumber === 2 ? 880 : 740);
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(baseFreq * 0.85, t);
+          osc.frequency.exponentialRampToValueAtTime(baseFreq, t + 0.09);
+          gain.gain.setValueAtTime(0.38, t);
+          gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.16);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(t);
+          osc.stop(t + 0.16);
+        } catch(e) {}
       },
       playFanfare() {
-        const notes = [523.25, 659.25, 783.99, 1046.50];
-        notes.forEach((f, i) => setTimeout(() => this.playBeep(f, 'triangle', 0.28, 0.35), i * 140));
+        try {
+          this.init();
+          if (!this.ctx) return;
+          const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51];
+          notes.forEach((f, i) => {
+            setTimeout(() => {
+              this.playBeep(f, 'triangle', 0.28, 0.38);
+            }, i * 110);
+          });
+        } catch(e) {}
       },
       playTempoTick(typeOrHigh = false, customGain = null) {
         try {
           this.init();
           if (!this.ctx) return;
-          let freq = 659.25;
-          let wave = 'triangle';
-          let dur = 0.055;
-          let vol = customGain || 0.38;
+          const t = this.ctx.currentTime;
 
           if (typeOrHigh === true || typeOrHigh === 'up' || typeOrHigh === 'high') {
-            freq = 1174.66; // D6 - Crisp bright chime for explosive drive
-            wave = 'triangle';
-            dur = 0.09;
-            vol = customGain || 0.48;
+            // Explosive Concentric Drive: Dual crystal chime (D6 + F#6 harmonic shimmer)
+            const osc1 = this.ctx.createOscillator();
+            const osc2 = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc1.type = 'triangle';
+            osc2.type = 'sine';
+            osc1.frequency.setValueAtTime(1174.66, t); // D6
+            osc2.frequency.setValueAtTime(1479.98, t); // F#6
+            gain.gain.setValueAtTime(customGain || 0.44, t);
+            gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.085);
+            osc1.connect(gain);
+            osc2.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc1.start(t);
+            osc2.start(t);
+            osc1.stop(t + 0.085);
+            osc2.stop(t + 0.085);
           } else if (typeOrHigh === 'peak' || typeOrHigh === 'hold') {
-            freq = 880; // A5 - Peak contraction
-            dur = 0.07;
-            vol = customGain || 0.42;
+            // Isometric Peak Contraction: Pure resonant acoustic bell (A5)
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(880, t); // A5
+            gain.gain.setValueAtTime(customGain || 0.42, t);
+            gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.075);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(t);
+            osc.stop(t + 0.075);
           } else {
-            // Down / Eccentric / Metronome woodblock click
-            freq = 659.25; // E5
-            wave = 'triangle';
-            dur = 0.05;
-            vol = customGain || 0.36;
+            // Controlled Eccentric Negative: Punchy wooden rimshot / woodblock click (E5 -> plunge)
+            const osc = this.ctx.createOscillator();
+            const filter = this.ctx.createBiquadFilter();
+            const gain = this.ctx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(740, t);
+            osc.frequency.exponentialRampToValueAtTime(320, t + 0.045);
+            filter.type = 'bandpass';
+            filter.frequency.setValueAtTime(850, t);
+            filter.Q.value = 3.0;
+            gain.gain.setValueAtTime(customGain || 0.40, t);
+            gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.05);
+            osc.connect(filter);
+            filter.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(t);
+            osc.stop(t + 0.05);
           }
-
-          const osc = this.ctx.createOscillator();
-          const gain = this.ctx.createGain();
-          osc.type = wave;
-          const t = this.ctx.currentTime;
-          osc.frequency.setValueAtTime(freq, t);
-          if (typeOrHigh === 'down' || typeOrHigh === false) {
-            // Fast pitch plunge simulates a punchy rimshot/woodblock click
-            osc.frequency.exponentialRampToValueAtTime(440, t + dur);
-          }
-          gain.gain.setValueAtTime(vol, t);
-          gain.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-          osc.connect(gain);
-          gain.connect(this.ctx.destination);
-          osc.start(t);
-          osc.stop(t + dur);
         } catch(e) {}
       }
     };
