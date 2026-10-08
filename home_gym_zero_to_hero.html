@@ -9315,6 +9315,392 @@
     .tempo-circle {
       box-shadow: 0 0 30px rgba(56, 189, 248, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
     }
+
+    /* ==========================================================================
+       ENTERTAINMENT & INTERACTIVE GAMIFICATION SUITE (ULTRACODE)
+       ========================================================================== */
+    
+    /* 1. Global FX Canvas */
+    #globalFxCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 999999;
+    }
+
+    /* 2. Header Interactive Triggers */
+    .btn-loot-crate-trigger {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.22) 0%, rgba(217, 119, 6, 0.25) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.55);
+      color: #fbbf24;
+      padding: 5px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 0.76rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      position: relative;
+      box-shadow: 0 0 14px rgba(245, 158, 11, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-loot-crate-trigger:hover {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.35) 0%, rgba(217, 119, 6, 0.4) 100%);
+      border-color: #fbbf24;
+      box-shadow: 0 0 22px rgba(245, 158, 11, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      transform: translateY(-1px) scale(1.03);
+    }
+    .loot-dot-pulse {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #fbbf24;
+      box-shadow: 0 0 8px #fbbf24;
+      animation: beaconPulse 1.5s infinite;
+    }
+
+    .btn-hype-deck-trigger {
+      background: linear-gradient(135deg, rgba(244, 63, 94, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%);
+      border: 1px solid rgba(244, 63, 94, 0.5);
+      color: #fda4af;
+      padding: 5px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 0.76rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 0 14px rgba(244, 63, 94, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-hype-deck-trigger:hover {
+      background: linear-gradient(135deg, rgba(244, 63, 94, 0.35) 0%, rgba(168, 85, 247, 0.35) 100%);
+      border-color: #f43f5e;
+      color: #fff;
+      box-shadow: 0 0 22px rgba(244, 63, 94, 0.45);
+      transform: translateY(-1px) scale(1.03);
+    }
+
+    /* 3. Shadow Titan Boss Battle Arena */
+    .boss-battle-card {
+      background: linear-gradient(160deg, rgba(28, 16, 32, 0.88) 0%, rgba(14, 10, 22, 0.96) 100%);
+      border: 1.5px solid rgba(244, 63, 94, 0.45);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 20px 50px -10px rgba(0, 0, 0, 0.8), 0 0 35px -8px rgba(244, 63, 94, 0.25);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.25s ease;
+    }
+    .boss-battle-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #f43f5e, #fbbf24, #a855f7);
+    }
+    .boss-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .boss-identity-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .boss-avatar-frame {
+      width: 58px;
+      height: 58px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(244, 63, 94, 0.25) 0%, rgba(30, 15, 30, 0.95) 100%);
+      border: 1.5px solid rgba(244, 63, 94, 0.6);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px rgba(244, 63, 94, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      position: relative;
+      flex-shrink: 0;
+      animation: bossPulse 3s infinite alternate ease-in-out;
+    }
+    @keyframes bossPulse {
+      0% { transform: scale(1); box-shadow: 0 0 18px rgba(244, 63, 94, 0.3); }
+      100% { transform: scale(1.05); box-shadow: 0 0 30px rgba(244, 63, 94, 0.6); }
+    }
+    .boss-avatar-frame.boss-hit-shake {
+      animation: bossDamageShake 0.4s ease-in-out;
+    }
+    @keyframes bossDamageShake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-6px) rotate(-3deg); filter: brightness(1.8); }
+      40% { transform: translateX(6px) rotate(3deg); filter: brightness(2); }
+      60% { transform: translateX(-4px) rotate(-2deg); }
+      80% { transform: translateX(4px) rotate(2deg); }
+    }
+    .boss-sprite-icon {
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+    .boss-level-tag {
+      font-size: 0.58rem;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      color: #fda4af;
+      text-transform: uppercase;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 1px 4px;
+      border-radius: 3px;
+      margin-top: 2px;
+    }
+    .boss-meta-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 3px;
+    }
+    .boss-phase-badge {
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--amber);
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+    .boss-difficulty-badge {
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: #f43f5e;
+      background: rgba(244, 63, 94, 0.15);
+      border: 1px solid rgba(244, 63, 94, 0.35);
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+    .boss-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+    .boss-flavor-text {
+      font-size: 0.78rem;
+      color: #94a3b8;
+      font-style: italic;
+      margin: 3px 0 0;
+    }
+    .boss-rewards-cluster {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .boss-reward-pill {
+      font-size: 0.74rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .boss-reward-pill.xp {
+      background: rgba(168, 85, 247, 0.15);
+      border: 1px solid var(--purple);
+      color: #d8b4fe;
+    }
+    .boss-reward-pill.loot {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid var(--cyan);
+      color: #7dd3fc;
+    }
+    .btn-boss-challenge {
+      background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 7px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 0 16px rgba(244, 63, 94, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      transition: all 0.2s ease;
+    }
+    .btn-boss-challenge:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 0 25px rgba(244, 63, 94, 0.6);
+    }
+    .boss-health-system {
+      background: rgba(9, 6, 16, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+    .boss-health-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+    .boss-hp-label {
+      color: #fda4af;
+      letter-spacing: 0.5px;
+    }
+    .boss-hp-counter {
+      color: #fff;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .boss-hp-track {
+      height: 14px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 99px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .boss-hp-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ef4444, #f43f5e, #fbbf24);
+      border-radius: 99px;
+      transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 0 12px rgba(244, 63, 94, 0.6);
+      position: relative;
+      z-index: 2;
+    }
+    .boss-damage-ghost {
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 99px;
+      transition: width 0.9s ease;
+      z-index: 1;
+    }
+    .boss-battle-tips {
+      margin-top: 8px;
+      font-size: 0.74rem;
+      color: #94a3b8;
+      line-height: 1.4;
+    }
+
+    /* 4. Daily Mystery Loot Crate Modal */
+    .loot-box-3d {
+      width: 120px;
+      height: 120px;
+      margin: 16px auto;
+      font-size: 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.25s ease;
+      filter: drop-shadow(0 0 25px rgba(245, 158, 11, 0.5));
+    }
+    .loot-box-3d:hover {
+      transform: scale(1.12) rotate(3deg);
+    }
+    .loot-box-3d.crate-rumble {
+      animation: crateRumbleAnim 0.7s infinite alternate ease-in-out;
+    }
+    @keyframes crateRumbleAnim {
+      0% { transform: scale(1.05) rotate(-4deg); filter: drop-shadow(0 0 35px rgba(245, 158, 11, 0.8)); }
+      100% { transform: scale(1.15) rotate(4deg); filter: drop-shadow(0 0 50px rgba(244, 63, 94, 0.9)); }
+    }
+
+    /* 5. Coach Hype Soundboard Deck */
+    .hype-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 16px 0;
+    }
+    @media (max-width: 600px) {
+      .hype-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .btn-hype-pad {
+      background: linear-gradient(145deg, rgba(22, 34, 62, 0.85) 0%, rgba(13, 21, 40, 0.95) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 16px 12px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 8px 20px rgba(0, 0, 0, 0.4);
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-hype-pad:hover {
+      transform: translateY(-3px) scale(1.03);
+      border-color: var(--cyan);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6), 0 0 20px rgba(56, 189, 248, 0.35);
+    }
+    .btn-hype-pad:active {
+      transform: scale(0.95) !important;
+    }
+    .hype-pad-icon {
+      font-size: 1.8rem;
+    }
+    .hype-pad-title {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    .hype-pad-sub {
+      font-size: 0.66rem;
+      color: var(--text-dim);
+    }
+
+    /* 6. Live Tap-to-Count Rep Clicker */
+    .live-rep-clicker-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      background: rgba(10, 16, 32, 0.7);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 12px;
+      padding: 14px;
+      margin: 12px 0;
+    }
+    .btn-rep-clicker {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0284c7 0%, #2563eb 50%, #7c3aed 100%);
+      border: 2px solid rgba(255, 255, 255, 0.35);
+      color: #fff;
+      font-size: 1.6rem;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 25px rgba(37, 99, 235, 0.5), inset 0 2px 0 rgba(255, 255, 255, 0.4);
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+      user-select: none;
+    }
+    .btn-rep-clicker:active {
+      transform: scale(0.9) !important;
+      box-shadow: 0 0 40px rgba(0, 242, 254, 0.8), inset 0 0 10px #fff;
+    }
   </style>
 </head>
 <body>
@@ -9428,6 +9814,17 @@
           <span style="color: var(--cyan);">🔍</span>
           <span style="font-family: inherit; font-size: 0.72rem; color: var(--text-muted);">Search</span>
           <kbd style="background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; padding: 1px 5px; border-radius: 4px; color: var(--cyan);">⌘K</kbd>
+        </button>
+
+        <!-- Interactive Daily Mystery Loot Crate Trigger -->
+        <button type="button" class="btn-loot-crate-trigger" onclick="openLootCrateModal()" title="Open Daily Mystery Supply Crate (XP Boost, Auras, Loot)">
+          <span>🎁</span> <span id="headerLootText">Loot Crate</span>
+          <span class="loot-dot-pulse" id="lootDotPulse"></span>
+        </button>
+
+        <!-- Interactive Coach Hype Soundboard Trigger -->
+        <button type="button" class="btn-hype-deck-trigger" onclick="toggleHypeDeckModal()" title="Open Coach Motivation & Soundboard Deck">
+          <span>🔥</span> <span>Hype Deck</span>
         </button>
 
         <!-- Unified Quick Tools & Action Menu -->
@@ -9669,6 +10066,49 @@
           <button class="nav-pill-btn" onclick="event.stopPropagation(); switchView('milestonesView')" style="margin-top: 4px; padding: 4px 10px; font-size: 0.75rem; border-color: rgba(168,85,247,0.4); color: var(--purple);">
             View 30 Milestones Hub ↗
           </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- RPG SHADOW TITAN BOSS BATTLE ARENA -->
+    <section class="container">
+      <div class="boss-battle-card" id="bossBattleCard">
+        <div class="boss-header-row">
+          <div class="boss-identity-wrap">
+            <div class="boss-avatar-frame" id="bossAvatarFrame">
+              <span class="boss-sprite-icon" id="bossSpriteIcon">🗿</span>
+              <span class="boss-level-tag" id="bossLevelTag">BOSS LVL 1</span>
+            </div>
+            <div>
+              <div class="boss-meta-line">
+                <span class="boss-phase-badge" id="bossPhaseBadge">PHASE 1 TITAN</span>
+                <span class="boss-difficulty-badge">WEEKLY RAID</span>
+              </div>
+              <h3 class="boss-title" id="bossTitle">Goliathon the Iron Sentinel</h3>
+              <p class="boss-flavor-text" id="bossFlavorText">"No mortal builds tendon armor without first enduring my compressive trial."</p>
+            </div>
+          </div>
+          <div class="boss-rewards-cluster">
+            <span class="boss-reward-pill xp" id="bossXpReward">🏆 +500 XP Bounty</span>
+            <span class="boss-reward-pill loot">🗡️ Boss Slayer Relic</span>
+            <button type="button" class="btn-boss-challenge" onclick="testBossAttack(event)" id="btnBossAttack" title="Strike the Boss with your daily workout volume!">
+              ⚔️ Strike Titan (-Vol DMG)
+            </button>
+          </div>
+        </div>
+
+        <div class="boss-health-system">
+          <div class="boss-health-meta">
+            <span class="boss-hp-label">TITAN HEALTH INTEGRITY:</span>
+            <span class="boss-hp-counter" id="bossHpText">24,500 / 30,000 HP (81.7%)</span>
+          </div>
+          <div class="boss-hp-track">
+            <div class="boss-hp-fill" id="bossHpFill" style="width: 81.7%;"></div>
+            <div class="boss-damage-ghost" id="bossDamageGhost" style="width: 81.7%;"></div>
+          </div>
+          <div class="boss-battle-tips">
+            <span>⚔️ <strong>How to Damage:</strong> Every set logged deals kinetic damage equal to Weight &times; Reps. Bodyweight exercises deal 150 DMG per set. Complete today's workout to deal a <strong>Critical 2,000 DMG Overload!</strong></span>
+          </div>
         </div>
       </div>
     </section>
@@ -14387,6 +14827,21 @@
             </div>
           </div>
 
+          <!-- TACTILE TAP-TO-COUNT REP CLICKER -->
+          <div class="live-rep-clicker-wrap" id="liveRepClickerDock">
+            <div style="text-align: center;">
+              <div style="font-size: 0.72rem; color: var(--cyan); font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">Live Rep Counter</div>
+              <div style="font-size: 1.8rem; font-weight: 900; color: #fff; font-family: 'JetBrains Mono';" id="liveTapRepCount">0 <span style="font-size: 0.9rem; color: var(--text-dim); font-weight: 600;">/ 12</span></div>
+            </div>
+            <button type="button" class="btn-rep-clicker" onclick="onTapRepClicker(event)" id="btnLiveTapRep" title="Tap every rep or press Spacebar">
+              👆 +1
+            </button>
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <button type="button" class="btn-micro-step" onclick="resetTapRepCounter()" style="padding: 4px 10px; font-size: 0.72rem;">↺ Reset</button>
+              <button type="button" class="btn-micro-step" onclick="logRepsFromClicker()" style="background: var(--emerald); color: #000; font-weight: 800; padding: 4px 10px; font-size: 0.72rem;">✓ Save</button>
+            </div>
+          </div>
+
           <!-- SET LOGGING TABLE -->
           <table class="hud-set-table">
             <thead>
@@ -14535,6 +14990,101 @@
       <span id="floatMarkIcon">✓</span> <span id="floatMarkText">Complete Day</span>
     </button>
   </div>
+
+  <!-- MODAL: DAILY MYSTERY LOOT CRATE (REWARD DROP) -->
+  <div id="lootCrateModal" class="app-modal" onclick="closeModalOnBackdrop(event, 'lootCrateModal')">
+    <div class="modal-box" style="max-width: 480px; text-align: center; border-color: var(--amber); box-shadow: 0 0 50px rgba(245, 158, 11, 0.4);">
+      <div class="modal-header" style="justify-content: center; position: relative;">
+        <div class="modal-title" style="color: #fbbf24; font-size: 1.25rem;">🎁 DAILY ATHLETE SUPPLY CRATE</div>
+        <button class="modal-close" onclick="closeModal('lootCrateModal')" style="position: absolute; right: 14px; top: 14px;">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 24px 20px;">
+        <div class="loot-box-3d" id="lootBox3d" onclick="openDailyLootCrate()">
+          🎁
+        </div>
+        <div id="lootStatusHeading" style="font-size: 1.1rem; font-weight: 800; color: #fff; margin-bottom: 6px;">
+          Tap Crate to Crack Open
+        </div>
+        <p style="font-size: 0.82rem; color: #94a3b8; max-width: 360px; margin: 0 auto 16px;" id="lootSubtext">
+          Conquer your consistency! Drops daily bonus XP, cosmetic aura titles, secret soundtracks, or legendary motivational wisdom.
+        </p>
+
+        <!-- Unlocked Reward Card Display -->
+        <div id="lootRewardDisplay" style="display: none; background: rgba(0,0,0,0.5); border: 1.5px solid var(--amber); border-radius: 12px; padding: 16px; margin: 16px 0; animation: appViewEnter 0.3s ease;">
+          <div style="font-size: 2.2rem; margin-bottom: 4px;" id="lootRewardIcon">🌟</div>
+          <div style="font-size: 1.05rem; font-weight: 800; color: #fff;" id="lootRewardTitle">+150 BONUS XP CLAIMED!</div>
+          <div style="font-size: 0.82rem; color: #cbd5e1; margin-top: 6px;" id="lootRewardDesc">Neural energy surge added to your Trainee XP passport.</div>
+        </div>
+
+        <div style="display: flex; gap: 8px; justify-content: center; margin-top: 14px;">
+          <button type="button" class="btn-live-session" id="btnOpenCrateAction" onclick="openDailyLootCrate()" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #000; font-weight: 900; font-size: 0.95rem; padding: 12px 28px; box-shadow: 0 0 25px rgba(245, 158, 11, 0.4);">
+            🔓 Crack Open Today's Crate
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: COACH HYPE SOUNDBOARD & MOTIVATION DECK -->
+  <div id="hypeDeckModal" class="app-modal" onclick="closeModalOnBackdrop(event, 'hypeDeckModal')">
+    <div class="modal-box" style="max-width: 560px; border-color: rgba(244, 63, 94, 0.6); box-shadow: 0 0 50px rgba(244, 63, 94, 0.35);">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 1.3rem;">🔥</span>
+          <div class="modal-title" style="color: #fff;">COACH HYPE SOUNDBOARD &amp; MOTIVATION</div>
+        </div>
+        <button class="modal-close" onclick="closeModal('hypeDeckModal')">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 18px;">
+        <p style="font-size: 0.8rem; color: #94a3b8; margin: 0 0 12px;">
+          Instant neural audio stimulation during grueling sets. Tap any button to fire off high-impact acoustic drops &amp; coach cues:
+        </p>
+
+        <div class="hype-grid">
+          <button type="button" class="btn-hype-pad" onclick="playHypeAudio('beast')">
+            <span class="hype-pad-icon">💥</span>
+            <span class="hype-pad-title">BEAST MODE</span>
+            <span class="hype-pad-sub">Heavy Sub-Bass Impact</span>
+          </button>
+          <button type="button" class="btn-hype-pad" onclick="playHypeAudio('lightweight')">
+            <span class="hype-pad-icon">⚡</span>
+            <span class="hype-pad-title">LIGHT WEIGHT!</span>
+            <span class="hype-pad-sub">Ronnie Coleman Hype</span>
+          </button>
+          <button type="button" class="btn-hype-pad" onclick="playHypeAudio('stayhard')">
+            <span class="hype-pad-icon">🛡️</span>
+            <span class="hype-pad-title">STAY HARD</span>
+            <span class="hype-pad-sub">War Drums &amp; Grit</span>
+          </button>
+          <button type="button" class="btn-hype-pad" onclick="playHypeAudio('focus')">
+            <span class="hype-pad-icon">🧠</span>
+            <span class="hype-pad-title">LASER FOCUS</span>
+            <span class="hype-pad-sub">432Hz Binaural Pulse</span>
+          </button>
+          <button type="button" class="btn-hype-pad" onclick="playHypeAudio('victory')">
+            <span class="hype-pad-icon">👑</span>
+            <span class="hype-pad-title">TRIUMPH</span>
+            <span class="hype-pad-sub">Royal Stadium Chime</span>
+          </button>
+          <button type="button" class="btn-hype-pad" onclick="playHypeAudio('gong')">
+            <span class="hype-pad-icon">🔔</span>
+            <span class="hype-pad-title">ZEN GONG</span>
+            <span class="hype-pad-sub">Tibetan Temple Bowl</span>
+          </button>
+        </div>
+
+        <div style="background: rgba(0,0,0,0.3); border-radius: 8px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: #cbd5e1;">
+          <span>🎙️ <strong>Audio Engine:</strong> 100% Offline Web Audio DSP Synthesis</span>
+          <button type="button" class="btn-micro-step" onclick="fireVictoryConfetti()" style="color: var(--cyan); border-color: rgba(56, 189, 248, 0.4);">
+            ✨ Confetti Shower
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GLOBAL FULLSCREEN CANVAS PARTICLE & CONFETTI ENGINE -->
+  <canvas id="globalFxCanvas"></canvas>
 
   <script>
     // ==========================================
@@ -20050,6 +20600,14 @@
         btn.innerText = '✓ Logged';
         playAudioTone(587.33, 'triangle', 0.25); // chime
 
+        // Deal kinetic damage to Shadow Titan Raid Boss
+        if (typeof BossBattleEngine !== 'undefined' && BossBattleEngine.dealDamage) {
+          const wtVal = parseFloat(loggedSetData[key].wt) || 20;
+          const repVal = parseInt(loggedSetData[key].reps, 10) || 10;
+          const hitDamage = Math.max(50, Math.round(wtVal * repVal));
+          BossBattleEngine.dealDamage(hitDamage, 'Set Conquered');
+        }
+
         // Robust multi-criterion final set detection
         const plan = getDayPlan(setDay);
         const planAllDone = checkAllWorkoutSetsDone(setDay);
@@ -20081,6 +20639,12 @@
             SoundFX.playFanfare();
           } else {
             playAudioTone(523.25, 'triangle', 0.4);
+          }
+          if (typeof CanvasFX !== 'undefined' && CanvasFX.confetti) {
+            CanvasFX.confetti({ count: 180 });
+          }
+          if (typeof BossBattleEngine !== 'undefined' && BossBattleEngine.dealDamage) {
+            BossBattleEngine.dealDamage(2500, `Day ${setDay} Final Conquest!`);
           }
           triggerHaptic([100, 50, 100, 50, 200]);
           renderActiveDay(setDay, false);
@@ -24974,6 +25538,12 @@ function stopGuidedCooldown() {
         localStorage.setItem(getProfileKey('gym_cooldown_done'), JSON.stringify(Array.from(cooldownDoneDays)));
         playAudioTone(523.25, 'triangle', 0.3);
         triggerHaptic([60, 40, 60]);
+        if (typeof CanvasFX !== 'undefined' && CanvasFX.confetti) {
+          CanvasFX.confetti({ count: 120 });
+        }
+        if (typeof BossBattleEngine !== 'undefined' && BossBattleEngine.dealDamage) {
+          BossBattleEngine.dealDamage(1500, `Day ${d} Completion`);
+        }
         speakAnnouncement(`Congratulations on completing Day ${d}! Keep going!`);
         showCelebrationBanner('📅 DAY MARKED GREEN IN CALENDAR!', `Day ${d} completed and glowing emerald green in your 365 Calendar & Heatmap!`);
       }
@@ -29279,8 +29849,596 @@ if (typeof window !== 'undefined') {
             osc.stop(t + 0.05);
           }
         } catch(e) {}
+      },
+      playBossHit() {
+        try {
+          this.init();
+          if (!this.ctx) return;
+          const t = this.ctx.currentTime;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(140, t);
+          osc.frequency.exponentialRampToValueAtTime(32, t + 0.18);
+          gain.gain.setValueAtTime(0.5, t);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + 0.22);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(t);
+          osc.stop(t + 0.22);
+        } catch(e) {}
+      },
+      playBossDefeated() {
+        try {
+          this.init();
+          if (!this.ctx) return;
+          const triumphNotes = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99, 1046.50];
+          triumphNotes.forEach((freq, idx) => {
+            setTimeout(() => {
+              this.playBeep(freq, 'triangle', 0.45, 0.4);
+            }, idx * 100);
+          });
+        } catch(e) {}
+      },
+      playCrateOpen() {
+        try {
+          this.init();
+          if (!this.ctx) return;
+          const t = this.ctx.currentTime;
+          [523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98].forEach((f, i) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(f, t + i * 0.06);
+            gain.gain.setValueAtTime(0.35, t + i * 0.06);
+            gain.gain.exponentialRampToValueAtTime(0.0001, t + i * 0.06 + 0.4);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(t + i * 0.06);
+            osc.stop(t + i * 0.06 + 0.4);
+          });
+        } catch(e) {}
+      },
+      playRepClick() {
+        try {
+          this.init();
+          if (!this.ctx) return;
+          const t = this.ctx.currentTime;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(1200, t);
+          osc.frequency.exponentialRampToValueAtTime(450, t + 0.035);
+          gain.gain.setValueAtTime(0.42, t);
+          gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.04);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(t);
+          osc.stop(t + 0.04);
+        } catch(e) {}
+      },
+      playGong() {
+        try {
+          this.init();
+          if (!this.ctx) return;
+          const t = this.ctx.currentTime;
+          [108, 216, 324, 432].forEach((freq, idx) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, t);
+            const initialGain = 0.4 / (idx + 1);
+            gain.gain.setValueAtTime(initialGain, t);
+            gain.gain.exponentialRampToValueAtTime(0.0001, t + 3.2);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(t);
+            osc.stop(t + 3.2);
+          });
+        } catch(e) {}
       }
     };
+
+    // ==========================================
+    // 1000X INTERACTIVE ENTERTAINMENT & GAMIFICATION ENGINES
+    // ==========================================
+
+    // --- 1. FULLSCREEN CANVAS PARTICLE & CONFETTI ENGINE (CanvasFX) ---
+    const CanvasFX = {
+      canvas: null,
+      ctx: null,
+      particles: [],
+      floatingTexts: [],
+      animId: null,
+      width: window.innerWidth,
+      height: window.innerHeight,
+
+      init() {
+        this.canvas = document.getElementById('globalFxCanvas');
+        if (!this.canvas) return;
+        this.ctx = this.canvas.getContext('2d');
+        this.resize();
+        window.addEventListener('resize', () => this.resize());
+      },
+
+      resize() {
+        if (!this.canvas) return;
+        this.width = window.innerWidth;
+        this.height = window.innerHeight;
+        this.canvas.width = this.width * (window.devicePixelRatio || 1);
+        this.canvas.height = this.height * (window.devicePixelRatio || 1);
+        if (this.ctx) {
+          this.ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+        }
+      },
+
+      confetti(options = {}) {
+        this.init();
+        const count = options.count || 90;
+        const originX = (options.origin && options.origin.x !== undefined) ? options.origin.x * this.width : this.width * 0.5;
+        const originY = (options.origin && options.origin.y !== undefined) ? options.origin.y * this.height : this.height * 0.35;
+        const colors = options.colors || ['#38bdf8', '#10b981', '#fbbf24', '#f43f5e', '#a855f7', '#00f2fe', '#ffffff'];
+
+        for (let i = 0; i < count; i++) {
+          const angle = (Math.PI * 2 * Math.random());
+          const speed = 4 + Math.random() * 12;
+          this.particles.push({
+            x: originX,
+            y: originY,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed - (3 + Math.random() * 4),
+            w: 6 + Math.random() * 8,
+            h: 8 + Math.random() * 10,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            rotation: Math.random() * 360,
+            rotSpeed: (Math.random() - 0.5) * 14,
+            gravity: 0.28 + Math.random() * 0.12,
+            drag: 0.985,
+            opacity: 1,
+            fadeSpeed: 0.007 + Math.random() * 0.008,
+            shape: Math.random() > 0.4 ? 'rect' : 'circle'
+          });
+        }
+        this.startLoop();
+      },
+
+      floatingText(text, x, y, color = '#38bdf8') {
+        this.init();
+        const posX = x !== undefined ? x : (this.width * 0.5);
+        const posY = y !== undefined ? y : (this.height * 0.5);
+        this.floatingTexts.push({
+          text,
+          x: posX + (Math.random() - 0.5) * 30,
+          y: posY,
+          vy: -2.2 - Math.random() * 1.5,
+          color,
+          opacity: 1,
+          scale: 1.2,
+          life: 0
+        });
+        this.startLoop();
+      },
+
+      startLoop() {
+        if (!this.animId) {
+          this.loop();
+        }
+      },
+
+      loop() {
+        if (!this.ctx || !this.canvas) return;
+        this.ctx.clearRect(0, 0, this.width, this.height);
+
+        // Render & update particles
+        for (let i = this.particles.length - 1; i >= 0; i--) {
+          const p = this.particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += p.gravity;
+          p.vx *= p.drag;
+          p.rotation += p.rotSpeed;
+          p.opacity -= p.fadeSpeed;
+
+          if (p.opacity <= 0 || p.y > this.height + 50) {
+            this.particles.splice(i, 1);
+            continue;
+          }
+
+          this.ctx.save();
+          this.ctx.globalAlpha = Math.max(0, p.opacity);
+          this.ctx.translate(p.x, p.y);
+          this.ctx.rotate((p.rotation * Math.PI) / 180);
+          this.ctx.fillStyle = p.color;
+          if (p.shape === 'rect') {
+            this.ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+          } else {
+            this.ctx.beginPath();
+            this.ctx.arc(0, 0, p.w / 2, 0, Math.PI * 2);
+            this.ctx.fill();
+          }
+          this.ctx.restore();
+        }
+
+        // Render & update floating text
+        for (let j = this.floatingTexts.length - 1; j >= 0; j--) {
+          const ft = this.floatingTexts[j];
+          ft.y += ft.vy;
+          ft.life += 1;
+          ft.opacity = Math.max(0, 1 - (ft.life / 50));
+
+          if (ft.opacity <= 0) {
+            this.floatingTexts.splice(j, 1);
+            continue;
+          }
+
+          this.ctx.save();
+          this.ctx.globalAlpha = ft.opacity;
+          this.ctx.font = '900 1.25rem "Plus Jakarta Sans", sans-serif';
+          this.ctx.textAlign = 'center';
+          this.ctx.shadowColor = ft.color;
+          this.ctx.shadowBlur = 12;
+          this.ctx.fillStyle = ft.color;
+          this.ctx.fillText(ft.text, ft.x, ft.y);
+          this.ctx.restore();
+        }
+
+        if (this.particles.length > 0 || this.floatingTexts.length > 0) {
+          this.animId = requestAnimationFrame(() => this.loop());
+        } else {
+          this.animId = null;
+        }
+      }
+    };
+
+    // --- 2. RPG SHADOW TITAN RAID BOSS ENGINE ---
+    const BossBattleEngine = {
+      BOSSES: [
+        {
+          id: 'boss_phase_1',
+          phase: 1,
+          name: 'Goliathon the Iron Sentinel',
+          title: 'PHASE 1 TITAN',
+          icon: '🗿',
+          maxHp: 30000,
+          flavor: '"No mortal builds tendon armor without first enduring my compressive trial."',
+          xpReward: 500,
+          badgeName: '🗿 Titanus Slayer'
+        },
+        {
+          id: 'boss_phase_2',
+          phase: 2,
+          name: 'Hydra of Hypertrophy',
+          title: 'PHASE 2 TITAN',
+          icon: '🐉',
+          maxHp: 65000,
+          flavor: '"Cut one set down and two more shall grow in its place."',
+          xpReward: 750,
+          badgeName: '🐉 Hydra Slayer'
+        },
+        {
+          id: 'boss_phase_3',
+          phase: 3,
+          name: 'Volcanus the Calisthenic Titan',
+          title: 'PHASE 3 TITAN',
+          icon: '⚡',
+          maxHp: 100000,
+          flavor: '"Only pure relative body strength can withstand my gravity eruption."',
+          xpReward: 1000,
+          badgeName: '⚡ Volcanus Slayer'
+        },
+        {
+          id: 'boss_phase_4',
+          phase: 4,
+          name: 'Chronos the Longevity Sovereign',
+          title: 'PHASE 4 APEX TITAN',
+          icon: '👑',
+          maxHp: 150000,
+          flavor: '"I measure eternity. Only 365 days of unbroken discipline can conquer me."',
+          xpReward: 1500,
+          badgeName: '👑 Chronos Victor'
+        }
+      ],
+
+      getCurrentBoss() {
+        const curDay = Number(currentDay || 1);
+        const phaseIdx = Math.min(3, Math.floor((curDay - 1) / 91));
+        return this.BOSSES[phaseIdx] || this.BOSSES[0];
+      },
+
+      getDamageDealt(bossId) {
+        try {
+          const raw = localStorage.getItem(getProfileKey(`gym_boss_dmg_${bossId}`));
+          if (raw !== null) return parseInt(raw, 10);
+        } catch(e) {}
+        // Fallback: estimate from total volume & completed days
+        let vol = 0;
+        if (typeof completedDays !== 'undefined' && completedDays) {
+          completedDays.forEach(d => {
+            if (typeof getDailyTonnage === 'function') {
+              const t = getDailyTonnage(d);
+              vol += (t.tonnage || 0) + 150;
+            } else {
+              vol += 250;
+            }
+          });
+        }
+        return vol;
+      },
+
+      setDamageDealt(bossId, dmg) {
+        try {
+          localStorage.setItem(getProfileKey(`gym_boss_dmg_${bossId}`), String(dmg));
+        } catch(e) {}
+      },
+
+      updateUI() {
+        const boss = this.getCurrentBoss();
+        const dmg = this.getDamageDealt(boss.id);
+        const currentHp = Math.max(0, boss.maxHp - dmg);
+        const pct = Math.max(0, Math.min(100, (currentHp / boss.maxHp) * 100));
+
+        const spriteEl = document.getElementById('bossSpriteIcon');
+        const levelTag = document.getElementById('bossLevelTag');
+        const phaseBadge = document.getElementById('bossPhaseBadge');
+        const titleEl = document.getElementById('bossTitle');
+        const flavorEl = document.getElementById('bossFlavorText');
+        const hpText = document.getElementById('bossHpText');
+        const hpFill = document.getElementById('bossHpFill');
+        const ghostFill = document.getElementById('bossDamageGhost');
+        const xpBounty = document.getElementById('bossXpReward');
+
+        if (spriteEl) spriteEl.textContent = currentHp <= 0 ? '💀' : boss.icon;
+        if (levelTag) levelTag.textContent = `BOSS LVL ${boss.phase}`;
+        if (phaseBadge) phaseBadge.textContent = boss.title;
+        if (titleEl) titleEl.textContent = currentHp <= 0 ? `${boss.name} (DEFEATED!)` : boss.name;
+        if (flavorEl) flavorEl.textContent = currentHp <= 0 ? '"A worthy warrior... You have conquered the trial."' : boss.flavor;
+        if (hpText) hpText.textContent = `${currentHp.toLocaleString()} / ${boss.maxHp.toLocaleString()} HP (${pct.toFixed(1)}%)`;
+        if (hpFill) hpFill.style.width = `${pct}%`;
+        if (ghostFill) {
+          setTimeout(() => { ghostFill.style.width = `${pct}%`; }, 250);
+        }
+        if (xpBounty) xpBounty.textContent = `🏆 +${boss.xpReward} XP Bounty`;
+      },
+
+      dealDamage(amount, source = 'Workout Set') {
+        const boss = this.getCurrentBoss();
+        const currentDmg = this.getDamageDealt(boss.id);
+        const newDmg = currentDmg + amount;
+        this.setDamageDealt(boss.id, newDmg);
+
+        const frame = document.getElementById('bossAvatarFrame');
+        if (frame) {
+          frame.classList.remove('boss-hit-shake');
+          void frame.offsetWidth;
+          frame.classList.add('boss-hit-shake');
+        }
+
+        if (typeof SoundFX !== 'undefined' && SoundFX.playBossHit) {
+          SoundFX.playBossHit();
+        }
+
+        const rect = frame ? frame.getBoundingClientRect() : { left: window.innerWidth / 2, top: 250 };
+        CanvasFX.floatingText(`-${amount} HP! 💥`, rect.left + 30, rect.top + 20, '#f43f5e');
+
+        this.updateUI();
+
+        if (currentDmg < boss.maxHp && newDmg >= boss.maxHp) {
+          this.onDefeat(boss);
+        }
+      },
+
+      onDefeat(boss) {
+        if (typeof SoundFX !== 'undefined' && SoundFX.playBossDefeated) {
+          SoundFX.playBossDefeated();
+        }
+        CanvasFX.confetti({ count: 200 });
+
+        const curBonus = parseInt(localStorage.getItem(getProfileKey('gym_bonus_xp')) || '0', 10);
+        localStorage.setItem(getProfileKey('gym_bonus_xp'), String(curBonus + boss.xpReward));
+
+        if (typeof checkAchievements === 'function') checkAchievements();
+
+        if (typeof showCelebrationBanner === 'function') {
+          showCelebrationBanner('👑 TITAN BOSS DEFEATED!', `You vanquished ${boss.name} and claimed +${boss.xpReward} Bonus XP!`);
+        }
+        speakAnnouncement(`Titan ${boss.name} has fallen! Victory!`);
+      }
+    };
+
+    // --- 3. DAILY MYSTERY LOOT CRATE ENGINE ---
+    const LOOT_REWARDS = [
+      { icon: '🌟', title: '+150 BONUS XP BOOST!', desc: 'Instant neural energy surge added to your Trainee XP passport.', xp: 150 },
+      { icon: '⚡', title: 'CYBER TITANIUM AURA UNLOCKED!', desc: 'Cosmic holographic glow added to your Trainee Profile avatar.', xp: 100 },
+      { icon: '🎵', title: 'SECRET TRACK UNLOCKED: "Apex Drive (128 BPM)"', desc: 'Added to your offline Gym Beats soundtrack rotation.', xp: 120 },
+      { icon: '☕', title: 'CELLULAR RECOVERY SHIELD (+20% RESISTANCE)', desc: 'Active recovery blessing: -20% neuromuscular fatigue accumulation.', xp: 100 },
+      { icon: '📜', title: 'ANCIENT GLADIATOR WISDOM', desc: '"The pain of discipline weighs ounces; the pain of regret weighs tons." - Jim Rohn', xp: 120 },
+      { icon: '👑', title: 'GOLDEN EMBERS PROFILE HALO', desc: 'Prestige golden fire halo unlocked for your Leaderboard profile.', xp: 200 }
+    ];
+
+    function openLootCrateModal() {
+      openModal('lootCrateModal');
+      const claimedKey = getProfileKey(`gym_loot_claimed_${new Date().toISOString().slice(0, 10)}`);
+      const isClaimed = localStorage.getItem(claimedKey) === 'true';
+
+      const box = document.getElementById('lootBox3d');
+      const heading = document.getElementById('lootStatusHeading');
+      const btn = document.getElementById('btnOpenCrateAction');
+      const display = document.getElementById('lootRewardDisplay');
+
+      if (isClaimed) {
+        if (box) box.textContent = '📦';
+        if (heading) heading.textContent = '✓ Today\'s Supply Drop Claimed';
+        if (btn) {
+          btn.disabled = true;
+          btn.style.opacity = '0.5';
+          btn.textContent = '✓ Already Claimed Today (Come back tomorrow!)';
+        }
+      } else {
+        if (box) box.textContent = '🎁';
+        if (heading) heading.textContent = 'Tap Crate to Crack Open';
+        if (btn) {
+          btn.disabled = false;
+          btn.style.opacity = '1';
+          btn.textContent = '🔓 Crack Open Today\'s Crate';
+        }
+        if (display) display.style.display = 'none';
+      }
+    }
+
+    function openDailyLootCrate() {
+      const todayStr = new Date().toISOString().slice(0, 10);
+      const claimedKey = getProfileKey(`gym_loot_claimed_${todayStr}`);
+      if (localStorage.getItem(claimedKey) === 'true') {
+        if (typeof showToast === 'function') showToast('📦 You already opened today\'s crate! New drop tomorrow morning.');
+        return;
+      }
+
+      const box = document.getElementById('lootBox3d');
+      const btn = document.getElementById('btnOpenCrateAction');
+      if (box) box.classList.add('crate-rumble');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = '⏳ Cracking Crate...';
+      }
+
+      if (typeof SoundFX !== 'undefined' && SoundFX.playCountdownRiser) {
+        SoundFX.playCountdownRiser(1);
+      }
+
+      setTimeout(() => {
+        if (box) {
+          box.classList.remove('crate-rumble');
+          box.textContent = '✨';
+        }
+
+        if (typeof SoundFX !== 'undefined' && SoundFX.playCrateOpen) {
+          SoundFX.playCrateOpen();
+        }
+        CanvasFX.confetti({ count: 120 });
+
+        const reward = LOOT_REWARDS[Math.floor(Math.random() * LOOT_REWARDS.length)];
+        localStorage.setItem(claimedKey, 'true');
+
+        const curBonus = parseInt(localStorage.getItem(getProfileKey('gym_bonus_xp')) || '0', 10);
+        localStorage.setItem(getProfileKey('gym_bonus_xp'), String(curBonus + reward.xp));
+        if (typeof checkAchievements === 'function') checkAchievements();
+
+        const display = document.getElementById('lootRewardDisplay');
+        const rIcon = document.getElementById('lootRewardIcon');
+        const rTitle = document.getElementById('lootRewardTitle');
+        const rDesc = document.getElementById('lootRewardDesc');
+        const heading = document.getElementById('lootStatusHeading');
+
+        if (rIcon) rIcon.textContent = reward.icon;
+        if (rTitle) rTitle.textContent = reward.title;
+        if (rDesc) rDesc.textContent = reward.desc;
+        if (display) display.style.display = 'block';
+        if (heading) heading.textContent = '🎉 LOOT CRATE UNLOCKED!';
+        if (btn) btn.textContent = '✓ Reward Claimed';
+
+        if (typeof BossBattleEngine !== 'undefined') {
+          BossBattleEngine.dealDamage(500, 'Loot Crate Kinetic Shockwave');
+        }
+
+        speakAnnouncement(`Supply drop opened! ${reward.title}`);
+      }, 1400);
+    }
+
+    // --- 4. COACH HYPE SOUNDBOARD & MOTIVATION ENGINE ---
+    function toggleHypeDeckModal() {
+      openModal('hypeDeckModal');
+    }
+
+    function playHypeAudio(key) {
+      if (typeof SoundFX !== 'undefined') SoundFX.init();
+      switch(key) {
+        case 'beast':
+          if (typeof SoundFX !== 'undefined' && SoundFX.playBossHit) SoundFX.playBossHit();
+          speakAnnouncement('Unleash beast mode! Maximum output!');
+          CanvasFX.floatingText('🔥 BEAST MODE ACTIVATED!', window.innerWidth / 2, window.innerHeight / 2, '#f43f5e');
+          break;
+        case 'lightweight':
+          if (typeof SoundFX !== 'undefined' && SoundFX.playFanfare) SoundFX.playFanfare();
+          speakAnnouncement('Light weight baby! Ain\'t nothin but a peanut!');
+          CanvasFX.floatingText('⚡ LIGHT WEIGHT BABY!', window.innerWidth / 2, window.innerHeight / 2, '#38bdf8');
+          break;
+        case 'stayhard':
+          if (typeof SoundFX !== 'undefined' && SoundFX.playCountdownRiser) SoundFX.playCountdownRiser(1);
+          speakAnnouncement('Stay hard! Don\'t stop when you\'re tired, stop when you\'re done!');
+          CanvasFX.floatingText('🛡️ STAY HARD!', window.innerWidth / 2, window.innerHeight / 2, '#a855f7');
+          break;
+        case 'focus':
+          if (typeof SoundFX !== 'undefined' && SoundFX.playBeep) SoundFX.playBeep(432, 'sine', 0.8, 0.4);
+          speakAnnouncement('Laser focus. Control every millimeter of the movement.');
+          CanvasFX.floatingText('🧠 LASER FOCUS!', window.innerWidth / 2, window.innerHeight / 2, '#10b981');
+          break;
+        case 'victory':
+          if (typeof SoundFX !== 'undefined' && SoundFX.playFanfare) SoundFX.playFanfare();
+          CanvasFX.confetti({ count: 150 });
+          speakAnnouncement('Victory is earned rep by rep!');
+          CanvasFX.floatingText('👑 TRIUMPH!', window.innerWidth / 2, window.innerHeight / 2, '#fbbf24');
+          break;
+        case 'gong':
+          if (typeof SoundFX !== 'undefined' && SoundFX.playGong) SoundFX.playGong();
+          CanvasFX.floatingText('🔔 ZEN TRANQUILITY', window.innerWidth / 2, window.innerHeight / 2, '#38bdf8');
+          break;
+      }
+    }
+
+    function fireVictoryConfetti() {
+      if (typeof SoundFX !== 'undefined' && SoundFX.playFanfare) SoundFX.playFanfare();
+      CanvasFX.confetti({ count: 150 });
+    }
+
+    // --- 5. TACTILE LIVE TAP-TO-COUNT REP CLICKER ---
+    let liveTapReps = 0;
+    function onTapRepClicker(event) {
+      liveTapReps++;
+      const countEl = document.getElementById('liveTapRepCount');
+      if (countEl) countEl.innerHTML = `${liveTapReps} <span style="font-size: 0.9rem; color: var(--text-dim); font-weight: 600;">/ 12</span>`;
+
+      if (typeof SoundFX !== 'undefined' && SoundFX.playRepClick) {
+        SoundFX.playRepClick();
+      }
+
+      const clickX = event ? event.clientX : (window.innerWidth / 2);
+      const clickY = event ? event.clientY : (window.innerHeight / 2);
+      CanvasFX.floatingText('+1 REP! 💪', clickX, clickY, '#38bdf8');
+
+      if (typeof BossBattleEngine !== 'undefined') {
+        BossBattleEngine.dealDamage(15, 'Rep Click');
+      }
+    }
+
+    function resetTapRepCounter() {
+      liveTapReps = 0;
+      const countEl = document.getElementById('liveTapRepCount');
+      if (countEl) countEl.innerHTML = `0 <span style="font-size: 0.9rem; color: var(--text-dim); font-weight: 600;">/ 12</span>`;
+    }
+
+    function logRepsFromClicker() {
+      const activeInput = document.querySelector('#liveSetRows input.reps-input, #liveSetRows input[type="number"]:last-of-type');
+      if (activeInput) {
+        activeInput.value = liveTapReps;
+        if (typeof showToast === 'function') showToast(`✓ Saved ${liveTapReps} reps from tap clicker into set!`);
+      } else {
+        if (typeof showToast === 'function') showToast(`✓ ${liveTapReps} reps counted!`);
+      }
+    }
+
+    function testBossAttack(event) {
+      const clickX = event ? event.clientX : (window.innerWidth / 2);
+      const clickY = event ? event.clientY : (window.innerHeight / 2);
+
+      let attackDmg = 350;
+      if (typeof getDailyTonnage === 'function') {
+        const t = getDailyTonnage(Number(currentDay || 1));
+        if (t.tonnage > 0) attackDmg = Math.round(t.tonnage * 0.15) + 300;
+      }
+
+      BossBattleEngine.dealDamage(attackDmg, 'Direct Titan Strike');
+      CanvasFX.floatingText(`CRITICAL HIT! -${attackDmg} DMG 🔥`, clickX, clickY - 40, '#f43f5e');
+    }
 
     // ==========================================
     // TRAINEE PROFILE & PERSONALIZATION ENGINE
@@ -31141,6 +32299,27 @@ if (typeof window !== 'undefined') {
       if (typeof calculatePlateLoading === 'function') {
         calculatePlateLoading();
       }
+
+      // Initialize Gamification & Interactive Engines
+      if (typeof CanvasFX !== 'undefined' && CanvasFX.init) {
+        CanvasFX.init();
+      }
+      if (typeof BossBattleEngine !== 'undefined' && BossBattleEngine.updateUI) {
+        BossBattleEngine.updateUI();
+      }
+
+      // Gamification Global Window Exports
+      window.CanvasFX = CanvasFX;
+      window.BossBattleEngine = BossBattleEngine;
+      window.openLootCrateModal = openLootCrateModal;
+      window.openDailyLootCrate = openDailyLootCrate;
+      window.toggleHypeDeckModal = toggleHypeDeckModal;
+      window.playHypeAudio = playHypeAudio;
+      window.fireVictoryConfetti = fireVictoryConfetti;
+      window.onTapRepClicker = onTapRepClicker;
+      window.resetTapRepCounter = resetTapRepCounter;
+      window.logRepsFromClicker = logRepsFromClicker;
+      window.testBossAttack = testBossAttack;
 
       // Guarantee pill click responsiveness
       const userPillEl = document.getElementById('headerUserPill');
