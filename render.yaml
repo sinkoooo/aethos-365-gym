@@ -4,8 +4,10 @@ services:
     runtime: node
     plan: free
     region: oregon
+    branch: main
     buildCommand: npm install
     startCommand: node server.mjs
+    healthCheckPath: /api/health
     envVars:
       - key: PORT
         value: 10000
