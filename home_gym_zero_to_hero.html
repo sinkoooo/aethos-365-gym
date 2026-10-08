@@ -49,27 +49,30 @@
   </script>
   <style>
     :root {
-      --bg-dark: #07090e;
-      --bg-mesh: radial-gradient(ellipse 90% 60% at 50% -20%, rgba(56, 189, 248, 0.09) 0%, transparent 60%),
-                 radial-gradient(ellipse 70% 50% at 90% 90%, rgba(139, 92, 246, 0.07) 0%, transparent 50%),
-                 radial-gradient(ellipse 60% 40% at 10% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
-                 #07090e;
-      --bg-surface: rgba(13, 19, 33, 0.72);
-      --bg-card: rgba(16, 24, 42, 0.65);
-      --bg-card-hover: rgba(25, 36, 62, 0.85);
-      --border: rgba(255, 255, 255, 0.08);
-      --border-subtle: rgba(255, 255, 255, 0.04);
+      --bg-dark: #050811;
+      --bg-mesh: radial-gradient(ellipse 90% 55% at 50% -20%, rgba(56, 189, 248, 0.16) 0%, transparent 65%),
+                 radial-gradient(ellipse 70% 50% at 95% 85%, rgba(139, 92, 246, 0.12) 0%, transparent 55%),
+                 radial-gradient(ellipse 65% 45% at 5% 75%, rgba(16, 185, 129, 0.09) 0%, transparent 50%),
+                 radial-gradient(circle at 50% 40%, rgba(15, 23, 42, 0.5) 0%, transparent 80%),
+                 #050811;
+      --bg-surface: rgba(13, 20, 36, 0.78);
+      --bg-surface-elevated: rgba(18, 28, 50, 0.88);
+      --bg-card: rgba(15, 23, 42, 0.72);
+      --bg-card-hover: rgba(22, 34, 62, 0.92);
+      --border: rgba(255, 255, 255, 0.09);
+      --border-subtle: rgba(255, 255, 255, 0.05);
+      --border-glass: rgba(255, 255, 255, 0.12);
       --border-focus: #38bdf8;
       --cyan: #38bdf8;
-      --cyan-glow: rgba(56, 189, 248, 0.28);
+      --cyan-glow: rgba(56, 189, 248, 0.38);
       --emerald: #10b981;
-      --emerald-glow: rgba(16, 185, 129, 0.28);
+      --emerald-glow: rgba(16, 185, 129, 0.38);
       --amber: #fbbf24;
-      --amber-glow: rgba(251, 191, 36, 0.28);
+      --amber-glow: rgba(251, 191, 36, 0.38);
       --rose: #f43f5e;
-      --rose-glow: rgba(244, 63, 94, 0.28);
+      --rose-glow: rgba(244, 63, 94, 0.38);
       --purple: #a855f7;
-      --purple-glow: rgba(168, 85, 247, 0.28);
+      --purple-glow: rgba(168, 85, 247, 0.38);
       --electric-blue: #3b82f6;
       --text: #f8fafc;
       --text-muted: #94a3b8;
@@ -78,10 +81,41 @@
       --radius-md: 14px;
       --radius-lg: 18px;
       --radius-xl: 24px;
-      --shadow-glow: 0 10px 30px -10px rgba(56, 189, 248, 0.25);
+      --shadow-glow: 0 10px 35px -10px rgba(56, 189, 248, 0.35);
+      --shadow-card: 0 14px 34px -8px rgba(0, 0, 0, 0.65), inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+      --shadow-card-hover: 0 20px 48px -10px rgba(0, 0, 0, 0.8), 0 0 28px -6px rgba(56, 189, 248, 0.25), inset 0 1px 0 0 rgba(255, 255, 255, 0.22);
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* MODERN MINIMALIST CUSTOM SCROLLBARS */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(5, 8, 17, 0.7);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.18);
+      border-radius: 99px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      transition: background 0.2s ease;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--cyan);
+      box-shadow: 0 0 10px var(--cyan-glow);
+    }
+
+    /* GLOBAL TACTILE BUTTON PRESS FEEDBACK */
+    button, .nav-pill-btn, .header-nav-tab, .btn-streak-action, .btn-streak-rest, .btn-live-session, .btn-quick-log {
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    button:active, .nav-pill-btn:active, .header-nav-tab:active, .btn-streak-action:active, .btn-live-session:active {
+      transform: scale(0.97) !important;
+    }
 
     body {
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -94,6 +128,7 @@
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      letter-spacing: -0.011em;
     }
 
     .container {
@@ -102,13 +137,13 @@
       padding: 0 18px;
     }
 
-    /* TOP HEADER */
+    /* TOP HEADER: MODERN FLOATING FROSTED DOCK */
     .top-header {
-      background: rgba(7, 10, 18, 0.82);
-      backdrop-filter: blur(24px) saturate(180%);
-      -webkit-backdrop-filter: blur(24px) saturate(180%);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+      background: rgba(6, 9, 19, 0.82);
+      backdrop-filter: blur(28px) saturate(200%);
+      -webkit-backdrop-filter: blur(28px) saturate(200%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.7), inset 0 -1px 0 rgba(255, 255, 255, 0.03);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -8820,6 +8855,465 @@
       background: rgba(16, 185, 129, 0.15);
       border-color: var(--emerald);
       color: #34d399;
+    }
+
+    /* ==========================================================================
+       1000X MODERN LUXURY DESIGN SYSTEM (AETHOS 365 COSMIC OBSIDIAN THEME)
+       ========================================================================== */
+
+    /* 1. App View Entrance Animations */
+    @keyframes appViewEnter {
+      from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.992);
+        filter: blur(4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
+    }
+
+    .app-view.active {
+      display: block !important;
+      animation: appViewEnter 0.28s var(--ease-out-expo) forwards;
+    }
+
+    /* 2. Top Header & Floating Navigation Dock */
+    .brand-logo {
+      background: linear-gradient(135deg, rgba(24, 34, 58, 0.9) 0%, rgba(10, 16, 32, 0.98) 100%) !important;
+      border: 1px solid rgba(56, 189, 248, 0.45) !important;
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+      position: relative;
+    }
+    .brand-logo:hover {
+      border-color: var(--cyan) !important;
+      box-shadow: 0 0 28px rgba(56, 189, 248, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+      transform: translateY(-1px) scale(1.05) !important;
+    }
+
+    .header-nav-inline {
+      background: rgba(11, 17, 33, 0.75) !important;
+      border: 1px solid rgba(255, 255, 255, 0.09) !important;
+      border-radius: 99px !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 4px 16px rgba(0, 0, 0, 0.35) !important;
+      padding: 4px 6px !important;
+    }
+
+    .header-nav-tab {
+      transition: all 0.22s var(--ease-out-expo) !important;
+      border-radius: 99px !important;
+    }
+    .header-nav-tab:hover {
+      color: #fff !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      transform: translateY(-1px);
+    }
+    .header-nav-tab.active {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.28) 0%, rgba(168, 85, 247, 0.28) 100%) !important;
+      border: 1px solid rgba(56, 189, 248, 0.65) !important;
+      color: #ffffff !important;
+      box-shadow: 0 0 20px -3px rgba(56, 189, 248, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.28) !important;
+      font-weight: 700 !important;
+    }
+
+    /* Live Cloud Sync Pill & User Pill */
+    .user-sync-pill {
+      background: rgba(14, 22, 40, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 99px;
+      padding: 5px 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #cbd5e1;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      transition: all 0.22s ease;
+    }
+    .user-sync-pill:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+      background: rgba(24, 36, 64, 0.9);
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
+    }
+    .sync-dot-live {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--emerald);
+      box-shadow: 0 0 10px var(--emerald);
+      animation: beaconPulse 2s infinite;
+    }
+    @keyframes beaconPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.6; }
+    }
+
+    /* 3. Cyber-HUD Telemetry Pods (.hud-card) */
+    .hero-dashboard {
+      gap: 14px !important;
+      margin-top: 4px;
+      margin-bottom: 8px;
+    }
+    .hud-card {
+      background: linear-gradient(145deg, rgba(16, 24, 45, 0.78) 0%, rgba(9, 14, 28, 0.92) 100%) !important;
+      border: 1px solid rgba(255, 255, 255, 0.09) !important;
+      border-radius: 14px !important;
+      box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.14), 0 14px 34px -8px rgba(0, 0, 0, 0.65) !important;
+      padding: 12px 16px !important;
+      transition: all 0.25s var(--ease-out-expo) !important;
+    }
+    .hud-card:hover {
+      transform: translateY(-3px) !important;
+      border-color: rgba(56, 189, 248, 0.45) !important;
+      box-shadow: 0 18px 44px -10px rgba(0, 0, 0, 0.8), 0 0 28px -6px rgba(56, 189, 248, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+    }
+    .hud-val {
+      font-size: 1.35rem !important;
+      font-weight: 800 !important;
+      letter-spacing: -0.025em !important;
+      font-variant-numeric: tabular-nums !important;
+      color: #fff !important;
+      text-shadow: 0 0 18px rgba(255, 255, 255, 0.15) !important;
+    }
+    .hud-sub {
+      color: var(--text-muted) !important;
+      font-size: 0.72rem !important;
+      letter-spacing: 0.2px !important;
+    }
+    .hud-pod-bar {
+      height: 5px !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      border-radius: 99px !important;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+    .hud-pod-fill.cyan {
+      background: linear-gradient(90deg, #00f2fe, var(--cyan)) !important;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.5) !important;
+    }
+
+    /* 4. Consistency Heatmap Card & Quick Actions Bar */
+    .consistency-heatmap-card {
+      background: linear-gradient(160deg, rgba(16, 24, 46, 0.8) 0%, rgba(9, 14, 28, 0.94) 100%) !important;
+      border: 1px solid rgba(255, 255, 255, 0.09) !important;
+      border-radius: 16px !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 18px 40px -10px rgba(0, 0, 0, 0.7) !important;
+      padding: 18px !important;
+      margin-bottom: 18px !important;
+    }
+    .consistency-quick-bar {
+      background: rgba(11, 17, 33, 0.75) !important;
+      border: 1px solid rgba(255, 255, 255, 0.09) !important;
+      border-radius: 12px !important;
+      padding: 10px 16px !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+    }
+    .streak-pill-chip {
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      letter-spacing: 0.3px;
+      transition: all 0.2s ease;
+    }
+    .streak-pill-chip.fire {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.22) 0%, rgba(239, 68, 68, 0.22) 100%) !important;
+      border: 1px solid rgba(245, 158, 11, 0.6) !important;
+      box-shadow: 0 0 16px rgba(245, 158, 11, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+      color: #fbbf24 !important;
+      font-weight: 800;
+    }
+    .streak-pill-chip.max {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.22) 0%, rgba(59, 130, 246, 0.22) 100%) !important;
+      border: 1px solid rgba(168, 85, 247, 0.55) !important;
+      box-shadow: 0 0 14px rgba(168, 85, 247, 0.25) !important;
+      color: #c084fc !important;
+      font-weight: 800;
+    }
+    .btn-streak-action {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(5, 150, 105, 0.25) 100%) !important;
+      border: 1px solid rgba(16, 185, 129, 0.5) !important;
+      color: #34d399 !important;
+      padding: 7px 16px !important;
+      border-radius: 8px !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.2px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+    }
+    .btn-streak-action:hover {
+      background: var(--emerald) !important;
+      color: #000 !important;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.45) !important;
+      transform: translateY(-1px) !important;
+    }
+    .btn-streak-rest {
+      border-radius: 8px !important;
+      padding: 7px 14px !important;
+      border-color: rgba(56, 189, 248, 0.35) !important;
+    }
+
+    /* 52-Week Matrix Grid Cells */
+    .h-cell {
+      border-radius: 3.5px !important;
+      transition: all 0.18s ease;
+    }
+    .h-cell:hover {
+      transform: scale(1.35) !important;
+      z-index: 10;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+    }
+    .h-cell.active-day {
+      box-shadow: 0 0 0 2px var(--cyan), 0 0 14px var(--cyan) !important;
+    }
+    .h-cell.done.tonnage-1 {
+      background: #064e3b !important;
+      box-shadow: 0 0 5px rgba(16, 185, 129, 0.3);
+    }
+    .h-cell.done.tonnage-2 {
+      background: #047857 !important;
+      box-shadow: 0 0 7px rgba(16, 185, 129, 0.45);
+    }
+    .h-cell.done.tonnage-3 {
+      background: #059669 !important;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
+    }
+    .h-cell.done.tonnage-4 {
+      background: #10b981 !important;
+      box-shadow: 0 0 14px rgba(16, 185, 129, 0.85) !important;
+    }
+
+    /* 5. Mission Checklist HUD Overhaul */
+    .mission-checklist-card {
+      background: linear-gradient(160deg, rgba(16, 24, 46, 0.82) 0%, rgba(9, 14, 28, 0.94) 100%) !important;
+      border: 1px solid rgba(255, 255, 255, 0.09) !important;
+      border-radius: 16px !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 18px 40px -10px rgba(0, 0, 0, 0.7) !important;
+      padding: 18px !important;
+      margin-bottom: 18px !important;
+    }
+    .mission-chip {
+      background: rgba(13, 19, 36, 0.75) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      border-radius: 12px !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 4px 14px rgba(0, 0, 0, 0.3) !important;
+      transition: all 0.22s var(--ease-out-expo) !important;
+    }
+    .mission-chip:hover {
+      border-color: rgba(56, 189, 248, 0.45) !important;
+      background: rgba(20, 31, 56, 0.9) !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+    }
+    .chip-check-toggle {
+      border-radius: 8px !important;
+      transition: all 0.2s ease !important;
+    }
+    .mission-chip.completed .chip-check-toggle {
+      background: var(--emerald) !important;
+      color: #000 !important;
+      box-shadow: 0 0 14px rgba(16, 185, 129, 0.5) !important;
+    }
+    .checklist-progress-bar-wrap {
+      height: 6px !important;
+      background: rgba(255, 255, 255, 0.07) !important;
+      border-radius: 99px !important;
+      overflow: hidden;
+      margin: 12px 0 14px !important;
+    }
+    .checklist-progress-fill {
+      background: linear-gradient(90deg, #00f2fe, #38bdf8, #10b981, #a855f7) !important;
+      background-size: 200% 100% !important;
+      animation: shimmerFill 3.5s infinite linear;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.5) !important;
+    }
+    @keyframes shimmerFill {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* 6. Day Controller Cockpit Dock (.day-dock) */
+    .day-dock {
+      background: linear-gradient(145deg, rgba(16, 24, 46, 0.85) 0%, rgba(9, 14, 28, 0.95) 100%) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      border-radius: 16px !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 20px 45px -10px rgba(0, 0, 0, 0.75) !important;
+      padding: 14px 18px !important;
+      margin-bottom: 20px !important;
+    }
+    .day-display-box {
+      background: rgba(8, 12, 24, 0.9) !important;
+      border: 1px solid rgba(56, 189, 248, 0.4) !important;
+      border-radius: 10px !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 15px rgba(56, 189, 248, 0.15) !important;
+    }
+    .day-display-box input {
+      font-family: 'JetBrains Mono', monospace !important;
+      font-size: 1.15rem !important;
+      font-weight: 800 !important;
+      color: #fff !important;
+    }
+    .btn-nav-day {
+      background: rgba(15, 23, 42, 0.8) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      border-radius: 10px !important;
+      padding: 7px 14px !important;
+      font-weight: 700 !important;
+    }
+    .btn-nav-day:hover {
+      border-color: var(--cyan) !important;
+      background: rgba(25, 36, 62, 0.95) !important;
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.25) !important;
+      color: #fff !important;
+    }
+    .btn-live-session {
+      background: linear-gradient(135deg, #0284c7 0%, #2563eb 50%, #7c3aed 100%) !important;
+      border: 1px solid rgba(255, 255, 255, 0.2) !important;
+      border-radius: 10px !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.3px;
+      box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+      padding: 8px 18px !important;
+    }
+    .btn-live-session:hover {
+      transform: translateY(-2px) scale(1.02) !important;
+      box-shadow: 0 8px 28px rgba(37, 99, 235, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+    }
+    .btn-complete-day {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.3) 100%) !important;
+      border: 1px solid rgba(16, 185, 129, 0.45) !important;
+      border-radius: 10px !important;
+      font-weight: 800 !important;
+      padding: 8px 18px !important;
+      color: #34d399 !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+    }
+    .btn-complete-day:hover {
+      background: var(--emerald) !important;
+      color: #000 !important;
+      box-shadow: 0 0 24px rgba(16, 185, 129, 0.5) !important;
+      transform: translateY(-1px) !important;
+    }
+    .btn-complete-day.completed {
+      background: linear-gradient(135deg, var(--emerald), #059669) !important;
+      color: #000 !important;
+      border-color: #34d399 !important;
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+    }
+
+    /* 7. Exercise Cards & Set Rows Overhaul */
+    .exercise-card {
+      background: linear-gradient(155deg, rgba(16, 24, 46, 0.82) 0%, rgba(9, 14, 28, 0.94) 100%) !important;
+      border: 1px solid rgba(255, 255, 255, 0.09) !important;
+      border-radius: 16px !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 16px 38px -10px rgba(0, 0, 0, 0.7) !important;
+      padding: 18px !important;
+      margin-bottom: 16px !important;
+      transition: all 0.25s var(--ease-out-expo) !important;
+    }
+    .exercise-card:hover {
+      border-color: rgba(56, 189, 248, 0.35) !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 20px 48px -10px rgba(0, 0, 0, 0.8), 0 0 24px -8px rgba(56, 189, 248, 0.25) !important;
+    }
+    .set-row input[type="number"], .set-row input[type="text"] {
+      background: rgba(8, 12, 24, 0.88) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+      border-radius: 8px !important;
+      color: #fff !important;
+      font-family: 'JetBrains Mono', monospace !important;
+      font-weight: 700 !important;
+      text-align: center;
+      transition: all 0.18s ease;
+    }
+    .set-row input:focus {
+      border-color: var(--cyan) !important;
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25) !important;
+      outline: none;
+    }
+    .btn-set-check {
+      border-radius: 8px !important;
+      transition: all 0.2s var(--ease-spring) !important;
+    }
+    .btn-set-check.completed {
+      background: var(--emerald) !important;
+      color: #000 !important;
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.5) !important;
+      transform: scale(1.05);
+    }
+
+    /* 8. Personal Record (PR) Vault & Strength Standards Overhaul */
+    .pr-vault-section {
+      background: linear-gradient(160deg, rgba(16, 24, 46, 0.82) 0%, rgba(9, 14, 28, 0.94) 100%) !important;
+      border: 1px solid rgba(255, 255, 255, 0.09) !important;
+      border-radius: 16px !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 18px 40px -10px rgba(0, 0, 0, 0.7) !important;
+      padding: 20px !important;
+    }
+    .pr-card {
+      background: linear-gradient(145deg, rgba(14, 21, 38, 0.85) 0%, rgba(8, 13, 26, 0.95) 100%) !important;
+      border: 1px solid rgba(255, 255, 255, 0.09) !important;
+      border-radius: 12px !important;
+      padding: 14px 16px !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+      transition: all 0.22s var(--ease-out-expo) !important;
+    }
+    .pr-card:hover {
+      transform: translateY(-3px) !important;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+    }
+    .pr-card.tier-elite {
+      border-color: rgba(245, 158, 11, 0.6) !important;
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+    }
+    .pr-card.tier-advanced {
+      border-color: rgba(56, 189, 248, 0.6) !important;
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+    }
+
+    /* 9. Joint & Mobility Pre-Hab Clinic */
+    .clinic-section {
+      background: linear-gradient(160deg, rgba(16, 24, 46, 0.85) 0%, rgba(9, 14, 28, 0.95) 100%) !important;
+      border: 1px solid rgba(255, 255, 255, 0.09) !important;
+      border-radius: 16px !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 18px 40px -10px rgba(0, 0, 0, 0.7) !important;
+      padding: 22px !important;
+    }
+    .clinic-joint-btn {
+      border-radius: 10px !important;
+      transition: all 0.2s ease !important;
+    }
+    .clinic-joint-btn.active {
+      border-color: var(--cyan) !important;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.25) 0%, rgba(59, 130, 246, 0.25) 100%) !important;
+      box-shadow: 0 0 18px rgba(56, 189, 248, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+    }
+
+    /* 10. Modals & Dialog Overlays */
+    .modal {
+      backdrop-filter: blur(28px) saturate(200%) !important;
+      -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
+      background: rgba(4, 7, 16, 0.85) !important;
+    }
+    .modal-box, .modal-content, .focus-hud-container {
+      background: linear-gradient(160deg, rgba(16, 25, 48, 0.95) 0%, rgba(8, 13, 26, 0.98) 100%) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+      border-radius: 20px !important;
+      box-shadow: 0 25px 70px -15px rgba(0, 0, 0, 0.9), 0 0 40px -10px rgba(56, 189, 248, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+    }
+
+    /* 11. Side Widgets & Pacer */
+    .side-widget {
+      background: linear-gradient(150deg, rgba(16, 24, 46, 0.8) 0%, rgba(9, 14, 28, 0.92) 100%) !important;
+      border: 1px solid rgba(255, 255, 255, 0.09) !important;
+      border-radius: 16px !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 14px 34px -8px rgba(0, 0, 0, 0.65) !important;
+      padding: 16px !important;
+      margin-bottom: 16px !important;
+    }
+    .tempo-circle {
+      box-shadow: 0 0 30px rgba(56, 189, 248, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
     }
   </style>
 </head>
