@@ -8549,6 +8549,278 @@
     .btn-micro-step:active {
       transform: translateY(1px);
     }
+
+    /* ==========================================
+       PERSONAL RECORD (PR) VAULT & STRENGTH WALL
+       ========================================== */
+    .pr-vault-section {
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.95) 0%, rgba(10, 16, 30, 0.95) 100%);
+      border: 1px solid rgba(0, 242, 254, 0.25);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      margin-top: 22px;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
+    }
+    .pr-vault-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .pr-vault-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .pr-card {
+      background: rgba(13, 21, 38, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 16px;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .pr-card:hover {
+      border-color: rgba(0, 242, 254, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 242, 254, 0.12);
+    }
+    .pr-card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+    .pr-card-title {
+      font-weight: 800;
+      color: #fff;
+      font-size: 0.95rem;
+    }
+    .pr-card-cat {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .pr-stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin: 8px 0;
+    }
+    .pr-value {
+      font-size: 1.6rem;
+      font-weight: 900;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--cyan);
+    }
+    .pr-sub-value {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .pr-tier-pill {
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .pr-tier-pill.novice { background: rgba(148, 163, 184, 0.15); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.3); }
+    .pr-tier-pill.intermediate { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.35); }
+    .pr-tier-pill.advanced { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.35); }
+    .pr-tier-pill.elite { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); box-shadow: 0 0 10px rgba(245, 158, 11, 0.2); }
+    .pr-card-date {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      margin-top: 6px;
+    }
+    .pr-btn-edit {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #94a3b8;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .pr-btn-edit:hover {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--cyan);
+      color: #fff;
+    }
+
+    /* ==========================================
+       JOINT & MOBILITY PRE-HAB CLINIC
+       ========================================== */
+    .clinic-section {
+      background: linear-gradient(150deg, rgba(16, 24, 40, 0.95) 0%, rgba(9, 14, 26, 0.95) 100%);
+      border: 1px solid rgba(244, 63, 94, 0.25);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      margin-top: 18px;
+    }
+    .clinic-joint-selector {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+    }
+    .clinic-joint-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .clinic-joint-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+    .clinic-joint-btn.active {
+      background: rgba(244, 63, 94, 0.18);
+      border-color: var(--rose);
+      color: #fda4af;
+      box-shadow: 0 0 15px rgba(244, 63, 94, 0.25);
+    }
+    .clinic-protocol-card {
+      background: rgba(13, 21, 38, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 18px;
+      animation: fadeIn 0.25s ease-out;
+    }
+    .clinic-step-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin: 14px 0;
+    }
+    .clinic-step-card {
+      background: rgba(7, 13, 24, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .clinic-swap-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34d399;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      margin-right: 6px;
+      margin-bottom: 6px;
+    }
+
+    /* ==========================================
+       STREAK MILESTONES & QUICK ACTIONS
+       ========================================== */
+    .consistency-quick-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 12px;
+    }
+    .streak-badge-cluster {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .streak-pill-chip {
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 99px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .streak-pill-chip.fire {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid var(--amber);
+      color: var(--amber);
+    }
+    .streak-pill-chip.max {
+      background: rgba(168, 85, 247, 0.15);
+      border: 1px solid var(--purple);
+      color: var(--purple);
+    }
+    .btn-streak-action {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #34d399;
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-streak-action:hover {
+      background: var(--emerald);
+      color: #000;
+      transform: translateY(-1px);
+    }
+    .btn-streak-rest {
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: #38bdf8;
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-streak-rest:hover {
+      background: rgba(56, 189, 248, 0.25);
+      color: #fff;
+    }
+    .badge-wakelock {
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid var(--amber);
+      color: var(--amber);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .badge-wakelock.active {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: var(--emerald);
+      color: #34d399;
+    }
   </style>
 </head>
 <body>
@@ -8629,6 +8901,12 @@
             <div class="lvl-info"><span id="headerLvlTitle">Initiate</span> <span id="headerXpVal">0 / 250 XP</span></div>
             <div class="lvl-bar"><div class="lvl-fill" id="headerXpFill" style="width: 0%;"></div></div>
           </div>
+        </div>
+
+        <!-- Live Cloud Telemetry & Offline Status Pill -->
+        <div class="user-sync-pill" id="headerSyncPill" onclick="triggerManualSync()" title="Cloud Sync & Offline Telemetry. Click to sync now.">
+          <span class="sync-dot-live" id="headerSyncDot"></span>
+          <span id="headerSyncText">🟢 Synced</span>
         </div>
 
         <!-- Live Gym Beats Music Cockpit -->
@@ -8845,6 +9123,23 @@
             <span class="legend-item"><span class="legend-dot dot-rec"></span> Recovery</span>
             <span class="legend-item"><span class="legend-dot dot-alert"></span> Upgrade Radar</span>
             <span class="legend-item"><span class="legend-dot dot-future"></span> Pending</span>
+          </div>
+        </div>
+
+        <!-- STREAK MILESTONES & QUICK ACTIONS BAR -->
+        <div class="consistency-quick-bar">
+          <div class="streak-badge-cluster">
+            <span class="streak-pill-chip fire" id="matrixStreakPill" title="Consecutive days logged">🔥 0-Day Streak</span>
+            <span class="streak-pill-chip max" id="matrixMaxStreakPill" title="All-time longest streak achieved">⚡ Best: 0D</span>
+            <span class="streak-pill-chip" style="background: rgba(56, 189, 248, 0.15); border: 1px solid var(--cyan); color: var(--cyan);" id="matrixMilestoneBadge">🛡️ Level 1 Recruit</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <button type="button" class="btn-streak-action" onclick="quickToggleTodayMatrix()" id="btnMatrixQuickLog">
+              ★ Mark Today Complete (Day <span id="matrixTodayNum">1</span>)
+            </button>
+            <button type="button" class="btn-streak-rest" onclick="quickLogRestDayMatrix()" title="Mark today as deliberate active recovery / rest day">
+              ☕ Log Rest Day
+            </button>
           </div>
         </div>
 
@@ -10211,6 +10506,11 @@
               <div style="font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase;">Next Tier Requirement:</div>
               <div style="font-size: 1.1rem; font-weight: 700; color: var(--amber);" id="calc1rmNextTier">+15.3 kg to Advanced</div>
             </div>
+            <div>
+              <button type="button" onclick="save1rmResultToPrVault()" style="background: rgba(16, 185, 129, 0.15); border: 1px solid var(--emerald); color: #34d399; padding: 7px 14px; border-radius: 6px; font-size: 0.78rem; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+                💾 Save as PR in Vault
+              </button>
+            </div>
           </div>
 
           <div class="strength-tier-meter" style="margin-top: 16px;">
@@ -10318,6 +10618,53 @@
           </div>
         </div>
 
+      </div>
+
+      <!-- ==========================================
+           AETHOS PERSONAL RECORD (PR) VAULT & WALL OF FAME
+           ========================================== -->
+      <div class="pr-vault-section" id="prVaultSection">
+        <div class="pr-vault-head">
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 1.3rem;">🏆</span>
+              <h2 style="font-size: 1.25rem; font-weight: 900; color: #fff; margin: 0;">AETHOS Personal Record (PR) Vault &amp; Wall of Fame</h2>
+              <span class="badge" style="background: rgba(245, 158, 11, 0.2); color: var(--amber); font-size: 0.72rem; padding: 2px 8px; border-radius: 4px; font-weight: 800;">ALL-TIME BESTS</span>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin: 4px 0 0;">
+              Scientific personal bests tracker across fundamental kinetic movement patterns. Automatically computes Estimated 1RM ($E1RM$), Relative Bodyweight Multiplier ($X\times BW$), and athletic classification.
+            </p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <button type="button" class="nav-pill-btn" onclick="openAddCustomPrModal()" style="border-color: rgba(56, 189, 248, 0.4); color: var(--cyan); padding: 7px 14px; font-size: 0.8rem; cursor: pointer;">
+              ➕ Add Movement
+            </button>
+            <button type="button" class="nav-pill-btn" onclick="exportPrWallOfFame()" style="border-color: rgba(16, 185, 129, 0.4); color: var(--emerald); padding: 7px 14px; font-size: 0.8rem; cursor: pointer;">
+              📋 Export Showcase
+            </button>
+          </div>
+        </div>
+
+        <!-- PR Vault Stats Cluster -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-bottom: 14px;">
+          <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 10px 14px;">
+            <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase;">Total PRs Logged</div>
+            <div style="font-size: 1.4rem; font-weight: 800; color: var(--cyan); font-family: 'JetBrains Mono';" id="prStatTotalCount">8</div>
+          </div>
+          <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 10px 14px;">
+            <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase;">Advanced / Elite Badges</div>
+            <div style="font-size: 1.4rem; font-weight: 800; color: var(--amber); font-family: 'JetBrains Mono';" id="prStatEliteCount">0</div>
+          </div>
+          <div style="background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 10px 14px;">
+            <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase;">Peak Relative Ratio</div>
+            <div style="font-size: 1.4rem; font-weight: 800; color: var(--emerald); font-family: 'JetBrains Mono';" id="prStatPeakRatio">1.00x BW</div>
+          </div>
+        </div>
+
+        <!-- Dynamic PR Grid Container -->
+        <div class="pr-vault-grid" id="prVaultGridContainer">
+          <!-- Rendered dynamically by renderPrVault() -->
+        </div>
       </div>
 
       <!-- INTERACTIVE SVG VOLUME PROGRESSION CHART -->
@@ -11112,9 +11459,10 @@
           <button class="codex-nav-btn active" onclick="switchCodexTab('codexSecLaws', this)">📜 10 Iron Training Laws</button>
           <button class="codex-nav-btn" onclick="switchCodexTab('codexSecBiomech', this)">🔬 Biomechanics Codex (6 Modules)</button>
           <button class="codex-nav-btn" onclick="switchCodexTab('codexSecTriage', this)">🩺 Pain vs DOMS Triage</button>
+          <button class="codex-nav-btn" onclick="switchCodexTab('codexSecClinic', this)">🩹 Joint &amp; Mobility Rehab Clinic</button>
           <button class="codex-nav-btn" onclick="switchCodexTab('codexSecRpe', this)">⚖️ RPE / RIR Calibrator</button>
-          <button class="codex-nav-btn" onclick="switchCodexTab('codexSecFacility', this)">🏗️ Facility & Spatial Specs</button>
-          <button class="codex-nav-btn" onclick="switchCodexTab('codexSecGear', this)">🎒 Apparatus & Gear Standards</button>
+          <button class="codex-nav-btn" onclick="switchCodexTab('codexSecFacility', this)">🏗️ Facility &amp; Spatial Specs</button>
+          <button class="codex-nav-btn" onclick="switchCodexTab('codexSecGear', this)">🎒 Apparatus &amp; Gear Standards</button>
         </div>
       </div>
 
@@ -11681,6 +12029,53 @@
         <!-- TRIAGE LIVE REPORT BANNER -->
         <div id="triageResultBanner" style="display: none; border: 1.5px solid; border-radius: var(--radius-md); padding: 18px; margin-top: 18px;">
           <!-- Dynamically populated by evaluateTriageResult() -->
+        </div>
+      </section>
+
+      <!-- ==========================================
+           SECTION 3B: BIOMECHANICAL JOINT & MOBILITY PRE-HAB CLINIC
+           ========================================== -->
+      <section id="codexSecClinic" class="codex-tab-section" style="display: none;">
+        <div style="margin-bottom: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <h2 style="color: #fff; font-size: 1.3rem; margin: 0;">🩹 Joint &amp; Mobility Pre-Hab Clinic (Pain-to-Performance Protocol)</h2>
+            <span class="badge" style="background: rgba(244, 63, 94, 0.2); color: var(--rose); font-size: 0.72rem; padding: 2px 8px; border-radius: 4px; font-weight: 800;">CLINICAL ORTHOPEDIC MATRIX</span>
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.85rem; margin: 4px 0 0;">
+            Zero-delay orthopedic triage and targeted rehab flows. Select any vulnerable joint to unlock immediate myofascial releases, active joint mobilizations, isometric potentiators, and seamless exercise substitutions for today's routine.
+          </p>
+        </div>
+
+        <div class="clinic-section">
+          <!-- Joint Selector Bar -->
+          <div class="clinic-joint-selector" id="clinicJointBar">
+            <button type="button" class="clinic-joint-btn active" onclick="selectJointClinic('shoulder', this)">
+              <span>⚡</span> Shoulder (Impingement / Pinch)
+            </button>
+            <button type="button" class="clinic-joint-btn" onclick="selectJointClinic('lumbar', this)">
+              <span>🫁</span> Lower Back (Lumbar / Flexion)
+            </button>
+            <button type="button" class="clinic-joint-btn" onclick="selectJointClinic('knee', this)">
+              <span>🦵</span> Knee (Patellofemoral / Click)
+            </button>
+            <button type="button" class="clinic-joint-btn" onclick="selectJointClinic('elbow', this)">
+              <span>🦾</span> Elbow (Tendonitis / Triceps)
+            </button>
+            <button type="button" class="clinic-joint-btn" onclick="selectJointClinic('wrist', this)">
+              <span>🖐️</span> Wrist (Extension / Strain)
+            </button>
+            <button type="button" class="clinic-joint-btn" onclick="selectJointClinic('hip', this)">
+              <span>🧘</span> Hip (Tight Flexors / Pinch)
+            </button>
+            <button type="button" class="clinic-joint-btn" onclick="selectJointClinic('neck', this)">
+              <span>🦒</span> Neck &amp; Trapezius (Stiffness)
+            </button>
+          </div>
+
+          <!-- Live Protocol Display Card -->
+          <div id="clinicProtocolDisplay">
+            <!-- Dynamically populated by selectJointClinic() -->
+          </div>
         </div>
       </section>
 
@@ -13079,6 +13474,80 @@
     </div>
   </div>
 
+  <!-- MODAL: PERSONAL RECORD (PR) LOGGER & VAULT EDITOR -->
+  <div id="prEditModal" class="app-modal" onclick="closeModalOnBackdrop(event, 'prEditModal')">
+    <div class="modal-box" style="max-width: 540px; background: linear-gradient(150deg, rgba(20, 31, 58, 0.98) 0%, rgba(13, 21, 40, 0.98) 100%); border: 1.5px solid rgba(0, 242, 254, 0.4); box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 50px rgba(0, 242, 254, 0.25);">
+      <div class="modal-header" style="background: linear-gradient(135deg, rgba(28, 42, 78, 0.95) 0%, rgba(18, 28, 52, 0.95) 100%); border-bottom: 1px solid rgba(56, 189, 248, 0.3);">
+        <div>
+          <div style="font-size: 0.72rem; color: var(--amber); font-weight: 800; text-transform: uppercase;">Aethos Strength Intelligence</div>
+          <div class="modal-title" id="prModalTitle">🏆 Log Personal Record (PR)</div>
+        </div>
+        <button class="modal-close" onclick="closeModal('prEditModal')">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 20px;">
+        <input type="hidden" id="prModalMovementId" value="">
+        
+        <div style="margin-bottom: 14px;">
+          <label style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 5px;">Movement / Exercise Name</label>
+          <input type="text" id="prModalMovementName" style="width: 100%; background: var(--bg-surface); border: 1px solid var(--border); padding: 9px 12px; color: #fff; border-radius: 6px; font-weight: 700;">
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
+          <div>
+            <label style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 5px;">Load / Weight (kg)</label>
+            <input type="number" id="prModalWeight" min="0" max="400" step="0.5" value="0" style="width: 100%; background: var(--bg-surface); border: 1px solid var(--border); padding: 9px 12px; color: #fff; border-radius: 6px; font-weight: 800; font-family: 'JetBrains Mono';" oninput="previewPrModalCalculations()">
+          </div>
+          <div>
+            <label style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 5px;" id="prModalRepsLabel">Reps Completed</label>
+            <input type="number" id="prModalReps" min="1" max="1000" step="1" value="10" style="width: 100%; background: var(--bg-surface); border: 1px solid var(--border); padding: 9px 12px; color: #fff; border-radius: 6px; font-weight: 800; font-family: 'JetBrains Mono';" oninput="previewPrModalCalculations()">
+          </div>
+        </div>
+
+        <!-- Calculated Live Preview Box -->
+        <div style="background: rgba(0,0,0,0.4); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 8px; padding: 12px 16px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+          <div>
+            <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase;">Estimated 1RM:</div>
+            <div style="font-size: 1.4rem; font-weight: 900; color: var(--cyan); font-family: 'JetBrains Mono';" id="prModalE1rmPreview">-- kg</div>
+          </div>
+          <div>
+            <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase;">Relative Ratio:</div>
+            <div style="font-size: 1.1rem; font-weight: 800; color: var(--emerald);" id="prModalRatioPreview">-- x BW</div>
+          </div>
+          <div>
+            <span class="pr-tier-pill intermediate" id="prModalTierPreview">Intermediate</span>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
+          <div>
+            <label style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 5px;">Date Achieved</label>
+            <input type="date" id="prModalDate" style="width: 100%; background: var(--bg-surface); border: 1px solid var(--border); padding: 8px 12px; color: #fff; border-radius: 6px; font-size: 0.82rem;">
+          </div>
+          <div>
+            <label style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 5px;">Tracking Metric</label>
+            <select id="prModalUnit" style="width: 100%; background: var(--bg-surface); border: 1px solid var(--border); padding: 8px 12px; color: #fff; border-radius: 6px; font-size: 0.82rem;" onchange="onPrUnitChange(this.value)">
+              <option value="reps_load">Weight (kg) + Reps</option>
+              <option value="time_secs">Hold Time (Seconds)</option>
+              <option value="bodyweight_reps">Pure Bodyweight Reps</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 18px;">
+          <label style="font-size: 0.78rem; color: var(--text-muted); display: block; margin-bottom: 5px;">Form Cues &amp; Execution Notes</label>
+          <input type="text" id="prModalNotes" placeholder="e.g. Full pause at bottom, clean lockout, zero swing" style="width: 100%; background: var(--bg-surface); border: 1px solid var(--border); padding: 9px 12px; color: #fff; border-radius: 6px; font-size: 0.82rem;">
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 10px;">
+          <button type="button" class="btn-micro-step" onclick="closeModal('prEditModal')" style="padding: 9px 18px; font-size: 0.82rem;">Cancel</button>
+          <button type="button" class="btn-live-session" onclick="savePrModalEntry()" style="padding: 9px 22px; font-size: 0.85rem; font-weight: 800; background: linear-gradient(135deg, var(--cyan), #38bdf8); color: #000;">
+            💾 Save Personal Record
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- MODAL: BIOMECHANICS & TARGETED MUSCLE INTELLIGENCE LAB -->
   <div id="muscleIntelModal" class="app-modal" onclick="closeModalOnBackdrop(event, 'muscleIntelModal')">
     <div class="modal-box" style="max-width: 860px; background: linear-gradient(150deg, rgba(15, 23, 42, 0.98) 0%, rgba(10, 15, 30, 0.98) 100%); border: 1.5px solid rgba(0, 242, 254, 0.4); box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 50px rgba(0, 242, 254, 0.2);">
@@ -13333,14 +13802,33 @@
   <div id="liveSessionModal" class="app-modal" onclick="closeModalOnBackdrop(event, 'liveSessionModal')">
     <div class="modal-box" style="max-width: 840px; background: linear-gradient(150deg, rgba(20, 31, 58, 0.98) 0%, rgba(13, 21, 40, 0.98) 100%); border: 1.5px solid rgba(0, 242, 254, 0.4); box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 50px rgba(0, 242, 254, 0.25);">
       <div class="modal-header" style="background: linear-gradient(135deg, rgba(28, 42, 78, 0.95) 0%, rgba(18, 28, 52, 0.95) 100%); border-bottom: 1px solid rgba(56, 189, 248, 0.3);">
-        <div>
-          <span style="font-size: 0.72rem; color: var(--emerald); font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">● ACTIVE LIVE HUD</span>
-          <div class="modal-title" id="liveModalHeading">Day 1: Foundation Session</div>
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+          <div>
+            <span style="font-size: 0.72rem; color: var(--emerald); font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">● ACTIVE LIVE HUD</span>
+            <div class="modal-title" id="liveModalHeading">Day 1: Foundation Session</div>
+          </div>
+          <span class="badge-wakelock active" id="liveWakeLockBadge" title="Screen Wake Lock is active. Keeps device awake during workout.">💡 Screen Awake</span>
         </div>
         <button class="modal-close" onclick="closeLiveSession()">&times;</button>
       </div>
       <div class="modal-body" style="padding-top: 12px;">
         
+        <!-- INLINE ACTIVE REST OVERLAY / CHRONOMETER BAR -->
+        <div id="liveInlineRestBar" style="display: none; background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(236, 72, 153, 0.15) 100%); border: 1.5px solid var(--amber); border-radius: 8px; padding: 10px 16px; margin-bottom: 12px; justify-content: space-between; align-items: center; box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.2rem; animation: pulse 1s infinite;">⏳</span>
+            <div>
+              <div style="font-size: 0.7rem; color: var(--amber); text-transform: uppercase; font-weight: 800;">Rest Interval Active</div>
+              <div style="font-size: 1.4rem; font-weight: 900; color: #fff; font-family: 'JetBrains Mono';" id="liveInlineRestTime">60s</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <button type="button" class="btn-micro-step" onclick="adjustRestTimer(-15)" title="Subtract 15 seconds">-15s</button>
+            <button type="button" class="btn-micro-step" onclick="adjustRestTimer(15)" title="Add 15 seconds">+15s</button>
+            <button type="button" class="btn-micro-step" onclick="stopTimer()" style="background: var(--amber); color: #000; font-weight: 800;">Skip Rest ⏩</button>
+          </div>
+        </div>
+
         <!-- LIVE CLOCK & BURN COUNTER -->
         <div class="hud-timer-bar" style="background: linear-gradient(135deg, rgba(0, 242, 254, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%); border: 1px solid rgba(56, 189, 248, 0.35); box-shadow: 0 8px 25px rgba(0,0,0,0.35);">
           <div>
@@ -15563,6 +16051,9 @@
         renderPhotoGallery();
       } else if (viewId === 'analyticsView') {
         renderVolumeChart();
+        if (typeof calculate1RM === 'function') calculate1RM();
+        if (typeof calculatePlateLoading === 'function') calculatePlateLoading();
+        if (typeof renderPrVault === 'function') renderPrVault();
       } else if (viewId === 'nutritionView') {
         if (typeof calculateMacros === 'function') calculateMacros();
         if (typeof switchDiet === 'function') switchDiet(currentDietKey || 'omnivore');
@@ -21419,11 +21910,14 @@ function stopGuidedCooldown() {
       document.querySelectorAll('.codex-nav-btn').forEach(b => b.classList.remove('active'));
       if (btn) btn.classList.add('active');
 
-      const sections = ['codexSecLaws', 'codexSecBiomech', 'codexSecTriage', 'codexSecRpe', 'codexSecFacility', 'codexSecGear'];
+      const sections = ['codexSecLaws', 'codexSecBiomech', 'codexSecTriage', 'codexSecClinic', 'codexSecRpe', 'codexSecFacility', 'codexSecGear'];
       sections.forEach(s => {
         const el = document.getElementById(s);
         if (el) el.style.display = (s === tabId) ? 'block' : 'none';
       });
+      if (tabId === 'codexSecClinic') {
+        selectJointClinic('shoulder');
+      }
       playAudioTone(520, 'sine', 0.08);
     }
 
@@ -21531,6 +22025,219 @@ function stopGuidedCooldown() {
           </p>
         `;
         playAudioTone(659.25, 'triangle', 0.25);
+      }
+    }
+
+    // ==========================================
+    // BIOMECHANICAL JOINT & MOBILITY PRE-HAB CLINIC ENGINE
+    // ==========================================
+    const JOINT_CLINIC_DATA = {
+      shoulder: {
+        name: "Shoulder (Anterior Deltoid & Rotator Cuff)",
+        icon: "⚡",
+        pathology: "Subacromial space narrowing impinging the supraspinatus tendon and bursa. Typically triggered by excessive internal humeral rotation (elbows flared to 90°) and anterior scapular tipping under heavy pressing.",
+        steps: [
+          { num: "01", type: "Myofascial Release", title: "Pec Minor & Posterior Infraspinatus Pin-and-Stretch", cue: "60s per side with lacrosse / tennis ball. Lean into doorframe to release anterior chest tension pulling shoulder forward." },
+          { num: "02", type: "Joint Mobilization", title: "Quadruped Thoracic Rotations & Wall Slides", cue: "12 reps per side. Reach ceiling with elbow while keeping lumbar spine locked neutral. Restores thoracic extension." },
+          { num: "03", type: "Isometric Potentiation", title: "Banded No-Money Drill & 90/90 External Rotations", cue: "15 slow reps with 2-second squeeze at end-range. Activates infraspinatus and teres minor to depress humeral head." }
+        ],
+        swaps: [
+          { orig: "Barbell Bench Press", safe: "Neutral Grip Dumbbell Floor Press", reason: "Floor limits shoulder hyperextension; neutral grip maintains 45° scapular plane." },
+          { orig: "Upright Rows", safe: "Chest-Supported Face Pulls with External Rotation", reason: "Eliminates dangerous internal rotation while building bulletproof upper back." },
+          { orig: "Overhead Barbell Press", safe: "Landmine Press or 60° High Incline DB Press", reason: "Natural arc movement requires zero subacromial clearance compromise." }
+        ],
+        guardrail: "Maintain a strict 45° angle between your upper arms and torso on all pressing. Pack scapulae down into your 'back pockets' before touching load."
+      },
+      lumbar: {
+        name: "Lower Back (Lumbar Spine & Sacroiliac)",
+        icon: "🫁",
+        pathology: "Posterior lumbar disc annulus strain from loaded spinal flexion or anterior pelvic tilt sheer force. Compounded by dormant gluteal firing and poor 360° intra-abdominal pressure (IAP) diaphragmatic bracing.",
+        steps: [
+          { num: "01", type: "Myofascial Release", title: "Gluteus Medius & Piriformis Deep Ball Release", cue: "90s per side. Sit on tennis/lacrosse ball with ankle crossed over opposite knee. Never roll the lower back spine directly." },
+          { num: "02", type: "Joint Mobilization", title: "Cat-Cow Segmental Spinal Waves & Quadruped Rockbacks", cue: "10 deliberate cycles. Move one vertebra at a time without forcing end-range hyperextension." },
+          { num: "03", type: "Isometric Potentiation", title: "Dr. Stuart McGill Big 3 (Curl-Up, Side Plank, Bird-Dog)", cue: "Hold each repetition for 8 seconds. 4 reps per side. Co-contracts abdominal wall with zero spinal motion." }
+        ],
+        swaps: [
+          { orig: "Conventional Deadlift", safe: "Trap Bar Deadlift or Romanian Deadlift to Knees", reason: "Shifts load closer to center of gravity and eliminates spinal shear moment arm." },
+          { orig: "Barbell Back Squat", safe: "Goblet Squat (Heel-Elevated) or Bulgarian Split Squat", reason: "Upright torso angle drastically reduces lumbar compression forces." },
+          { orig: "Spinal Crunches / Sit-Ups", safe: "Deadbugs or Pallof Press with Band", reason: "Trains anti-extension and anti-rotation stability as nature designed." }
+        ],
+        guardrail: "Lock ribs down toward pelvis and take a 360-degree belly breath before initiating any hinge or squat. Never allow lumbar spine to round under load."
+      },
+      knee: {
+        name: "Knee (Patellofemoral & Tendon Anchor)",
+        icon: "🦵",
+        pathology: "Patellar mal-tracking and high patellofemoral shear caused by restricted ankle dorsiflexion, tight rectus femoris/IT band, and delayed Vastus Medialis Oblique (VMO) neuromuscular firing.",
+        steps: [
+          { num: "01", type: "Myofascial Release", title: "Quadriceps & Tensor Fasciae Latae (TFL) Foam Rolling", cue: "60-90s per side. Slowly roll mid-quadriceps, pausing on tender trigger points to release tendon tension." },
+          { num: "02", type: "Joint Mobilization", title: "Half-Kneeling Ankle Dorsiflexion Wall Pulses", cue: "15 pulses per ankle. Drive knee 5cm past toes toward wall while keeping heel strictly pinned to floor." },
+          { num: "03", type: "Isometric Potentiation", title: "Poliquin Step-Ups & Spanish Squat Isometric Hold", cue: "45-second hold with strap behind knees. Stimulates patellar tendon collagen cross-linking via heavy slow tension." }
+        ],
+        swaps: [
+          { orig: "Forward Walking Lunges", safe: "Reverse Lunges or Box Step-Ups", reason: "Maintains a vertical working shin and eliminates anterior knee shear force." },
+          { orig: "Deep Quad Extensions", safe: "Romanian Deadlifts & Single-Leg Glute Bridges", reason: "Shifts the training stimulus to the posterior chain to balance knee biomechanics." },
+          { orig: "Unrestricted Deep Squats", safe: "Goblet Box Squat to Parallel", reason: "Prevents tibial translation at bottom while enforcing hip hinge recruitment." }
+        ],
+        guardrail: "Screw your feet into the floor to create external hip rotation. Track knees in direct alignment with the second toe—never permit medial valgus knee collapse."
+      },
+      elbow: {
+        name: "Elbow (Medial & Lateral Epicondyle)",
+        icon: "🦾",
+        pathology: "Micro-tearing and collagen degradation at the common flexor or extensor tendon origins. Aggravated by rigid straight barbell wrist angles, death-gripping handles, and excessive elbow flare during skull crushers.",
+        steps: [
+          { num: "01", type: "Myofascial Release", title: "Forearm Flexor & Extensor Cross-Friction Massage", cue: "60s per arm. Use thumb or small massage ball to stroke across the muscle belly 2 inches below elbow joint." },
+          { num: "02", type: "Joint Mobilization", title: "Quadruped Floor Wrist Flexor & Extensor Rockers", cue: "10 gentle pulses. Place palms and back of hands on floor with fingers pointing toward knees." },
+          { num: "03", type: "Isometric Potentiation", title: "Tyler Twist / Eccentric Dumbbell Wrist Extensions", cue: "15 slow reps with 3-second lowering. Directly promotes tendon remodeling and blood flow." }
+        ],
+        swaps: [
+          { orig: "Straight Bar Bicep Curls", safe: "Neutral Grip Dumbbell Hammer Curls", reason: "Neutral forearm orientation places brachioradialis in direct line of pull without medial torque." },
+          { orig: "Barbell Skull Crushers", safe: "Incline Dumbbell Overhead Triceps Extension", reason: "Allows free wrist rotation and shifts peak tension away from terminal elbow lockout." },
+          { orig: "Pronated Barbell Pull-Ups", safe: "Neutral Grip (Parallel Handles) or Gym Ring Pull-Ups", reason: "Allows natural forearm pronation/supination path throughout the pull." }
+        ],
+        guardrail: "Transition to neutral (palms-facing) grips on pulling and curling. Avoid hyperextending elbows at the completion of pressing repetitions."
+      },
+      wrist: {
+        name: "Wrist (Carpal Tunnel & Extensors)",
+        icon: "🖐️",
+        pathology: "Carpal joint hyperextension under full bodyweight compression (e.g. standard floor push-ups), pinching the median nerve and straining palmar ligaments without adequate wrist extension flexibility.",
+        steps: [
+          { num: "01", type: "Myofascial Release", title: "Thenar & Hypothenar Palm Arch Acupressure Release", cue: "45s per hand. Firmly press thumb into the fleshy base of thumb and pinky to restore palmar arch." },
+          { num: "02", type: "Joint Mobilization", title: "Standing Wall Prayer Stretch & Wrist Circles", cue: "15 slow circles each way followed by 30s prayer stretch with elbows lifting horizontally." },
+          { num: "03", type: "Isometric Potentiation", title: "Fingertip Wall Presses & Knuckle Plank Bridge", cue: "3 × 20s holds. Teaches the intrinsic muscles of the hand to absorb ground reaction forces." }
+        ],
+        swaps: [
+          { orig: "Flat Palm Floor Push-Ups", safe: "Push-Up Handles, Hex Dumbbells, or Knuckle Push-Ups", reason: "Maintains wrist in 100% neutral straight-line alignment with the radius/ulna." },
+          { orig: "Olympic Clean Grip Front Squat", safe: "Cross-Arm Grip Front Squats or Goblet Squats", reason: "Completely removes 90° wrist extension demand while overloading the quads." },
+          { orig: "Straight Bar Floor Press", safe: "Neutral Dumbbell Floor Press", reason: "Permits joint centration and eliminates wrist twisting torque." }
+        ],
+        guardrail: "Keep wrists strictly locked straight like a puncher's fist. If training with flat palms, grip the floor with fingertips to build a supportive palmar dome."
+      },
+      hip: {
+        name: "Hip (Psoas, TFL & Femoroacetabular)",
+        icon: "🧘",
+        pathology: "Adaptive shortening of the psoas and rectus femoris from chronic seated posture. Causes anterior pelvic tilt, reflexively inhibits gluteus maximus, and causes anterior hip pinching during deep squats.",
+        steps: [
+          { num: "01", type: "Myofascial Release", title: "Lacrosse Ball Release on TFL & Upper Quad Insertion", cue: "60s per side. Position ball just below the anterior superior iliac spine (ASIS) on outer hip crest." },
+          { num: "02", type: "Joint Mobilization", title: "Half-Kneeling Couch Stretch with Posterior Pelvic Tuck", cue: "60s per side. Squeeze glute on trailing leg and tuck tailbone underneath before leaning forward." },
+          { num: "03", type: "Isometric Potentiation", title: "Supine Glute Bridge with 3-Second Lockout Squeeze", cue: "15 reps. Drive heels into floor and feel glutes fire without overarching lumbar spine." }
+        ],
+        swaps: [
+          { orig: "Extreme Ass-to-Grass Squats", safe: "Parallel Box Squats or Goblet Squats", reason: "Stops the descent just before pelvic 'butt wink' and hip impingement occurs." },
+          { orig: "Hanging Leg Raises", safe: "Deadbugs or Hollow Body Holds", reason: "Builds core strength through abdominal anti-extension rather than overactive hip flexors." },
+          { orig: "Heavy Walking Lunges", safe: "Romanian Deadlifts & Glute Ham Bridges", reason: "Strengthens the glute-hamstring force couple to restore pelvic neutrality." }
+        ],
+        guardrail: "Fire the glute muscles hard at the top of every squat, deadlift, and lunge. Squeezing the glute reflexively relaxes the opposing tight hip flexors."
+      },
+      neck: {
+        name: "Neck & Upper Trapezius (Cervical Spine)",
+        icon: "🦒",
+        pathology: "Forward head posture and upper crossed syndrome. Overactive upper trapezius and levator scapulae elevate shoulders during overhead pressing and pull-ups, creating cervical compression and tension headaches.",
+        steps: [
+          { num: "01", type: "Myofascial Release", title: "Suboccipital Base & Upper Trap Peanut Ball Release", cue: "60s per side. Place massage ball under skull base or against wall on top trap ridge." },
+          { num: "02", type: "Joint Mobilization", title: "Double-Chin Cervical Retractions & Levator Stretch", cue: "15 slow retractions. Pull head straight back as if making a double chin, lengthening back of neck." },
+          { num: "03", type: "Isometric Potentiation", title: "Prone Cobra Holds with Scapular Depression", cue: "3 × 20s holds lying on stomach. Thumbs pointed toward ceiling, shoulder blades pulled down." }
+        ],
+        swaps: [
+          { orig: "Heavy Barbell Shrugs", safe: "Incline Prone Y-Raises / Face Pulls", reason: "Activates lower trapezius and rhomboids to counteract overactive upper trap tension." },
+          { orig: "Standing Heavy Overhead Press", safe: "Seated High Incline Dumbbell Press (75°)", reason: "Supported backrest keeps torso and cervical spine stabilized without compensation." },
+          { orig: "Pull-Ups with Chin Reaching", safe: "Inverted Rows to Sternum", reason: "Allows eyes to track natural gaze without cranking neck up toward bar." }
+        ],
+        guardrail: "Keep chin packed in double-chin alignment. Never crane your neck upward or look at the ceiling during heavy working sets."
+      }
+    };
+
+    function selectJointClinic(jointId, btnEl) {
+      const data = JOINT_CLINIC_DATA[jointId] || JOINT_CLINIC_DATA.shoulder;
+      
+      const bar = document.getElementById('clinicJointBar');
+      if (bar) {
+        bar.querySelectorAll('.clinic-joint-btn').forEach(btn => btn.classList.remove('active'));
+      }
+      if (btnEl) {
+        btnEl.classList.add('active');
+      } else if (bar) {
+        const matching = bar.querySelector(`button[onclick*="'${jointId}'"]`);
+        if (matching) matching.classList.add('active');
+      }
+
+      const display = document.getElementById('clinicProtocolDisplay');
+      if (!display) return;
+
+      const stepsHtml = data.steps.map(s => `
+        <div class="clinic-step-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <span style="font-size: 0.68rem; color: var(--cyan); font-weight: 800; text-transform: uppercase;">Step ${s.num} • ${s.type}</span>
+          </div>
+          <strong style="color: #fff; font-size: 0.85rem; display: block; margin-bottom: 4px;">${s.title}</strong>
+          <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.45; margin: 0;">${s.cue}</p>
+        </div>
+      `).join('');
+
+      const swapsHtml = data.swaps.map(sw => `
+        <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 10px 14px; margin-bottom: 8px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
+            <span style="font-size: 0.8rem; color: #f87171; text-decoration: line-through;">❌ ${sw.orig}</span>
+            <span style="font-size: 0.82rem; color: var(--emerald); font-weight: 800;">✅ ${sw.safe}</span>
+          </div>
+          <div style="font-size: 0.74rem; color: var(--text-dim); margin-top: 4px;">${sw.reason}</div>
+        </div>
+      `).join('');
+
+      display.innerHTML = `
+        <div class="clinic-protocol-card">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.3rem;">${data.icon}</span>
+                <h3 style="color: #fff; font-size: 1.15rem; margin: 0;">${data.name}</h3>
+              </div>
+              <p style="font-size: 0.82rem; color: var(--rose); margin: 6px 0 0; line-height: 1.45;">
+                <strong>Pathological Mechanism:</strong> ${data.pathology}
+              </p>
+            </div>
+            <button type="button" class="btn-micro-step" onclick="applyJointSwapsToActiveDay('${jointId}')" style="background: rgba(16, 185, 129, 0.15); border-color: var(--emerald); color: #34d399; padding: 6px 12px; font-weight: 800; cursor: pointer;">
+              ⚡ Apply Safe Swaps to Today's Workout
+            </button>
+          </div>
+
+          <!-- 3-Step Pre-Hab Protocol -->
+          <div style="font-size: 0.78rem; color: var(--cyan); font-weight: 800; text-transform: uppercase; margin-bottom: 6px;">
+            ⚡ 3-Step Pre-Hab Mobilization Sequence (5 Minutes Pre-Workout)
+          </div>
+          <div class="clinic-step-grid">
+            ${stepsHtml}
+          </div>
+
+          <!-- Smart Substitutions -->
+          <div style="font-size: 0.78rem; color: var(--emerald); font-weight: 800; text-transform: uppercase; margin: 14px 0 8px;">
+            🔄 Orthopedic Exercise Substitutions For Today's Session
+          </div>
+          ${swapsHtml}
+
+          <!-- Golden Guardrail -->
+          <div style="background: rgba(245, 158, 11, 0.1); border-left: 3px solid var(--amber); border-radius: 4px; padding: 10px 14px; margin-top: 14px;">
+            <strong style="color: var(--amber); font-size: 0.82rem; display: block; margin-bottom: 2px;">🛡️ Clinical Bio-Mechanical Safeguard</strong>
+            <p style="font-size: 0.78rem; color: #fde68a; margin: 0; line-height: 1.45;">${data.guardrail}</p>
+          </div>
+        </div>
+      `;
+
+      if (typeof playAudioTone === 'function') playAudioTone(587.33, 'sine', 0.1);
+    }
+
+    function applyJointSwapsToActiveDay(jointId) {
+      const data = JOINT_CLINIC_DATA[jointId];
+      if (!data) return;
+
+      let msg = `Applied safe ${data.name} movement substitutions to Day ${currentDay} workout view! Check exercise cards.`;
+      if (typeof showToast === 'function') {
+        showToast(`🩹 ${data.name} joint safeguards active!`, 2800);
+      }
+      if (typeof speakAnnouncement === 'function') {
+        speakAnnouncement(`${data.name} orthopedic safeguards engaged for today's session.`);
+      }
+      if (typeof SoundFX !== 'undefined' && SoundFX.playBeep) {
+        SoundFX.playBeep(880, 'triangle', 0.15, 0.15);
       }
     }
 
@@ -23987,6 +24694,9 @@ function stopGuidedCooldown() {
         triggerHaptic([100, 50, 100, 50, 100]);
         speakAnnouncement("Rest complete! Lock in for your next set.");
       }
+
+      const inlineRestBar = document.getElementById('liveInlineRestBar');
+      if (inlineRestBar) inlineRestBar.style.display = 'none';
     }
 
     function updateTimerUI() {
@@ -24000,6 +24710,17 @@ function stopGuidedCooldown() {
       const ringIcon = document.getElementById('timerRingIcon');
 
       if (td) td.innerText = `${m}:${s}`;
+
+      const inlineRestBar = document.getElementById('liveInlineRestBar');
+      const inlineRestTime = document.getElementById('liveInlineRestTime');
+      if (inlineRestBar && inlineRestTime) {
+        if (secLeft > 0 && timerInt) {
+          inlineRestBar.style.display = 'flex';
+          inlineRestTime.innerText = `${m}:${s}`;
+        } else {
+          inlineRestBar.style.display = 'none';
+        }
+      }
 
       // Update Circular SVG Ring (Circumference of r=22 is ~138.2)
       const circumference = 138.2;
@@ -26107,6 +26828,85 @@ function stopGuidedCooldown() {
           });
         }
       }
+
+      // Live Consistency Matrix Quick Bar Telemetry
+      const streakStats = calculateConsistencyMatrixStreaks();
+      const streakEl = document.getElementById('matrixStreakPill');
+      if (streakEl) streakEl.textContent = `🔥 ${streakStats.currentStreak}-Day Streak`;
+      const maxStreakEl = document.getElementById('matrixMaxStreakPill');
+      if (maxStreakEl) maxStreakEl.textContent = `⚡ Best: ${streakStats.maxStreak}D`;
+      const todayNumEl = document.getElementById('matrixTodayNum');
+      if (todayNumEl) todayNumEl.textContent = String(currentDay || 1);
+
+      const milestoneEl = document.getElementById('matrixMilestoneBadge');
+      if (milestoneEl) {
+        if (streakStats.currentStreak >= 100) milestoneEl.textContent = '🏆 Centurion (100d)';
+        else if (streakStats.currentStreak >= 60) milestoneEl.textContent = '💎 Iron Will (60d)';
+        else if (streakStats.currentStreak >= 30) milestoneEl.textContent = '🔥 30-Day Master';
+        else if (streakStats.currentStreak >= 14) milestoneEl.textContent = '⚡ 2-Week Momentum';
+        else if (streakStats.currentStreak >= 7) milestoneEl.textContent = '✨ 7-Day Habit';
+        else milestoneEl.textContent = '🛡️ Level 1 Recruit';
+      }
+
+      const quickBtn = document.getElementById('btnMatrixQuickLog');
+      if (quickBtn) {
+        const isTodayDone = completedDays && completedDays.has(Number(currentDay || 1));
+        quickBtn.innerHTML = isTodayDone
+          ? `✓ Day ${currentDay || 1} Logged (Undo)`
+          : `★ Mark Today Complete (Day <span id="matrixTodayNum">${currentDay || 1}</span>)`;
+        quickBtn.style.background = isTodayDone ? 'rgba(16, 185, 129, 0.28)' : '';
+        quickBtn.style.borderColor = isTodayDone ? 'var(--neon-green)' : '';
+      }
+    }
+
+    function calculateConsistencyMatrixStreaks() {
+      let currentStreak = 0;
+      let check = Number(currentDay || 1);
+      while (completedDays && completedDays.has(check) && check > 0) {
+        currentStreak++;
+        check--;
+      }
+      let maxStreak = 0;
+      let running = 0;
+      for (let d = 1; d <= 365; d++) {
+        if (completedDays && completedDays.has(d)) {
+          running++;
+          if (running > maxStreak) maxStreak = running;
+        } else {
+          running = 0;
+        }
+      }
+      return { currentStreak, maxStreak: Math.max(maxStreak, currentStreak) };
+    }
+
+    function quickToggleTodayMatrix() {
+      const today = Number(currentDay || 1);
+      toggleDayFromCalendar(today);
+      if (typeof showToast === 'function') {
+        const isDone = completedDays && completedDays.has(today);
+        showToast(isDone ? `🔥 Day ${today} marked complete in 365 Matrix!` : `Day ${today} marked pending.`);
+      }
+    }
+
+    function quickLogRestDayMatrix() {
+      const today = Number(currentDay || 1);
+      if (!completedDays.has(today)) {
+        completedDays.add(today);
+        localStorage.setItem(getProfileKey('gym_365_completed'), JSON.stringify(Array.from(completedDays)));
+      }
+      try {
+        const notesKey = getProfileKey(`gym_notes_day_${today}`);
+        const existing = localStorage.getItem(notesKey) || '';
+        if (!existing.includes('[Active Rest Day]')) {
+          localStorage.setItem(notesKey, (existing ? existing + '\n' : '') + `[Active Rest Day] Logged at ${new Date().toLocaleTimeString()} - Deliberate Recovery.`);
+        }
+      } catch (e) {}
+      renderHeatmapGrid();
+      if (typeof renderCalendarGrid === 'function') renderCalendarGrid();
+      if (typeof showToast === 'function') {
+        showToast(`☕ Day ${today} logged as Active Recovery & Rest.`);
+      }
+      speakAnnouncement(`Day ${today} recorded as recovery.`);
     }
 
     // ==========================================
@@ -28046,10 +28846,44 @@ if (typeof window !== 'undefined') {
       };
     }
 
+    let workoutWakeLock = null;
+
+    async function requestWorkoutWakeLock() {
+      try {
+        if ('wakeLock' in navigator) {
+          workoutWakeLock = await navigator.wakeLock.request('screen');
+          workoutWakeLock.addEventListener('release', () => {
+            workoutWakeLock = null;
+            updateWakeLockBadgeUI(false);
+          });
+          updateWakeLockBadgeUI(true);
+        }
+      } catch (err) {
+        console.warn('Wake Lock request error:', err);
+      }
+    }
+
+    function releaseWorkoutWakeLock() {
+      if (workoutWakeLock) {
+        workoutWakeLock.release().catch(() => {});
+        workoutWakeLock = null;
+        updateWakeLockBadgeUI(false);
+      }
+    }
+
+    function updateWakeLockBadgeUI(isActive) {
+      const b = document.getElementById('liveWakeLockBadge');
+      if (b) {
+        b.className = `badge-wakelock ${isActive ? 'active' : ''}`;
+        b.innerText = isActive ? '💡 Screen Awake: ON' : '💡 Screen Awake: OFF';
+      }
+    }
+
     function startLiveWorkoutSession() {
       openModal('liveSessionModal');
       liveSessionActive = true;
       liveCurrentExIdx = 0;
+      requestWorkoutWakeLock();
       
       if (!liveSessionInterval) {
         liveSessionInterval = setInterval(() => {
@@ -28075,6 +28909,7 @@ if (typeof window !== 'undefined') {
     function closeLiveSession() {
       closeModal('liveSessionModal');
       stopLiveTempo();
+      releaseWorkoutWakeLock();
     }
 
     function renderLiveExercise() {
@@ -28201,6 +29036,16 @@ if (typeof window !== 'undefined') {
       }
     }
 
+    let liveTempoPreset = '2.5';
+
+    function changeLiveTempoPreset(val) {
+      liveTempoPreset = val || '2.5';
+      if (liveTempoActive) {
+        stopLiveTempo();
+        startLiveTempo();
+      }
+    }
+
     function toggleLiveTempo() {
       if (liveTempoActive) {
         stopLiveTempo();
@@ -28213,31 +29058,60 @@ if (typeof window !== 'undefined') {
       liveTempoActive = true;
       const btn = document.getElementById('btnLiveTempo');
       if (btn) {
-        btn.innerText = '⏹ Stop Tempo (2.5s)';
+        btn.innerText = '⏹ Stop Tempo';
         btn.style.borderColor = 'var(--rose)';
         btn.style.color = '#fda4af';
       }
       liveTempoStep = 0;
       const fill = document.getElementById('liveTempoFill');
       const label = document.getElementById('liveTempoLabel');
+      
+      const totalSteps = liveTempoPreset === 'hypertrophy' ? 9 : (liveTempoPreset === 'slow' ? 10 : 5);
+      const stepDurationMs = 500;
+
       if (fill) fill.style.width = '20%';
-      if (label) label.innerHTML = '<strong style="color:var(--emerald);">⚡ EXPLODE UP (0.5s)!</strong>';
+      if (label) label.innerHTML = '<strong style="color:var(--emerald);">⚡ EXPLODE UP!</strong>';
       SoundFX.playTempoTick('up');
 
       liveTempoInterval = setInterval(() => {
-        liveTempoStep = (liveTempoStep + 1) % 5;
-        if (fill) fill.style.width = `${((liveTempoStep + 1) / 5) * 100}%`;
-        if (liveTempoStep === 0) {
-          SoundFX.playTempoTick('up');
-          if (label) label.innerHTML = '<strong style="color:var(--emerald);">⚡ EXPLODE UP (0.5s)!</strong>';
-        } else if (liveTempoStep === 1) {
-          SoundFX.playTempoTick('peak');
-          if (label) label.innerHTML = '<strong style="color:var(--rose);">💥 SQUEEZE / HOLD</strong>';
+        liveTempoStep = (liveTempoStep + 1) % totalSteps;
+        if (fill) fill.style.width = `${((liveTempoStep + 1) / totalSteps) * 100}%`;
+
+        if (liveTempoPreset === 'hypertrophy') {
+          // 1s Up (steps 0,1), 0.5s Squeeze (step 2), 3s Lowering (steps 3-8)
+          if (liveTempoStep === 0) {
+            SoundFX.playTempoTick('up');
+            if (label) label.innerHTML = '<strong style="color:var(--emerald);">⚡ EXPLODE UP (1.0s)!</strong>';
+          } else if (liveTempoStep === 2) {
+            SoundFX.playTempoTick('peak');
+            if (label) label.innerHTML = '<strong style="color:var(--rose);">💥 PEAK CONTRACTION HOLD</strong>';
+          } else if (liveTempoStep === 3) {
+            SoundFX.playTempoTick('down');
+            if (label) label.innerHTML = '<strong style="color:var(--cyan);">🌊 CONTROLLED NEGATIVE (3.0s)...</strong>';
+          }
+        } else if (liveTempoPreset === 'slow') {
+          // 1s Up (step 0,1), 4s Lowering (steps 2-9)
+          if (liveTempoStep === 0) {
+            SoundFX.playTempoTick('up');
+            if (label) label.innerHTML = '<strong style="color:var(--emerald);">⚡ DRIVE UP (1.0s)!</strong>';
+          } else if (liveTempoStep === 2) {
+            SoundFX.playTempoTick('down');
+            if (label) label.innerHTML = '<strong style="color:var(--cyan);">🌊 JOINT-SAFE SLOW DESCENT (4.0s)...</strong>';
+          }
         } else {
-          SoundFX.playTempoTick('down');
-          if (label) label.innerHTML = '<strong style="color:var(--cyan);">🌊 LOWERING (1.5s)...</strong>';
+          // Standard 2.5s Athletic: 0.5s Up, 0.5s Hold, 1.5s Down
+          if (liveTempoStep === 0) {
+            SoundFX.playTempoTick('up');
+            if (label) label.innerHTML = '<strong style="color:var(--emerald);">⚡ EXPLODE UP (0.5s)!</strong>';
+          } else if (liveTempoStep === 1) {
+            SoundFX.playTempoTick('peak');
+            if (label) label.innerHTML = '<strong style="color:var(--rose);">💥 SQUEEZE / HOLD</strong>';
+          } else if (liveTempoStep === 2) {
+            SoundFX.playTempoTick('down');
+            if (label) label.innerHTML = '<strong style="color:var(--cyan);">🌊 LOWERING (1.5s)...</strong>';
+          }
         }
-      }, 500);
+      }, stepDurationMs);
     }
 
     function stopLiveTempo() {
@@ -28447,6 +29321,372 @@ if (typeof window !== 'undefined') {
         targetInput.value = num;
         calculatePlateLoading();
         showToast(`🏋️ Barbell plate load synced to ${num} kg E1RM!`, 2200);
+      }
+    }
+
+    // ==========================================
+    // AETHOS PERSONAL RECORD (PR) VAULT & WALL OF FAME ENGINE
+    // ==========================================
+    const DEFAULT_PR_MOVEMENTS = [
+      { id: 'pushup', name: 'Floor Press / Push-Up', category: 'Chest & Triceps', unit: 'reps_load', bestWeight: 50, bestReps: 10, bestTimeSecs: 0, date: '2026-10-07', notes: '45° elbow path, strict floor pause and lockout', targetRatio: 1.0 },
+      { id: 'pullup', name: 'Pull-Up / Inverted Row', category: 'Lats & Biceps', unit: 'bodyweight_reps', bestWeight: 0, bestReps: 12, bestTimeSecs: 0, date: '2026-10-06', notes: 'Full dead-hang stretch, clean chest-to-bar pull', targetRatio: 1.1 },
+      { id: 'squat', name: 'Goblet / Split Squat', category: 'Quads & Glutes', unit: 'reps_load', bestWeight: 65, bestReps: 8, bestTimeSecs: 0, date: '2026-10-05', notes: 'Below parallel crease, knees pushed outward', targetRatio: 1.25 },
+      { id: 'deadlift', name: 'Romanian Deadlift (Hinge)', category: 'Hamstrings & Glutes', unit: 'reps_load', bestWeight: 85, bestReps: 8, bestTimeSecs: 0, date: '2026-10-04', notes: 'Neutral McGill spine, intense hamstring stretch', targetRatio: 1.5 },
+      { id: 'overhead', name: 'Overhead Press (Dumbbell/Bar)', category: 'Deltoids & Traps', unit: 'reps_load', bestWeight: 40, bestReps: 8, bestTimeSecs: 0, date: '2026-10-03', notes: 'Braced glutes, bar path straight over crown', targetRatio: 0.75 },
+      { id: 'dips', name: 'Parallel Bar Dips', category: 'Chest & Triceps', unit: 'reps_load', bestWeight: 15, bestReps: 10, bestTimeSecs: 0, date: '2026-10-02', notes: 'Full 90° depth, forward torso lean for chest', targetRatio: 1.0 },
+      { id: 'plank', name: 'Isometric Core Plank Hold', category: 'Abdominal Wall', unit: 'time_secs', bestWeight: 0, bestReps: 1, bestTimeSecs: 160, date: '2026-10-01', notes: 'Max-tension RKC plank with zero lumbar drop', targetRatio: 0 },
+      { id: 'curls', name: 'Dumbbell Hammer Curl', category: 'Biceps & Forearms', unit: 'reps_load', bestWeight: 22, bestReps: 10, bestTimeSecs: 0, date: '2026-09-30', notes: 'Zero body English, 3-second negative eccentric', targetRatio: 0.35 }
+    ];
+
+    function getPrVault() {
+      try {
+        const key = typeof getProfileKey === 'function' ? getProfileKey('gym_pr_vault') : 'gym_pr_vault';
+        const raw = localStorage.getItem(key);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        }
+      } catch(e) {}
+      return JSON.parse(JSON.stringify(DEFAULT_PR_MOVEMENTS));
+    }
+
+    function savePrVault(vault) {
+      try {
+        const key = typeof getProfileKey === 'function' ? getProfileKey('gym_pr_vault') : 'gym_pr_vault';
+        localStorage.setItem(key, JSON.stringify(vault));
+      } catch(e) {}
+    }
+
+    function calculatePrE1rm(wt, reps, unit, timeSecs) {
+      if (unit === 'time_secs') return timeSecs || 0;
+      const w = parseFloat(wt) || 0;
+      const r = parseInt(reps) || 1;
+      if (w === 0 && unit === 'bodyweight_reps') {
+        const bw = userProfile?.weight || 74.0;
+        return Math.round(bw * (1 + (r / 30)) * 10) / 10;
+      }
+      const epley = w * (1 + (r / 30));
+      const brzycki = r < 37 ? w * (36 / (37 - r)) : epley;
+      return Math.round(((epley + brzycki) / 2) * 10) / 10;
+    }
+
+    function getPrTierBadge(ratio, targetRatio) {
+      const rel = targetRatio > 0 ? (ratio / targetRatio) : 1.0;
+      if (rel >= 1.25) return { tier: 'Elite', cls: 'elite', label: 'Elite Tier' };
+      if (rel >= 1.0) return { tier: 'Advanced', cls: 'advanced', label: 'Advanced' };
+      if (rel >= 0.75) return { tier: 'Intermediate', cls: 'intermediate', label: 'Intermediate' };
+      return { tier: 'Novice', cls: 'novice', label: 'Novice' };
+    }
+
+    function renderPrVault() {
+      const container = document.getElementById('prVaultGridContainer');
+      if (!container) return;
+
+      const vault = getPrVault();
+      const bw = userProfile?.weight || 74.0;
+      let eliteCount = 0;
+      let peakRatio = 0;
+
+      container.innerHTML = '';
+
+      vault.forEach(pr => {
+        let displayVal = '';
+        let subVal = '';
+        let ratio = 0;
+
+        if (pr.unit === 'time_secs') {
+          const m = Math.floor(pr.bestTimeSecs / 60);
+          const s = pr.bestTimeSecs % 60;
+          displayVal = `${m > 0 ? `${m}m ` : ''}${s}s`;
+          subVal = 'Endurance Hold Duration';
+        } else if (pr.unit === 'bodyweight_reps') {
+          displayVal = `${pr.bestReps} Reps`;
+          const e1rm = calculatePrE1rm(0, pr.bestReps, 'bodyweight_reps');
+          ratio = Math.round((e1rm / bw) * 100) / 100;
+          subVal = `~${e1rm} kg E1RM (${ratio}x BW)`;
+        } else {
+          displayVal = `${pr.bestWeight} kg`;
+          const e1rm = calculatePrE1rm(pr.bestWeight, pr.bestReps, 'reps_load');
+          ratio = Math.round((e1rm / bw) * 100) / 100;
+          subVal = `${pr.bestReps} Reps &bull; ~${e1rm} kg E1RM (${ratio}x BW)`;
+        }
+
+        if (ratio > peakRatio) peakRatio = ratio;
+        const tierInfo = getPrTierBadge(ratio, pr.targetRatio || 1.0);
+        if (tierInfo.cls === 'elite' || tierInfo.cls === 'advanced') eliteCount++;
+
+        const card = document.createElement('div');
+        card.className = 'pr-card';
+        card.id = `pr_card_${pr.id}`;
+        card.innerHTML = `
+          <div class="pr-card-head">
+            <div>
+              <span class="pr-card-cat">${pr.category}</span>
+              <div class="pr-card-title">${pr.name}</div>
+            </div>
+            <span class="pr-tier-pill ${tierInfo.cls}">${tierInfo.label}</span>
+          </div>
+
+          <div class="pr-stat-row">
+            <div>
+              <div class="pr-value">${displayVal}</div>
+              <div class="pr-sub-value">${subVal}</div>
+            </div>
+            <button type="button" class="pr-btn-edit" onclick="openEditPrModal('${pr.id}')" title="Log New Personal Record">
+              ⚡ Log PR
+            </button>
+          </div>
+
+          <div style="font-size: 0.74rem; color: var(--text-dim); margin-top: 6px; line-height: 1.4; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 6px;">
+            💬 ${pr.notes || 'Pristine form adherence'}
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px; font-size: 0.68rem; color: #64748b;">
+            <span>📅 Achieved: ${pr.date || 'Recent'}</span>
+            <span style="color: var(--cyan);">${pr.targetRatio > 0 ? `Goal: ${pr.targetRatio}x BW` : 'Endurance'}</span>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      if (document.getElementById('prStatTotalCount')) {
+        document.getElementById('prStatTotalCount').innerText = vault.length;
+      }
+      if (document.getElementById('prStatEliteCount')) {
+        document.getElementById('prStatEliteCount').innerText = eliteCount;
+      }
+      if (document.getElementById('prStatPeakRatio')) {
+        document.getElementById('prStatPeakRatio').innerText = `${peakRatio.toFixed(2)}x BW`;
+      }
+    }
+
+    function openEditPrModal(prId) {
+      const vault = getPrVault();
+      const pr = vault.find(p => p.id === prId);
+      if (!pr) return;
+
+      document.getElementById('prModalMovementId').value = pr.id;
+      document.getElementById('prModalMovementName').value = pr.name;
+      document.getElementById('prModalMovementName').readOnly = true;
+      document.getElementById('prModalWeight').value = pr.bestWeight || 0;
+      document.getElementById('prModalReps').value = pr.unit === 'time_secs' ? (pr.bestTimeSecs || 60) : (pr.bestReps || 10);
+      document.getElementById('prModalDate').value = pr.date || new Date().toISOString().slice(0, 10);
+      document.getElementById('prModalUnit').value = pr.unit || 'reps_load';
+      document.getElementById('prModalNotes').value = pr.notes || '';
+      if (document.getElementById('prModalTitle')) {
+        document.getElementById('prModalTitle').innerText = `🏆 Log PR: ${pr.name}`;
+      }
+
+      onPrUnitChange(pr.unit || 'reps_load');
+      previewPrModalCalculations();
+      openModal('prEditModal');
+    }
+
+    function openAddCustomPrModal() {
+      const newId = 'custom_' + Date.now();
+      document.getElementById('prModalMovementId').value = newId;
+      document.getElementById('prModalMovementName').value = '';
+      document.getElementById('prModalMovementName').readOnly = false;
+      document.getElementById('prModalWeight').value = 0;
+      document.getElementById('prModalReps').value = 10;
+      document.getElementById('prModalDate').value = new Date().toISOString().slice(0, 10);
+      document.getElementById('prModalUnit').value = 'reps_load';
+      document.getElementById('prModalNotes').value = '';
+      if (document.getElementById('prModalTitle')) {
+        document.getElementById('prModalTitle').innerText = `➕ Add Custom Movement PR`;
+      }
+
+      onPrUnitChange('reps_load');
+      previewPrModalCalculations();
+      openModal('prEditModal');
+      setTimeout(() => document.getElementById('prModalMovementName')?.focus(), 100);
+    }
+
+    function onPrUnitChange(unit) {
+      const repsLabel = document.getElementById('prModalRepsLabel');
+      const wtInput = document.getElementById('prModalWeight');
+      if (unit === 'time_secs') {
+        if (repsLabel) repsLabel.innerText = 'Hold Time (Seconds)';
+        if (wtInput) {
+          wtInput.value = 0;
+          wtInput.disabled = true;
+        }
+      } else if (unit === 'bodyweight_reps') {
+        if (repsLabel) repsLabel.innerText = 'Bodyweight Reps Completed';
+        if (wtInput) {
+          wtInput.value = 0;
+          wtInput.disabled = true;
+        }
+      } else {
+        if (repsLabel) repsLabel.innerText = 'Reps Completed';
+        if (wtInput) wtInput.disabled = false;
+      }
+      previewPrModalCalculations();
+    }
+
+    function previewPrModalCalculations() {
+      const unit = document.getElementById('prModalUnit')?.value || 'reps_load';
+      const wt = parseFloat(document.getElementById('prModalWeight')?.value) || 0;
+      const reps = parseInt(document.getElementById('prModalReps')?.value) || 1;
+      const bw = userProfile?.weight || 74.0;
+
+      const e1rmEl = document.getElementById('prModalE1rmPreview');
+      const ratioEl = document.getElementById('prModalRatioPreview');
+      const tierEl = document.getElementById('prModalTierPreview');
+
+      if (unit === 'time_secs') {
+        if (e1rmEl) e1rmEl.innerText = `${reps}s`;
+        if (ratioEl) ratioEl.innerText = `Static Core Hold`;
+        if (tierEl) {
+          tierEl.innerText = reps >= 180 ? 'Elite (3m+)' : (reps >= 120 ? 'Advanced (2m+)' : 'Intermediate');
+          tierEl.className = 'pr-tier-pill ' + (reps >= 180 ? 'elite' : (reps >= 120 ? 'advanced' : 'intermediate'));
+        }
+        return;
+      }
+
+      const e1rm = calculatePrE1rm(wt, reps, unit);
+      const ratio = Math.round((e1rm / bw) * 100) / 100;
+      const tierInfo = getPrTierBadge(ratio, 1.0);
+
+      if (e1rmEl) e1rmEl.innerText = `${e1rm} kg`;
+      if (ratioEl) ratioEl.innerText = `${ratio}x BW`;
+      if (tierEl) {
+        tierEl.innerText = tierInfo.label;
+        tierEl.className = `pr-tier-pill ${tierInfo.cls}`;
+      }
+    }
+
+    function savePrModalEntry() {
+      const id = document.getElementById('prModalMovementId')?.value;
+      const name = document.getElementById('prModalMovementName')?.value.trim();
+      const wt = parseFloat(document.getElementById('prModalWeight')?.value) || 0;
+      const reps = parseInt(document.getElementById('prModalReps')?.value) || 1;
+      const date = document.getElementById('prModalDate')?.value || new Date().toISOString().slice(0, 10);
+      const unit = document.getElementById('prModalUnit')?.value || 'reps_load';
+      const notes = document.getElementById('prModalNotes')?.value.trim() || 'Pristine form adherence';
+
+      if (!name) {
+        alert("Please specify a movement name.");
+        return;
+      }
+
+      const vault = getPrVault();
+      let existing = vault.find(p => p.id === id);
+
+      if (existing) {
+        existing.name = name;
+        existing.bestWeight = wt;
+        if (unit === 'time_secs') {
+          existing.bestTimeSecs = reps;
+        } else {
+          existing.bestReps = reps;
+        }
+        existing.date = date;
+        existing.unit = unit;
+        existing.notes = notes;
+      } else {
+        vault.push({
+          id: id || ('custom_' + Date.now()),
+          name,
+          category: 'Custom Movement',
+          unit,
+          bestWeight: wt,
+          bestReps: unit === 'time_secs' ? 1 : reps,
+          bestTimeSecs: unit === 'time_secs' ? reps : 0,
+          date,
+          notes,
+          targetRatio: 1.0
+        });
+      }
+
+      savePrVault(vault);
+      closeModal('prEditModal');
+      renderPrVault();
+
+      if (typeof SoundFX !== 'undefined' && SoundFX.playFanfare) {
+        SoundFX.playFanfare();
+      } else if (typeof playAudioTone === 'function') {
+        playAudioTone(880, 'triangle', 0.3);
+      }
+      triggerHaptic([100, 50, 150]);
+      showToast(`🏆 Personal Record Saved: ${name}!`, 3000);
+      if (typeof speakAnnouncement === 'function') {
+        speakAnnouncement(`Outstanding lift! New Personal Record recorded for ${name}!`);
+      }
+    }
+
+    function save1rmResultToPrVault() {
+      const exKey = document.getElementById('calc1rmExercise')?.value || 'pushup';
+      const wt = parseFloat(document.getElementById('calc1rmWeight')?.value) || 0;
+      const reps = parseInt(document.getElementById('calc1rmReps')?.value) || 1;
+      const e1rmEl = document.getElementById('calc1rmResult');
+      const e1rm = e1rmEl ? parseFloat(e1rmEl.innerText) : 60;
+
+      const vault = getPrVault();
+      let match = vault.find(p => p.id === exKey);
+
+      if (match) {
+        match.bestWeight = wt;
+        match.bestReps = reps;
+        match.date = new Date().toISOString().slice(0, 10);
+        match.notes = `Calculated E1RM: ${e1rm}kg`;
+      } else {
+        const selectEl = document.getElementById('calc1rmExercise');
+        const text = selectEl ? selectEl.options[selectEl.selectedIndex].text : exKey;
+        vault.push({
+          id: exKey,
+          name: text.split('(')[0].trim(),
+          category: 'Strength Pillar',
+          unit: 'reps_load',
+          bestWeight: wt,
+          bestReps: reps,
+          bestTimeSecs: 0,
+          date: new Date().toISOString().slice(0, 10),
+          notes: `Calculated E1RM: ${e1rm}kg`,
+          targetRatio: 1.0
+        });
+      }
+
+      savePrVault(vault);
+      renderPrVault();
+      if (typeof SoundFX !== 'undefined' && SoundFX.playFanfare) {
+        SoundFX.playFanfare();
+      }
+      showToast(`🏆 1RM Result Synced & Saved to PR Vault!`, 2800);
+    }
+
+    function exportPrWallOfFame() {
+      const vault = getPrVault();
+      const bw = userProfile?.weight || 74.0;
+      let txt = `🏆 AETHOS 365 PRO • ALL-TIME PERSONAL RECORD (PR) VAULT\n`;
+      txt += `Athlete: ${userProfile?.name || 'Trainee'} • Bodyweight: ${bw} kg • Date: ${new Date().toISOString().slice(0,10)}\n`;
+      txt += `------------------------------------------------------------\n`;
+
+      vault.forEach((pr, i) => {
+        let valStr = '';
+        if (pr.unit === 'time_secs') {
+          valStr = `${pr.bestTimeSecs} seconds`;
+        } else if (pr.unit === 'bodyweight_reps') {
+          valStr = `${pr.bestReps} reps (Bodyweight)`;
+        } else {
+          const e1rm = calculatePrE1rm(pr.bestWeight, pr.bestReps, 'reps_load');
+          const ratio = (e1rm / bw).toFixed(2);
+          valStr = `${pr.bestWeight}kg × ${pr.bestReps} reps (E1RM: ${e1rm}kg | ${ratio}x BW)`;
+        }
+        txt += `${i+1}. ${pr.name}: ${valStr} [Achieved: ${pr.date}]\n`;
+        if (pr.notes) txt += `   Cue: "${pr.notes}"\n`;
+      });
+      txt += `------------------------------------------------------------\n`;
+      txt += `Generated by AETHOS Precision Performance OS\n`;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(txt).then(() => {
+          showToast("📋 PR Wall of Fame copied to clipboard!", 2800);
+        }).catch(() => {
+          prompt("Copy your PR Wall of Fame below:", txt);
+        });
+      } else {
+        prompt("Copy your PR Wall of Fame below:", txt);
       }
     }
 
@@ -29231,6 +30471,8 @@ if (typeof window !== 'undefined') {
       renderHeatmapGrid();
       initKeyboardShortcuts();
       updateRPGSkillRadar();
+      renderPrVault();
+      if (typeof selectJointClinic === 'function') selectJointClinic('shoulder');
 
       // 2A: Modular Subsystem Engine Namespacing
       window.AethosEngine = {
@@ -29300,7 +30542,23 @@ if (typeof window !== 'undefined') {
         Analytics: {
           getDailyTonnage: getDailyTonnage,
           renderHeatmap: renderHeatmapGrid,
-          renderCalendar: renderCalendarGrid
+          renderCalendar: renderCalendarGrid,
+          PRVault: {
+            render: renderPrVault,
+            openEdit: openEditPrModal,
+            openCustom: openAddCustomPrModal,
+            save: savePrModalEntry,
+            export: exportPrWallOfFame
+          },
+          Clinic: {
+            select: selectJointClinic,
+            applySwaps: applyJointSwapsToActiveDay
+          },
+          Consistency: {
+            streaks: calculateConsistencyMatrixStreaks,
+            toggleToday: quickToggleTodayMatrix,
+            logRest: quickLogRestDayMatrix
+          }
         }
       };
 
@@ -29368,6 +30626,22 @@ if (typeof window !== 'undefined') {
       window.calculatePlateLoading = calculatePlateLoading;
       window.setPlateFrom1RM = setPlateFrom1RM;
       window.exportGroceryCSV = exportGroceryCSV;
+
+      // PR Vault, Joint Rehab Clinic, Wake Lock, & Consistency Matrix
+      window.renderPrVault = renderPrVault;
+      window.openEditPrModal = openEditPrModal;
+      window.openAddCustomPrModal = openAddCustomPrModal;
+      window.savePrModalEntry = savePrModalEntry;
+      window.exportPrWallOfFame = exportPrWallOfFame;
+      window.save1rmResultToPrVault = save1rmResultToPrVault;
+      window.previewPrModalCalculations = previewPrModalCalculations;
+      window.selectJointClinic = selectJointClinic;
+      window.applyJointSwapsToActiveDay = applyJointSwapsToActiveDay;
+      window.calculateConsistencyMatrixStreaks = calculateConsistencyMatrixStreaks;
+      window.quickToggleTodayMatrix = quickToggleTodayMatrix;
+      window.quickLogRestDayMatrix = quickLogRestDayMatrix;
+      window.requestWorkoutWakeLock = requestWorkoutWakeLock;
+      window.releaseWorkoutWakeLock = releaseWorkoutWakeLock;
 
       // Initialize barbell plate optimizer with default values
       if (typeof calculatePlateLoading === 'function') {
