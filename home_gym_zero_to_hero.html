@@ -9851,7 +9851,7 @@
               </div>
             </button>
 
-            <div class="tools-group-title" style="margin-top: 4px;">🖨️ Exports & Nutrition</div>
+            <div class="tools-group-title" style="margin-top: 4px;">🖨️ Exports & Tools</div>
             <button type="button" class="tool-item-row" onclick="closeHeaderToolsMenu(); openPrintSheetModal();">
               <span class="tool-icon">🖨️</span>
               <div>
@@ -9859,15 +9859,15 @@
                 <div class="tool-item-desc">A4 cheat sheet & PDF</div>
               </div>
             </button>
-            <button type="button" class="tool-item-row" onclick="closeHeaderToolsMenu(); openNutritionExportModal();">
-              <span class="tool-icon">🥗</span>
+            <button type="button" class="tool-item-row" onclick="closeHeaderToolsMenu(); openModal('hotkeysModal');">
+              <span class="tool-icon">⌨️</span>
               <div>
-                <div>What to Eat Today</div>
-                <div class="tool-item-desc">Diet & macro blueprint</div>
+                <div>Keyboard Hotkeys <span style="font-size: 0.72rem; color: var(--cyan); font-weight: 700;">(?)</span></div>
+                <div class="tool-item-desc">Shortcuts & hands-free controls</div>
               </div>
             </button>
 
-            <div class="tools-group-title" style="margin-top: 4px;">🏆 Community & Profile</div>
+            <div class="tools-group-title" style="margin-top: 4px;">🏆 Community</div>
             <button type="button" class="tool-item-row" id="toolItemAdminCockpit" onclick="closeHeaderToolsMenu(); openAdminModal();" style="display:none; border-left: 2px solid #a855f7;">
               <span class="tool-icon">🛡️</span>
               <div>
@@ -9880,27 +9880,6 @@
               <div>
                 <div>Leaderboard</div>
                 <div class="tool-item-desc">Athlete standings & rank</div>
-              </div>
-            </button>
-            <button type="button" class="tool-item-row" onclick="closeHeaderToolsMenu(); openProfileSettingsModal();">
-              <span class="tool-icon">⚙️</span>
-              <div>
-                <div>Profile Settings</div>
-                <div class="tool-item-desc">Customize athlete goals & avatar</div>
-              </div>
-            </button>
-            <button type="button" class="tool-item-row" onclick="closeHeaderToolsMenu(); openModal('hotkeysModal');">
-              <span class="tool-icon">⌨️</span>
-              <div>
-                <div>Keyboard Hotkeys <span style="font-size: 0.72rem; color: var(--cyan); font-weight: 700;">(?)</span></div>
-                <div class="tool-item-desc">Shortcuts & hands-free controls</div>
-              </div>
-            </button>
-            <button type="button" class="tool-item-row" onclick="closeHeaderToolsMenu(); handleUserPillClick();" style="border-top: 1px solid rgba(255,255,255,0.06); margin-top: 4px; padding-top: 8px;">
-              <span class="tool-icon">⚡</span>
-              <div>
-                <div style="color: var(--cyan); font-weight: 700;">Sign In / Switch Account</div>
-                <div class="tool-item-desc">Trainee portal & instant switch</div>
               </div>
             </button>
           </div>
@@ -9987,7 +9966,7 @@
         </div>
 
         <!-- 4. Equipment Status -->
-        <div class="hud-card" onclick="openNutritionExportModal()" title="View Equipment Loadout & Nutrition Blueprint">
+        <div class="hud-card" onclick="switchView('roadmapView')" title="Click to view Equipment Loadout & Roadmap">
           <div class="hud-icon-badge emerald">🛡️</div>
           <div class="hud-card-body">
             <div class="hud-title">
@@ -10063,9 +10042,6 @@
           <div class="quest-progress-track">
             <div class="quest-progress-bar" id="questProgressBar" style="width: 0%;"></div>
           </div>
-          <button class="nav-pill-btn" onclick="event.stopPropagation(); switchView('milestonesView')" style="margin-top: 4px; padding: 4px 10px; font-size: 0.75rem; border-color: rgba(168,85,247,0.4); color: var(--purple);">
-            View 30 Milestones Hub ↗
-          </button>
         </div>
       </div>
     </section>
@@ -10085,7 +10061,6 @@
                 <span class="boss-difficulty-badge">WEEKLY RAID</span>
               </div>
               <h3 class="boss-title" id="bossTitle">Goliathon the Iron Sentinel</h3>
-              <p class="boss-flavor-text" id="bossFlavorText">"No mortal builds tendon armor without first enduring my compressive trial."</p>
             </div>
           </div>
           <div class="boss-rewards-cluster">
@@ -10107,7 +10082,7 @@
             <div class="boss-damage-ghost" id="bossDamageGhost" style="width: 81.7%;"></div>
           </div>
           <div class="boss-battle-tips">
-            <span>⚔️ <strong>How to Damage:</strong> Every set logged deals kinetic damage equal to Weight &times; Reps. Bodyweight exercises deal 150 DMG per set. Complete today's workout to deal a <strong>Critical 2,000 DMG Overload!</strong></span>
+            <span>⚔️ <strong>Kinetic Damage:</strong> Weight &times; Reps per set | <strong>+2,000 DMG</strong> on workout completion</span>
           </div>
         </div>
       </div>
@@ -10179,17 +10154,11 @@
         </div>
 
         <div class="day-dock-actions">
-          <button class="btn-live-session" onclick="openFocusHUD()" style="background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%); box-shadow: 0 0 20px rgba(236,72,153,0.35);" title="Enter Fullscreen Gym Focus HUD (Hotkey: F)">
-            ⚡ Focus HUD (F)
-          </button>
-          <button class="btn-live-session" onclick="startLiveWorkoutSession()" title="Enter distraction-free active workout session player with rep tempo metronome and auto-rest timer">
-            ▶ Live Session HUD
+          <button class="btn-live-session" onclick="startLiveWorkoutSession()" title="Enter distraction-free active workout session player (Hotkey: F)">
+            ▶ Live Session (F)
           </button>
           <button class="btn-quick-log" onclick="quickLogAllSetsForCurrentDay()" title="One-click log all target sets for today's workout">
             ⚡ Quick Log Sets
-          </button>
-          <button class="btn-quick-log" onclick="openNutritionExportModal()" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); color: #34d399;" title="View & Export Today's Nutrition (What to Eat Today)">
-            🥗 What to Eat Today
           </button>
           <button class="btn-reset-dock" onclick="confirmResetCurrentTimeline()" title="Reset current profile workout timeline back to clean Day 1 (0 XP, clean slate)">
             🔄 Reset Timeline
@@ -10218,9 +10187,7 @@
             <button class="btn-check-all-hud" onclick="manualCheckAllMissionItems()" title="Mark all checklist items complete and mark green in calendar">
               ✓ Check All &amp; Mark Green
             </button>
-            <button class="btn-toggle-day-hud" id="btnToggleDayHud" onclick="toggleCurrentDayCompletion()" title="Toggle Day Complete (Green in 365 Calendar)">
-              ★ Complete Day
-            </button>
+            <button class="btn-toggle-day-hud" id="btnToggleDayHud" onclick="toggleCurrentDayCompletion()" style="display:none;" aria-hidden="true"></button>
           </div>
         </div>
 
@@ -10446,15 +10413,12 @@
                     <span class="pillar-tag pillar-warmup">Joint Integrity & Spine Priming</span>
                   </div>
                   <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.4;" id="warmupStatus">
-                    Crucial before loading weight. Lubricates synovial fluid, articulates spinal vertebrae, activates dormant glutes, and primes shoulder rotator cuffs.
+                    Synovial joint lubrication, spinal articulation &amp; rotator cuff priming.
                   </p>
                 </div>
                 <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
-                  <button class="btn-toggle-guides" type="button" onclick="openModal('musicStudioModal')" id="btnWarmupLaunchMusic" title="Open Warmup Soundtrack Studio" style="border-color: rgba(56, 189, 248, 0.35); color: #38bdf8;">
-                    🎵 Warm-Up Beats
-                  </button>
                   <button class="btn-toggle-guides" type="button" onclick="toggleWarmupGuidesDrawer()" id="btnWarmupGuidesToggle">
-                    📖 Step-by-Step Form & Video Guides <span id="warmupGuideChevron">▾</span>
+                    📖 Step-by-Step Form &amp; Video Guides <span id="warmupGuideChevron">▾</span>
                   </button>
                   <button class="btn-launch-warmup" onclick="startGuidedWarmup()" id="btnWarmupLaunch">
                     ▶ Start Follow-Along Warm-Up
@@ -10795,12 +10759,12 @@
                     <span class="pillar-tag pillar-cooldown">Parasympathetic Recovery & Decompression</span>
                   </div>
                   <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.4;" id="cooldownStatus">
-                    Crucial for nervous system downregulation. Flushes metabolic waste, restores hip/shoulder capsule mobility, decompresses lumbar discs, and shifts body into growth mode.
+                    Parasympathetic recovery, disc decompression &amp; mobility restoration.
                   </p>
                 </div>
                 <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
                   <button class="btn-toggle-guides" type="button" onclick="toggleCooldownGuidesDrawer()" id="btnCooldownGuidesToggle">
-                    📖 Step-by-Step Form & Video Guides <span id="cooldownGuideChevron">▾</span>
+                    📖 Step-by-Step Form &amp; Video Guides <span id="cooldownGuideChevron">▾</span>
                   </button>
                   <button class="btn-launch-cooldown" onclick="startGuidedCooldown()" id="btnCooldownLaunch">
                     ▶ Start Follow-Along Cool-Down
@@ -10822,15 +10786,6 @@
                   <button type="button" class="mobility-chip cooldown-chip" onclick="showCooldownMovementDetail(2)">3. Doorframe Chest Opener</button>
                   <button type="button" class="mobility-chip cooldown-chip" onclick="showCooldownMovementDetail(3)">4. Supine Figure-4 Stretch</button>
                   <button type="button" class="mobility-chip cooldown-chip" onclick="showCooldownMovementDetail(4)">5. Diaphragmatic Box Breathing</button>
-                </div>
-              </div>
-
-              <!-- Post-Workout Skin & Follicle Longevity Hygiene Reminder -->
-              <div style="margin-top: 10px; background: rgba(56, 189, 248, 0.06); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 8px; padding: 10px 14px; display: flex; align-items: flex-start; gap: 10px;">
-                <span style="font-size: 1.3rem; line-height: 1;">✨</span>
-                <div style="flex: 1; font-size: 0.8rem; color: #cbd5e1; line-height: 1.45;">
-                  <strong style="color: var(--cyan);">Post-Workout 15-Minute Rule (Skin & Hair Follicle Shield):</strong>
-                  Rinse dried sweat within 15 min to prevent salt-crystal pore clogging & bacterial acne. Wash hairline gently with lukewarm water to remove sebum DHT build-up, and hydrate with 500ml water + vitamin C for dermal collagen protection.
                 </div>
               </div>
             </div>
@@ -10895,12 +10850,6 @@
             <!-- Technique Guides Drawer (Expandable) -->
             <div id="cooldownGuidesDrawer" class="technique-guides-drawer" style="display: none; margin-top: 14px;">
               <!-- Populated by JavaScript with rich breakdown cards -->
-            </div>
-
-            <div style="text-align: right; margin-top: 14px;">
-              <button onclick="toggleCurrentDayCompletion()" class="btn-photo-action" style="background: linear-gradient(135deg, var(--emerald), #059669); color: #000; font-weight: 800; font-size: 0.95rem; padding: 10px 22px;">
-                ✓ Complete Day Workout
-              </button>
             </div>
           </div>
 
@@ -17450,11 +17399,9 @@
       if (wasCompleted) {
         playAudioTone(659.25, 'triangle', 0.2);
         triggerHaptic(50);
-        speakAnnouncement(`${label} marked complete!`);
       } else {
         playAudioTone(392.00, 'sine', 0.15);
         triggerHaptic(30);
-        speakAnnouncement(`${label} marked pending.`);
       }
 
       if (tDay === currentDay) {
@@ -17498,7 +17445,7 @@
         playAudioTone(523.25, 'triangle', 0.4);
       }
       triggerHaptic([100, 50, 100, 50, 200]);
-      speakAnnouncement(`All checklist items complete! Day ${targetDay} is marked green in your calendar.`);
+      speakAnnouncement("Workout complete!");
       showCelebrationBanner('🏆 ALL CHECKLIST ITEMS COMPLETE!', `Day ${targetDay} fully conquered and marked GREEN in your 365 Calendar!`);
 
       if (targetDay === currentDay) {
@@ -19863,9 +19810,6 @@
       updateMissionChecklist();
       applyStageMinimization();
       updateRPGSkillRadar();
-      if (announce) {
-        speakAnnouncement(`Day ${currentDay}. ${plan.workoutName}`);
-      }
     }
 
     const DIY_EQUIPMENT_HACKS = {
@@ -20579,11 +20523,10 @@
           playAudioTone(523.25, 'triangle', 0.4);
         }
         triggerHaptic([100, 50, 100, 50, 200]);
-        speakAnnouncement("Workout complete! All sets logged for Day " + currentDay + "!");
+        speakAnnouncement("Workout complete!");
         showCelebrationBanner("🏆 WORKOUT COMPLETE!", "All sets quick-logged! Day " + currentDay + " marked complete.");
       } else {
         resetTimer();
-        speakAnnouncement("Sets unlogged for Day " + currentDay + ".");
       }
     }
 
@@ -20649,11 +20592,10 @@
           triggerHaptic([100, 50, 100, 50, 200]);
           renderActiveDay(setDay, false);
           renderHeatmapGrid();
-          speakAnnouncement("Workout complete! Outstanding work " + (userProfile?.name || 'Trainee') + "! You crushed all sets for Day " + setDay + "!");
+          speakAnnouncement("Workout complete!");
           showCelebrationBanner("🏆 WORKOUT COMPLETE!", "Incredible discipline! All sets conquered for Day " + setDay + ". Day marked complete!");
         } else {
           startTimer(60);
-          speakAnnouncement("Set logged! 60 seconds rest timer started.");
         }
       } else {
         btn.classList.remove('done');
@@ -21689,7 +21631,7 @@ function startGuidedWarmup() {
       warmupDoneDays.add(currentDay);
       localStorage.setItem(getProfileKey('gym_warmup_done'), JSON.stringify(Array.from(warmupDoneDays)));
       updateMissionChecklist();
-      speakAnnouncement("Warm up complete! Let's crush today's workout.");
+      speakAnnouncement("Warm-up complete.");
       playAudioTone(880, 'sine', 0.5);
       applyStageMinimization();
       return;
@@ -21702,7 +21644,6 @@ function startGuidedWarmup() {
     updateWarmupHUD(curr);
 
     if (warmupSec === 60) {
-      speakAnnouncement(`Next warm-up: ${curr.shortName}. 60 seconds.`);
       playAudioTone(523.25, 'sine', 0.2);
     }
 
@@ -21843,7 +21784,7 @@ function startGuidedCooldown() {
       cooldownDoneDays.add(currentDay);
       localStorage.setItem(getProfileKey('gym_cooldown_done'), JSON.stringify(Array.from(cooldownDoneDays)));
       updateMissionChecklist();
-      speakAnnouncement("Cool down complete! Fantastic effort today. Refuel with protein and hydrate.");
+      speakAnnouncement("Cool-down complete.");
       playAudioTone(880, 'sine', 0.5);
       applyStageMinimization();
       return;
@@ -21856,7 +21797,6 @@ function startGuidedCooldown() {
     updateCooldownHUD(curr);
 
     if (cooldownSec === 60) {
-      speakAnnouncement(`Next cool-down: ${curr.shortName}. 60 seconds.`);
       playAudioTone(440, 'sine', 0.2);
     }
 
@@ -23291,9 +23231,6 @@ function stopGuidedCooldown() {
       if (typeof showToast === 'function') {
         showToast(`🩹 ${data.name} joint safeguards active!`, 2800);
       }
-      if (typeof speakAnnouncement === 'function') {
-        speakAnnouncement(`${data.name} orthopedic safeguards engaged for today's session.`);
-      }
       if (typeof SoundFX !== 'undefined' && SoundFX.playBeep) {
         SoundFX.playBeep(880, 'triangle', 0.15, 0.15);
       }
@@ -23793,7 +23730,6 @@ function stopGuidedCooldown() {
 
       selectedPhotoDataUrl = null;
       SoundFX.playBeep(440, 'triangle', 0.1, 0.1);
-      speakAnnouncement(`Photo deleted for Day ${numDay}.`);
       updatePhotoUIForDay(numDay);
       checkAchievements();
       updateMissionChecklist();
@@ -25528,7 +25464,6 @@ function stopGuidedCooldown() {
         autoLogAllSetsForDay(d, false);
         triggerHaptic(25);
         playAudioTone(392, 'sine', 0.15);
-        speakAnnouncement(`Day ${d} marked pending.`);
       } else {
         completedDays.add(d);
         autoLogAllSetsForDay(d, true);
@@ -25544,7 +25479,7 @@ function stopGuidedCooldown() {
         if (typeof BossBattleEngine !== 'undefined' && BossBattleEngine.dealDamage) {
           BossBattleEngine.dealDamage(1500, `Day ${d} Completion`);
         }
-        speakAnnouncement(`Congratulations on completing Day ${d}! Keep going!`);
+        speakAnnouncement("Day complete!");
         showCelebrationBanner('📅 DAY MARKED GREEN IN CALENDAR!', `Day ${d} completed and glowing emerald green in your 365 Calendar & Heatmap!`);
       }
       localStorage.setItem(getProfileKey('gym_365_completed'), JSON.stringify(Array.from(completedDays)));
@@ -26060,7 +25995,6 @@ function stopGuidedCooldown() {
       // Sound & Haptic Feedback
       playAudioTone(659.25, 'triangle', 0.2);
       triggerHaptic([60, 40, 60]);
-      speakAnnouncement(`Set ${setNum || 1} started. Lock in and feel the beat.`);
     }
 
     function adjustActiveSetStat(field, delta) {
@@ -26141,7 +26075,6 @@ function stopGuidedCooldown() {
           loggedSetData[key].done = true;
           localStorage.setItem(getProfileKey('gym_set_logs'), JSON.stringify(loggedSetData));
           startTimer(60);
-          speakAnnouncement("Set logged! 60 seconds rest timer started.");
         }
       }
 
@@ -26356,7 +26289,7 @@ function stopGuidedCooldown() {
         } else if (e === targetSecs) {
           playAudioTone(880, 'sine', 0.4);
           triggerHaptic([100, 50, 100]);
-          speakAnnouncement("Hold complete! " + targetSecs + " seconds reached.");
+          speakAnnouncement("Hold complete!");
           if (holdText) holdText.innerText = `⏹ ${e}s ✓ (tap to stop)`;
           if (breathPill) {
             breathPill.className = 'hold-breathing-pill exhale';
@@ -26477,7 +26410,6 @@ function stopGuidedCooldown() {
         autoLogAllSetsForDay(d, false);
         triggerHaptic(25);
         playAudioTone(392, 'sine', 0.15);
-        speakAnnouncement(`Day ${d} marked pending.`);
       } else {
         completedDays.add(d);
         autoLogAllSetsForDay(d, true);
@@ -26487,7 +26419,6 @@ function stopGuidedCooldown() {
         localStorage.setItem(getProfileKey('gym_cooldown_done'), JSON.stringify(Array.from(cooldownDoneDays)));
         playAudioTone(523.25, 'triangle', 0.35);
         triggerHaptic([60, 40, 60]);
-        speakAnnouncement(`Day ${d} marked complete and green in calendar!`);
         showCelebrationBanner('📅 DAY MARKED GREEN!', `Day ${d} marked complete in your 365 Calendar!`);
       }
       localStorage.setItem(getProfileKey('gym_365_completed'), JSON.stringify(Array.from(completedDays)));
@@ -27321,7 +27252,6 @@ function stopGuidedCooldown() {
       closeModal('exerciseSwapModal');
       renderActiveDay(currentDay, false);
       SoundFX.playBeep(659.25, 'triangle', 0.2, 0.2);
-      speakAnnouncement(`Movement swapped. Ready to lift.`);
     }
 
     function resetExerciseSwap(originalKey, idx) {
@@ -27329,7 +27259,6 @@ function stopGuidedCooldown() {
       closeModal('exerciseSwapModal');
       renderActiveDay(currentDay, false);
       SoundFX.playBeep(523.25, 'triangle', 0.15, 0.15);
-      speakAnnouncement(`Reset to original movement.`);
     }
 
     // ==========================================
@@ -27432,7 +27361,6 @@ function stopGuidedCooldown() {
       const hud = document.getElementById('fullscreenFocusHUD');
       if (hud) hud.classList.add('active');
       renderFocusHUD();
-      speakAnnouncement(`Focus mode active. Day ${currentDay}.`);
       SoundFX.playBeep(659.25, 'triangle', 0.2, 0.2);
     }
 
@@ -27560,14 +27488,13 @@ function stopGuidedCooldown() {
         showWorkoutCompleteTimerUI();
         if (typeof SoundFX !== 'undefined' && SoundFX.playFanfare) SoundFX.playFanfare();
         triggerHaptic([100, 50, 100, 50, 200]);
-        speakAnnouncement(`Workout complete! Outstanding effort! All sets logged for Day ${currentDay}!`);
+        speakAnnouncement("Workout complete!");
         showCelebrationBanner("🏆 WORKOUT CONQUERED!", `All target movements completed for Day ${currentDay}!`);
         closeFocusHUD();
         return;
       }
 
       startFocusRestTimer(60);
-      speakAnnouncement(`Set ${focusCurrentSetNum} logged. Resting 60 seconds.`);
 
       if (focusCurrentSetNum < ex.sets) {
         focusCurrentSetNum++;
@@ -27597,7 +27524,7 @@ function stopGuidedCooldown() {
           focusRestInterval = null;
           if (box) box.style.display = 'none';
           playAudioTone(880, 'sine', 0.4);
-          speakAnnouncement("Rest complete! Set up for your next set.");
+          speakAnnouncement("Rest complete. Ready for next set.");
         }
       }, 1000);
     }
@@ -27616,7 +27543,6 @@ function stopGuidedCooldown() {
       }
       const box = document.getElementById('focusRestCountdownBox');
       if (box) box.style.display = 'none';
-      speakAnnouncement("Rest skipped. Let's go.");
     }
 
     function focusHudNextEx() {
@@ -27970,7 +27896,6 @@ function stopGuidedCooldown() {
       if (typeof showToast === 'function') {
         showToast(`☕ Day ${today} logged as Active Recovery & Rest.`);
       }
-      speakAnnouncement(`Day ${today} recorded as recovery.`);
     }
 
     // ==========================================
@@ -28257,7 +28182,7 @@ function stopGuidedCooldown() {
     }
 
     function testVoiceCoach() {
-      speakAnnouncement("Voice coach configured! Ready to power your 365-day transformation.");
+      speakAnnouncement("Voice coach active.");
     }
 
     // ==========================================
@@ -30241,7 +30166,7 @@ if (typeof window !== 'undefined') {
         if (typeof showCelebrationBanner === 'function') {
           showCelebrationBanner('👑 TITAN BOSS DEFEATED!', `You vanquished ${boss.name} and claimed +${boss.xpReward} Bonus XP!`);
         }
-        speakAnnouncement(`Titan ${boss.name} has fallen! Victory!`);
+        speakAnnouncement("Titan defeated! Victory!");
       }
     };
 
@@ -30339,8 +30264,6 @@ if (typeof window !== 'undefined') {
         if (typeof BossBattleEngine !== 'undefined') {
           BossBattleEngine.dealDamage(500, 'Loot Crate Kinetic Shockwave');
         }
-
-        speakAnnouncement(`Supply drop opened! ${reward.title}`);
       }, 1400);
     }
 
@@ -30555,7 +30478,6 @@ if (typeof window !== 'undefined') {
 
       renderLiveExercise();
       SoundFX.playBeep(659.25, 'triangle', 0.2, 0.2);
-      speakAnnouncement(`Live workout session started. Day ${currentDay}. Let's crush this.`);
     }
 
     function closeLiveSession() {
@@ -30656,11 +30578,10 @@ if (typeof window !== 'undefined') {
           SoundFX.playFanfare();
         }
         triggerHaptic([100, 50, 100, 50, 200]);
-        speakAnnouncement(`Workout complete! All movements conquered for Day ${currentDay}!`);
+        speakAnnouncement("Workout complete!");
         showCelebrationBanner("🏆 WORKOUT COMPLETE!", "All movements conquered for Day " + currentDay + "!");
       } else {
         startTimer(60);
-        speakAnnouncement(`Set ${setNum} done! Resting 60 seconds.`);
       }
 
       const wt = parseFloat(document.getElementById(`liveWeight_${setNum}`)?.value) || ((userProfile?.weight || 82) * 0.6);
@@ -30803,7 +30724,7 @@ if (typeof window !== 'undefined') {
 
       const cals = Math.round(liveSessionSecs * 0.12);
       alert(`🏆 WORKOUT COMPLETED!\n\nFantastic work! You crushed Day ${currentDay}.\n\n⏱️ Duration: ${Math.round(liveSessionSecs/60)} mins\n🔥 Est. Burn: ${cals} kcal\n\nDay ${currentDay} marked complete in your 365-day journey!`);
-      speakAnnouncement(`Workout complete! Incredible discipline today. Keep the streak alive!`);
+      speakAnnouncement("Workout complete!");
       liveSessionSecs = 0;
     }
 
@@ -31263,7 +31184,7 @@ if (typeof window !== 'undefined') {
       triggerHaptic([100, 50, 150]);
       showToast(`🏆 Personal Record Saved: ${name}!`, 3000);
       if (typeof speakAnnouncement === 'function') {
-        speakAnnouncement(`Outstanding lift! New Personal Record recorded for ${name}!`);
+        speakAnnouncement("New personal record!");
       }
     }
 
