@@ -32,7 +32,6 @@
           window.openModal('profilePassportModal');
         } else {
           window.openModal('authModal');
-          if (typeof loadQuickAccountChips === 'function') loadQuickAccountChips();
           if (typeof switchAuthTab === 'function') switchAuthTab('login');
         }
       };
@@ -41,7 +40,6 @@
           window.openModal('profileSettingsModal');
         } else {
           window.openModal('authModal');
-          if (typeof loadQuickAccountChips === 'function') loadQuickAccountChips();
           if (typeof switchAuthTab === 'function') switchAuthTab('login');
         }
       };
@@ -13272,12 +13270,6 @@
         <button class="modal-close" onclick="closeModal('authModal')">&times;</button>
       </div>
       <div class="modal-body">
-        <!-- Quick Account Switcher Chips -->
-        <div id="quickAccountSwitcher" style="display: none;">
-          <div style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--cyan); margin-bottom: 6px; font-weight: 700;">⚡ Quick Select Account</div>
-          <div class="quick-account-chips" id="quickAccountChipsContainer"></div>
-        </div>
-
         <div class="auth-tab-row" id="authTabRow">
           <button class="auth-tab-btn active" id="tabBtnLogin" onclick="switchAuthTab('login')">Sign In</button>
           <button class="auth-tab-btn" id="tabBtnRegister" onclick="switchAuthTab('register')">Create Profile</button>
@@ -13289,7 +13281,7 @@
             <div class="form-group-100x">
               <label>Athlete Name</label>
               <div class="input-wrapper-100x">
-                <input type="text" id="authDisplayNameInput" placeholder="e.g. Shivam (Head Coach) or Spartan Warrior">
+                <input type="text" id="authDisplayNameInput" placeholder="Your Name">
               </div>
             </div>
 
@@ -13310,13 +13302,13 @@
               <div class="form-group-100x">
                 <label>Starting Weight (kg)</label>
                 <div class="input-wrapper-100x">
-                  <input type="number" id="authStartWeightInput" step="0.5" placeholder="e.g. 74.0">
+                  <input type="number" id="authStartWeightInput" step="0.5" placeholder="74.0">
                 </div>
               </div>
               <div class="form-group-100x">
                 <label>Target Goal (kg)</label>
                 <div class="input-wrapper-100x">
-                  <input type="number" id="authTargetWeightInput" step="0.5" placeholder="e.g. 70.0">
+                  <input type="number" id="authTargetWeightInput" step="0.5" placeholder="70.0">
                 </div>
               </div>
             </div>
@@ -13324,7 +13316,7 @@
             <div class="form-group-100x">
               <label>Athlete Bio / Motivation</label>
               <div class="input-wrapper-100x">
-                <input type="text" id="authBioInput" placeholder="e.g. 365 days of zero excuses.">
+                <input type="text" id="authBioInput" placeholder="Your personal motto or training goal">
               </div>
             </div>
 
@@ -13346,14 +13338,14 @@
           <div class="form-group-100x">
             <label>Username</label>
             <div class="input-wrapper-100x">
-              <input type="text" id="authUsernameInput" required autocomplete="username" placeholder="Username (e.g. shivam or alex)">
+              <input type="text" id="authUsernameInput" required autocomplete="username" placeholder="Username">
             </div>
           </div>
 
           <div class="form-group-100x">
             <label>Password</label>
             <div class="input-wrapper-100x">
-              <input type="password" id="authPasswordInput" required autocomplete="current-password" placeholder="Enter password">
+              <input type="password" id="authPasswordInput" required autocomplete="current-password" placeholder="Password">
               <button type="button" class="pwd-toggle-btn" onclick="togglePasswordVisibility('authPasswordInput', this)" title="Show/Hide Password">👁️</button>
             </div>
           </div>
@@ -15337,7 +15329,6 @@
         const titleEl = document.getElementById('authModalTitle');
         if (titleEl) titleEl.innerHTML = '⚡ Trainee Portal';
         openModal('authModal');
-        loadQuickAccountChips();
         switchAuthTab('login');
       }
     }
@@ -15351,10 +15342,9 @@
         titleEl.innerHTML = '🔄 Switch Athlete Account';
       }
       openModal('authModal');
-      loadQuickAccountChips();
       switchAuthTab('login');
       if (typeof showToast === 'function') {
-        showToast('🔄 Select an athlete profile chip below to switch accounts');
+        showToast('🔄 Sign in with your athlete credentials to switch accounts');
       }
     }
     window.openSwitchAccountModal = openSwitchAccountModal;
@@ -15374,36 +15364,8 @@
     }
 
     async function loadQuickAccountChips() {
-      const container = document.getElementById('quickAccountChipsContainer');
-      const wrap = document.getElementById('quickAccountSwitcher');
-      if (!container || !wrap) return;
-
-      try {
-        const res = await fetch('/api/auth/profiles', { cache: 'no-store' });
-        const json = await res.json();
-        if (json.success && Array.isArray(json.profiles) && json.profiles.length > 0) {
-          wrap.style.display = 'block';
-          container.innerHTML = json.profiles.map(p => {
-            const isAdmin = p.role === 'admin';
-            const isActive = currentUser && (currentUser.username === p.username || (isAdmin && currentUser.username === 'shivam'));
-            const roleBadge = isAdmin ? '👑 Admin' : '⚡ Trainee';
-            const badgeBg = isAdmin ? 'rgba(168, 85, 247, 0.25)' : 'rgba(56, 189, 248, 0.15)';
-            const badgeColor = isAdmin ? '#c084fc' : '#38bdf8';
-            const activeClass = isActive ? 'account-chip active-account' : 'account-chip';
-            return `
-              <div class="${activeClass}" onclick="fillQuickAccount('${p.username.replace(/'/g, "\\'")}')" title="${isActive ? 'Currently Logged In Profile' : 'Click to select @' + p.username}">
-                <span>${p.avatar || (isAdmin ? '👑' : '⚡')}</span>
-                <strong>${p.displayName || p.username}</strong>
-                <span style="font-size: 0.65rem; padding: 2px 6px; border-radius: 99px; background: ${badgeBg}; color: ${badgeColor}; font-weight: 700;">${roleBadge}${isActive ? ' (Active)' : ''}</span>
-              </div>
-            `;
-          }).join('');
-        } else {
-          wrap.style.display = 'none';
-        }
-      } catch {
-        wrap.style.display = 'none';
-      }
+      // Suggestion chips removed to keep the sign in modal clean and private
+      return;
     }
 
     function fillQuickAccount(uname) {
@@ -15586,7 +15548,6 @@
     function openProfileSettingsModal() {
       if (!currentUser) {
         openModal('authModal');
-        loadQuickAccountChips();
         switchAuthTab('login');
         return;
       }
@@ -32009,7 +31970,6 @@ if (typeof window !== 'undefined') {
         setTimeout(() => {
           if (!currentUser) {
             openModal('authModal');
-            loadQuickAccountChips();
             switchAuthTab('login');
           }
         }, 700);
