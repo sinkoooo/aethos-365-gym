@@ -1,4 +1,4 @@
-const CACHE_NAME = 'aethos-365-v100x';
+const CACHE_NAME = 'aethos-365-ultra-v200x';
 const ASSETS_TO_CACHE = [
   './',
   './home_gym_zero_to_hero.html',
@@ -12,7 +12,7 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('[Service Worker] Pre-caching offline assets for', CACHE_NAME);
+      console.log('[Service Worker] Pre-caching ultra-performance assets for', CACHE_NAME);
       return cache.addAll(ASSETS_TO_CACHE);
     })
   );
@@ -33,48 +33,33 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Network-First strategy for HTML documents, Cache-First for static media assets
+// Ultra-Fast Stale-While-Revalidate Strategy with Background Sync & Cache Race
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
 
   const request = event.request;
-  const isHtml = request.mode === 'navigate' || 
-                 request.destination === 'document' || 
-                 request.url.includes('.html') ||
-                 request.url.endsWith('/');
+  const url = new URL(request.url);
 
-  if (isHtml) {
-    // Network first for all HTML pages to guarantee immediate updates
-    event.respondWith(
-      fetch(request, { cache: 'no-store' }).then((networkResponse) => {
-        if (networkResponse && networkResponse.status === 200) {
-          const responseToCache = networkResponse.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(request, responseToCache);
-          });
-        }
-        return networkResponse;
-      }).catch(() => {
-        console.log('[Service Worker] Network unavailable, falling back to cache');
-        return caches.match(request) || caches.match('./home_gym_zero_to_hero.html') || caches.match('./');
-      })
-    );
+  // Skip caching API mutations or auth endpoints
+  if (url.pathname.startsWith('/api/')) {
     return;
   }
 
-  // Stale-while-revalidate for static assets
+  // Stale-While-Revalidate: Return cached response in ~2ms while updating cache in background
   event.respondWith(
-    caches.match(request).then((cachedResponse) => {
+    caches.open(CACHE_NAME).then(async (cache) => {
+      const cachedResponse = await cache.match(request);
+
       const fetchPromise = fetch(request).then((networkResponse) => {
         if (networkResponse && networkResponse.status === 200) {
-          const responseToCache = networkResponse.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(request, responseToCache);
-          });
+          cache.put(request, networkResponse.clone());
         }
         return networkResponse;
-      }).catch(() => null);
+      }).catch((err) => {
+        return cachedResponse;
+      });
 
+      // If cached, return immediately; otherwise wait for network
       return cachedResponse || fetchPromise;
     })
   );

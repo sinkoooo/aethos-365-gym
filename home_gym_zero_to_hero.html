@@ -14,7 +14,11 @@
   <link rel="icon" type="image/png" href="icon-192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700;800&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet">
+  </noscript>
   <script>
     // 100X EARLY INTERACTION DEFENSE: Instant Pill & Modal Activation
     // Ensures clicking Sign In / User Pill responds within 0ms regardless of download or parse speed
@@ -3102,6 +3106,8 @@
     }
 
     .pro-ex-card {
+      content-visibility: auto;
+      contain-intrinsic-size: 0 450px;
       background: rgba(13, 20, 36, 0.65);
       backdrop-filter: blur(20px) saturate(180%);
       -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -5086,6 +5092,8 @@
     /* FLOATING TIMER */
     /* ── 1000X FLOATING REST CHRONOMETER HUD ── */
     .floating-timer {
+      will-change: transform, opacity;
+      transform: translateZ(0);
       position: fixed;
       bottom: 24px;
       right: 24px;
@@ -5319,6 +5327,8 @@
     .app-modal.active { display: flex; }
 
     .modal-box {
+      will-change: transform, opacity;
+      transform: translateZ(0);
       background: rgba(10, 16, 30, 0.94);
       backdrop-filter: blur(32px) saturate(190%);
       -webkit-backdrop-filter: blur(32px) saturate(190%);
@@ -20340,6 +20350,7 @@
         return;
       }
 
+      const cardsFrag = document.createDocumentFragment();
       plan.exercises.forEach((item, idx) => {
         const baseEx = CATALOG[item.key] || CATALOG['box_squats'];
         const progKey = `prog_${item.key}`;
@@ -20614,8 +20625,11 @@
           ${overloadHtml}
         `;
 
-        flow.appendChild(card);
+        cardsFrag.appendChild(card);
       });
+
+      flow.innerHTML = '';
+      flow.appendChild(cardsFrag);
 
       if (typeof applyWorkoutCardFilter === 'function') {
         applyWorkoutCardFilter();
@@ -20726,6 +20740,17 @@
       playAudioTone(440, 'triangle', 0.1);
     }
 
+    let _persistSetLogsTimer = null;
+    function scheduleSetLogsPersist() {
+      if (_persistSetLogsTimer) clearTimeout(_persistSetLogsTimer);
+      _persistSetLogsTimer = setTimeout(() => {
+        try {
+          localStorage.setItem(getProfileKey('gym_set_logs'), JSON.stringify(loggedSetData));
+          if (typeof checkAchievements === 'function') checkAchievements();
+        } catch (e) {}
+      }, 120);
+    }
+
     function quickStepSetLog(key, field, delta, defaultReps, defaultWt, triggerBtn) {
       if (!loggedSetData[key]) {
         loggedSetData[key] = { wt: defaultWt || '0', reps: defaultReps || '10', done: false };
@@ -20739,7 +20764,7 @@
       let updatedStr = String(newVal);
       loggedSetData[key][field] = updatedStr;
       loggedSetData[key].userCustom = true;
-      localStorage.setItem(getProfileKey('gym_set_logs'), JSON.stringify(loggedSetData));
+      scheduleSetLogsPersist();
 
       if (triggerBtn) {
         const row = triggerBtn.closest('tr');
@@ -20748,15 +20773,13 @@
           if (input) input.value = updatedStr;
         }
       }
-      checkAchievements();
     }
 
     function saveSetLog(key, field, val, defaultReps, defaultWt) {
       if (!loggedSetData[key]) loggedSetData[key] = { wt: defaultWt || '0', reps: defaultReps || '10', done: false };
       loggedSetData[key][field] = val;
       loggedSetData[key].userCustom = true;
-      localStorage.setItem(getProfileKey('gym_set_logs'), JSON.stringify(loggedSetData));
-      checkAchievements();
+      scheduleSetLogsPersist();
     }
 
     function checkAllWorkoutSetsDone(day) {
@@ -28090,7 +28113,6 @@ function stopGuidedCooldown() {
     function renderHeatmapGrid() {
       const fullGrid = document.getElementById('heatmapGrid52');
       if (!fullGrid) return;
-      fullGrid.innerHTML = '';
 
       const doneCount = completedDays.size;
       const streakSummary = document.getElementById('heatmapStreakSummary');
@@ -28099,6 +28121,7 @@ function stopGuidedCooldown() {
       }
 
       let activeCell = null;
+      const frag = document.createDocumentFragment();
 
       for (let d = 1; d <= 365; d++) {
         const numD = Number(d);
@@ -28142,8 +28165,11 @@ function stopGuidedCooldown() {
           renderActiveDay(d);
         };
 
-        fullGrid.appendChild(cell);
+        frag.appendChild(cell);
       }
+
+      fullGrid.innerHTML = '';
+      fullGrid.appendChild(frag);
 
       // Auto-scroll heatmap smoothly to center the active day on mobile or narrow viewports
       if (activeCell) {

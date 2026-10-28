@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import compression from 'compression';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -24,16 +25,39 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// High-Performance Wire Optimization: Brotli & Gzip Compression
+app.use(compression({
+  level: 6,
+  threshold: 1024,
+  filter: (req, res) => {
+    if (req.headers['x-no-compression']) return false;
+    return compression.filter(req, res);
+  }
+}));
+
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
-// Aggressive Cache-Control headers to ensure zero stale browser/proxy caching
+// Ultra-Low Latency Response Timer & Diagnostics Header
 app.use((req, res, next) => {
+  const start = process.hrtime.bigint();
+  const origSend = res.send;
+  res.send = function(...args) {
+    if (!res.headersSent) {
+      const durationMs = Number(process.hrtime.bigint() - start) / 1e6;
+      res.setHeader('X-Response-Time', `${durationMs.toFixed(2)}ms`);
+    }
+    return origSend.apply(this, args);
+  };
+  next();
+});
+
+// Smart Tiered Caching Strategy:
+// APIs: Zero-stale privacy protection
+app.use('/api', (req, res, next) => {
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
   res.setHeader('Pragma', 'no-cache');
-  res.setHeader('Expires', '0');
-  res.setHeader('Surrogate-Control', 'no-store');
   next();
 });
 
@@ -56,19 +80,25 @@ async function authenticateUser(req, res, next) {
 }
 app.use(authenticateUser);
 
-// Quick alias routes for home gym app
+// Quick alias routes for home gym app with conditional 304 revalidation
 app.get(['/', '/gym', '/homegym', '/aethos', '/index.html'], (req, res) => {
-  res.sendFile(path.join(__dirname, 'home_gym_zero_to_hero.html'));
+  res.setHeader('Cache-Control', 'no-cache, must-revalidate');
+  res.sendFile(path.join(__dirname, 'home_gym_zero_to_hero.html'), { etag: true, lastModified: true });
 });
 
-// Serve static directory with strict no-cache options
+// Serve static directory with smart conditional ETags & asset caching
 app.use(express.static(__dirname, {
-  etag: false,
-  lastModified: false,
-  setHeaders: (res) => {
-    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
-    res.setHeader('Pragma', 'no-cache');
-    res.setHeader('Expires', '0');
+  etag: true,
+  lastModified: true,
+  maxAge: '7d',
+  setHeaders: (res, filePath) => {
+    if (filePath.endsWith('.html') || filePath.endsWith('.htm')) {
+      res.setHeader('Cache-Control', 'no-cache, must-revalidate');
+    } else if (filePath.match(/\.(jpg|jpeg|png|gif|svg|webp|ico|woff2|woff|ttf)$/i)) {
+      res.setHeader('Cache-Control', 'public, max-age=604800, stale-while-revalidate=86400');
+    } else {
+      res.setHeader('Cache-Control', 'public, max-age=86400');
+    }
   }
 }));
 
