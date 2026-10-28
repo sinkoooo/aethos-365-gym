@@ -11104,6 +11104,90 @@
       border-color: rgba(255, 255, 255, 0.3);
     }
 
+  
+    /* ==========================================================
+       FLAGSHIP 2026: ULTRA-RICH MUSIC GRAPHICS & STAGE VISUALIZER
+       ========================================================== */
+    .music-visualizer-container {
+      position: relative;
+      width: 100%;
+      height: 140px !important;
+      background: radial-gradient(ellipse 90% 90% at 50% 50%, rgba(13, 21, 42, 0.95) 0%, rgba(4, 7, 16, 0.98) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.28);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-top: 14px;
+      margin-bottom: 14px;
+      box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.9), 0 8px 24px rgba(0, 0, 0, 0.5);
+      transition: height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .music-visualizer-container.stage-expanded {
+      height: 280px !important;
+      border-color: var(--cyan);
+      box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.9), 0 0 35px rgba(56, 189, 248, 0.35);
+    }
+    .vis-telemetry-hud {
+      position: absolute;
+      top: 8px;
+      left: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      pointer-events: none;
+      z-index: 5;
+    }
+    .telemetry-pill {
+      font-size: 0.65rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 800;
+      color: #94a3b8;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+    .telemetry-pill.live {
+      color: var(--emerald);
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+    .vis-mode-dock {
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      display: flex;
+      gap: 4px;
+      z-index: 6;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      max-width: 80%;
+    }
+    .vis-mode-btn {
+      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #94a3b8;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      transition: all 0.2s ease;
+    }
+    .vis-mode-btn:hover {
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.12);
+    }
+    .vis-mode-btn.active {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.35), rgba(168, 85, 247, 0.35));
+      border-color: var(--cyan);
+      color: #fff;
+      font-weight: 800;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+    }
+
   </style>
 </head>
 <body>
@@ -11129,6 +11213,7 @@
       <div class="island-music-pod" id="islandMusicPod" onclick="event.stopPropagation(); GymMusic.togglePlay();" title="Toggle Workout Beats">
         <span class="island-music-disc">🎵</span>
         <span class="island-music-name" id="islandMusicName">Cyber Heavy Pump</span>
+        <canvas id="islandMiniSpectrumCanvas" width="46" height="14" style="border-radius: 3px; display: block;"></canvas>
         <button type="button" class="island-music-btn" id="islandMusicBtn">▶</button>
       </div>
     </div>
@@ -12015,6 +12100,25 @@
 
             <!-- Follow-Along Active Player HUD -->
             <div id="cooldownActivePlayer" class="cooldown-player-hud" style="display: none; margin-top: 14px;">
+              <!-- Parasympathetic Cool-Down Soundtrack Dock -->
+              <div class="cooldown-music-dock" style="background: rgba(10, 16, 32, 0.75); border: 1px solid rgba(16, 185, 129, 0.28); border-radius: 10px; padding: 10px 14px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <span style="font-size: 1.2rem;">🧘</span>
+                  <div>
+                    <div style="font-size: 0.84rem; font-weight: 800; color: #fff;">✨ 528Hz Solfeggio &amp; 432Hz Zen Alpha Waves</div>
+                    <div style="font-size: 0.7rem; color: var(--emerald);">Parasympathetic Downregulation &bull; Vagal Nerve Recovery</div>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 6px; align-items: center;">
+                  <button type="button" class="mobility-chip active" onclick="GymMusic.selectTrack('ambient_drone_528'); GymMusic.play();">✨ 528Hz DNA</button>
+                  <button type="button" class="mobility-chip" onclick="GymMusic.selectTrack('zen_432'); GymMusic.play();">🧘 432Hz Zen</button>
+                  <button type="button" class="mobility-chip" onclick="GymMusic.selectTrack('binaural_flow'); GymMusic.play();">🌊 10Hz Alpha</button>
+                  <button type="button" class="btn-launch-cooldown" onclick="GymMusic.togglePlay()" style="padding: 4px 12px; font-size: 0.76rem;">▶ Play</button>
+                </div>
+              </div>
+              <div style="position: relative; height: 32px; background: rgba(0, 0, 0, 0.4); border-radius: 6px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.06); margin-bottom: 12px;">
+                <canvas id="cooldownMusicSpectrumCanvas" width="500" height="32" style="width: 100%; height: 100%; display: block;"></canvas>
+              </div>
               <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
                 <div style="display: flex; align-items: center; gap: 16px;">
                   <div class="player-clock-circle" id="cooldownClockCircle">
@@ -15234,14 +15338,26 @@
           </div>
 
           <!-- REAL-TIME 60FPS AUDIO SPECTRUM VISUALIZER -->
-          <div class="music-visualizer-container">
+          <div class="music-visualizer-container" id="mainMusicVisualizerContainer">
             <canvas id="musicSpectrumCanvas"></canvas>
+            
+            <!-- Real-Time Telemetry HUD -->
+            <div class="vis-telemetry-hud">
+              <span class="telemetry-pill live" id="visLivePill">● 60 FPS DSP</span>
+              <span class="telemetry-pill" id="visBpmPill">128 BPM</span>
+              <span class="telemetry-pill" id="visEnergyPill">ENERGY: 85%</span>
+            </div>
+
+            <!-- Enhanced Mode Selector Dock -->
             <div class="vis-mode-dock">
-              <button type="button" class="vis-mode-btn active" data-mode="bars" onclick="GymMusic.setVisualizerMode('bars')">📊 Bars</button>
-              <button type="button" class="vis-mode-btn" data-mode="wave" onclick="GymMusic.setVisualizerMode('wave')">〰️ Wave</button>
+              <button type="button" class="vis-mode-btn active" data-mode="bars" onclick="GymMusic.setVisualizerMode('bars')">📊 VU Bars</button>
+              <button type="button" class="vis-mode-btn" data-mode="wave" onclick="GymMusic.setVisualizerMode('wave')">〰️ Ribbon</button>
               <button type="button" class="vis-mode-btn" data-mode="orbit" onclick="GymMusic.setVisualizerMode('orbit')">⭕ Orbit</button>
               <button type="button" class="vis-mode-btn" data-mode="matrix" onclick="GymMusic.setVisualizerMode('matrix')">⚡ Matrix</button>
               <button type="button" class="vis-mode-btn" data-mode="cyber_hex" onclick="GymMusic.setVisualizerMode('cyber_hex')">🛑 Hex</button>
+              <button type="button" class="vis-mode-btn" data-mode="particles" onclick="GymMusic.setVisualizerMode('particles')">✨ Particles</button>
+              <button type="button" class="vis-mode-btn" data-mode="cyber_tunnel" onclick="GymMusic.setVisualizerMode('cyber_tunnel')">🚀 Tunnel</button>
+              <button type="button" class="vis-mode-btn" onclick="GymMusic.toggleStageExpanded()" title="Toggle Expanded Stage View">⛶</button>
             </div>
           </div>
 
@@ -30479,8 +30595,27 @@ const GymMusic = {
     });
   },
 
+  toggleStageExpanded() {
+    const el = document.getElementById('mainMusicVisualizerContainer');
+    if (el) el.classList.toggle('stage-expanded');
+  },
+
   startVisualizer() {
     if (this.visualizerAnimId) return;
+
+    // Peak VU Physics State
+    this.peakCaps = new Float32Array(128);
+    this.peakDrop = new Float32Array(128);
+
+    // Quantum Particle Field State
+    this.particles = Array.from({ length: 64 }, () => ({
+      x: Math.random() * 600,
+      y: Math.random() * 200,
+      vx: (Math.random() - 0.5) * 1.6,
+      vy: (Math.random() - 0.5) * 1.6,
+      r: Math.random() * 2.2 + 1,
+      col: Math.random() > 0.5 ? '#00f2fe' : '#a855f7'
+    }));
 
     const render = () => {
       this.visualizerAnimId = requestAnimationFrame(render);
@@ -30491,6 +30626,8 @@ const GymMusic = {
         document.getElementById('focusMusicSpectrumCanvas'),
         document.getElementById('liveMusicSpectrumCanvas'),
         document.getElementById('warmupMusicSpectrumCanvas'),
+        document.getElementById('cooldownMusicSpectrumCanvas'),
+        document.getElementById('islandMiniSpectrumCanvas'),
         document.getElementById('dockMiniSpectrumCanvas')
       ].filter(c => c && c.offsetParent !== null);
 
@@ -30567,10 +30704,18 @@ const GymMusic = {
         if (w === 0 || h === 0) return;
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
-        ctx.clearRect(0, 0, w, h);
+        // Phosphor Persistence Motion-Blur Trail
+        ctx.fillStyle = 'rgba(6, 11, 24, 0.32)';
+        ctx.fillRect(0, 0, w, h);
+
+        // Update Real-Time Telemetry HUD
+        const bpmEl = document.getElementById('visBpmPill');
+        const energyEl = document.getElementById('visEnergyPill');
+        if (bpmEl) bpmEl.innerText = (this.tempoBpm || 128) + ' BPM';
+        if (energyEl) energyEl.innerText = 'ENERGY: ' + Math.min(100, Math.round((bassAvg / 255) * 125)) + '%';
 
         if (!this.isPlaying) {
-          ctx.strokeStyle = 'rgba(56, 189, 248, 0.25)';
+          ctx.strokeStyle = 'rgba(56, 189, 248, 0.35)';
           ctx.lineWidth = 1.5;
           ctx.beginPath();
           const midY = h / 2;
@@ -30584,42 +30729,50 @@ const GymMusic = {
         }
 
         if (this.visualizerMode === 'bars') {
-          // Dynamic bar count: fill entire width beautifully whether 300px or 2560px
-          const step = isFullScreenHud ? 14 : 12;
+          const step = isFullScreenHud ? 14 : 10;
           const barCount = Math.max(24, Math.min(128, Math.floor(w / step)));
-          const barWidth = Math.max(4, (w / barCount) - (isFullScreenHud ? 4 : 3));
-          let x = (w - (barCount * (barWidth + (isFullScreenHud ? 4 : 3)))) / 2;
+          const barWidth = Math.max(3, (w / barCount) - 3);
+          let x = (w - (barCount * (barWidth + 3))) / 2;
           if (x < 0) x = 2;
 
           for (let i = 0; i < barCount; i++) {
-            const sampleIdx = Math.floor(i * (bufferLength / barCount) * 0.82);
+            const sampleIdx = Math.floor(i * (bufferLength / barCount) * 0.85);
             const val = freqData[sampleIdx] || 0;
-            const barHeight = Math.max(isFullScreenHud ? 8 : 4, (val / 255) * (h * (isFullScreenHud ? 0.88 : 0.95)));
+            const barHeight = Math.max(4, (val / 255) * (h * 0.9));
+
+            // Studio VU Gravity Physics for Peak Caps
+            if (barHeight >= this.peakCaps[i]) {
+              this.peakCaps[i] = barHeight;
+              this.peakDrop[i] = 0;
+            } else {
+              this.peakDrop[i] += 0.35;
+              this.peakCaps[i] = Math.max(0, this.peakCaps[i] - this.peakDrop[i]);
+            }
 
             const grad = ctx.createLinearGradient(0, h, 0, h - barHeight);
-            grad.addColorStop(0, 'rgba(0, 242, 254, 0.25)');
+            grad.addColorStop(0, 'rgba(0, 242, 254, 0.2)');
             grad.addColorStop(0.35, '#00f2fe');
-            grad.addColorStop(0.7, '#a855f7');
+            grad.addColorStop(0.65, '#10b981');
+            grad.addColorStop(0.85, '#fbbf24');
             grad.addColorStop(1, '#f43f5e');
 
             ctx.fillStyle = grad;
-            const radius = Math.min(4, barWidth / 2);
+            const radius = Math.min(3, barWidth / 2);
             const topY = h - barHeight;
             ctx.beginPath();
             if (ctx.roundRect) ctx.roundRect(x, topY, barWidth, barHeight, [radius, radius, 0, 0]);
             else ctx.rect(x, topY, barWidth, barHeight);
             ctx.fill();
 
-            // Peak glowing dot / crest
+            // Floating Studio VU Peak Cap with Neon Glow
+            const capY = Math.max(2, h - this.peakCaps[i] - 2);
             ctx.fillStyle = '#ffffff';
             ctx.shadowColor = '#00f2fe';
-            ctx.shadowBlur = isFullScreenHud ? 8 : 3;
-            ctx.beginPath();
-            ctx.arc(x + barWidth / 2, Math.max(4, topY - 3), isFullScreenHud ? 2.2 : 1.5, 0, Math.PI * 2);
-            ctx.fill();
+            ctx.shadowBlur = 6;
+            ctx.fillRect(x, capY, barWidth, 2);
             ctx.shadowBlur = 0;
 
-            x += barWidth + (isFullScreenHud ? 4 : 3);
+            x += barWidth + 3;
           }
         } else if (this.visualizerMode === 'wave') {
           // Multi-layer full-screen oscilloscope wave
@@ -30779,6 +30932,85 @@ const GymMusic = {
             ctx.lineWidth = isFullScreenHud ? (r === ringCount ? 3 : 1.8) : 1.5;
             ctx.shadowColor = '#00f2fe';
             ctx.shadowBlur = isFullScreenHud ? (bassRatio * 16) : 6;
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+          }
+        } else if (this.visualizerMode === 'particles') {
+          // Mode 6: Quantum Sonic Particle Field
+          const cx = w / 2;
+          const cy = h / 2;
+          const bassBoost = bassAvg / 255;
+
+          // Radial Kick Shockwave on Heavy Drops
+          if (bassAvg > 140) {
+            ctx.strokeStyle = 'rgba(0, 242, 254, ' + (bassBoost * 0.45) + ')';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(cx, cy, (bassBoost * Math.min(w, h) * 0.48), 0, Math.PI * 2);
+            ctx.stroke();
+          }
+
+          this.particles.forEach((p, idx) => {
+            const freqSample = freqData[idx % bufferLength] || 0;
+            const energy = freqSample / 255;
+            p.x += p.vx * (1 + energy * 2.5);
+            p.y += p.vy * (1 + energy * 2.5);
+
+            if (p.x < 0) p.x = w;
+            if (p.x > w) p.x = 0;
+            if (p.y < 0) p.y = h;
+            if (p.y > h) p.y = 0;
+
+            const radius = p.r * (1 + energy * 1.5);
+            ctx.fillStyle = p.col;
+            ctx.shadowColor = p.col;
+            ctx.shadowBlur = 8;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+
+            // Connect constellation filaments
+            for (let j = idx + 1; j < this.particles.length; j++) {
+              const p2 = this.particles[j];
+              const dx = p.x - p2.x;
+              const dy = p.y - p2.y;
+              const dist = Math.sqrt(dx * dx + dy * dy);
+              if (dist < 42) {
+                ctx.strokeStyle = 'rgba(56, 189, 248, ' + ((1 - dist / 42) * 0.3) + ')';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.stroke();
+              }
+            }
+          });
+        } else if (this.visualizerMode === 'cyber_tunnel') {
+          // Mode 7: Hyperdrive 3D Space Tunnel
+          const cx = w / 2;
+          const cy = h / 2;
+          const numRings = isFullScreenHud ? 12 : 8;
+          const time = Date.now() * 0.0025;
+
+          for (let r = 0; r < numRings; r++) {
+            const ringPhase = ((r / numRings) + (time * 0.3)) % 1;
+            const scale = Math.pow(ringPhase, 2.2);
+            const ringRadius = scale * Math.max(w, h) * 0.7 + ((bassAvg / 255) * 20);
+
+            ctx.beginPath();
+            const sides = 8;
+            for (let s = 0; s <= sides; s++) {
+              const ang = (s / sides) * Math.PI * 2 + (r * 0.1);
+              const px = cx + Math.cos(ang) * ringRadius;
+              const py = cy + Math.sin(ang) * ringRadius;
+              if (s === 0) ctx.moveTo(px, py);
+              else ctx.lineTo(px, py);
+            }
+            ctx.strokeStyle = ringPhase > 0.65 ? '#00f2fe' : (ringPhase > 0.35 ? '#a855f7' : '#f43f5e');
+            ctx.lineWidth = Math.max(1, scale * 3.5);
+            ctx.shadowColor = '#00f2fe';
+            ctx.shadowBlur = scale * 12;
             ctx.stroke();
             ctx.shadowBlur = 0;
           }
