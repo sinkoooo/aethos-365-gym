@@ -10518,9 +10518,256 @@
       transform: scale(1.2);
       box-shadow: 0 0 18px rgba(56, 189, 248, 0.8);
     }
+  
+    /* ==========================================================
+       ARCHITECTURAL FLAGSHIP 2026: SPATIAL CANVAS & DYNAMIC ISLAND
+       ========================================================== */
+    .ambient-mesh-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image: 
+        radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+        radial-gradient(ellipse 70% 40% at 50% 0%, rgba(56, 189, 248, 0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 95% 90%, rgba(168, 85, 247, 0.08) 0%, transparent 60%);
+      background-size: 28px 28px, 100% 100%, 100% 100%;
+      mask-image: radial-gradient(ellipse 95% 95% at 50% 40%, #000 65%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 95% 95% at 50% 40%, #000 65%, transparent 100%);
+    }
+
+    /* Apple-Grade Floating Dynamic Island */
+    .dynamic-island-capsule {
+      position: fixed;
+      top: 68px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 99;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 6px 14px;
+      background: rgba(9, 14, 28, 0.88);
+      backdrop-filter: blur(28px) saturate(220%);
+      -webkit-backdrop-filter: blur(28px) saturate(220%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 99px;
+      box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      max-width: 90vw;
+    }
+    .dynamic-island-capsule:hover {
+      background: rgba(14, 22, 44, 0.96);
+      border-color: rgba(56, 189, 248, 0.5);
+      box-shadow: 0 16px 40px -4px rgba(0, 0, 0, 0.85), 0 0 24px -4px rgba(56, 189, 248, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      transform: translateX(-50%) translateY(2px) scale(1.02);
+    }
+    .dynamic-island-capsule.active-timer {
+      border-color: var(--cyan);
+      box-shadow: 0 16px 40px -4px rgba(0, 0, 0, 0.85), 0 0 28px rgba(56, 189, 248, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      animation: islandPulseGlow 2s infinite ease-in-out;
+    }
+    @keyframes islandPulseGlow {
+      0%, 100% { border-color: rgba(56, 189, 248, 0.4); box-shadow: 0 12px 32px -4px rgba(0,0,0,0.75), 0 0 15px rgba(56,189,248,0.25); }
+      50% { border-color: rgba(56, 189, 248, 0.9); box-shadow: 0 16px 40px -4px rgba(0,0,0,0.85), 0 0 30px rgba(56,189,248,0.5); }
+    }
+    .island-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .island-pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 8px var(--cyan);
+      animation: dotPulse 1.8s infinite;
+    }
+    @keyframes dotPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+    .island-day-badge {
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: var(--cyan);
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 1px 7px;
+      border-radius: 99px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .island-ex-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #fff;
+      white-space: nowrap;
+      max-width: 220px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .island-timer-pod {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 2px 8px;
+      border-radius: 99px;
+    }
+    .island-timer-svg {
+      width: 14px;
+      height: 14px;
+      transform: rotate(-90deg);
+    }
+    .island-timer-track {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.15);
+      stroke-width: 2.5;
+    }
+    .island-timer-fill {
+      fill: none;
+      stroke: var(--cyan);
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-dasharray: 62.83;
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 1s linear;
+    }
+    .island-timer-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      font-weight: 800;
+      color: var(--cyan);
+    }
+    .island-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .island-metric-pill {
+      font-size: 0.72rem;
+      color: #94a3b8;
+      font-weight: 600;
+    }
+    .island-action-btn {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(168, 85, 247, 0.25));
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .island-action-btn:hover {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.4), rgba(168, 85, 247, 0.4));
+      border-color: var(--cyan);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+    }
+    @media (max-width: 768px) {
+      .dynamic-island-capsule {
+        top: auto;
+        bottom: 16px;
+        max-width: calc(100vw - 32px);
+      }
+      .island-ex-title {
+        max-width: 110px;
+      }
+    }
+
+    /* Bento Grid 3.0 Hero Pods */
+    .bento-hud-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: stretch !important;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      background: linear-gradient(145deg, rgba(16, 24, 46, 0.85) 0%, rgba(9, 14, 28, 0.95) 100%) !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 16px 36px -10px rgba(0, 0, 0, 0.75) !important;
+      transition: all 0.28s var(--ease-out-expo) !important;
+    }
+    .bento-hud-card:hover {
+      transform: translateY(-3px) scale(1.01) !important;
+      border-color: rgba(56, 189, 248, 0.45) !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 22px 50px -12px rgba(0, 0, 0, 0.85), 0 0 28px -6px rgba(56, 189, 248, 0.28) !important;
+    }
+    .bento-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .bento-ring-wrap {
+      position: relative;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .bento-ring-svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+    .bento-ring-bg {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.08);
+      stroke-width: 3.2;
+    }
+    .bento-ring-fg {
+      fill: none;
+      stroke: var(--cyan);
+      stroke-width: 3.2;
+      stroke-linecap: round;
+      transition: stroke-dasharray 0.6s ease;
+      filter: drop-shadow(0 0 3px rgba(56, 189, 248, 0.5));
+    }
+    .bento-ring-text {
+      position: absolute;
+      font-size: 0.65rem;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      color: #fff;
+    }
+
   </style>
 </head>
 <body>
+
+  <!-- SPATIAL CANVAS: SUB-PIXEL DOT-MATRIX & DUAL AURORA GLOW MESH -->
+  <div class="ambient-mesh-canvas" aria-hidden="true"></div>
+
+  <!-- FLOATING DYNAMIC ISLAND: LIVE ACTIVITY CAPSULE -->
+  <aside class="dynamic-island-capsule" id="floatingDynamicIsland" onclick="handleDynamicIslandClick(event)" title="Live Session Activity Capsule (Click to expand Focus HUD)">
+    <div class="island-left">
+      <span class="island-pulse-dot" id="islandPulseDot"></span>
+      <span class="island-day-badge" id="islandDayBadge">DAY 1</span>
+      <span class="island-ex-title" id="islandExTitle">Live Performance Telemetry</span>
+    </div>
+    <div class="island-center">
+      <div class="island-timer-pod" id="islandTimerPod" style="display: none;">
+        <svg class="island-timer-svg" viewBox="0 0 24 24">
+          <circle class="island-timer-track" cx="12" cy="12" r="10"></circle>
+          <circle class="island-timer-fill" id="islandTimerFill" cx="12" cy="12" r="10"></circle>
+        </svg>
+        <span class="island-timer-text" id="islandTimerDigits">01:00</span>
+      </div>
+    </div>
+    <div class="island-right">
+      <span class="island-metric-pill" id="islandMetricPill">⚡ 0/6 Mission Done</span>
+      <button type="button" class="island-action-btn" onclick="event.stopPropagation(); startLiveWorkoutSession();" title="Enter Distraction-Free Active Focus HUD">
+        ▶ Focus
+      </button>
+    </div>
+  </aside>
 
   <!-- TOP PROFESSIONAL HEADER -->
   <header class="top-header">
@@ -10755,13 +11002,21 @@
     <!-- HUD METRICS (ULTRA-SLEEK CYBER-TELEMETRY PODS) -->
     <section class="container">
       <div class="hero-dashboard">
-        <!-- 1. Year Progress -->
-        <div class="hud-card" onclick="switchWorkoutCockpitTab('tabMatrix')" title="Click to open 365-Day Consistency Matrix & Matrix Log">
-          <div class="hud-icon-badge cyan">🎯</div>
+        <!-- 1. Year Progress (Bento Pod with SVG Radial Ring) -->
+        <div class="hud-card bento-hud-card" onclick="switchWorkoutCockpitTab('tabMatrix')" title="Click to open 365-Day Consistency Matrix & Matrix Log">
+          <div class="bento-card-top">
+            <div class="hud-icon-badge cyan">🎯</div>
+            <div class="bento-ring-wrap" title="365-Day Year Progress Gauge">
+              <svg class="bento-ring-svg" viewBox="0 0 36 36">
+                <path class="bento-ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                <path class="bento-ring-fg" id="bentoYearRing" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+              </svg>
+              <span id="pctCompleted" class="bento-ring-text">0.0%</span>
+            </div>
+          </div>
           <div class="hud-card-body">
             <div class="hud-title">
               <span>Year Progress</span>
-              <span id="pctCompleted" class="hud-title-badge">0.0%</span>
             </div>
             <div class="hud-val" id="statCompleted">0 / 365</div>
             <div class="hud-sub">Days Conquered</div>
@@ -10771,39 +11026,45 @@
           </div>
         </div>
 
-        <!-- 2. Habit Streak -->
-        <div class="hud-card" onclick="switchWorkoutCockpitTab('tabMatrix')" title="Click to inspect Habit Streaks & Calendar">
-          <div class="hud-icon-badge amber">🔥</div>
+        <!-- 2. Habit Streak (Bento Pod with Kinetic Flame Badge) -->
+        <div class="hud-card bento-hud-card" onclick="switchWorkoutCockpitTab('tabMatrix')" title="Click to inspect Habit Streaks & Calendar">
+          <div class="bento-card-top">
+            <div class="hud-icon-badge amber">🔥</div>
+            <span id="hudStreakBadge" class="hud-title-badge amber-chip" style="font-size:0.68rem; padding: 2px 8px; font-weight:800;">0D STREAK</span>
+          </div>
           <div class="hud-card-body">
             <div class="hud-title">
               <span>Habit Streak</span>
-              <span id="hudStreakBadge" class="hud-title-badge">0D</span>
             </div>
             <div class="hud-val" id="statStreak">0 Days</div>
             <div class="hud-sub" id="streakSub">Log today to keep streak</div>
           </div>
         </div>
 
-        <!-- 3. Training Level -->
-        <div class="hud-card" onclick="switchView('milestonesView')" title="Click to jump to Milestone Hub & Level Progression">
-          <div class="hud-icon-badge purple">⚡</div>
+        <!-- 3. Training Level (Bento Pod) -->
+        <div class="hud-card bento-hud-card" onclick="switchView('milestonesView')" title="Click to jump to Milestone Hub & Level Progression">
+          <div class="bento-card-top">
+            <div class="hud-icon-badge purple">⚡</div>
+            <span id="statPhaseChip" class="hud-title-badge purple-chip" style="font-size:0.68rem; padding: 2px 8px; font-weight:800;">PHASE 1</span>
+          </div>
           <div class="hud-card-body">
             <div class="hud-title">
               <span>Training Level</span>
-              <span id="statPhaseChip" class="hud-title-badge purple-chip">PHASE 1</span>
             </div>
             <div class="hud-val" id="statPhase">Phase 1</div>
             <div class="hud-sub" id="statPhaseDesc">Neural & Joint Foundation</div>
           </div>
         </div>
 
-        <!-- 4. Equipment Status -->
-        <div class="hud-card" onclick="switchWorkoutCockpitTab('tabRadar')" title="Click to view Equipment Loadout & Radar">
-          <div class="hud-icon-badge emerald">🛡️</div>
+        <!-- 4. Equipment Status (Bento Pod) -->
+        <div class="hud-card bento-hud-card" onclick="switchWorkoutCockpitTab('tabRadar')" title="Click to view Equipment Loadout & Radar">
+          <div class="bento-card-top">
+            <div class="hud-icon-badge emerald">🛡️</div>
+            <span class="hud-title-badge emerald-chip" style="font-size:0.68rem; padding: 2px 8px; font-weight:800;">$0 TIER</span>
+          </div>
           <div class="hud-card-body">
             <div class="hud-title">
               <span>Equipment Gear</span>
-              <span class="hud-title-badge emerald-chip">$0 TIER</span>
             </div>
             <div class="hud-val" id="statEquip">Zero Gear ($0)</div>
             <div class="hud-sub" id="statEquipSub">Living room bodyweight</div>
@@ -18144,6 +18405,121 @@
     }
     window.switchWorkoutCockpitTab = switchWorkoutCockpitTab;
 
+    // ==========================================
+    // FLAGSHIP 2026: GYMHAPTICS & DYNAMIC ISLAND
+    // ==========================================
+    const GymHaptics = {
+      ctx: null,
+      init() {
+        if (!this.ctx) {
+          if (typeof SoundFX !== 'undefined' && SoundFX.ctx) {
+            this.ctx = SoundFX.ctx;
+          } else {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (AudioCtx) this.ctx = new AudioCtx();
+          }
+        }
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      },
+      tick() {
+        try {
+          this.init();
+          if (!this.ctx) return;
+          const t = this.ctx.currentTime;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(140, t);
+          osc.frequency.exponentialRampToValueAtTime(80, t + 0.04);
+          gain.gain.setValueAtTime(0.18, t);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + 0.04);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(t);
+          osc.stop(t + 0.04);
+        } catch(e) {}
+      },
+      setComplete() {
+        if (typeof SoundFX !== 'undefined' && SoundFX.playSetComplete) {
+          SoundFX.playSetComplete();
+        }
+      },
+      water() {
+        try {
+          this.init();
+          if (!this.ctx) return;
+          const t = this.ctx.currentTime;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(600, t);
+          osc.frequency.exponentialRampToValueAtTime(1200, t + 0.08);
+          gain.gain.setValueAtTime(0.25, t);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(t);
+          osc.stop(t + 0.12);
+        } catch(e) {}
+      },
+      overload() {
+        try {
+          this.init();
+          if (!this.ctx) return;
+          const t = this.ctx.currentTime;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(320, t);
+          osc.frequency.exponentialRampToValueAtTime(640, t + 0.15);
+          gain.gain.setValueAtTime(0.3, t);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + 0.2);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(t);
+          osc.stop(t + 0.2);
+        } catch(e) {}
+      }
+    };
+    window.GymHaptics = GymHaptics;
+
+    function updateDynamicIslandTelemetry() {
+      const islandDayBadge = document.getElementById('islandDayBadge');
+      const islandExTitle = document.getElementById('islandExTitle');
+      const islandMetricPill = document.getElementById('islandMetricPill');
+      
+      if (islandDayBadge) islandDayBadge.innerText = 'DAY ' + currentDay;
+      
+      const plan = typeof getDayPlan === 'function' ? getDayPlan(currentDay) : null;
+      if (islandExTitle) {
+        if (plan && plan.exercises && plan.exercises.length > 0) {
+          islandExTitle.innerText = plan.exercises[0].name || plan.title || 'Workout Ready';
+        } else if (plan && (plan.isRest || plan.isRecovery)) {
+          islandExTitle.innerText = plan.isRest ? 'Active Rest Protocol' : 'Mobility & Recovery';
+        } else {
+          islandExTitle.innerText = 'Precision Performance OS';
+        }
+      }
+
+      if (islandMetricPill && typeof completedDays !== 'undefined') {
+        const isDayDone = completedDays.has(Number(currentDay));
+        islandMetricPill.innerText = isDayDone ? '★ Day Complete' : 'Day ' + currentDay + ' • Ready';
+      }
+    }
+    window.updateDynamicIslandTelemetry = updateDynamicIslandTelemetry;
+
+    function handleDynamicIslandClick(e) {
+      if (typeof secLeft !== 'undefined' && secLeft > 0 && typeof timerInt !== 'undefined' && timerInt) {
+        if (typeof togglePauseRestTimer === 'function') togglePauseRestTimer();
+      } else if (typeof startLiveWorkoutSession === 'function') {
+        startLiveWorkoutSession();
+      }
+    }
+    window.handleDynamicIslandClick = handleDynamicIslandClick;
+
+
     function scrollToWorkoutSection(id) {
       if (!document.getElementById('workoutView')?.classList.contains('active')) {
         switchView('workoutView');
@@ -23619,6 +23995,14 @@ function stopGuidedCooldown() {
       if (pctCompleted) pctCompleted.innerText = `${pct}%`;
       if (hudProgressFill) hudProgressFill.style.width = `${pct}%`;
 
+      const bentoYearRing = document.getElementById('bentoYearRing');
+      if (bentoYearRing) {
+        bentoYearRing.setAttribute('stroke-dasharray', `${Math.min(100, pct)}, 100`);
+      }
+      if (typeof updateDynamicIslandTelemetry === 'function') {
+        updateDynamicIslandTelemetry();
+      }
+
       const pParts = (plan?.phaseName || 'Phase 1: Neural & Joint Foundation').split(':');
       const statPhase = document.getElementById('statPhase');
       const statPhaseDesc = document.getElementById('statPhaseDesc');
@@ -26790,6 +27174,11 @@ function stopGuidedCooldown() {
 
       const inlineRestBar = document.getElementById('liveInlineRestBar');
       if (inlineRestBar) inlineRestBar.style.display = 'none';
+
+      const islandElOnComplete = document.getElementById('floatingDynamicIsland');
+      const islandTimerPodOnComplete = document.getElementById('islandTimerPod');
+      if (islandElOnComplete) islandElOnComplete.classList.remove('active-timer');
+      if (islandTimerPodOnComplete) islandTimerPodOnComplete.style.display = 'none';
     }
 
     function updateTimerUI() {
@@ -26818,6 +27207,26 @@ function stopGuidedCooldown() {
       // Update Circular SVG Ring (Circumference of r=22 is ~138.2)
       const circumference = 138.2;
       const progress = Math.max(0, Math.min(1, secLeft / Math.max(1, timerTotalSec)));
+
+      // Synchronize Floating Dynamic Island Capsule
+      const islandEl = document.getElementById('floatingDynamicIsland');
+      const islandTimerPod = document.getElementById('islandTimerPod');
+      const islandTimerDigits = document.getElementById('islandTimerDigits');
+      const islandTimerFill = document.getElementById('islandTimerFill');
+      if (islandEl && islandTimerPod && islandTimerDigits) {
+        if (secLeft > 0 && timerInt && !timerIsPaused) {
+          islandEl.classList.add('active-timer');
+          islandTimerPod.style.display = 'flex';
+          islandTimerDigits.innerText = `${m}:${s}`;
+          if (islandTimerFill) {
+            const islandCirc = 62.83;
+            islandTimerFill.style.strokeDashoffset = String(islandCirc * (1 - progress));
+          }
+        } else if (!timerInt || secLeft <= 0) {
+          islandEl.classList.remove('active-timer');
+          islandTimerPod.style.display = 'none';
+        }
+      }
       const offset = circumference * (1 - progress);
 
       if (ringFill) {
