@@ -8968,23 +8968,25 @@
       margin-bottom: 8px;
     }
     .hud-card {
-      background: linear-gradient(145deg, rgba(16, 24, 45, 0.78) 0%, rgba(9, 14, 28, 0.92) 100%) !important;
+      background: linear-gradient(150deg, rgba(16, 24, 46, 0.85) 0%, rgba(9, 14, 28, 0.95) 100%) !important;
       border: 1px solid rgba(255, 255, 255, 0.09) !important;
       border-radius: 14px !important;
-      box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.14), 0 14px 34px -8px rgba(0, 0, 0, 0.65) !important;
-      padding: 12px 16px !important;
+      box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.16), 0 14px 34px -8px rgba(0, 0, 0, 0.65) !important;
+      padding: 14px 18px !important;
       transition: all 0.25s var(--ease-out-expo) !important;
+      cursor: pointer;
     }
     .hud-card:hover {
       transform: translateY(-3px) !important;
       border-color: rgba(56, 189, 248, 0.45) !important;
-      box-shadow: 0 18px 44px -10px rgba(0, 0, 0, 0.8), 0 0 28px -6px rgba(56, 189, 248, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+      box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.8), 0 0 28px -6px rgba(56, 189, 248, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
     }
     .hud-val {
-      font-size: 1.35rem !important;
+      font-size: 1.4rem !important;
       font-weight: 800 !important;
       letter-spacing: -0.025em !important;
       font-variant-numeric: tabular-nums !important;
+      font-family: 'JetBrains Mono', monospace !important;
       color: #fff !important;
       text-shadow: 0 0 18px rgba(255, 255, 255, 0.15) !important;
     }
@@ -8998,7 +9000,7 @@
       background: rgba(255, 255, 255, 0.08) !important;
       border-radius: 99px !important;
       overflow: hidden;
-      margin-top: 6px;
+      margin-top: 8px;
     }
     .hud-pod-fill.cyan {
       background: linear-gradient(90deg, #00f2fe, var(--cyan)) !important;
@@ -9007,15 +9009,15 @@
 
     /* 4. Consistency Heatmap Card & Quick Actions Bar */
     .consistency-heatmap-card {
-      background: linear-gradient(160deg, rgba(16, 24, 46, 0.8) 0%, rgba(9, 14, 28, 0.94) 100%) !important;
+      background: linear-gradient(160deg, rgba(16, 24, 46, 0.85) 0%, rgba(9, 14, 28, 0.95) 100%) !important;
       border: 1px solid rgba(255, 255, 255, 0.09) !important;
       border-radius: 16px !important;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 18px 40px -10px rgba(0, 0, 0, 0.7) !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 18px 40px -10px rgba(0, 0, 0, 0.7) !important;
       padding: 18px !important;
       margin-bottom: 18px !important;
     }
     .consistency-quick-bar {
-      background: rgba(11, 17, 33, 0.75) !important;
+      background: rgba(11, 17, 33, 0.8) !important;
       border: 1px solid rgba(255, 255, 255, 0.09) !important;
       border-radius: 12px !important;
       padding: 10px 16px !important;
@@ -9025,6 +9027,8 @@
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
       letter-spacing: 0.3px;
       transition: all 0.2s ease;
+      border-radius: 99px;
+      padding: 4px 12px;
     }
     .streak-pill-chip.fire {
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.22) 0%, rgba(239, 68, 68, 0.22) 100%) !important;
@@ -9042,7 +9046,7 @@
     }
     .btn-streak-action {
       background: linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(5, 150, 105, 0.25) 100%) !important;
-      border: 1px solid rgba(16, 185, 129, 0.5) !important;
+      border: 1px solid rgba(16, 185, 129, 0.55) !important;
       color: #34d399 !important;
       padding: 7px 16px !important;
       border-radius: 8px !important;
@@ -9053,13 +9057,14 @@
     .btn-streak-action:hover {
       background: var(--emerald) !important;
       color: #000 !important;
-      box-shadow: 0 0 20px rgba(16, 185, 129, 0.45) !important;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.5) !important;
       transform: translateY(-1px) !important;
     }
     .btn-streak-rest {
       border-radius: 8px !important;
       padding: 7px 14px !important;
       border-color: rgba(56, 189, 248, 0.35) !important;
+      font-weight: 700 !important;
     }
 
     /* 52-Week Matrix Grid Cells */
@@ -9092,9 +9097,83 @@
       box-shadow: 0 0 14px rgba(16, 185, 129, 0.85) !important;
     }
 
-    /* 5. Mission Checklist HUD Overhaul */
+    /* 5. Daily Readiness Autoregulation & Hydration Cockpit (.readiness-strip) */
+    .readiness-strip {
+      background: linear-gradient(145deg, rgba(14, 21, 38, 0.85) 0%, rgba(8, 13, 26, 0.95) 100%) !important;
+      border: 1px solid rgba(56, 189, 248, 0.2) !important;
+      border-radius: 14px !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 14px 35px -8px rgba(0, 0, 0, 0.6) !important;
+      padding: 12px 18px !important;
+      margin-bottom: 18px !important;
+    }
+    .readiness-btns {
+      background: rgba(5, 8, 18, 0.75) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      border-radius: 99px !important;
+      padding: 3px 5px !important;
+    }
+    .btn-energy {
+      border-radius: 99px !important;
+      font-weight: 700 !important;
+      font-size: 0.74rem !important;
+      padding: 5px 12px !important;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .btn-energy.active-prime {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.32), rgba(99, 102, 241, 0.32)) !important;
+      border-color: rgba(168, 85, 247, 0.8) !important;
+      color: #f0abfc !important;
+      box-shadow: 0 0 14px rgba(168, 85, 247, 0.45) !important;
+      font-weight: 800 !important;
+    }
+    .btn-energy.active-high {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.28), rgba(37, 99, 235, 0.28)) !important;
+      border-color: rgba(56, 189, 248, 0.8) !important;
+      color: #fff !important;
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.45) !important;
+      font-weight: 800 !important;
+    }
+    .btn-energy.active-norm {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.28), rgba(5, 150, 105, 0.28)) !important;
+      border-color: rgba(16, 185, 129, 0.8) !important;
+      color: #6ee7b7 !important;
+      box-shadow: 0 0 14px rgba(16, 185, 129, 0.45) !important;
+      font-weight: 800 !important;
+    }
+    .btn-energy.active-low {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.28), rgba(217, 119, 6, 0.28)) !important;
+      border-color: rgba(245, 158, 11, 0.8) !important;
+      color: #fde68a !important;
+      box-shadow: 0 0 14px rgba(245, 158, 11, 0.45) !important;
+      font-weight: 800 !important;
+    }
+    .water-pod-strip {
+      background: rgba(5, 8, 18, 0.75) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      border-radius: 99px !important;
+      padding: 4px 8px !important;
+    }
+    .water-cup {
+      width: 25px !important;
+      height: 27px !important;
+      border-radius: 6px !important;
+      background: rgba(12, 18, 34, 0.85) !important;
+      border: 1.2px solid rgba(56, 189, 248, 0.25) !important;
+    }
+    .water-cup.filled {
+      background: linear-gradient(180deg, #00f2fe 0%, #2563eb 100%) !important;
+      border-color: var(--cyan) !important;
+      box-shadow: 0 0 12px rgba(0, 242, 254, 0.5) !important;
+    }
+    .water-quick-btn {
+      border-radius: 99px !important;
+      font-weight: 800 !important;
+      padding: 3px 9px !important;
+    }
+
+    /* 6. Mission Checklist HUD Overhaul */
     .mission-checklist-card {
-      background: linear-gradient(160deg, rgba(16, 24, 46, 0.82) 0%, rgba(9, 14, 28, 0.94) 100%) !important;
+      background: linear-gradient(160deg, rgba(16, 24, 46, 0.85) 0%, rgba(9, 14, 28, 0.95) 100%) !important;
       border: 1px solid rgba(255, 255, 255, 0.09) !important;
       border-radius: 16px !important;
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 18px 40px -10px rgba(0, 0, 0, 0.7) !important;
@@ -9102,7 +9181,7 @@
       margin-bottom: 18px !important;
     }
     .mission-chip {
-      background: rgba(13, 19, 36, 0.75) !important;
+      background: rgba(13, 19, 36, 0.78) !important;
       border: 1px solid rgba(255, 255, 255, 0.08) !important;
       border-radius: 12px !important;
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 4px 14px rgba(0, 0, 0, 0.3) !important;
@@ -9110,7 +9189,7 @@
     }
     .mission-chip:hover {
       border-color: rgba(56, 189, 248, 0.45) !important;
-      background: rgba(20, 31, 56, 0.9) !important;
+      background: rgba(20, 31, 56, 0.92) !important;
       transform: translateY(-2px) !important;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
     }
@@ -9142,20 +9221,20 @@
       100% { background-position: 0% 50%; }
     }
 
-    /* 6. Day Controller Cockpit Dock (.day-dock) */
+    /* 7. Day Controller Cockpit Dock (.day-dock) */
     .day-dock {
-      background: linear-gradient(145deg, rgba(16, 24, 46, 0.85) 0%, rgba(9, 14, 28, 0.95) 100%) !important;
+      background: linear-gradient(145deg, rgba(16, 24, 46, 0.88) 0%, rgba(9, 14, 28, 0.96) 100%) !important;
       border: 1px solid rgba(255, 255, 255, 0.1) !important;
       border-radius: 16px !important;
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 20px 45px -10px rgba(0, 0, 0, 0.75) !important;
-      padding: 14px 18px !important;
+      padding: 14px 20px !important;
       margin-bottom: 20px !important;
     }
     .day-display-box {
-      background: rgba(8, 12, 24, 0.9) !important;
-      border: 1px solid rgba(56, 189, 248, 0.4) !important;
+      background: rgba(7, 11, 22, 0.92) !important;
+      border: 1.5px solid rgba(56, 189, 248, 0.5) !important;
       border-radius: 10px !important;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 15px rgba(56, 189, 248, 0.15) !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 0 16px rgba(56, 189, 248, 0.2) !important;
     }
     .day-display-box input {
       font-family: 'JetBrains Mono', monospace !important;
@@ -9178,20 +9257,35 @@
     }
     .btn-live-session {
       background: linear-gradient(135deg, #0284c7 0%, #2563eb 50%, #7c3aed 100%) !important;
-      border: 1px solid rgba(255, 255, 255, 0.2) !important;
+      border: 1px solid rgba(255, 255, 255, 0.25) !important;
       border-radius: 10px !important;
       font-weight: 800 !important;
       letter-spacing: 0.3px;
-      box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+      box-shadow: 0 4px 20px rgba(37, 99, 235, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
       padding: 8px 18px !important;
     }
     .btn-live-session:hover {
       transform: translateY(-2px) scale(1.02) !important;
-      box-shadow: 0 8px 28px rgba(37, 99, 235, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+      box-shadow: 0 8px 28px rgba(37, 99, 235, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
+    }
+    .btn-quick-log {
+      border-radius: 10px !important;
+      font-weight: 800 !important;
+      background: rgba(56, 189, 248, 0.12) !important;
+      border: 1px solid rgba(56, 189, 248, 0.35) !important;
+      color: var(--cyan) !important;
+      padding: 8px 16px !important;
+      transition: all 0.2s ease;
+    }
+    .btn-quick-log:hover {
+      background: rgba(56, 189, 248, 0.25) !important;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.35) !important;
+      color: #fff !important;
+      transform: translateY(-1px);
     }
     .btn-complete-day {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.3) 100%) !important;
-      border: 1px solid rgba(16, 185, 129, 0.45) !important;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(5, 150, 105, 0.35) 100%) !important;
+      border: 1px solid rgba(16, 185, 129, 0.5) !important;
       border-radius: 10px !important;
       font-weight: 800 !important;
       padding: 8px 18px !important;
@@ -9201,57 +9295,315 @@
     .btn-complete-day:hover {
       background: var(--emerald) !important;
       color: #000 !important;
-      box-shadow: 0 0 24px rgba(16, 185, 129, 0.5) !important;
+      box-shadow: 0 0 24px rgba(16, 185, 129, 0.55) !important;
       transform: translateY(-1px) !important;
     }
     .btn-complete-day.completed {
-      background: linear-gradient(135deg, var(--emerald), #059669) !important;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
       color: #000 !important;
+      font-weight: 900 !important;
       border-color: #34d399 !important;
-      box-shadow: 0 0 25px rgba(16, 185, 129, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
     }
 
-    /* 7. Exercise Cards & Set Rows Overhaul */
-    .exercise-card {
-      background: linear-gradient(155deg, rgba(16, 24, 46, 0.82) 0%, rgba(9, 14, 28, 0.94) 100%) !important;
+    /* 8. Pro Exercise Cards (.pro-ex-card) & Set Logging Suite */
+    .pro-ex-card {
+      background: linear-gradient(155deg, rgba(16, 24, 46, 0.85) 0%, rgba(9, 14, 28, 0.95) 100%) !important;
       border: 1px solid rgba(255, 255, 255, 0.09) !important;
       border-radius: 16px !important;
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 16px 38px -10px rgba(0, 0, 0, 0.7) !important;
-      padding: 18px !important;
-      margin-bottom: 16px !important;
+      padding: 20px !important;
+      margin-bottom: 18px !important;
+      position: relative;
+      overflow: hidden;
       transition: all 0.25s var(--ease-out-expo) !important;
     }
-    .exercise-card:hover {
-      border-color: rgba(56, 189, 248, 0.35) !important;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 20px 48px -10px rgba(0, 0, 0, 0.8), 0 0 24px -8px rgba(56, 189, 248, 0.25) !important;
+    .pro-ex-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 16px;
+      bottom: 16px;
+      width: 4px;
+      border-radius: 0 4px 4px 0;
+      background: linear-gradient(180deg, var(--cyan), var(--electric-blue), var(--purple));
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.5);
     }
-    .set-row input[type="number"], .set-row input[type="text"] {
-      background: rgba(8, 12, 24, 0.88) !important;
+    .pro-ex-card:hover {
+      border-color: rgba(56, 189, 248, 0.38) !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 20px 48px -10px rgba(0, 0, 0, 0.8), 0 0 24px -8px rgba(56, 189, 248, 0.25) !important;
+      transform: translateY(-2px);
+    }
+    .ex-title-text {
+      font-size: 1.22rem !important;
+      font-weight: 800 !important;
+      color: #fff !important;
+      letter-spacing: -0.015em !important;
+    }
+    .ex-target-pill {
+      font-size: 0.72rem !important;
+      font-weight: 700 !important;
+      padding: 3px 9px !important;
+      border-radius: 6px !important;
+      background: rgba(56, 189, 248, 0.12) !important;
+      color: #7dd3fc !important;
+      border: 1px solid rgba(56, 189, 248, 0.25) !important;
+    }
+    .ex-target-badge {
+      font-family: 'JetBrains Mono', monospace !important;
+      font-size: 0.88rem !important;
+      font-weight: 800 !important;
+      color: #34d399 !important;
+      background: rgba(16, 185, 129, 0.12) !important;
+      border: 1px solid rgba(16, 185, 129, 0.3) !important;
+      padding: 4px 10px !important;
+      border-radius: 8px !important;
+    }
+    .biomech-telemetry-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 10px 0 12px;
+    }
+    .biomech-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      padding: 4px 9px;
+      border-radius: 6px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+    .biomech-tag.agonist {
+      background: rgba(56, 189, 248, 0.1) !important;
+      border: 1px solid rgba(56, 189, 248, 0.3) !important;
+      color: #7dd3fc !important;
+    }
+    .biomech-tag.synergist {
+      background: rgba(168, 85, 247, 0.1) !important;
+      border: 1px solid rgba(168, 85, 247, 0.3) !important;
+      color: #d8b4fe !important;
+    }
+    .biomech-tag.tempo {
+      background: rgba(245, 158, 11, 0.1) !important;
+      border: 1px solid rgba(245, 158, 11, 0.3) !important;
+      color: #fde68a !important;
+    }
+    .progression-pills {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .prog-btn {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #94a3b8;
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .prog-btn:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+      color: #fff;
+    }
+    .prog-btn.active-std {
+      background: rgba(16, 185, 129, 0.18);
+      border-color: rgba(16, 185, 129, 0.55);
+      color: #34d399;
+      font-weight: 800;
+    }
+    .prog-btn.active-easy {
+      background: rgba(245, 158, 11, 0.18);
+      border-color: rgba(245, 158, 11, 0.55);
+      color: #fbbf24;
+      font-weight: 800;
+    }
+    .prog-btn.active-hard {
+      background: rgba(244, 63, 94, 0.18);
+      border-color: rgba(244, 63, 94, 0.55);
+      color: #fda4af;
+      font-weight: 800;
+    }
+
+    /* Set Logging Table Overhaul */
+    .set-logging-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 6px;
+      margin-top: 14px;
+    }
+    .set-logging-table th {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--text-dim);
+      padding: 6px 12px;
+      font-weight: 800;
+    }
+    .set-logging-table tr td {
+      background: rgba(11, 17, 33, 0.65) !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 9px 12px !important;
+      transition: all 0.18s ease;
+    }
+    .set-logging-table tr:hover td {
+      background: rgba(20, 31, 56, 0.85) !important;
+      border-color: rgba(56, 189, 248, 0.2);
+    }
+    .set-logging-table td:first-child {
+      border-left: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 10px 0 0 10px !important;
+    }
+    .set-logging-table td:last-child {
+      border-right: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 0 10px 10px 0 !important;
+    }
+
+    /* Tactile Micro-Steppers & Set Log Inputs */
+    .stepper-input-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .btn-micro-step {
+      background: rgba(255, 255, 255, 0.06) !important;
+      border: 1px solid rgba(255, 255, 255, 0.14) !important;
+      color: #cbd5e1 !important;
+      font-family: 'JetBrains Mono', monospace !important;
+      font-size: 0.72rem !important;
+      font-weight: 800 !important;
+      padding: 5px 8px !important;
+      border-radius: 6px !important;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+    .btn-micro-step:hover {
+      background: rgba(56, 189, 248, 0.2) !important;
+      border-color: var(--cyan) !important;
+      color: #fff !important;
+      transform: translateY(-1px);
+    }
+    .btn-micro-step:active {
+      transform: scale(0.92) !important;
+    }
+    .log-input {
+      background: rgba(7, 11, 22, 0.9) !important;
       border: 1px solid rgba(255, 255, 255, 0.12) !important;
       border-radius: 8px !important;
       color: #fff !important;
       font-family: 'JetBrains Mono', monospace !important;
-      font-weight: 700 !important;
+      font-weight: 800 !important;
       text-align: center;
+      padding: 5px 8px !important;
       transition: all 0.18s ease;
     }
-    .set-row input:focus {
+    .log-input:focus {
       border-color: var(--cyan) !important;
       box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25) !important;
       outline: none;
+      background: rgba(12, 19, 38, 0.98) !important;
     }
-    .btn-set-check {
-      border-radius: 8px !important;
-      transition: all 0.2s var(--ease-spring) !important;
+    .log-input.log-input-reps {
+      color: #38bdf8 !important;
     }
-    .btn-set-check.completed {
-      background: var(--emerald) !important;
-      color: #000 !important;
-      box-shadow: 0 0 16px rgba(16, 185, 129, 0.5) !important;
-      transform: scale(1.05);
+    .log-input.log-input-wt {
+      color: #f8fafc !important;
     }
 
-    /* 8. Personal Record (PR) Vault & Strength Standards Overhaul */
+    /* Reps in Reserve & Velocity Tags */
+    .rir-strip {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      margin-top: 4px;
+    }
+    .rir-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.3);
+      color: #94a3b8;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .rir-pill:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+      color: #fff;
+    }
+    .rir-pill.active {
+      background: rgba(56, 189, 248, 0.25);
+      border-color: var(--cyan);
+      color: #fff;
+      box-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
+    }
+    .vbt-velocity-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: #a855f7;
+      background: rgba(168, 85, 247, 0.15);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      padding: 1px 5px;
+      border-radius: 4px;
+      margin-left: 4px;
+    }
+
+    /* Set Action Buttons */
+    .btn-start-set {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.3) 0%, rgba(124, 58, 237, 0.3) 100%) !important;
+      border: 1px solid rgba(56, 189, 248, 0.5) !important;
+      color: #7dd3fc !important;
+      font-size: 0.76rem !important;
+      font-weight: 800 !important;
+      padding: 5px 12px !important;
+      border-radius: 8px !important;
+      box-shadow: 0 2px 10px rgba(37, 99, 235, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-start-set:hover {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.5) 0%, rgba(124, 58, 237, 0.5) 100%) !important;
+      color: #fff !important;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.45);
+    }
+    .btn-check-set {
+      background: rgba(15, 23, 42, 0.75) !important;
+      border: 1px solid rgba(255, 255, 255, 0.14) !important;
+      color: #cbd5e1 !important;
+      padding: 5px 14px !important;
+      border-radius: 8px !important;
+      font-size: 0.78rem !important;
+      font-weight: 800 !important;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .btn-check-set:hover {
+      border-color: var(--emerald) !important;
+      color: #fff !important;
+      background: rgba(16, 185, 129, 0.2) !important;
+      transform: translateY(-1px);
+    }
+    .btn-check-set.done {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.28) 0%, rgba(5, 150, 105, 0.38) 100%) !important;
+      border: 1px solid rgba(16, 185, 129, 0.7) !important;
+      color: #34d399 !important;
+      box-shadow: 0 0 14px rgba(16, 185, 129, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+      font-weight: 800 !important;
+    }
+
+    /* 9. Personal Record (PR) Vault & Strength Standards Overhaul */
     .pr-vault-section {
       background: linear-gradient(160deg, rgba(16, 24, 46, 0.82) 0%, rgba(9, 14, 28, 0.94) 100%) !important;
       border: 1px solid rgba(255, 255, 255, 0.09) !important;
@@ -9280,7 +9632,7 @@
       box-shadow: 0 0 20px rgba(56, 189, 248, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
     }
 
-    /* 9. Joint & Mobility Pre-Hab Clinic */
+    /* 10. Joint & Mobility Pre-Hab Clinic */
     .clinic-section {
       background: linear-gradient(160deg, rgba(16, 24, 46, 0.85) 0%, rgba(9, 14, 28, 0.95) 100%) !important;
       border: 1px solid rgba(255, 255, 255, 0.09) !important;
@@ -9298,7 +9650,7 @@
       box-shadow: 0 0 18px rgba(56, 189, 248, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
     }
 
-    /* 10. Modals & Dialog Overlays */
+    /* 11. Modals & Dialog Overlays */
     .modal {
       backdrop-filter: blur(28px) saturate(200%) !important;
       -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
@@ -9311,7 +9663,7 @@
       box-shadow: 0 25px 70px -15px rgba(0, 0, 0, 0.9), 0 0 40px -10px rgba(56, 189, 248, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
     }
 
-    /* 11. Side Widgets & Pacer */
+    /* 12. Side Widgets & Pacer */
     .side-widget {
       background: linear-gradient(150deg, rgba(16, 24, 46, 0.8) 0%, rgba(9, 14, 28, 0.92) 100%) !important;
       border: 1px solid rgba(255, 255, 255, 0.09) !important;
@@ -9991,17 +10343,6 @@
           <kbd style="background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.15); font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; padding: 1px 5px; border-radius: 4px; color: var(--cyan);">⌘K</kbd>
         </button>
 
-        <!-- Interactive Daily Mystery Loot Crate Trigger -->
-        <button type="button" class="btn-loot-crate-trigger" onclick="openLootCrateModal()" title="Open Daily Mystery Supply Crate (XP Boost, Auras, Loot)">
-          <span>🎁</span> <span id="headerLootText">Loot Crate</span>
-          <span class="loot-dot-pulse" id="lootDotPulse"></span>
-        </button>
-
-        <!-- Interactive Coach Hype Soundboard Trigger -->
-        <button type="button" class="btn-hype-deck-trigger" onclick="toggleHypeDeckModal()" title="Open Coach Motivation & Soundboard Deck">
-          <span>🔥</span> <span>Hype Deck</span>
-        </button>
-
         <!-- Unified Quick Tools & Action Menu -->
         <div class="tools-menu-wrapper" id="headerToolsMenuWrapper">
           <button type="button" class="tools-menu-btn" id="btnToolsMenuToggle" onclick="toggleHeaderToolsMenu(event)" title="Quick Tools, Logs & Sheets">
@@ -10010,19 +10351,22 @@
           </button>
           
           <div class="tools-dropdown-panel" id="headerToolsDropdown">
-            <div class="tools-group-title">📅 Logs & Tracking</div>
-            <button type="button" class="tool-item-row" onclick="closeHeaderToolsMenu(); openModal('calendarModal');">
-              <span class="tool-icon">📅</span>
+            <div class="tools-group-title">🎮 Rewards & Motivation</div>
+            <button type="button" class="tool-item-row" onclick="closeHeaderToolsMenu(); openLootCrateModal();">
+              <span class="tool-icon">🎁</span>
               <div>
-                <div>365 Calendar</div>
-                <div class="tool-item-desc">Year consistency matrix</div>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span id="headerLootText">Daily Loot Crate</span>
+                  <span class="loot-dot-pulse" id="lootDotPulse"></span>
+                </div>
+                <div class="tool-item-desc">Open daily XP drops & rewards</div>
               </div>
             </button>
-            <button type="button" class="tool-item-row" onclick="closeHeaderToolsMenu(); openModal('metricsModal');">
-              <span class="tool-icon">⚖️</span>
+            <button type="button" class="tool-item-row" onclick="closeHeaderToolsMenu(); toggleHypeDeckModal();">
+              <span class="tool-icon">🔥</span>
               <div>
-                <div>Weight & Body Log</div>
-                <div class="tool-item-desc">Track weight & waistline</div>
+                <div>Coach Hype Deck</div>
+                <div class="tool-item-desc">Motivation audio & soundboard</div>
               </div>
             </button>
 
