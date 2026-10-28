@@ -10228,6 +10228,296 @@
       justify-content: space-between;
       gap: 16px;
     }
+
+    /* ========================================================
+       HYPERION OBSIDIAN 2.0: FULL UI MODERN REVAMP
+       ======================================================== */
+
+    /* 1. Cockpit Segmented Navigation Hub */
+    .workout-cockpit-nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(11, 17, 33, 0.78);
+      backdrop-filter: blur(24px) saturate(200%);
+      -webkit-backdrop-filter: blur(24px) saturate(200%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 99px;
+      padding: 5px 8px;
+      overflow-x: auto;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.4);
+      margin-bottom: 14px;
+    }
+    .cockpit-nav-pill {
+      background: transparent;
+      border: 1px solid transparent;
+      color: #94a3b8;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 7px 16px;
+      border-radius: 99px;
+      cursor: pointer;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+    }
+    .cockpit-nav-pill:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.06);
+      transform: translateY(-1px);
+    }
+    .cockpit-nav-pill.active {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.25) 0%, rgba(168, 85, 247, 0.25) 100%);
+      border-color: rgba(56, 189, 248, 0.6);
+      color: #ffffff;
+      box-shadow: 0 2px 14px rgba(56, 189, 248, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      font-weight: 800;
+    }
+    .cockpit-workout-quickbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(14, 21, 38, 0.75);
+      border: 1px solid rgba(56, 189, 248, 0.22);
+      border-radius: 12px;
+      padding: 10px 16px;
+      margin-bottom: 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+    .cockpit-workout-quickbar:hover {
+      border-color: rgba(56, 189, 248, 0.45);
+      background: rgba(20, 31, 56, 0.88);
+      transform: translateY(-1px);
+    }
+
+    /* 2. Unified Pro Section Cards (Used across Analytics, Nutrition, Roadmap, Codex) */
+    .pro-section-card {
+      background: linear-gradient(155deg, rgba(16, 24, 46, 0.85) 0%, rgba(9, 14, 28, 0.95) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 22px;
+      box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .pro-section-card:hover {
+      border-color: rgba(56, 189, 248, 0.3);
+      box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.8), 0 0 25px -8px rgba(56, 189, 248, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+    .pro-section-head {
+      margin-bottom: 18px;
+    }
+    .pro-section-head h2 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.015em;
+      margin: 0 0 6px;
+    }
+    .pro-section-head p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* 3. Milestones & Level Hub Overhaul */
+    .milestone-hub-hero {
+      background: linear-gradient(150deg, rgba(20, 31, 58, 0.85) 0%, rgba(11, 17, 33, 0.95) 100%);
+      border: 1px solid rgba(168, 85, 247, 0.35);
+      border-radius: 18px;
+      padding: 24px;
+      margin: 18px 0 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.7), 0 0 30px -10px rgba(168, 85, 247, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+    .milestone-rank-circle {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.3) 0%, rgba(56, 189, 248, 0.3) 100%);
+      border: 2px solid rgba(168, 85, 247, 0.65);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 22px rgba(168, 85, 247, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      flex-shrink: 0;
+    }
+    .milestone-filters {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .milestone-filter-btn {
+      background: rgba(14, 21, 38, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #94a3b8;
+      padding: 7px 16px;
+      border-radius: 99px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .milestone-filter-btn:hover {
+      color: #fff;
+      border-color: rgba(56, 189, 248, 0.4);
+      background: rgba(22, 34, 62, 0.9);
+      transform: translateY(-1px);
+    }
+    .milestone-filter-btn.active {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.28) 0%, rgba(56, 189, 248, 0.28) 100%);
+      border-color: rgba(168, 85, 247, 0.7);
+      color: #fff;
+      box-shadow: 0 0 16px rgba(168, 85, 247, 0.35);
+      font-weight: 800;
+    }
+    .milestone-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 16px;
+    }
+    .milestone-holo-card {
+      background: linear-gradient(155deg, rgba(15, 23, 44, 0.85) 0%, rgba(9, 14, 28, 0.95) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 180px;
+      box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      transition: all 0.22s var(--ease-out-expo);
+      position: relative;
+      overflow: hidden;
+    }
+    .milestone-holo-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(168, 85, 247, 0.45);
+      box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.75), 0 0 24px -6px rgba(168, 85, 247, 0.25);
+    }
+    .milestone-holo-card.unlocked {
+      border-color: rgba(16, 185, 129, 0.45);
+      box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.6), 0 0 20px -8px rgba(16, 185, 129, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+    .holo-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .holo-icon-wrap {
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+
+    /* 4. Photo Transformation Studio & Time-Lapse */
+    .timelapse-dock {
+      background: linear-gradient(155deg, rgba(14, 21, 38, 0.9) 0%, rgba(8, 13, 26, 0.98) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 18px;
+      padding: 20px;
+      margin: 20px 0;
+      box-shadow: 0 18px 45px -10px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    }
+    .timelapse-screen {
+      background: #060912;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.8);
+    }
+    .photo-gallery-card {
+      background: linear-gradient(150deg, rgba(15, 23, 44, 0.85) 0%, rgba(9, 14, 28, 0.95) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 10px 28px -6px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      transition: all 0.22s ease;
+    }
+    .photo-gallery-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(56, 189, 248, 0.4);
+      box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.75), 0 0 20px rgba(56, 189, 248, 0.2);
+    }
+    .photo-gallery-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      cursor: pointer;
+      display: block;
+      transition: transform 0.25s ease;
+    }
+    .photo-gallery-card:hover .photo-gallery-img {
+      transform: scale(1.03);
+    }
+    .photo-card-info {
+      padding: 12px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* 5. Modern Selects & Form Controls */
+    select, input[type="text"], input[type="number"], textarea {
+      background: rgba(10, 16, 32, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.85rem;
+      transition: all 0.18s ease;
+    }
+    select:focus, input[type="text"]:focus, input[type="number"]:focus, textarea:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
+      outline: none;
+      background: rgba(14, 22, 42, 0.98);
+    }
+
+    /* 6. Custom Sleek Range Sliders */
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 99px;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+      cursor: pointer;
+      border: 2px solid #fff;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+      box-shadow: 0 0 18px rgba(56, 189, 248, 0.8);
+    }
   </style>
 </head>
 <body>
@@ -10460,13 +10750,13 @@
   <!-- ==========================================
        VIEW 1: TODAY'S WORKOUT ENGINE
        ========================================== -->
-  <div id="workoutView" class="app-view active">
+    <div id="workoutView" class="app-view active">
     
     <!-- HUD METRICS (ULTRA-SLEEK CYBER-TELEMETRY PODS) -->
     <section class="container">
       <div class="hero-dashboard">
         <!-- 1. Year Progress -->
-        <div class="hud-card" onclick="openModal('calendarModal')" title="Click to open 365-Day Consistency Matrix & Matrix Log">
+        <div class="hud-card" onclick="switchWorkoutCockpitTab('tabMatrix')" title="Click to open 365-Day Consistency Matrix & Matrix Log">
           <div class="hud-icon-badge cyan">🎯</div>
           <div class="hud-card-body">
             <div class="hud-title">
@@ -10482,7 +10772,7 @@
         </div>
 
         <!-- 2. Habit Streak -->
-        <div class="hud-card" onclick="openModal('calendarModal')" title="Click to inspect Habit Streaks & Calendar">
+        <div class="hud-card" onclick="switchWorkoutCockpitTab('tabMatrix')" title="Click to inspect Habit Streaks & Calendar">
           <div class="hud-icon-badge amber">🔥</div>
           <div class="hud-card-body">
             <div class="hud-title">
@@ -10508,7 +10798,7 @@
         </div>
 
         <!-- 4. Equipment Status -->
-        <div class="hud-card" onclick="switchView('roadmapView')" title="Click to view Equipment Loadout & Roadmap">
+        <div class="hud-card" onclick="switchWorkoutCockpitTab('tabRadar')" title="Click to view Equipment Loadout & Radar">
           <div class="hud-icon-badge emerald">🛡️</div>
           <div class="hud-card-body">
             <div class="hud-title">
@@ -10517,114 +10807,6 @@
             </div>
             <div class="hud-val" id="statEquip">Zero Gear ($0)</div>
             <div class="hud-sub" id="statEquipSub">Living room bodyweight</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 365-DAY CONSISTENCY MATRIX -->
-    <section class="container">
-      <div class="consistency-heatmap-card">
-        <div class="heatmap-header">
-          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-            <span style="font-weight: 800; font-size: 0.92rem; color: #fff;">📊 365-Day Consistency Matrix</span>
-            <span style="font-size: 0.75rem; color: var(--emerald); font-weight: 700;" id="heatmapStreakSummary">0 / 365 Days Logged</span>
-          </div>
-          <div class="heatmap-legend">
-            <span class="legend-item"><span class="legend-dot dot-done"></span> Done</span>
-            <span class="legend-item"><span class="legend-dot dot-rec"></span> Recovery</span>
-            <span class="legend-item"><span class="legend-dot dot-alert"></span> Upgrade Radar</span>
-            <span class="legend-item"><span class="legend-dot dot-future"></span> Pending</span>
-          </div>
-        </div>
-
-        <!-- STREAK MILESTONES & QUICK ACTIONS BAR -->
-        <div class="consistency-quick-bar">
-          <div class="streak-badge-cluster">
-            <span class="streak-pill-chip fire" id="matrixStreakPill" title="Consecutive days logged">🔥 0-Day Streak</span>
-            <span class="streak-pill-chip max" id="matrixMaxStreakPill" title="All-time longest streak achieved">⚡ Best: 0D</span>
-            <span class="streak-pill-chip" style="background: rgba(56, 189, 248, 0.15); border: 1px solid var(--cyan); color: var(--cyan);" id="matrixMilestoneBadge">🛡️ Level 1 Recruit</span>
-          </div>
-          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-            <button type="button" class="btn-streak-action" onclick="quickToggleTodayMatrix()" id="btnMatrixQuickLog">
-              ★ Mark Today Complete (Day <span id="matrixTodayNum">1</span>)
-            </button>
-            <button type="button" class="btn-streak-rest" onclick="quickLogRestDayMatrix()" title="Mark today as deliberate active recovery / rest day">
-              ☕ Log Rest Day
-            </button>
-          </div>
-        </div>
-
-        <div class="heatmap-scroll-area" id="heatmapScrollArea">
-          <div class="heatmap-months-row">
-            <span>M1</span><span>M2</span><span>M3</span><span>M4</span><span>M5</span><span>M6</span><span>M7</span><span>M8</span><span>M9</span><span>M10</span><span>M11</span><span>M12</span>
-          </div>
-          <div class="heatmap-grid-52" id="heatmapGrid52">
-            <!-- 365 cells rendered by JS -->
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ACTIVE MILESTONE QUEST BANNER -->
-    <section class="container">
-      <div class="milestone-quest-banner" onclick="switchView('milestonesView')" title="Click to view all Milestones & Tiers" style="cursor: pointer;">
-        <div class="quest-left">
-          <div class="quest-icon" id="questIcon">🔥</div>
-          <div class="quest-title-wrap">
-            <h4><span id="questTitle">Active Milestone Quest</span> <span class="rarity-pill rarity-rare" id="questRarity">Rare</span></h4>
-            <p id="questDesc">Loading milestone target...</p>
-          </div>
-        </div>
-        <div class="quest-right">
-          <div style="display: flex; justify-content: space-between; width: 100%; font-size: 0.78rem; font-weight: 700;">
-            <span style="color: var(--cyan);" id="questProgressText">0 / 7 Days</span>
-            <span style="color: var(--amber);" id="questXpReward">+150 XP</span>
-          </div>
-          <div class="quest-progress-track">
-            <div class="quest-progress-bar" id="questProgressBar" style="width: 0%;"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- RPG SHADOW TITAN BOSS BATTLE ARENA -->
-    <section class="container">
-      <div class="boss-battle-card" id="bossBattleCard">
-        <div class="boss-header-row">
-          <div class="boss-identity-wrap">
-            <div class="boss-avatar-frame" id="bossAvatarFrame">
-              <span class="boss-sprite-icon" id="bossSpriteIcon">🗿</span>
-              <span class="boss-level-tag" id="bossLevelTag">BOSS LVL 1</span>
-            </div>
-            <div>
-              <div class="boss-meta-line">
-                <span class="boss-phase-badge" id="bossPhaseBadge">PHASE 1 TITAN</span>
-                <span class="boss-difficulty-badge">WEEKLY RAID</span>
-              </div>
-              <h3 class="boss-title" id="bossTitle">Goliathon the Iron Sentinel</h3>
-            </div>
-          </div>
-          <div class="boss-rewards-cluster">
-            <span class="boss-reward-pill xp" id="bossXpReward">🏆 +500 XP Bounty</span>
-            <span class="boss-reward-pill loot">🗡️ Boss Slayer Relic</span>
-            <button type="button" class="btn-boss-challenge" onclick="testBossAttack(event)" id="btnBossAttack" title="Strike the Boss with your daily workout volume!">
-              ⚔️ Strike Titan (-Vol DMG)
-            </button>
-          </div>
-        </div>
-
-        <div class="boss-health-system">
-          <div class="boss-health-meta">
-            <span class="boss-hp-label">TITAN HEALTH INTEGRITY:</span>
-            <span class="boss-hp-counter" id="bossHpText">24,500 / 30,000 HP (81.7%)</span>
-          </div>
-          <div class="boss-hp-track">
-            <div class="boss-hp-fill" id="bossHpFill" style="width: 81.7%;"></div>
-            <div class="boss-damage-ghost" id="bossDamageGhost" style="width: 81.7%;"></div>
-          </div>
-          <div class="boss-battle-tips">
-            <span>⚔️ <strong>Kinetic Damage:</strong> Weight &times; Reps per set | <strong>+2,000 DMG</strong> on workout completion</span>
           </div>
         </div>
       </div>
@@ -10715,182 +10897,49 @@
       </div>
     </section>
 
-    <!-- TODAY'S MISSION CHECKLIST HUD (Zero-Scroll Feature Hub) -->
-    <section class="container">
-      <div class="mission-checklist-card">
-        <div class="mission-checklist-header">
-          <div class="mission-title">
-            <span>⚡ TODAY'S TRAINING MISSION CHECKLIST</span>
-            <span class="mission-day-badge" id="missionDayBadge">DAY 1</span>
-            <span class="mission-progress-pill" id="checklistProgressPill">0 / 6 Complete</span>
-            <span class="badge-cal-status pending" id="checklistCalStatus">📅 Calendar: Pending</span>
-          </div>
-          <div class="checklist-header-actions">
-            <button class="btn-check-all-hud" onclick="manualCheckAllMissionItems()" title="Mark all checklist items complete and mark green in calendar">
-              ✓ Check All &amp; Mark Green
-            </button>
-            <button class="btn-toggle-day-hud" id="btnToggleDayHud" onclick="toggleCurrentDayCompletion()" style="display:none;" aria-hidden="true"></button>
-          </div>
+    <!-- COCKPIT EXECUTIVE SEGMENTED NAVIGATION HUB -->
+    <section class="container" style="margin-top: 6px; margin-bottom: 12px;">
+      <div class="workout-cockpit-nav" id="workoutCockpitNav">
+        <button type="button" class="cockpit-nav-pill active" id="btnCockpitTabWorkout" onclick="switchWorkoutCockpitTab('tabWorkout', this)">
+          <span>🏋️</span> <span>Today's Workout</span>
+        </button>
+        <button type="button" class="cockpit-nav-pill" id="btnCockpitTabChecklist" onclick="switchWorkoutCockpitTab('tabChecklist', this)">
+          <span>⚡</span> <span>Mission Checklist</span>
+          <span class="hud-title-badge" id="pillBadgeChecklist" style="font-size:0.68rem; padding:1px 6px;">0/6</span>
+        </button>
+        <button type="button" class="cockpit-nav-pill" id="btnCockpitTabMatrix" onclick="switchWorkoutCockpitTab('tabMatrix', this)">
+          <span>📊</span> <span>365 Consistency Matrix</span>
+        </button>
+        <button type="button" class="cockpit-nav-pill" id="btnCockpitTabBoss" onclick="switchWorkoutCockpitTab('tabBoss', this)">
+          <span>⚔️</span> <span>Boss Raid &amp; Quests</span>
+          <span class="hud-title-badge amber-chip" style="font-size:0.68rem; padding:1px 6px;">RAID</span>
+        </button>
+        <button type="button" class="cockpit-nav-pill" id="btnCockpitTabRadar" onclick="switchWorkoutCockpitTab('tabRadar', this)">
+          <span>🛡️</span> <span>Athletic Radar &amp; Gear</span>
+        </button>
+        <button type="button" class="cockpit-nav-pill" id="btnCockpitTabAll" onclick="switchWorkoutCockpitTab('tabAll', this)" title="Show all telemetry modules in continuous scroll mode">
+          <span>👁️</span> <span>Show All</span>
+        </button>
+      </div>
+
+      <!-- Interactive 1-Line Quick Progress Strip for Workout Mode -->
+      <div class="cockpit-workout-quickbar" id="cockpitQuickBar" onclick="switchWorkoutCockpitTab('tabChecklist')" title="Click to view full interactive mission checklist">
+        <div style="display: flex; align-items: center; gap: 10px; font-size: 0.82rem; font-weight: 700; color: #fff;">
+          <span style="color: var(--cyan); font-size: 1rem;">⚡</span>
+          <span>Daily Mission Status:</span>
+          <span style="color: var(--cyan);" id="quickChecklistSummaryText">0 / 6 Objectives Complete</span>
         </div>
-
-        <div class="checklist-progress-bar-wrap" title="Daily Checklist Completion Progress">
-          <div class="checklist-progress-fill" id="checklistProgressFill" style="width: 0%;"></div>
-        </div>
-
-        <div class="mission-chips-grid">
-          <div class="mission-chip" id="chipWarmup" onclick="toggleChecklistItemManual('warmup')" title="Click anywhere to toggle Joint Warm-Up complete / pending">
-            <div class="chip-left">
-              <button class="chip-check-toggle" id="btnCheckWarmup" onclick="event.stopPropagation(); toggleChecklistItemManual('warmup')" title="Toggle Complete">
-                ○
-              </button>
-              <span class="chip-icon">🔥</span>
-              <div>
-                <span class="chip-label">Joint Warm-Up</span>
-                <span class="chip-status" id="chipWarmupStatus">5 Mins Ready</span>
-              </div>
-            </div>
-            <button class="chip-jump-btn" onclick="event.stopPropagation(); scrollToWorkoutSection('warmupBox')" title="Scroll to Warm-Up Section">
-              ▼
-            </button>
-          </div>
-
-          <div class="mission-chip" id="chipWorkout" onclick="toggleChecklistItemManual('exercises')" title="Click anywhere to toggle all workout exercises complete and green in calendar">
-            <div class="chip-left">
-              <button class="chip-check-toggle" id="btnCheckWorkout" onclick="event.stopPropagation(); toggleChecklistItemManual('exercises')" title="Toggle All Workout Sets Complete">
-                ○
-              </button>
-              <span class="chip-icon">🏋️</span>
-              <div>
-                <span class="chip-label">Main Exercises</span>
-                <span class="chip-status" id="chipWorkoutStatus">0 Sets Logged</span>
-              </div>
-            </div>
-            <button class="chip-jump-btn" onclick="event.stopPropagation(); scrollToWorkoutSection('workoutHeader')" title="Scroll to Exercise Cards">
-              ▼
-            </button>
-          </div>
-
-          <div class="mission-chip" id="chipPhoto" onclick="toggleChecklistItemManual('photo')" title="Click anywhere to toggle Day Photo complete / pending">
-            <div class="chip-left">
-              <button class="chip-check-toggle" id="btnCheckPhoto" onclick="event.stopPropagation(); toggleChecklistItemManual('photo')" title="Toggle Complete">
-                ○
-              </button>
-              <span class="chip-icon" id="chipPhotoIcon">📸</span>
-              <img id="chipPhotoMiniThumb" class="photo-thumb-mini" style="display: none; width: 26px; height: 26px; border-radius: 50%; object-fit: cover; margin-right: 4px;" src="" alt="Photo">
-              <div>
-                <span class="chip-label">Day Photo Studio</span>
-                <span class="chip-status" id="chipPhotoStatus">Pending (+75 XP)</span>
-              </div>
-            </div>
-            <button class="chip-jump-btn" onclick="event.stopPropagation(); handleChipPhotoClick()" title="Open Photo Studio Modal">
-              📸
-            </button>
-          </div>
-
-          <div class="mission-chip" id="chipCooldown" onclick="toggleChecklistItemManual('cooldown')" title="Click anywhere to toggle Joint Cool-Down complete / pending">
-            <div class="chip-left">
-              <button class="chip-check-toggle" id="btnCheckCooldown" onclick="event.stopPropagation(); toggleChecklistItemManual('cooldown')" title="Toggle Complete">
-                ○
-              </button>
-              <span class="chip-icon">🧊</span>
-              <div>
-                <span class="chip-label">Joint Cool-Down</span>
-                <span class="chip-status" id="chipCooldownStatus">5 Mins Mobility</span>
-              </div>
-            </div>
-            <button class="chip-jump-btn" onclick="event.stopPropagation(); scrollToWorkoutSection('cooldownBox')" title="Scroll to Cool-Down Section">
-              ▼
-            </button>
-          </div>
-
-          <div class="mission-chip" id="chipNutrition" onclick="toggleChecklistItemManual('nutrition')" title="Click anywhere to toggle Daily Nutrition complete / pending (Includes Skin & Hair Micronutrients)">
-            <div class="chip-left">
-              <button class="chip-check-toggle" id="btnCheckNutrition" onclick="event.stopPropagation(); toggleChecklistItemManual('nutrition')" title="Toggle Complete">
-                ○
-              </button>
-              <span class="chip-icon">🥗</span>
-              <div>
-                <span class="chip-label">Nutrition & Glow Bioactives</span>
-                <span class="chip-status" id="chipNutritionStatus">What to Eat Today</span>
-              </div>
-            </div>
-            <button class="chip-jump-btn" onclick="event.stopPropagation(); openNutritionExportModal()" title="View & Export Today's Meals & Skin/Hair Stack">
-              🥗
-            </button>
-          </div>
-
-          <div class="mission-chip" id="chipWater" onclick="toggleChecklistItemManual('water')" title="Click anywhere to toggle 8 Glasses (3.2L+) Dermal Hydration Target">
-            <div class="chip-left">
-              <button class="chip-check-toggle" id="btnCheckWater" onclick="event.stopPropagation(); toggleChecklistItemManual('water')" title="Toggle Complete">
-                ○
-              </button>
-              <span class="chip-icon">💧</span>
-              <div>
-                <span class="chip-label">Dermal Hydration (3.2L+)</span>
-                <span class="chip-status" id="chipWaterStatus">0 / 8 Glasses</span>
-              </div>
-            </div>
-            <button class="chip-jump-btn" onclick="event.stopPropagation(); scrollToWaterTracker()" title="Scroll to Hydration Tracker">
-              💧
-            </button>
-          </div>
-
-          <div class="mission-chip" id="chipQuest" onclick="switchView('milestonesView')" title="Click to view Milestones & Quests">
-            <div class="chip-left">
-              <span class="chip-icon">🏆</span>
-              <div>
-                <span class="chip-label">Active Quest</span>
-                <span class="chip-status" id="chipQuestStatus">Next Trophy</span>
-              </div>
-            </div>
-            <span style="font-size: 0.8rem; color: var(--text-dim);">↗</span>
-          </div>
+        <div style="display: flex; align-items: center; gap: 8px; font-size: 0.76rem; color: var(--text-dim);">
+          <span>Tap for Full Checklist &amp; Quests</span>
+          <span style="color: var(--cyan); font-size: 0.9rem;">→</span>
         </div>
       </div>
     </section>
 
-    <!-- MAIN WORKOUT & SIDEBAR LAYOUT -->
-    <main class="container">
-
-      <!-- 5-PILLAR RPG ATHLETIC RADAR & MASTERY TIERS -->
-      <section class="rpg-radar-section" id="rpgRadarSection">
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-          <div>
-            <div style="font-size: 0.72rem; color: var(--cyan); font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">RPG Athletic Progression</div>
-            <h3 style="color: #fff; font-size: 1.05rem; display: flex; align-items: center; gap: 8px;">
-              <span>🛡️ Trainee Mastery Radar</span>
-              <span id="rpgOverallRank" style="font-size: 0.72rem; padding: 2px 8px; border-radius: 4px; background: rgba(0,242,254,0.15); border: 1px solid var(--cyan); color: var(--cyan);">Tier 1: Recruit</span>
-            </h3>
-          </div>
-          <span style="font-size: 0.75rem; color: var(--text-dim);">Live stat masteries based on completed volume & daily disciplines</span>
-        </div>
-        <div class="rpg-radar-grid" id="rpgRadarGrid">
-          <!-- 5 Pillars populated dynamically by JS: Push, Pull, Legs, Core, Mobility -->
-        </div>
-      </section>
-
-      <!-- 5-DAY ADVANCE EQUIPMENT RADAR -->
-      <div id="equipmentRadar" class="equipment-radar">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 6px;">
-          <span class="radar-tag" id="radarDaysLeft">⚠️ 5 DAYS LEFT</span>
-          <div class="radar-tab-row" style="margin: 0;">
-            <button type="button" class="radar-tab-btn active" id="radarTabPro" onclick="switchRadarEquipTab('pro')">🛒 Commercial Gear</button>
-            <button type="button" class="radar-tab-btn" id="radarTabDiy" onclick="switchRadarEquipTab('diy')">🛠️ $0 DIY Alternative</button>
-          </div>
-        </div>
-        <div class="radar-title" id="radarTitle">Equipment Upgrade Required</div>
-        <div class="radar-desc" id="radarDesc">Details...</div>
-        <div class="radar-specs" id="radarSpecs">Specs...</div>
-        <div id="radarDiySection" class="radar-diy-box" style="display: none;">
-          <strong style="color: var(--cyan); display: block; margin-bottom: 4px;">🛠️ Zero-Cost Home DIY Alternative:</strong>
-          <span id="radarDiyText">Towel on doorframe or luggage strap for suspension training.</span>
-        </div>
-        <a href="#" target="_blank" rel="noopener noreferrer" class="radar-btn" id="radarBuyLink" style="margin-top: 10px;">
-          🛒 Search & Procure on Amazon ↗
-        </a>
-      </div>
-
-      <div class="workout-layout">
+    <!-- SECTION 1: TODAY'S ACTIVE WORKOUT ENGINE -->
+    <div id="cockpitSecWorkout">
+      <main class="container">
+        <div class="workout-layout">
         
         <!-- Primary Workout Column -->
         <div class="workout-main">
@@ -11575,7 +11624,302 @@
         </aside>
 
       </div>
-    </main>
+      </main>
+    </div>
+
+    <!-- SECTION 2: TODAY'S MISSION CHECKLIST HUD -->
+    <div id="cockpitSecChecklist" style="display: none;">
+      <!-- TODAY'S MISSION CHECKLIST HUD (Zero-Scroll Feature Hub) -->
+    <section class="container">
+      <div class="mission-checklist-card">
+        <div class="mission-checklist-header">
+          <div class="mission-title">
+            <span>⚡ TODAY'S TRAINING MISSION CHECKLIST</span>
+            <span class="mission-day-badge" id="missionDayBadge">DAY 1</span>
+            <span class="mission-progress-pill" id="checklistProgressPill">0 / 6 Complete</span>
+            <span class="badge-cal-status pending" id="checklistCalStatus">📅 Calendar: Pending</span>
+          </div>
+          <div class="checklist-header-actions">
+            <button class="btn-check-all-hud" onclick="manualCheckAllMissionItems()" title="Mark all checklist items complete and mark green in calendar">
+              ✓ Check All &amp; Mark Green
+            </button>
+            <button class="btn-toggle-day-hud" id="btnToggleDayHud" onclick="toggleCurrentDayCompletion()" style="display:none;" aria-hidden="true"></button>
+          </div>
+        </div>
+
+        <div class="checklist-progress-bar-wrap" title="Daily Checklist Completion Progress">
+          <div class="checklist-progress-fill" id="checklistProgressFill" style="width: 0%;"></div>
+        </div>
+
+        <div class="mission-chips-grid">
+          <div class="mission-chip" id="chipWarmup" onclick="toggleChecklistItemManual('warmup')" title="Click anywhere to toggle Joint Warm-Up complete / pending">
+            <div class="chip-left">
+              <button class="chip-check-toggle" id="btnCheckWarmup" onclick="event.stopPropagation(); toggleChecklistItemManual('warmup')" title="Toggle Complete">
+                ○
+              </button>
+              <span class="chip-icon">🔥</span>
+              <div>
+                <span class="chip-label">Joint Warm-Up</span>
+                <span class="chip-status" id="chipWarmupStatus">5 Mins Ready</span>
+              </div>
+            </div>
+            <button class="chip-jump-btn" onclick="event.stopPropagation(); scrollToWorkoutSection('warmupBox')" title="Scroll to Warm-Up Section">
+              ▼
+            </button>
+          </div>
+
+          <div class="mission-chip" id="chipWorkout" onclick="toggleChecklistItemManual('exercises')" title="Click anywhere to toggle all workout exercises complete and green in calendar">
+            <div class="chip-left">
+              <button class="chip-check-toggle" id="btnCheckWorkout" onclick="event.stopPropagation(); toggleChecklistItemManual('exercises')" title="Toggle All Workout Sets Complete">
+                ○
+              </button>
+              <span class="chip-icon">🏋️</span>
+              <div>
+                <span class="chip-label">Main Exercises</span>
+                <span class="chip-status" id="chipWorkoutStatus">0 Sets Logged</span>
+              </div>
+            </div>
+            <button class="chip-jump-btn" onclick="event.stopPropagation(); scrollToWorkoutSection('workoutHeader')" title="Scroll to Exercise Cards">
+              ▼
+            </button>
+          </div>
+
+          <div class="mission-chip" id="chipPhoto" onclick="toggleChecklistItemManual('photo')" title="Click anywhere to toggle Day Photo complete / pending">
+            <div class="chip-left">
+              <button class="chip-check-toggle" id="btnCheckPhoto" onclick="event.stopPropagation(); toggleChecklistItemManual('photo')" title="Toggle Complete">
+                ○
+              </button>
+              <span class="chip-icon" id="chipPhotoIcon">📸</span>
+              <img id="chipPhotoMiniThumb" class="photo-thumb-mini" style="display: none; width: 26px; height: 26px; border-radius: 50%; object-fit: cover; margin-right: 4px;" src="" alt="Photo">
+              <div>
+                <span class="chip-label">Day Photo Studio</span>
+                <span class="chip-status" id="chipPhotoStatus">Pending (+75 XP)</span>
+              </div>
+            </div>
+            <button class="chip-jump-btn" onclick="event.stopPropagation(); handleChipPhotoClick()" title="Open Photo Studio Modal">
+              📸
+            </button>
+          </div>
+
+          <div class="mission-chip" id="chipCooldown" onclick="toggleChecklistItemManual('cooldown')" title="Click anywhere to toggle Joint Cool-Down complete / pending">
+            <div class="chip-left">
+              <button class="chip-check-toggle" id="btnCheckCooldown" onclick="event.stopPropagation(); toggleChecklistItemManual('cooldown')" title="Toggle Complete">
+                ○
+              </button>
+              <span class="chip-icon">🧊</span>
+              <div>
+                <span class="chip-label">Joint Cool-Down</span>
+                <span class="chip-status" id="chipCooldownStatus">5 Mins Mobility</span>
+              </div>
+            </div>
+            <button class="chip-jump-btn" onclick="event.stopPropagation(); scrollToWorkoutSection('cooldownBox')" title="Scroll to Cool-Down Section">
+              ▼
+            </button>
+          </div>
+
+          <div class="mission-chip" id="chipNutrition" onclick="toggleChecklistItemManual('nutrition')" title="Click anywhere to toggle Daily Nutrition complete / pending (Includes Skin & Hair Micronutrients)">
+            <div class="chip-left">
+              <button class="chip-check-toggle" id="btnCheckNutrition" onclick="event.stopPropagation(); toggleChecklistItemManual('nutrition')" title="Toggle Complete">
+                ○
+              </button>
+              <span class="chip-icon">🥗</span>
+              <div>
+                <span class="chip-label">Nutrition & Glow Bioactives</span>
+                <span class="chip-status" id="chipNutritionStatus">What to Eat Today</span>
+              </div>
+            </div>
+            <button class="chip-jump-btn" onclick="event.stopPropagation(); openNutritionExportModal()" title="View & Export Today's Meals & Skin/Hair Stack">
+              🥗
+            </button>
+          </div>
+
+          <div class="mission-chip" id="chipWater" onclick="toggleChecklistItemManual('water')" title="Click anywhere to toggle 8 Glasses (3.2L+) Dermal Hydration Target">
+            <div class="chip-left">
+              <button class="chip-check-toggle" id="btnCheckWater" onclick="event.stopPropagation(); toggleChecklistItemManual('water')" title="Toggle Complete">
+                ○
+              </button>
+              <span class="chip-icon">💧</span>
+              <div>
+                <span class="chip-label">Dermal Hydration (3.2L+)</span>
+                <span class="chip-status" id="chipWaterStatus">0 / 8 Glasses</span>
+              </div>
+            </div>
+            <button class="chip-jump-btn" onclick="event.stopPropagation(); scrollToWaterTracker()" title="Scroll to Hydration Tracker">
+              💧
+            </button>
+          </div>
+
+          <div class="mission-chip" id="chipQuest" onclick="switchView('milestonesView')" title="Click to view Milestones & Quests">
+            <div class="chip-left">
+              <span class="chip-icon">🏆</span>
+              <div>
+                <span class="chip-label">Active Quest</span>
+                <span class="chip-status" id="chipQuestStatus">Next Trophy</span>
+              </div>
+            </div>
+            <span style="font-size: 0.8rem; color: var(--text-dim);">↗</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    </div>
+
+    <!-- SECTION 3: 365-DAY CONSISTENCY MATRIX -->
+    <div id="cockpitSecMatrix" style="display: none;">
+      <!-- 365-DAY CONSISTENCY MATRIX -->
+    <section class="container">
+      <div class="consistency-heatmap-card">
+        <div class="heatmap-header">
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <span style="font-weight: 800; font-size: 0.92rem; color: #fff;">📊 365-Day Consistency Matrix</span>
+            <span style="font-size: 0.75rem; color: var(--emerald); font-weight: 700;" id="heatmapStreakSummary">0 / 365 Days Logged</span>
+          </div>
+          <div class="heatmap-legend">
+            <span class="legend-item"><span class="legend-dot dot-done"></span> Done</span>
+            <span class="legend-item"><span class="legend-dot dot-rec"></span> Recovery</span>
+            <span class="legend-item"><span class="legend-dot dot-alert"></span> Upgrade Radar</span>
+            <span class="legend-item"><span class="legend-dot dot-future"></span> Pending</span>
+          </div>
+        </div>
+
+        <!-- STREAK MILESTONES & QUICK ACTIONS BAR -->
+        <div class="consistency-quick-bar">
+          <div class="streak-badge-cluster">
+            <span class="streak-pill-chip fire" id="matrixStreakPill" title="Consecutive days logged">🔥 0-Day Streak</span>
+            <span class="streak-pill-chip max" id="matrixMaxStreakPill" title="All-time longest streak achieved">⚡ Best: 0D</span>
+            <span class="streak-pill-chip" style="background: rgba(56, 189, 248, 0.15); border: 1px solid var(--cyan); color: var(--cyan);" id="matrixMilestoneBadge">🛡️ Level 1 Recruit</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <button type="button" class="btn-streak-action" onclick="quickToggleTodayMatrix()" id="btnMatrixQuickLog">
+              ★ Mark Today Complete (Day <span id="matrixTodayNum">1</span>)
+            </button>
+            <button type="button" class="btn-streak-rest" onclick="quickLogRestDayMatrix()" title="Mark today as deliberate active recovery / rest day">
+              ☕ Log Rest Day
+            </button>
+          </div>
+        </div>
+
+        <div class="heatmap-scroll-area" id="heatmapScrollArea">
+          <div class="heatmap-months-row">
+            <span>M1</span><span>M2</span><span>M3</span><span>M4</span><span>M5</span><span>M6</span><span>M7</span><span>M8</span><span>M9</span><span>M10</span><span>M11</span><span>M12</span>
+          </div>
+          <div class="heatmap-grid-52" id="heatmapGrid52">
+            <!-- 365 cells rendered by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+    </div>
+
+    <!-- SECTION 4: RPG SHADOW TITAN BOSS RAID & ACTIVE QUESTS -->
+    <div id="cockpitSecBoss" style="display: none;">
+      <!-- ACTIVE MILESTONE QUEST BANNER -->
+    <section class="container">
+      <div class="milestone-quest-banner" onclick="switchView('milestonesView')" title="Click to view all Milestones & Tiers" style="cursor: pointer;">
+        <div class="quest-left">
+          <div class="quest-icon" id="questIcon">🔥</div>
+          <div class="quest-title-wrap">
+            <h4><span id="questTitle">Active Milestone Quest</span> <span class="rarity-pill rarity-rare" id="questRarity">Rare</span></h4>
+            <p id="questDesc">Loading milestone target...</p>
+          </div>
+        </div>
+        <div class="quest-right">
+          <div style="display: flex; justify-content: space-between; width: 100%; font-size: 0.78rem; font-weight: 700;">
+            <span style="color: var(--cyan);" id="questProgressText">0 / 7 Days</span>
+            <span style="color: var(--amber);" id="questXpReward">+150 XP</span>
+          </div>
+          <div class="quest-progress-track">
+            <div class="quest-progress-bar" id="questProgressBar" style="width: 0%;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+      <div style="height: 16px;"></div>
+      <!-- RPG SHADOW TITAN BOSS BATTLE ARENA -->
+    <section class="container">
+      <div class="boss-battle-card" id="bossBattleCard">
+        <div class="boss-header-row">
+          <div class="boss-identity-wrap">
+            <div class="boss-avatar-frame" id="bossAvatarFrame">
+              <span class="boss-sprite-icon" id="bossSpriteIcon">🗿</span>
+              <span class="boss-level-tag" id="bossLevelTag">BOSS LVL 1</span>
+            </div>
+            <div>
+              <div class="boss-meta-line">
+                <span class="boss-phase-badge" id="bossPhaseBadge">PHASE 1 TITAN</span>
+                <span class="boss-difficulty-badge">WEEKLY RAID</span>
+              </div>
+              <h3 class="boss-title" id="bossTitle">Goliathon the Iron Sentinel</h3>
+            </div>
+          </div>
+          <div class="boss-rewards-cluster">
+            <span class="boss-reward-pill xp" id="bossXpReward">🏆 +500 XP Bounty</span>
+            <span class="boss-reward-pill loot">🗡️ Boss Slayer Relic</span>
+            <button type="button" class="btn-boss-challenge" onclick="testBossAttack(event)" id="btnBossAttack" title="Strike the Boss with your daily workout volume!">
+              ⚔️ Strike Titan (-Vol DMG)
+            </button>
+          </div>
+        </div>
+
+        <div class="boss-health-system">
+          <div class="boss-health-meta">
+            <span class="boss-hp-label">TITAN HEALTH INTEGRITY:</span>
+            <span class="boss-hp-counter" id="bossHpText">24,500 / 30,000 HP (81.7%)</span>
+          </div>
+          <div class="boss-hp-track">
+            <div class="boss-hp-fill" id="bossHpFill" style="width: 81.7%;"></div>
+            <div class="boss-damage-ghost" id="bossDamageGhost" style="width: 81.7%;"></div>
+          </div>
+          <div class="boss-battle-tips">
+            <span>⚔️ <strong>Kinetic Damage:</strong> Weight &times; Reps per set | <strong>+2,000 DMG</strong> on workout completion</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    </div>
+
+    <!-- SECTION 5: RPG 5-PILLAR ATHLETIC RADAR & 5-DAY ADVANCE GEAR -->
+    <div id="cockpitSecRadar" style="display: none;">
+      <section class="container">
+        <!-- 5-PILLAR RPG ATHLETIC RADAR & MASTERY TIERS -->
+      <section class="rpg-radar-section" id="rpgRadarSection">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <div style="font-size: 0.72rem; color: var(--cyan); font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">RPG Athletic Progression</div>
+            <h3 style="color: #fff; font-size: 1.05rem; display: flex; align-items: center; gap: 8px;">
+              <span>🛡️ Trainee Mastery Radar</span>
+              <span id="rpgOverallRank" style="font-size: 0.72rem; padding: 2px 8px; border-radius: 4px; background: rgba(0,242,254,0.15); border: 1px solid var(--cyan); color: var(--cyan);">Tier 1: Recruit</span>
+            </h3>
+          </div>
+          <span style="font-size: 0.75rem; color: var(--text-dim);">Live stat masteries based on completed volume & daily disciplines</span>
+        </div>
+        <div class="rpg-radar-grid" id="rpgRadarGrid">
+          <!-- 5 Pillars populated dynamically by JS: Push, Pull, Legs, Core, Mobility -->
+        </div>
+      </section>
+        <div style="height: 16px;"></div>
+        <!-- 5-DAY ADVANCE EQUIPMENT RADAR -->
+      <div id="equipmentRadar" class="equipment-radar">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 6px;">
+          <span class="radar-tag" id="radarDaysLeft">⚠️ 5 DAYS LEFT</span>
+          <div class="radar-tab-row" style="margin: 0;">
+            <button type="button" class="radar-tab-btn active" id="radarTabPro" onclick="switchRadarEquipTab('pro')">🛒 Commercial Gear</button>
+            <button type="button" class="radar-tab-btn" id="radarTabDiy" onclick="switchRadarEquipTab('diy')">🛠️ $0 DIY Alternative</button>
+          </div>
+        </div>
+        <div class="radar-title" id="radarTitle">Equipment Upgrade Required</div>
+        <div class="radar-desc" id="radarDesc">Details...</div>
+        <div class="radar-specs" id="radarSpecs">Specs...</div>
+        <div id="radarDiySection" class="radar-diy-box" style="display: none;">
+          <strong style="color: var(--cyan); display: block; margin-bottom: 4px;">🛠️ Zero-Cost Home DIY Alternative:</strong>
+          <span id="radarDiyText">Towel on doorframe or luggage strap for suspension training.</span>
+        </div>
+        <a href="#" target="_blank" rel="noopener noreferrer" class="radar-btn" id="radarBuyLink" style="margin-top: 10px;">
+          🛒 Search & Procure on Amazon ↗
+        </a>
+      </div>
+      </section>
+    </div>
 
   </div>
 
@@ -17683,6 +18027,11 @@
       if (target) target.classList.add('active');
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
+      if (viewId === 'workoutView') {
+        const savedCockpitTab = localStorage.getItem('aethos_cockpit_tab') || 'tabWorkout';
+        switchWorkoutCockpitTab(savedCockpitTab);
+      }
+
       if (viewId === 'milestonesView') {
         renderMilestonesHub(currentMilestoneFilter);
       } else if (viewId === 'photosView') {
@@ -17735,9 +18084,74 @@
     // ==========================================
     // WORKOUT NAVIGATION & MISSION CHECKLIST
     // ==========================================
+    
+    // ==========================================
+    // 100X WORKOUT COCKPIT SEGMENTED CONTROLLER
+    // ==========================================
+    function switchWorkoutCockpitTab(tabKey, btnEl) {
+      const validTabs = ['tabWorkout', 'tabChecklist', 'tabMatrix', 'tabBoss', 'tabRadar', 'tabAll'];
+      if (!validTabs.includes(tabKey)) tabKey = 'tabWorkout';
+
+      try {
+        localStorage.setItem('aethos_cockpit_tab', tabKey);
+      } catch(e) {}
+
+      // Update pill states
+      document.querySelectorAll('.workout-cockpit-nav .cockpit-nav-pill').forEach(pill => {
+        pill.classList.remove('active');
+      });
+      const targetPill = btnEl || document.getElementById('btnCockpit' + tabKey.charAt(0).toUpperCase() + tabKey.slice(1));
+      if (targetPill) targetPill.classList.add('active');
+
+      const secWorkout = document.getElementById('cockpitSecWorkout');
+      const secChecklist = document.getElementById('cockpitSecChecklist');
+      const secMatrix = document.getElementById('cockpitSecMatrix');
+      const secBoss = document.getElementById('cockpitSecBoss');
+      const secRadar = document.getElementById('cockpitSecRadar');
+      const quickBar = document.getElementById('cockpitQuickBar');
+
+      if (tabKey === 'tabAll') {
+        if (secWorkout) secWorkout.style.display = 'block';
+        if (secChecklist) secChecklist.style.display = 'block';
+        if (secMatrix) secMatrix.style.display = 'block';
+        if (secBoss) secBoss.style.display = 'block';
+        if (secRadar) secRadar.style.display = 'block';
+        if (quickBar) quickBar.style.display = 'none';
+      } else {
+        if (secWorkout) secWorkout.style.display = (tabKey === 'tabWorkout') ? 'block' : 'none';
+        if (secChecklist) secChecklist.style.display = (tabKey === 'tabChecklist') ? 'block' : 'none';
+        if (secMatrix) secMatrix.style.display = (tabKey === 'tabMatrix') ? 'block' : 'none';
+        if (secBoss) secBoss.style.display = (tabKey === 'tabBoss') ? 'block' : 'none';
+        if (secRadar) secRadar.style.display = (tabKey === 'tabRadar') ? 'block' : 'none';
+        if (quickBar) quickBar.style.display = (tabKey === 'tabWorkout') ? 'flex' : 'none';
+      }
+
+      // Dynamic telemetry trigger upon tab activation
+      if (tabKey === 'tabMatrix' || tabKey === 'tabAll') {
+        if (typeof renderHeatmapGrid === 'function') renderHeatmapGrid();
+      }
+      if (tabKey === 'tabBoss' || tabKey === 'tabAll') {
+        if (typeof updateActiveQuestBanner === 'function') updateActiveQuestBanner();
+        if (typeof BossBattleEngine !== 'undefined' && BossBattleEngine.updateUI) BossBattleEngine.updateUI();
+      }
+      if (tabKey === 'tabRadar' || tabKey === 'tabAll') {
+        if (typeof updateRPGSkillRadar === 'function') updateRPGSkillRadar();
+        if (typeof checkAdvanceEquipmentAlert === 'function') checkAdvanceEquipmentAlert(currentDay);
+      }
+      if (tabKey === 'tabChecklist' || tabKey === 'tabAll') {
+        if (typeof updateMissionChecklist === 'function') updateMissionChecklist();
+      }
+    }
+    window.switchWorkoutCockpitTab = switchWorkoutCockpitTab;
+
     function scrollToWorkoutSection(id) {
       if (!document.getElementById('workoutView')?.classList.contains('active')) {
         switchView('workoutView');
+      }
+      // Ensure workout section is active if user is in checklist, matrix, or boss mode
+      const activeCockpitTab = localStorage.getItem('aethos_cockpit_tab') || 'tabWorkout';
+      if (activeCockpitTab !== 'tabWorkout' && activeCockpitTab !== 'tabAll') {
+        switchWorkoutCockpitTab('tabWorkout');
       }
       const el = document.getElementById(id);
       if (el) {
@@ -17915,6 +18329,15 @@
       const pct = Math.round((completedCount / 6) * 100);
       if (progressPill) progressPill.innerText = `${completedCount} / 6 Complete (${pct}%)`;
       if (progressFill) progressFill.style.width = `${pct}%`;
+
+      const quickChecklistEl = document.getElementById('quickChecklistSummaryText');
+      if (quickChecklistEl) {
+        quickChecklistEl.innerText = `${completedCount} / 6 Objectives Complete (${pct}%)`;
+      }
+      const pillBadgeEl = document.getElementById('pillBadgeChecklist');
+      if (pillBadgeEl) {
+        pillBadgeEl.innerText = `${completedCount}/6`;
+      }
 
       if (calStatus) {
         if (isDayDone) {
@@ -33422,6 +33845,12 @@ if (typeof window !== 'undefined') {
           handleUserPillClick();
         };
       }
+
+      // Initialize Cockpit Segmented Tab
+      try {
+        const savedTab = localStorage.getItem('aethos_cockpit_tab') || 'tabWorkout';
+        switchWorkoutCockpitTab(savedTab);
+      } catch(e) {}
 
       window.__appReady = true;
     }
