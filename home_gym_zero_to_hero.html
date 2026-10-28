@@ -10738,6 +10738,372 @@
       color: #fff;
     }
 
+  
+    /* ==========================================================
+       UBIQUITOUS 1000X GLOBAL FLOATING MUSICAL DOCK
+       ========================================================== */
+    .global-music-dock {
+      position: fixed;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 998;
+      width: min(1240px, calc(100vw - 24px));
+      background: rgba(8, 13, 27, 0.92);
+      backdrop-filter: blur(32px) saturate(220%);
+      -webkit-backdrop-filter: blur(32px) saturate(220%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      padding: 10px 18px;
+      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.85), 0 0 30px -8px rgba(56, 189, 248, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+    }
+    .global-music-dock:hover {
+      border-color: rgba(56, 189, 248, 0.45);
+      box-shadow: 0 24px 60px -10px rgba(0, 0, 0, 0.9), 0 0 35px -6px rgba(56, 189, 248, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+    .global-music-dock.playing {
+      border-color: rgba(56, 189, 248, 0.6);
+      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.85), 0 0 35px rgba(56, 189, 248, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    }
+    .music-dock-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: nowrap;
+    }
+    .music-dock-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      min-width: 240px;
+    }
+    .music-vinyl-disc {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #1e293b 0%, #090d16 65%, #000 100%);
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), inset 0 0 6px rgba(56, 189, 248, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+    .global-music-dock.playing .music-vinyl-disc {
+      animation: vinylSpin 3.5s linear infinite;
+      border-color: var(--cyan);
+      box-shadow: 0 0 14px var(--cyan-glow), inset 0 0 8px rgba(56, 189, 248, 0.6);
+    }
+    @keyframes vinylSpin {
+      100% { transform: rotate(360deg); }
+    }
+    .vinyl-icon {
+      font-size: 1.1rem;
+    }
+    .dock-meta-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .dock-track-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #fff;
+      white-space: nowrap;
+      max-width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .dock-bpm-pill {
+      font-size: 0.65rem;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--cyan);
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 1px 6px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .dock-tag-pill {
+      font-size: 0.62rem;
+      font-weight: 800;
+      color: var(--emerald);
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 1px 5px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .dock-meta-sub {
+      font-size: 0.72rem;
+      color: #94a3b8;
+      white-space: nowrap;
+      max-width: 240px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .music-dock-center {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-shrink: 0;
+    }
+    .music-dock-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .dock-ctrl-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #fff;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.78rem;
+      transition: all 0.2s ease;
+    }
+    .dock-ctrl-btn:hover {
+      background: rgba(255, 255, 255, 0.16);
+      transform: scale(1.08);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+    .dock-play-btn {
+      background: linear-gradient(135deg, #00f2fe 0%, #38bdf8 100%);
+      border: none;
+      color: #000;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.05rem;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.45);
+      transition: all 0.22s var(--ease-spring);
+    }
+    .dock-play-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 28px rgba(56, 189, 248, 0.7);
+    }
+    .dock-bass-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #94a3b8;
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 5px 10px;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .dock-bass-btn:hover, .dock-bass-btn.active {
+      background: linear-gradient(135deg, rgba(244, 63, 94, 0.25), rgba(168, 85, 247, 0.25));
+      border-color: #f43f5e;
+      color: #fff;
+      box-shadow: 0 0 12px rgba(244, 63, 94, 0.4);
+    }
+    .dock-spectrum-wrap {
+      width: 140px;
+      height: 28px;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+    #dockMiniSpectrumCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .music-dock-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+      justify-content: flex-end;
+      overflow: hidden;
+    }
+    .dock-channel-pills {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      max-width: 480px;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+    }
+    .dock-channel-pills::-webkit-scrollbar {
+      display: none;
+    }
+    .dock-ch-pill {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #cbd5e1;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 99px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+    .dock-ch-pill:hover {
+      background: rgba(255, 255, 255, 0.14);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+    .dock-ch-pill.active {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.3), rgba(168, 85, 247, 0.3));
+      border-color: var(--cyan);
+      color: #fff;
+      font-weight: 800;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
+    }
+    .dock-vol-cluster {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .dock-vol-slider {
+      width: 70px;
+      accent-color: var(--cyan);
+      cursor: pointer;
+    }
+    .dock-studio-btn {
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: var(--cyan);
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 5px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+    .dock-studio-btn:hover {
+      background: rgba(56, 189, 248, 0.25);
+      border-color: var(--cyan);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+    }
+    @media (max-width: 1024px) {
+      .dock-channel-pills {
+        max-width: 220px;
+      }
+      .dock-spectrum-wrap {
+        display: none;
+      }
+    }
+    @media (max-width: 768px) {
+      .global-music-dock {
+        bottom: 8px;
+        padding: 8px 12px;
+      }
+      .dock-meta-sub, .dock-tag-pill, .dock-channel-pills, .dock-vol-cluster {
+        display: none;
+      }
+      .music-dock-left {
+        min-width: 140px;
+      }
+      .dock-track-title {
+        max-width: 130px;
+      }
+    }
+
+    /* Dynamic Island Music Pod */
+    .island-music-pod {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 2px 8px;
+      border-radius: 99px;
+      transition: all 0.2s ease;
+    }
+    .island-music-pod:hover {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--cyan);
+    }
+    .island-music-name {
+      font-size: 0.7rem;
+      color: #cbd5e1;
+      font-weight: 700;
+      max-width: 130px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .island-music-btn {
+      background: transparent;
+      border: none;
+      color: var(--cyan);
+      font-size: 0.72rem;
+      font-weight: 800;
+      cursor: pointer;
+      padding: 0 2px;
+    }
+
+    /* Exercise Card Music Cadence Bar */
+    .ex-music-cadence-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(14, 21, 38, 0.85);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 8px;
+      padding: 6px 12px;
+      margin-bottom: 12px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+    .btn-cue-beats {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(168, 85, 247, 0.2));
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-cue-beats:hover {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.35), rgba(168, 85, 247, 0.35));
+      border-color: var(--cyan);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
+    }
+    .btn-cue-beats-studio {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #94a3b8;
+      font-size: 0.72rem;
+      padding: 4px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .btn-cue-beats-studio:hover {
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
   </style>
 </head>
 <body>
@@ -10759,6 +11125,11 @@
           <circle class="island-timer-fill" id="islandTimerFill" cx="12" cy="12" r="10"></circle>
         </svg>
         <span class="island-timer-text" id="islandTimerDigits">01:00</span>
+      </div>
+      <div class="island-music-pod" id="islandMusicPod" onclick="event.stopPropagation(); GymMusic.togglePlay();" title="Toggle Workout Beats">
+        <span class="island-music-disc">🎵</span>
+        <span class="island-music-name" id="islandMusicName">Cyber Heavy Pump</span>
+        <button type="button" class="island-music-btn" id="islandMusicBtn">▶</button>
       </div>
     </div>
     <div class="island-right">
@@ -14901,6 +15272,42 @@
             </div>
             <div style="font-size: 0.95rem; font-weight: 800; color: #fff;">⚡ Cyber Heavy Pump</div>
             <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 3px;">Driving techno sub-bass, 4-on-the-floor kicks, and claps for high-intensity sets.</div>
+          </div>
+
+          <div class="music-genre-card" data-track="industrial_techno" onclick="GymMusic.selectTrack('industrial_techno')">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+              <span class="music-tag-pill" style="border-color: rgba(56,189,248,0.4); color: var(--cyan); background: rgba(56,189,248,0.15);">135 BPM</span>
+              <span style="font-size: 0.72rem; color: var(--cyan);">ENDURANCE</span>
+            </div>
+            <div style="font-size: 0.95rem; font-weight: 800; color: #fff;">🏭 Berlin Industrial Techno</div>
+            <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 3px;">Relentless 135 BPM German warehouse kick, resonant sub rumble, and metallic grooves.</div>
+          </div>
+
+          <div class="music-genre-card" data-track="epic_war_drums" onclick="GymMusic.selectTrack('epic_war_drums')">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+              <span class="music-tag-pill" style="border-color: rgba(244,63,94,0.4); color: #fb7185; background: rgba(244,63,94,0.15);">120 BPM</span>
+              <span style="font-size: 0.72rem; color: #fb7185;">CHAMPION PR</span>
+            </div>
+            <div style="font-size: 0.95rem; font-weight: 800; color: #fff;">🥁 Cinematic War Drums</div>
+            <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 3px;">Thunderous orchestral taiko sub booms, marching rim rolls, and apocalyptic brass chords.</div>
+          </div>
+
+          <div class="music-genre-card" data-track="cyber_glitch" onclick="GymMusic.selectTrack('cyber_glitch')">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+              <span class="music-tag-pill" style="border-color: rgba(168,85,247,0.4); color: var(--purple); background: rgba(168,85,247,0.15);">105 BPM</span>
+              <span style="font-size: 0.72rem; color: var(--purple);">HYPERTROPHY</span>
+            </div>
+            <div style="font-size: 0.95rem; font-weight: 800; color: #fff;">👾 Cyber Glitch-Hop</div>
+            <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 3px;">Punchy half-time boom-bap bounce, resonant low-pass wobble bass, and glitchy textures.</div>
+          </div>
+
+          <div class="music-genre-card" data-track="ambient_drone_528" onclick="GymMusic.selectTrack('ambient_drone_528')">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+              <span class="music-tag-pill" style="border-color: rgba(16,185,129,0.4); color: var(--emerald); background: rgba(16,185,129,0.15);">528 Hz</span>
+              <span style="font-size: 0.72rem; color: var(--emerald);">RESTORATION</span>
+            </div>
+            <div style="font-size: 0.95rem; font-weight: 800; color: #fff;">✨ 528Hz Solfeggio Miracle</div>
+            <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 3px;">Pure 528Hz Solfeggio frequency with 6Hz Theta binaural entrainment for deep recovery.</div>
           </div>
 
           <div class="music-genre-card" data-track="dark_phonk" onclick="GymMusic.selectTrack('dark_phonk')">
@@ -19509,6 +19916,72 @@
   <' + 'script>
     window.addEventListener('load', () => { setTimeout(() => { try { window.print(); } catch(e){} }, 300); });
   <' + '/script>
+
+  <!-- ==========================================
+       UBIQUITOUS 1000X FLOATING WORKOUT SOUNDTRACK DOCK
+       ========================================== -->
+  <div class="global-music-dock" id="globalFloatingMusicDock">
+    <div class="music-dock-inner">
+      
+      <!-- Track Meta & Vinyl Core -->
+      <div class="music-dock-left" onclick="openModal('musicModal')" title="Click to open Full Studio Lab">
+        <div class="music-vinyl-disc" id="dockVinylDisc">
+          <span class="vinyl-center-dot"></span>
+          <span class="vinyl-icon">🎵</span>
+        </div>
+        <div class="music-dock-meta">
+          <div class="dock-meta-top">
+            <span class="dock-track-title" id="dockTrackTitle">⚡ Cyber Heavy Pump</span>
+            <span class="dock-bpm-pill" id="dockBpmPill">128 BPM</span>
+            <span class="dock-tag-pill" id="dockTagPill">HEAVY LIFTS</span>
+          </div>
+          <div class="dock-meta-sub" id="dockMetaSub">High-BPM Hardstyle & Sub-Bass • Procedural DSP</div>
+        </div>
+      </div>
+
+      <!-- Playback Controls & Real-Time Spectrum Canvas -->
+      <div class="music-dock-center">
+        <div class="music-dock-controls">
+          <button type="button" class="dock-ctrl-btn" onclick="GymMusic.prevTrack()" title="Previous Channel">⏮</button>
+          <button type="button" class="dock-play-btn" id="dockPlayBtn" onclick="GymMusic.togglePlay()" title="Play / Pause Beats">▶</button>
+          <button type="button" class="dock-ctrl-btn" onclick="GymMusic.nextTrack()" title="Next Channel">⏭</button>
+          <button type="button" class="dock-bass-btn" id="dockBassBoostBtn" onclick="GymMusic.toggleBassBoost()" title="Toggle DSP Bass Boost">⚡ BASS</button>
+        </div>
+        
+        <!-- Live Mini Spectrum Visualizer Canvas -->
+        <div class="dock-spectrum-wrap" onclick="openModal('musicModal')" title="Live Synthesizer Spectrum. Click to open Studio.">
+          <canvas id="dockMiniSpectrumCanvas" width="180" height="26"></canvas>
+        </div>
+      </div>
+
+      <!-- Quick Channel Preset Pills & Volume Deck -->
+      <div class="music-dock-right">
+        <div class="dock-channel-pills" id="dockChannelPills">
+          <button type="button" class="dock-ch-pill active" data-track="cyber_pump" onclick="GymMusic.selectTrack('cyber_pump')">⚡ Hardstyle</button>
+          <button type="button" class="dock-ch-pill" data-track="dark_phonk" onclick="GymMusic.selectTrack('dark_phonk')">🔥 Phonk</button>
+          <button type="button" class="dock-ch-pill" data-track="dnb_rush" onclick="GymMusic.selectTrack('dnb_rush')">⚡ DnB</button>
+          <button type="button" class="dock-ch-pill" data-track="industrial_techno" onclick="GymMusic.selectTrack('industrial_techno')">🏭 Techno</button>
+          <button type="button" class="dock-ch-pill" data-track="epic_war_drums" onclick="GymMusic.selectTrack('epic_war_drums')">🥁 War Drums</button>
+          <button type="button" class="dock-ch-pill" data-track="heavy_trap" onclick="GymMusic.selectTrack('heavy_trap')">🥊 Trap</button>
+          <button type="button" class="dock-ch-pill" data-track="synthwave" onclick="GymMusic.selectTrack('synthwave')">🌌 Synthwave</button>
+          <button type="button" class="dock-ch-pill" data-track="cyber_glitch" onclick="GymMusic.selectTrack('cyber_glitch')">👾 Glitch-Hop</button>
+          <button type="button" class="dock-ch-pill" data-track="lofi_focus" onclick="GymMusic.selectTrack('lofi_focus')">🎧 Lo-Fi</button>
+          <button type="button" class="dock-ch-pill" data-track="zen_432" onclick="GymMusic.selectTrack('zen_432')">🧘 432Hz</button>
+          <button type="button" class="dock-ch-pill" data-track="ambient_drone_528" onclick="GymMusic.selectTrack('ambient_drone_528')">✨ 528Hz</button>
+          <button type="button" class="dock-ch-pill" data-track="binaural_flow" onclick="GymMusic.selectTrack('binaural_flow')">🌊 Alpha 10Hz</button>
+          <button type="button" class="dock-ch-pill" data-track="youtube_music" onclick="GymMusic.selectTrack('youtube_music')">🔴 YT Music</button>
+        </div>
+
+        <div class="dock-vol-cluster">
+          <span style="font-size: 0.72rem; color: #94a3b8;">🔊</span>
+          <input type="range" class="dock-vol-slider" min="0" max="1" step="0.05" value="0.75" oninput="GymMusic.setVolume(this.value)" title="Master Volume">
+          <button type="button" class="dock-studio-btn" onclick="openModal('musicModal')" title="Open Full Studio Studio Lab">🎛️ Studio</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </body>
 </html>`);
       printWin.document.close();
@@ -29881,11 +30354,15 @@ const GymMusic = {
     { id: 'cyber_pump', name: '⚡ Cyber Heavy Pump', bpm: 128, genre: 'High-BPM Hardstyle & Sub-Bass', tag: 'HEAVY LIFTS', desc: 'Heavy 4-on-the-floor kick, rolling 16th acid bassline, and punchy claps. Fuels max-effort sets.' },
     { id: 'dark_phonk', name: '💥 Dark Phonk Beast Mode', bpm: 140, genre: 'Memphis Cowbell & 808 Glides', tag: 'PR SHRED', desc: 'Distorted 808 sub drops, syncopated cowbell riff, and rapid trap hi-hat rolls. Maximum adrenaline.' },
     { id: 'dnb_rush', name: '🔥 Neurofunk Drum & Bass', bpm: 174, genre: 'High-Cadence Breakbeat & Reese', tag: 'HIIT / BURNOUT', desc: 'Relentless 174 BPM breakbeat, Reese bass modulation, and lightning tempo for cardio & AMRAP sets.' },
-    { id: 'synthwave', name: '🌌 Synthwave Outrun', bpm: 116, genre: '80s Retro Cyberpunk Arps', tag: 'TEMPO FLOW', desc: 'Nostalgic 80s sawtooth arpeggios, gated analog snare, and melodic chords for steady rep cadences.' },
+    { id: 'industrial_techno', name: '🏭 Berlin Industrial Techno', bpm: 135, genre: 'Raw Warehouse Kick & Metal Stabs', tag: 'ENDURANCE', desc: 'Relentless 135 BPM driving German warehouse kick, resonant sub rumble, and metallic percussive grooves.' },
+    { id: 'epic_war_drums', name: '🥁 Cinematic War Drums & Horns', bpm: 120, genre: 'Epic Taiko & Low Brass PR Drops', tag: 'CHAMPION PR', desc: 'Thunderous orchestral taiko sub booms, marching rim rolls, and apocalyptic brass chords for maximum neural focus.' },
     { id: 'heavy_trap', name: '🥊 Heavy Trap 808 Thump', bpm: 92, genre: 'Hip-Hop 808s & Hard Snare', tag: 'POWERLIFTING', desc: 'Earth-shaking 808 sub hits, crisp layered snare, and rapid hi-hat rolls for explosive reps.' },
+    { id: 'synthwave', name: '🌌 Synthwave Outrun', bpm: 116, genre: '80s Retro Cyberpunk Arps', tag: 'TEMPO FLOW', desc: 'Nostalgic 80s sawtooth arpeggios, gated analog snare, and melodic chords for steady rep cadences.' },
+    { id: 'cyber_glitch', name: '👾 Cyber Glitch-Hop & Wobble', bpm: 105, genre: 'Mid-Tempo Electronic Wobble', tag: 'HYPERTROPHY', desc: 'Punchy half-time boom-bap bounce, resonant low-pass wobble bass, and glitchy acoustic textures.' },
     { id: 'lofi_focus', name: '🎧 Lo-Fi Deep Focus', bpm: 84, genre: 'Chillhop Rhodes & Boom-Bap', tag: 'MOBILITY', desc: 'Warm Rhodes electric piano chords and laidback boom-bap rhythm. Perfect for warm-ups and calisthenics.' },
     { id: 'zen_432', name: '🧘 432Hz Zen Recovery', bpm: 60, genre: 'Alpha Waves & Harmonic Drone', tag: 'COOL-DOWN', desc: '432Hz healing harmonic drones and binaural pulsations for post-workout decompression and box breathing.' },
-    { id: 'binaural_flow', name: '🌊 Alpha/Theta Mind Flow', bpm: 64, genre: '10Hz Binaural Cognitive Drone', tag: 'RESTORATION', desc: 'Harmonic 200Hz/210Hz dual-frequency binaural wave tuned to 10Hz Alpha rhythm for mental clarity.' },
+    { id: 'ambient_drone_528', name: '✨ 528Hz Solfeggio Miracle Tone', bpm: 60, genre: 'Cellular Repair & DNA Renewal', tag: 'RESTORATION', desc: 'Pure 528Hz Solfeggio frequency with 6Hz Theta binaural entrainment for parasympathetic nervous reboot.' },
+    { id: 'binaural_flow', name: '🌊 Alpha/Theta Mind Flow', bpm: 64, genre: '10Hz Binaural Cognitive Drone', tag: 'NEURAL RESET', desc: 'Harmonic 200Hz/210Hz dual-frequency binaural wave tuned to 10Hz Alpha rhythm for mental clarity.' },
     { id: 'local_mp3', name: '📁 My Local MP3 Files', bpm: 0, genre: 'Custom User Playlist', tag: 'CUSTOM', desc: 'Load your personal workout playlist MP3 / WAV files directly from your phone or laptop.' },
     { id: 'youtube_music', name: '🔴 YouTube Music', bpm: 0, genre: 'Personal Playlist & Gym Radio', tag: 'YT MUSIC', desc: 'Stream your personal YouTube Music playlist or curated gym radio with smart Voice Coach ducking.' }
   ],
@@ -30013,7 +30490,8 @@ const GymMusic = {
         document.getElementById('musicSpectrumCanvas'),
         document.getElementById('focusMusicSpectrumCanvas'),
         document.getElementById('liveMusicSpectrumCanvas'),
-        document.getElementById('warmupMusicSpectrumCanvas')
+        document.getElementById('warmupMusicSpectrumCanvas'),
+        document.getElementById('dockMiniSpectrumCanvas')
       ].filter(c => c && c.offsetParent !== null);
 
       if (targetCanvases.length === 0) return;
@@ -30971,6 +31449,87 @@ const GymMusic = {
         this.playChordTone(130.81, time, 3.8, 'triangle'); // C3 base warm pad
       }
     }
+    else if (this.currentTrackId === 'industrial_techno') {
+      // 135 BPM Berlin Industrial Warehouse Techno
+      if (step === 0 || step === 4 || step === 8 || step === 12) {
+        this.playKick(time, 1.35);
+      }
+      if (step === 2 || step === 6 || step === 10 || step === 14) {
+        this.play808Sub(36.71, time, 0.24); // Low D1 rumble
+        this.playHiHat(time, true); // Open sizzling hi-hat
+      }
+      if (step % 2 === 1) {
+        this.playHiHat(time, false);
+      }
+      if (step === 0 || step === 10) {
+        this.playBassNote(73.42, time, 0.12, 'sawtooth');
+      }
+    }
+    else if (this.currentTrackId === 'epic_war_drums') {
+      // 120 BPM Cinematic Taiko War Drums & Brass
+      if (step === 0 || step === 6 || step === 8 || step === 14) {
+        this.playKick(time, 1.45);
+        this.play808Sub(38.89, time, 0.45);
+      }
+      if (step === 4 || step === 12) {
+        this.playSnare(time, false);
+      }
+      if (step === 14 || step === 15) {
+        this.playSnare(time, false);
+      }
+      if (step === 0 || step === 8) {
+        this.playChordTone(73.42, time, 1.6, 'sawtooth');
+        this.playChordTone(110.00, time, 1.6, 'sawtooth');
+        this.playChordTone(146.83, time, 1.6, 'triangle');
+      }
+    }
+    else if (this.currentTrackId === 'ambient_drone_528') {
+      // 528Hz Solfeggio Miracle Tone & DNA Renewal
+      if (step === 0) {
+        this.playChordTone(528, time, 3.8, 'sine');
+        this.playChordTone(264, time, 3.8, 'sine');
+        this.playBinauralBeat(528, 534, time, 3.8);
+      }
+    }
+    else if (this.currentTrackId === 'cyber_glitch') {
+      // 105 BPM Cyber Glitch-Hop & Low-Pass Wobble
+      if (step === 0 || step === 7 || step === 10) {
+        this.playKick(time, 1.25);
+      }
+      if (step === 4 || step === 12) {
+        this.playSnare(time, true);
+      }
+      if (step % 3 === 0) {
+        this.playHiHat(time, step === 6);
+      }
+      const wobbleNotes = [55, 55, 65.41, 55, 82.41, 55, 73.42, 65.41, 55, 55, 65.41, 98, 82.41, 73.42, 65.41, 55];
+      this.playBassNote(wobbleNotes[step], time, 0.14, 'square');
+    }
+  },
+
+  cueOptimalTrackForMovement(exKey) {
+    const k = (exKey || '').toLowerCase();
+    let trackId = 'cyber_pump';
+    if (k.includes('deadlift') || k.includes('squat') || k.includes('press') || k.includes('bench')) {
+      trackId = 'dark_phonk';
+    } else if (k.includes('jump') || k.includes('burpee') || k.includes('hiit') || k.includes('sprint') || k.includes('cardio')) {
+      trackId = 'dnb_rush';
+    } else if (k.includes('row') || k.includes('pull') || k.includes('chin')) {
+      trackId = 'industrial_techno';
+    } else if (k.includes('plank') || k.includes('hold') || k.includes('stretch') || k.includes('mobility')) {
+      trackId = 'synthwave';
+    }
+    this.selectTrack(trackId);
+    if (!this.isPlaying) this.play();
+    const t = this.tracks.find(x => x.id === trackId);
+    if (typeof showToast === 'function' && t) {
+      showToast('🎧 Cued ' + t.name + ' (' + t.bpm + ' BPM) for max neural drive!');
+    }
+  },
+
+  cycleTrackForExercise(exKey) {
+    this.nextTrack();
+    if (!this.isPlaying) this.play();
   },
 
   handleLocalFiles(event) {
@@ -31008,6 +31567,39 @@ const GymMusic = {
 
   updateUI() {
     const tObj = this.tracks.find(t => t.id === this.currentTrackId) || this.tracks[0];
+
+    // Global Floating Music Dock Sync
+    const dockTrackTitle = document.getElementById('dockTrackTitle');
+    const dockBpmPill = document.getElementById('dockBpmPill');
+    const dockTagPill = document.getElementById('dockTagPill');
+    const dockMetaSub = document.getElementById('dockMetaSub');
+    const dockPlayBtn = document.getElementById('dockPlayBtn');
+    const globalDock = document.getElementById('globalFloatingMusicDock');
+    const dockBassBtn = document.getElementById('dockBassBoostBtn');
+
+    if (dockTrackTitle) dockTrackTitle.innerText = tObj.name;
+    if (dockBpmPill) dockBpmPill.innerText = tObj.bpm ? tObj.bpm + ' BPM' : 'ACTIVE';
+    if (dockTagPill) dockTagPill.innerText = tObj.tag || 'BEATS';
+    if (dockMetaSub) dockMetaSub.innerText = tObj.desc;
+    if (dockPlayBtn) dockPlayBtn.innerText = this.isPlaying ? '⏸' : '▶';
+    if (globalDock) globalDock.classList.toggle('playing', this.isPlaying);
+    if (dockBassBtn) {
+      dockBassBtn.classList.toggle('active', this.bassBoostActive);
+      dockBassBtn.innerHTML = this.bassBoostActive ? '⚡ BASS: ON' : '⚡ BASS';
+    }
+
+    // Dynamic Island Music Pod Sync
+    const islandMusicName = document.getElementById('islandMusicName');
+    const islandMusicBtn = document.getElementById('islandMusicBtn');
+    const islandMusicPod = document.getElementById('islandMusicPod');
+    if (islandMusicName) islandMusicName.innerText = tObj.name;
+    if (islandMusicBtn) islandMusicBtn.innerText = this.isPlaying ? '⏸' : '▶';
+    if (islandMusicPod) islandMusicPod.classList.toggle('playing', this.isPlaying);
+
+    // Update active pill in floating dock
+    document.querySelectorAll('.dock-ch-pill').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-track') === this.currentTrackId || btn.innerText.toLowerCase().includes(tObj.tag.toLowerCase()));
+    });
 
     // Header mini pill
     const pillTitle = document.getElementById('musicPillTitle');
