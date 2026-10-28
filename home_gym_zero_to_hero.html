@@ -11189,6 +11189,394 @@
     }
 
   
+    
+    /* ==========================================================
+       GEN-Z DOPAMINE COLOR ENGINE & 1000X GRAPHICS ARCHITECTURE
+       ========================================================== */
+    
+    /* 1. DEFAULT GEN-Z THEME: CYBER DOPAMINE (ELECTRIC MAGENTA / CYAN / VIOLET) */
+    :root, body, [data-genz-theme="cyber-dopamine"] {
+      --bg-dark: #0d0722;
+      --bg-mesh: radial-gradient(ellipse 90% 65% at 20% -10%, rgba(255, 0, 128, 0.28) 0%, transparent 60%),
+                 radial-gradient(ellipse 85% 60% at 85% 15%, rgba(0, 242, 254, 0.24) 0%, transparent 55%),
+                 radial-gradient(ellipse 80% 70% at 50% 90%, rgba(121, 40, 202, 0.3) 0%, transparent 65%),
+                 radial-gradient(circle 500px at 10% 60%, rgba(0, 255, 163, 0.18) 0%, transparent 55%),
+                 radial-gradient(circle 600px at 90% 70%, rgba(255, 230, 0, 0.15) 0%, transparent 50%),
+                 #0d0722;
+      --bg-surface: rgba(25, 14, 48, 0.82);
+      --bg-surface-elevated: rgba(38, 20, 72, 0.88);
+      --bg-card: rgba(28, 16, 56, 0.78);
+      --bg-card-hover: rgba(45, 25, 88, 0.94);
+      --border: rgba(255, 255, 255, 0.15);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-glass: rgba(255, 255, 255, 0.22);
+      --border-focus: #ff007f;
+      --cyan: #00f2fe;
+      --cyan-glow: rgba(0, 242, 254, 0.5);
+      --emerald: #00ffa3;
+      --emerald-glow: rgba(0, 255, 163, 0.5);
+      --amber: #ffe600;
+      --amber-glow: rgba(255, 230, 0, 0.5);
+      --rose: #ff007f;
+      --rose-glow: rgba(255, 0, 127, 0.55);
+      --purple: #b026ff;
+      --purple-glow: rgba(176, 38, 255, 0.55);
+      --electric-blue: #4facfe;
+      --text: #ffffff;
+      --text-muted: #c4b5fd;
+      --text-dim: #a78bfa;
+      --shadow-card: 0 14px 34px -8px rgba(13, 7, 34, 0.8), 0 0 20px -5px rgba(255, 0, 128, 0.18), inset 0 1px 0 0 rgba(255, 255, 255, 0.18);
+      --shadow-card-hover: 0 20px 48px -10px rgba(0, 0, 0, 0.85), 0 0 35px -4px rgba(0, 242, 254, 0.35), 0 0 25px -4px rgba(255, 0, 128, 0.35), inset 0 1px 0 0 rgba(255, 255, 255, 0.28);
+    }
+
+    /* 2. THEME: SUNSET HYPE (EUPHORIC CORAL / NEON PEACH / GOLD) */
+    body[data-genz-theme="sunset-hype"] {
+      --bg-dark: #1b0918;
+      --bg-mesh: radial-gradient(ellipse 90% 65% at 20% -10%, rgba(255, 65, 108, 0.32) 0%, transparent 60%),
+                 radial-gradient(ellipse 85% 60% at 85% 15%, rgba(255, 75, 43, 0.28) 0%, transparent 55%),
+                 radial-gradient(ellipse 80% 70% at 50% 90%, rgba(138, 35, 135, 0.32) 0%, transparent 65%),
+                 radial-gradient(circle 500px at 10% 60%, rgba(254, 225, 64, 0.2) 0%, transparent 55%),
+                 #1b0918;
+      --bg-surface: rgba(38, 14, 32, 0.84);
+      --bg-surface-elevated: rgba(52, 20, 44, 0.9);
+      --bg-card: rgba(42, 17, 36, 0.8);
+      --bg-card-hover: rgba(62, 25, 52, 0.94);
+      --border-focus: #ff416c;
+      --cyan: #ff7e40;
+      --cyan-glow: rgba(255, 126, 64, 0.5);
+      --emerald: #10b981;
+      --amber: #ffcc00;
+      --amber-glow: rgba(255, 204, 0, 0.5);
+      --rose: #ff2a7a;
+      --rose-glow: rgba(255, 42, 122, 0.55);
+      --purple: #d946ef;
+      --purple-glow: rgba(217, 70, 239, 0.55);
+      --electric-blue: #ff6b6b;
+      --text: #fff5f5;
+      --text-muted: #fed7aa;
+      --text-dim: #fdba74;
+      --shadow-card: 0 14px 34px -8px rgba(27, 9, 24, 0.8), 0 0 20px -5px rgba(255, 65, 108, 0.2);
+    }
+
+    /* 3. THEME: TOXIC ACID (CYBER LIME / RADIOACTIVE MINT / OBSIDIAN) */
+    body[data-genz-theme="toxic-acid"] {
+      --bg-dark: #061410;
+      --bg-mesh: radial-gradient(ellipse 90% 65% at 20% -10%, rgba(204, 255, 0, 0.26) 0%, transparent 60%),
+                 radial-gradient(ellipse 85% 60% at 85% 15%, rgba(0, 255, 170, 0.26) 0%, transparent 55%),
+                 radial-gradient(ellipse 80% 70% at 50% 90%, rgba(0, 242, 254, 0.22) 0%, transparent 65%),
+                 radial-gradient(circle 500px at 10% 60%, rgba(176, 38, 255, 0.18) 0%, transparent 55%),
+                 #061410;
+      --bg-surface: rgba(10, 28, 22, 0.84);
+      --bg-surface-elevated: rgba(16, 42, 33, 0.9);
+      --bg-card: rgba(12, 34, 27, 0.8);
+      --bg-card-hover: rgba(20, 52, 41, 0.94);
+      --border-focus: #ccff00;
+      --cyan: #00ffaa;
+      --cyan-glow: rgba(0, 255, 170, 0.5);
+      --emerald: #ccff00;
+      --emerald-glow: rgba(204, 255, 0, 0.5);
+      --amber: #ffff00;
+      --rose: #ff007f;
+      --purple: #00ffa3;
+      --text: #f0fdf4;
+      --text-muted: #bbf7d0;
+      --text-dim: #86efac;
+      --shadow-card: 0 14px 34px -8px rgba(6, 20, 16, 0.8), 0 0 20px -5px rgba(204, 255, 0, 0.2);
+    }
+
+    /* 4. THEME: KAWAII VAPOR (Y2K PASTEL PINK / LILAC / DREAM CYAN) */
+    body[data-genz-theme="kawaii-vapor"] {
+      --bg-dark: #120b22;
+      --bg-mesh: radial-gradient(ellipse 90% 65% at 20% -10%, rgba(255, 117, 140, 0.3) 0%, transparent 60%),
+                 radial-gradient(ellipse 85% 60% at 85% 15%, rgba(177, 118, 250, 0.3) 0%, transparent 55%),
+                 radial-gradient(ellipse 80% 70% at 50% 90%, rgba(105, 255, 235, 0.24) 0%, transparent 65%),
+                 radial-gradient(circle 500px at 10% 60%, rgba(255, 209, 148, 0.2) 0%, transparent 55%),
+                 #120b22;
+      --bg-surface: rgba(28, 18, 50, 0.82);
+      --bg-surface-elevated: rgba(40, 26, 70, 0.88);
+      --bg-card: rgba(32, 21, 58, 0.78);
+      --bg-card-hover: rgba(50, 32, 88, 0.94);
+      --border-focus: #ff758c;
+      --cyan: #69ffeb;
+      --cyan-glow: rgba(105, 255, 235, 0.5);
+      --emerald: #a7f3d0;
+      --amber: #ffd194;
+      --rose: #ff758c;
+      --rose-glow: rgba(255, 117, 140, 0.55);
+      --purple: #b176fa;
+      --purple-glow: rgba(177, 118, 250, 0.55);
+      --text: #faf5ff;
+      --text-muted: #e9d5ff;
+      --text-dim: #d8b4fe;
+      --shadow-card: 0 14px 34px -8px rgba(18, 11, 34, 0.8), 0 0 20px -5px rgba(255, 117, 140, 0.2);
+    }
+
+    /* 5. THEME: ARCADE NITRO (ELECTRIC COBALT / LASER PINK / NITRO GOLD) */
+    body[data-genz-theme="arcade-nitro"] {
+      --bg-dark: #060b24;
+      --bg-mesh: radial-gradient(ellipse 90% 65% at 20% -10%, rgba(0, 85, 255, 0.32) 0%, transparent 60%),
+                 radial-gradient(ellipse 85% 60% at 85% 15%, rgba(255, 0, 85, 0.32) 0%, transparent 55%),
+                 radial-gradient(ellipse 80% 70% at 50% 90%, rgba(255, 230, 0, 0.24) 0%, transparent 65%),
+                 radial-gradient(circle 500px at 10% 60%, rgba(0, 242, 254, 0.2) 0%, transparent 55%),
+                 #060b24;
+      --bg-surface: rgba(12, 22, 58, 0.84);
+      --bg-surface-elevated: rgba(18, 32, 80, 0.9);
+      --bg-card: rgba(14, 26, 68, 0.8);
+      --bg-card-hover: rgba(24, 42, 105, 0.94);
+      --border-focus: #00f2fe;
+      --cyan: #00f2fe;
+      --cyan-glow: rgba(0, 242, 254, 0.55);
+      --emerald: #00ff88;
+      --amber: #ffe600;
+      --rose: #ff0055;
+      --rose-glow: rgba(255, 0, 85, 0.55);
+      --purple: #0055ff;
+      --purple-glow: rgba(0, 85, 255, 0.55);
+      --text: #f0f9ff;
+      --text-muted: #bfdbfe;
+      --text-dim: #93c5fd;
+      --shadow-card: 0 14px 34px -8px rgba(6, 11, 36, 0.8), 0 0 20px -5px rgba(0, 85, 255, 0.2);
+    }
+
+    /* 1000X GRAPHICS: LIQUID AURORA CANVAS */
+    .genz-aurora-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.85;
+      transition: opacity 0.5s ease;
+    }
+
+    /* HOLOGRAPHIC RAINBOW SHIMMER CARDS */
+    .pro-ex-card {
+      background: linear-gradient(135deg, rgba(30, 17, 60, 0.75) 0%, rgba(16, 9, 36, 0.85) 100%) padding-box,
+                  linear-gradient(135deg, rgba(255, 0, 128, 0.35), rgba(0, 242, 254, 0.35), rgba(121, 40, 202, 0.35), rgba(0, 255, 163, 0.35)) border-box;
+      border: 1.5px solid transparent !important;
+      box-shadow: 0 14px 35px -8px rgba(0, 0, 0, 0.6), 0 0 25px -6px rgba(255, 0, 128, 0.15) !important;
+      backdrop-filter: blur(24px) saturate(200%) !important;
+      -webkit-backdrop-filter: blur(24px) saturate(200%) !important;
+    }
+    .pro-ex-card:hover {
+      transform: translateY(-4px) scale(1.006);
+      background: linear-gradient(135deg, rgba(42, 24, 82, 0.88) 0%, rgba(22, 12, 48, 0.94) 100%) padding-box,
+                  linear-gradient(135deg, #ff007f, #00f2fe, #ffe600, #00ffa3, #7928ca) border-box;
+      box-shadow: 0 22px 50px -10px rgba(0, 0, 0, 0.75), 0 0 35px -2px rgba(0, 242, 254, 0.35), 0 0 30px -2px rgba(255, 0, 128, 0.35) !important;
+    }
+
+    .pro-ex-card::before {
+      background: linear-gradient(180deg, #ff007f 0%, #7928ca 35%, #00f2fe 70%, #00ffa3 100%) !important;
+      width: 4px !important;
+      box-shadow: 0 0 12px rgba(255, 0, 128, 0.6);
+    }
+
+    /* TOP HEADER & DYNAMIC ISLAND VIBRANT GLOW */
+    .top-header {
+      background: rgba(18, 9, 38, 0.85) !important;
+      backdrop-filter: blur(24px) saturate(190%) !important;
+      -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
+      border-bottom: 1px solid rgba(255, 0, 128, 0.22) !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 0, 128, 0.1) !important;
+    }
+
+    .dynamic-island-capsule {
+      background: rgba(24, 11, 48, 0.9) !important;
+      border: 1.5px solid rgba(0, 242, 254, 0.45) !important;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.65), 0 0 25px rgba(0, 242, 254, 0.35), 0 0 15px rgba(255, 0, 128, 0.25) !important;
+    }
+
+    /* GEN-Z THEME PILL IN HEADER */
+    .genz-theme-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: linear-gradient(135deg, rgba(255, 0, 128, 0.18) 0%, rgba(121, 40, 202, 0.18) 100%);
+      border: 1.5px solid rgba(255, 0, 128, 0.45);
+      border-radius: 99px;
+      padding: 5px 12px;
+      cursor: pointer;
+      box-shadow: 0 0 14px rgba(255, 0, 128, 0.25);
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .genz-theme-pill:hover {
+      transform: scale(1.05);
+      border-color: #00f2fe;
+      box-shadow: 0 0 22px rgba(0, 242, 254, 0.45), 0 0 15px rgba(255, 0, 128, 0.45);
+    }
+    .theme-glow-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff007f, #00f2fe);
+      box-shadow: 0 0 8px #ff007f;
+      animation: themeDotPulse 2s infinite alternate;
+    }
+    @keyframes themeDotPulse {
+      0% { transform: scale(0.9); box-shadow: 0 0 5px #ff007f; }
+      100% { transform: scale(1.3); box-shadow: 0 0 12px #00f2fe; }
+    }
+    .theme-pill-label {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #ff007f;
+      letter-spacing: 0.04em;
+    }
+    .theme-pill-active {
+      font-size: 0.74rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    /* GEN-Z THEME SELECTOR MODAL / PANEL */
+    .genz-theme-modal {
+      display: none;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      width: 320px;
+      background: rgba(22, 10, 46, 0.95);
+      backdrop-filter: blur(28px) saturate(220%);
+      -webkit-backdrop-filter: blur(28px) saturate(220%);
+      border: 1.5px solid rgba(255, 0, 128, 0.4);
+      border-radius: 18px;
+      padding: 16px;
+      z-index: 1000;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(255, 0, 128, 0.35);
+      animation: modalSpringPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .genz-theme-modal.active {
+      display: block;
+    }
+    @keyframes modalSpringPop {
+      0% { opacity: 0; transform: translateY(-12px) scale(0.95); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .genz-theme-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: #ff007f;
+    }
+    .genz-theme-close {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 1rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .genz-theme-close:hover { color: #fff; }
+    .genz-theme-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .genz-theme-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 10px 12px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      color: #fff;
+    }
+    .genz-theme-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: #00f2fe;
+      transform: translateX(4px);
+    }
+    .genz-theme-btn.active {
+      background: linear-gradient(135deg, rgba(255, 0, 128, 0.25) 0%, rgba(121, 40, 202, 0.25) 100%);
+      border-color: #ff007f;
+      box-shadow: 0 0 16px rgba(255, 0, 128, 0.35);
+    }
+    .theme-btn-preview {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      flex-shrink: 0;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    }
+    .theme-btn-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .theme-btn-meta strong {
+      font-size: 0.82rem;
+      color: #fff;
+    }
+    .theme-btn-meta small {
+      font-size: 0.7rem;
+      color: #c4b5fd;
+    }
+
+    /* RAINBOW XP BAR ANIMATION */
+    .lvl-bar {
+      background: rgba(0, 0, 0, 0.5) !important;
+      border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    }
+    .lvl-fill {
+      background: linear-gradient(90deg, #ff007f, #7928ca, #00f2fe, #00ffa3, #ffe600, #ff007f) !important;
+      background-size: 250% 100% !important;
+      animation: rainbowShimmer 3.5s linear infinite !important;
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.7) !important;
+    }
+    @keyframes rainbowShimmer {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 250% 50%; }
+    }
+
+    /* GEN-Z HYPE BADGES & PILLS */
+    .genz-hype-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: 99px;
+      background: linear-gradient(135deg, rgba(255, 0, 128, 0.22) 0%, rgba(0, 242, 254, 0.22) 100%);
+      border: 1px solid rgba(255, 0, 128, 0.45);
+      color: #fff;
+      box-shadow: 0 0 10px rgba(255, 0, 128, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* COMPLETE DAY & SET BUTTON DOPAMINE STYLING */
+    .btn-set-done.done {
+      background: linear-gradient(135deg, #00ffa3 0%, #00f2fe 100%) !important;
+      color: #000 !important;
+      font-weight: 900 !important;
+      box-shadow: 0 0 20px rgba(0, 255, 163, 0.65) !important;
+      border-color: #00ffa3 !important;
+      transform: scale(1.02);
+    }
+    .btn-complete-day {
+      background: linear-gradient(135deg, #ff007f 0%, #7928ca 50%, #00f2fe 100%) !important;
+      box-shadow: 0 0 25px rgba(255, 0, 128, 0.6) !important;
+      font-weight: 900 !important;
+      letter-spacing: 0.03em;
+    }
+    .btn-complete-day:hover {
+      box-shadow: 0 0 35px rgba(0, 242, 254, 0.8), 0 0 25px rgba(255, 0, 128, 0.8) !important;
+      transform: scale(1.03);
+    }
+
     /* ==========================================================
        100X GOD-TIER ATHLETIC OS: COACH PERSONAS & AI OVERLOAD
        ========================================================== */
@@ -11276,6 +11664,7 @@
 <body>
 
   <!-- SPATIAL CANVAS: SUB-PIXEL DOT-MATRIX & DUAL AURORA GLOW MESH -->
+  <canvas id="genzAuroraCanvas" class="genz-aurora-canvas" aria-hidden="true"></canvas>
   <div class="ambient-mesh-canvas" aria-hidden="true"></div>
 
   <!-- FLOATING DYNAMIC ISLAND: LIVE ACTIVITY CAPSULE -->
@@ -11390,6 +11779,58 @@
         <div class="user-sync-pill" id="headerSyncPill" onclick="triggerManualSync()" title="Cloud Sync & Offline Telemetry. Click to sync now.">
           <span class="sync-dot-live" id="headerSyncDot"></span>
           <span id="headerSyncText">🟢 Synced</span>
+        </div>
+
+        <!-- Live Gen-Z Dopamine Theme Switcher Pill -->
+        <div class="genz-theme-pill" id="genzThemePill" onclick="toggleGenzThemeModal(event)" title="Gen-Z Dopamine Color Engine & Aesthetic Themes">
+          <div class="theme-glow-dot"></div>
+          <span class="theme-pill-label">🌈 Vibe:</span>
+          <span class="theme-pill-active" id="activeGenzThemeLabel">Cyber Dopamine</span>
+          <span style="font-size: 0.65rem; opacity: 0.7;">▼</span>
+        </div>
+
+        <div class="genz-theme-modal" id="genzThemeModal" onclick="event.stopPropagation()">
+          <div class="genz-theme-header">
+            <span>🌈 GEN-Z DOPAMINE THEMES</span>
+            <button type="button" class="genz-theme-close" onclick="closeGenzThemeModal()">✕</button>
+          </div>
+          <div class="genz-theme-grid">
+            <button type="button" class="genz-theme-btn active" data-theme="cyber-dopamine" onclick="setGenzTheme('cyber-dopamine')">
+              <span class="theme-btn-preview" style="background: linear-gradient(135deg, #ff007f, #7928ca, #00f2fe);"></span>
+              <div class="theme-btn-meta">
+                <strong>Cyber Dopamine</strong>
+                <small>Neon Magenta • Violet • Cyan</small>
+              </div>
+            </button>
+            <button type="button" class="genz-theme-btn" data-theme="sunset-hype" onclick="setGenzTheme('sunset-hype')">
+              <span class="theme-btn-preview" style="background: linear-gradient(135deg, #ff416c, #ff4b2b, #fee140);"></span>
+              <div class="theme-btn-meta">
+                <strong>Sunset Hype</strong>
+                <small>Hot Coral • Neon Peach • Gold</small>
+              </div>
+            </button>
+            <button type="button" class="genz-theme-btn" data-theme="toxic-acid" onclick="setGenzTheme('toxic-acid')">
+              <span class="theme-btn-preview" style="background: linear-gradient(135deg, #ccff00, #00ffa3, #00f2fe);"></span>
+              <div class="theme-btn-meta">
+                <strong>Toxic Acid</strong>
+                <small>Cyber Lime • Radioactive Mint</small>
+              </div>
+            </button>
+            <button type="button" class="genz-theme-btn" data-theme="kawaii-vapor" onclick="setGenzTheme('kawaii-vapor')">
+              <span class="theme-btn-preview" style="background: linear-gradient(135deg, #ff758c, #b176fa, #69ffeb);"></span>
+              <div class="theme-btn-meta">
+                <strong>Kawaii Vapor</strong>
+                <small>Pastel Pink • Lilac • Dream Cyan</small>
+              </div>
+            </button>
+            <button type="button" class="genz-theme-btn" data-theme="arcade-nitro" onclick="setGenzTheme('arcade-nitro')">
+              <span class="theme-btn-preview" style="background: linear-gradient(135deg, #0055ff, #ff0055, #ffe600);"></span>
+              <div class="theme-btn-meta">
+                <strong>Arcade Nitro</strong>
+                <small>Electric Cobalt • Laser Pink • Gold</small>
+              </div>
+            </button>
+          </div>
         </div>
 
         <!-- Live Gym Beats Music Cockpit -->
@@ -22372,6 +22813,7 @@
             <div class="ex-title-wrap">
               <span class="ex-title-text">${idx + 1}. ${activeName}</span>
               <span class="ex-target-pill">${activeTarget}</span>
+              <span class="genz-hype-badge">${['🔥 BUSSIN\'', '⚡ GOAT SET', '👑 PEAK FORM', '✨ MAIN CHARACTER', '💎 SHEESH'][(idx || 0) % 5]}</span>
             </div>
             <div style="display: flex; align-items: center; gap: 8px;">
               <button type="button" class="btn-warmup-trigger" onclick="openWarmupRampForExercise('${item.key}', '${activeName.replace(/'/g, "\\'")}', '${activeWorkingWeight}')" title="Generate 4-tier neuromuscular warm-up ladder & plate loadout">
@@ -22685,6 +23127,11 @@
         btn.classList.add('done');
         btn.innerText = '✓ Logged';
         playAudioTone(587.33, 'triangle', 0.25); // chime
+
+        // Gen-Z 1000X Dopamine Celebration Engine
+        if (window.GenzDopamineEngine) {
+          window.GenzDopamineEngine.triggerSetCelebration(btn);
+        }
 
         // Deal kinetic damage to Shadow Titan Raid Boss
         if (typeof BossBattleEngine !== 'undefined' && BossBattleEngine.dealDamage) {
@@ -24715,6 +25162,319 @@ function stopGuidedCooldown() {
       speakAnnouncement(coach.name + ' ready. Let\'s execute.');
     }
     window.switchCoachPersona = switchCoachPersona;
+
+    
+    // ==========================================================
+    // GEN-Z 1000X GRAPHICS & DOPAMINE ENGINE (GenzDopamineEngine)
+    // ==========================================================
+    const GENZ_THEMES = {
+      'cyber-dopamine': {
+        name: 'Cyber Dopamine',
+        blobs: ['#ff007f', '#00f2fe', '#7928ca', '#00ffa3', '#ffe600']
+      },
+      'sunset-hype': {
+        name: 'Sunset Hype',
+        blobs: ['#ff416c', '#ff4b2b', '#fee140', '#8a2387', '#ff7e40']
+      },
+      'toxic-acid': {
+        name: 'Toxic Acid',
+        blobs: ['#ccff00', '#00ffaa', '#00f2fe', '#b026ff', '#ffff00']
+      },
+      'kawaii-vapor': {
+        name: 'Kawaii Vapor',
+        blobs: ['#ff758c', '#b176fa', '#69ffeb', '#ffd194', '#a7f3d0']
+      },
+      'arcade-nitro': {
+        name: 'Arcade Nitro',
+        blobs: ['#0055ff', '#ff0055', '#ffe600', '#00f2fe', '#00ff88']
+      }
+    };
+
+    let activeGenzThemeKey = localStorage.getItem('gym_genz_theme') || 'cyber-dopamine';
+
+    function setGenzTheme(themeKey) {
+      if (!GENZ_THEMES[themeKey]) return;
+      activeGenzThemeKey = themeKey;
+      try {
+        localStorage.setItem('gym_genz_theme', themeKey);
+      } catch(e) {}
+
+      document.body.setAttribute('data-genz-theme', themeKey);
+      document.documentElement.setAttribute('data-genz-theme', themeKey);
+
+      const labelEl = document.getElementById('activeGenzThemeLabel');
+      if (labelEl) labelEl.textContent = GENZ_THEMES[themeKey].name;
+
+      document.querySelectorAll('.genz-theme-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-theme') === themeKey);
+      });
+
+      if (window.GenzAuroraEngine) {
+        window.GenzAuroraEngine.updateColors(GENZ_THEMES[themeKey].blobs);
+      }
+
+      if (typeof CanvasFX !== 'undefined' && CanvasFX.confetti) {
+        CanvasFX.confetti({ count: 60, colors: GENZ_THEMES[themeKey].blobs });
+      }
+
+      if (typeof showToast === 'function') {
+        showToast('🌈 Aesthetic unlocked: ' + GENZ_THEMES[themeKey].name + ' (1000x Colorful)');
+      }
+      closeGenzThemeModal();
+    }
+    window.setGenzTheme = setGenzTheme;
+
+    function toggleGenzThemeModal(event) {
+      if (event) event.stopPropagation();
+      const modal = document.getElementById('genzThemeModal');
+      if (modal) modal.classList.toggle('active');
+    }
+    window.toggleGenzThemeModal = toggleGenzThemeModal;
+
+    function closeGenzThemeModal() {
+      const modal = document.getElementById('genzThemeModal');
+      if (modal) modal.classList.remove('active');
+    }
+    window.closeGenzThemeModal = closeGenzThemeModal;
+
+    document.addEventListener('click', (e) => {
+      const modal = document.getElementById('genzThemeModal');
+      const pill = document.getElementById('genzThemePill');
+      if (modal && modal.classList.contains('active')) {
+        if (!modal.contains(e.target) && !pill.contains(e.target)) {
+          closeGenzThemeModal();
+        }
+      }
+    });
+
+    // 1000X LIQUID AURORA PLASMA ENGINE
+    const GenzAuroraEngine = {
+      canvas: null,
+      ctx: null,
+      blobs: [],
+      stars: [],
+      mouse: { x: window.innerWidth / 2, y: window.innerHeight / 2 },
+      animId: null,
+      colors: ['#ff007f', '#00f2fe', '#7928ca', '#00ffa3', '#ffe600'],
+
+      init() {
+        this.canvas = document.getElementById('genzAuroraCanvas');
+        if (!this.canvas) return;
+        this.ctx = this.canvas.getContext('2d');
+        this.resize();
+        window.addEventListener('resize', () => this.resize());
+        window.addEventListener('mousemove', (e) => {
+          this.mouse.x = e.clientX;
+          this.mouse.y = e.clientY;
+        });
+
+        // Initialize 5 drifting orbital blobs
+        this.blobs = [
+          { x: 0.2, y: 0.2, r: 350, vx: 0.0008, vy: 0.0011, phase: 0 },
+          { x: 0.8, y: 0.25, r: 380, vx: 0.0012, vy: 0.0009, phase: 1.5 },
+          { x: 0.5, y: 0.8, r: 420, vx: 0.0009, vy: 0.0013, phase: 3.1 },
+          { x: 0.15, y: 0.75, r: 320, vx: 0.0014, vy: 0.0007, phase: 4.5 },
+          { x: 0.85, y: 0.8, r: 360, vx: 0.0007, vy: 0.0015, phase: 5.8 }
+        ];
+
+        // 80 Sub-pixel twinkling stars
+        this.stars = [];
+        for (let i = 0; i < 80; i++) {
+          this.stars.push({
+            x: Math.random(),
+            y: Math.random(),
+            r: Math.random() * 1.5 + 0.5,
+            alpha: Math.random() * 0.8 + 0.2,
+            speed: Math.random() * 0.02 + 0.01
+          });
+        }
+
+        const initialTheme = GENZ_THEMES[activeGenzThemeKey] || GENZ_THEMES['cyber-dopamine'];
+        this.colors = initialTheme.blobs;
+
+        this.loop();
+      },
+
+      updateColors(newColors) {
+        if (newColors && newColors.length > 0) {
+          this.colors = newColors;
+        }
+      },
+
+      resize() {
+        if (!this.canvas) return;
+        const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+        this.canvas.width = window.innerWidth * dpr;
+        this.canvas.height = window.innerHeight * dpr;
+        if (this.ctx) this.ctx.scale(dpr, dpr);
+      },
+
+      loop() {
+        if (!this.ctx || !this.canvas) return;
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        const t = performance.now();
+
+        this.ctx.clearRect(0, 0, w, h);
+
+        // Music bass reactivity boost
+        let bassRatio = 0;
+        if (typeof GymMusic !== 'undefined' && GymMusic.isPlaying && GymMusic.analyser) {
+          const freqData = new Uint8Array(GymMusic.analyser.frequencyBinCount);
+          GymMusic.analyser.getByteFrequencyData(freqData);
+          let sum = 0;
+          for (let i = 0; i < 8; i++) sum += freqData[i];
+          bassRatio = sum / (8 * 255);
+        }
+
+        // Render glowing Aurora Blobs with radial gradients
+        this.ctx.globalCompositeOperation = 'screen';
+        for (let i = 0; i < this.blobs.length; i++) {
+          const b = this.blobs[i];
+          const color = this.colors[i % this.colors.length];
+          const curX = (b.x + Math.sin(t * b.vx + b.phase) * 0.18) * w;
+          const curY = (b.y + Math.cos(t * b.vy + b.phase) * 0.18) * h;
+          const dynamicR = b.r * (1 + bassRatio * 0.45);
+
+          const grad = this.ctx.createRadialGradient(curX, curY, 0, curX, curY, dynamicR);
+          grad.addColorStop(0, color);
+          grad.addColorStop(0.4, color);
+          grad.addColorStop(1, 'transparent');
+
+          this.ctx.fillStyle = grad;
+          this.ctx.beginPath();
+          this.ctx.arc(curX, curY, dynamicR, 0, Math.PI * 2);
+          this.ctx.fill();
+        }
+
+        // Render twinkling micro-stars
+        this.ctx.globalCompositeOperation = 'lighter';
+        for (let s of this.stars) {
+          s.alpha += Math.sin(t * s.speed) * 0.015;
+          const a = Math.max(0.1, Math.min(0.9, s.alpha));
+          this.ctx.fillStyle = `rgba(255, 255, 255, ${a})`;
+          this.ctx.beginPath();
+          this.ctx.arc(s.x * w, s.y * h, s.r, 0, Math.PI * 2);
+          this.ctx.fill();
+        }
+
+        this.animId = requestAnimationFrame(() => this.loop());
+      }
+    };
+    window.GenzAuroraEngine = GenzAuroraEngine;
+
+    // HIGH-DOPAMINE CELEBRATION & FEEDBACK ENGINE
+    const GenzDopamineEngine = {
+      hypeWords: [
+        'SHEESH! 🔥', 'W SET! ⚡', 'LOCKED IN! 👑', 'NO CAP! 🚀',
+        'MAIN CHARACTER! ✨', 'BEAST MODE! 💥', 'GAINS ACQUIRED! 💯',
+        'BUILT DIFFERENT! 🦾', 'UNSTOPPABLE! 🏆', 'SUPER SAIYAN! ⚡'
+      ],
+      emojiSet: ['🔥', '⚡', '💯', '✨', '👑', '🚀', '💎', '🦾'],
+
+      triggerSetCelebration(btn) {
+        const rect = btn.getBoundingClientRect();
+        const originX = (rect.left + rect.width / 2) / window.innerWidth;
+        const originY = (rect.top + rect.height / 2) / window.innerHeight;
+        const posX = rect.left + rect.width / 2;
+        const posY = rect.top;
+
+        // 1. Confetti burst
+        if (typeof CanvasFX !== 'undefined' && CanvasFX.confetti) {
+          CanvasFX.confetti({
+            count: 45,
+            origin: { x: originX, y: originY },
+            colors: (GENZ_THEMES[activeGenzThemeKey] || GENZ_THEMES['cyber-dopamine']).blobs
+          });
+        }
+
+        // 2. Floating Gen-Z Hype Word
+        const word = this.hypeWords[Math.floor(Math.random() * this.hypeWords.length)];
+        const colors = ['#00ffa3', '#00f2fe', '#ff007f', '#ffe600', '#b026ff'];
+        const chosenColor = colors[Math.floor(Math.random() * colors.length)];
+        if (typeof CanvasFX !== 'undefined' && CanvasFX.floatingText) {
+          CanvasFX.floatingText(word, posX, posY - 25, chosenColor);
+        }
+
+        // 3. Dopamine Arpeggiated Chime
+        this.playDopamineChime();
+
+        // 4. Update Dynamic Island with instant hype
+        const islandTitle = document.getElementById('islandExTitle');
+        if (islandTitle) {
+          islandTitle.innerHTML = `<span style="color: #00ffa3; font-weight: 800;">${word}</span> • +50 XP`;
+          setTimeout(() => {
+            if (typeof updateDynamicIslandStatus === 'function') updateDynamicIslandStatus();
+          }, 3000);
+        }
+      },
+
+      triggerDayCelebration() {
+        if (typeof CanvasFX !== 'undefined' && CanvasFX.confetti) {
+          CanvasFX.confetti({ count: 160, colors: ['#ff007f', '#00f2fe', '#00ffa3', '#ffe600', '#b026ff', '#ffffff'] });
+        }
+        if (typeof CanvasFX !== 'undefined' && CanvasFX.floatingText) {
+          CanvasFX.floatingText('🔥 W DAY! MAXIMUM GAINS 👑', window.innerWidth / 2, window.innerHeight / 2, '#00ffa3');
+        }
+        this.playVictoryFanfare();
+      },
+
+      playDopamineChime() {
+        try {
+          const ctx = (typeof SoundFX !== 'undefined' && SoundFX.ctx) ? SoundFX.ctx : new (window.AudioContext || window.webkitAudioContext)();
+          if (ctx.state === 'suspended') ctx.resume();
+          const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6 arpeggio
+          notes.forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.05);
+            gain.gain.setValueAtTime(0.2, ctx.currentTime + idx * 0.05);
+            gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + idx * 0.05 + 0.35);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(ctx.currentTime + idx * 0.05);
+            osc.stop(ctx.currentTime + idx * 0.05 + 0.35);
+          });
+        } catch(e) {}
+      },
+
+      playVictoryFanfare() {
+        try {
+          const ctx = (typeof SoundFX !== 'undefined' && SoundFX.ctx) ? SoundFX.ctx : new (window.AudioContext || window.webkitAudioContext)();
+          if (ctx.state === 'suspended') ctx.resume();
+          const chords = [
+            { f: [523.25, 659.25, 783.99], t: 0, d: 0.25 },
+            { f: [587.33, 739.99, 880.00], t: 0.2, d: 0.25 },
+            { f: [659.25, 830.61, 987.77], t: 0.4, d: 0.25 },
+            { f: [783.99, 1046.50, 1318.51], t: 0.65, d: 0.6 }
+          ];
+          chords.forEach(c => {
+            c.f.forEach(freq => {
+              const osc = ctx.createOscillator();
+              const gain = ctx.createGain();
+              osc.type = 'sawtooth';
+              osc.frequency.setValueAtTime(freq, ctx.currentTime + c.t);
+              gain.gain.setValueAtTime(0.12, ctx.currentTime + c.t);
+              gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + c.t + c.d);
+              osc.connect(gain);
+              gain.connect(ctx.destination);
+              osc.start(ctx.currentTime + c.t);
+              osc.stop(ctx.currentTime + c.t + c.d);
+            });
+          });
+        } catch(e) {}
+      }
+    };
+    window.GenzDopamineEngine = GenzDopamineEngine;
+
+    // Initialize Gen-Z theme and Aurora Canvas on DOM ready
+    document.addEventListener('DOMContentLoaded', () => {
+      setGenzTheme(activeGenzThemeKey);
+      if (window.GenzAuroraEngine) {
+        window.GenzAuroraEngine.init();
+      }
+    });
 
     // Biomechanics Anatomical Lighting on Movement Hover
     function highlightMusclesOnModel(muscles) {
