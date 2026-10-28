@@ -11188,6 +11188,89 @@
       box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
     }
 
+  
+    /* ==========================================================
+       100X GOD-TIER ATHLETIC OS: COACH PERSONAS & AI OVERLOAD
+       ========================================================== */
+    .coach-persona-dock {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(10, 16, 32, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 99px;
+      padding: 2px 4px;
+      margin-left: 8px;
+    }
+    .coach-persona-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: #94a3b8;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .coach-persona-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .coach-persona-btn.active {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.35), rgba(168, 85, 247, 0.35));
+      border-color: var(--cyan);
+      color: #fff;
+      font-weight: 800;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
+    }
+
+    /* AI Progressive Overload Recommendation Chip */
+    .overload-ai-recommendation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.12) 0%, rgba(16, 185, 129, 0.12) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin-top: 10px;
+      font-size: 0.76rem;
+      color: #e2e8f0;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+      animation: overloadGlowPulse 2.5s infinite alternate;
+    }
+    @keyframes overloadGlowPulse {
+      0% { border-color: rgba(56, 189, 248, 0.25); box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3); }
+      100% { border-color: rgba(56, 189, 248, 0.65); box-shadow: 0 4px 20px rgba(56, 189, 248, 0.25); }
+    }
+    .btn-quick-apply-overload {
+      background: linear-gradient(135deg, #00f2fe 0%, #10b981 100%);
+      border: none;
+      color: #000;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 0 0 12px rgba(0, 242, 254, 0.4);
+      transition: all 0.2s var(--ease-spring);
+    }
+    .btn-quick-apply-overload:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 18px rgba(0, 242, 254, 0.6);
+    }
+
+    /* Biomechanics Muscle Illumination Glow */
+    .heat-part.active-hover-highlight {
+      fill: #00f2fe !important;
+      filter: drop-shadow(0 0 6px #00f2fe);
+      transition: all 0.2s ease;
+    }
+
   </style>
 </head>
 <body>
@@ -11604,9 +11687,16 @@
           <button class="btn-reset-dock" onclick="confirmResetCurrentTimeline()" title="Reset current profile workout timeline back to clean Day 1 (0 XP, clean slate)">
             🔄 Reset Timeline
           </button>
+          <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 8px;">
           <label style="font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; cursor: pointer;">
-            <input type="checkbox" id="voiceCoachToggle" checked> 🔊 Audio Coach
+            <input type="checkbox" id="voiceCoachToggle" checked> 🔊 Audio Coach:
           </label>
+          <div class="coach-persona-dock" id="coachPersonaDock" title="Select AI Performance Coach Persona">
+            <button type="button" class="coach-persona-btn active" id="btnCoachMarcus" onclick="switchCoachPersona('marcus')">⚡ Marcus (Drill)</button>
+            <button type="button" class="coach-persona-btn" id="btnCoachElena" onclick="switchCoachPersona('elena')">🧬 Elena (Biomech)</button>
+            <button type="button" class="coach-persona-btn" id="btnCoachKai" onclick="switchCoachPersona('kai')">🧘 Kai (Zen)</button>
+          </div>
+        </div>
           <button class="btn-complete-day" id="btnMarkDay" onclick="toggleCurrentDayCompletion()">
             <span id="markIcon">✓</span> <span id="markText">Complete Day</span>
           </button>
@@ -22164,6 +22254,8 @@
         card.dataset.exName = (activeName || '').toLowerCase();
         card.dataset.exTarget = (activeTarget || '').toLowerCase();
         card.dataset.exMuscles = (musclesList || []).join(' ').toLowerCase();
+        card.onmouseenter = () => highlightMusclesOnModel(musclesList);
+        card.onmouseleave = () => clearMuscleHighlightsOnModel();
 
         let cuesList = '';
         for (const [title, cue] of Object.entries(activeCues)) {
@@ -24550,17 +24642,134 @@ function stopGuidedCooldown() {
 
     let modalWebcamStream = null;
 
+    
+    // ==========================================
+    // 100X AI COACH PERSONAS & BIOMECHANICS SYNC
+    // ==========================================
+    const COACH_PERSONAS = {
+      marcus: {
+        id: 'marcus',
+        name: 'Coach Marcus',
+        role: 'Tactical Drill Master',
+        pitch: 0.88,
+        rate: 1.12,
+        gender: 'male',
+        icon: '⚡',
+        phrases: {
+          setDone: "Solid reps! Don't let your guard down on rest.",
+          dayDone: "Mission conquered! That's how champions are forged.",
+          pr: "NEW PR SHATTERED! Pure unstoppable force!"
+        }
+      },
+      elena: {
+        id: 'elena',
+        name: 'Dr. Elena Rostova',
+        role: 'Olympian Biomechanist',
+        pitch: 1.15,
+        rate: 1.05,
+        gender: 'female',
+        icon: '🧬',
+        phrases: {
+          setDone: "Mechanical tension verified. Synovial recovery initiated.",
+          dayDone: "Neurological stimulus registered. Initiate protein intake.",
+          pr: "Force-velocity curve elevated! Biomechanical threshold achieved!"
+        }
+      },
+      kai: {
+        id: 'kai',
+        name: 'Sensei Kai',
+        role: 'Mindfulness & Breathwork Flow',
+        pitch: 0.95,
+        rate: 0.92,
+        gender: 'male',
+        icon: '🧘',
+        phrases: {
+          setDone: "Release tension with the breath. Center your mind.",
+          dayDone: "Discipline flows like water. Rest in deep tranquility.",
+          pr: "Mind and body in harmonic equilibrium. Extraordinary."
+        }
+      }
+    };
+
+    let activeCoachKey = localStorage.getItem('gym_coach_persona') || 'marcus';
+
+    function getActiveCoach() {
+      return COACH_PERSONAS[activeCoachKey] || COACH_PERSONAS.marcus;
+    }
+
+    function switchCoachPersona(personaKey) {
+      if (!COACH_PERSONAS[personaKey]) return;
+      activeCoachKey = personaKey;
+      try {
+        localStorage.setItem('gym_coach_persona', personaKey);
+      } catch(e) {}
+
+      document.querySelectorAll('.coach-persona-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.id === 'btnCoach' + personaKey.charAt(0).toUpperCase() + personaKey.slice(1));
+      });
+
+      const coach = getActiveCoach();
+      if (typeof showToast === 'function') {
+        showToast(coach.icon + ' ' + coach.name + ' (' + coach.role + ') locked in!');
+      }
+      speakAnnouncement(coach.name + ' ready. Let\'s execute.');
+    }
+    window.switchCoachPersona = switchCoachPersona;
+
+    // Biomechanics Anatomical Lighting on Movement Hover
+    function highlightMusclesOnModel(muscles) {
+      if (!muscles || muscles.length === 0) return;
+      const muscleClassMap = {
+        chest: ['heat-front-chest-l', 'heat-front-chest-r'],
+        quads: ['heat-front-quads-l', 'heat-front-quads-r'],
+        biceps: ['heat-front-biceps-l', 'heat-front-biceps-r'],
+        abs: ['heat-front-abs-1', 'heat-front-abs-2', 'heat-front-abs-3', 'heat-front-abs-4', 'heat-front-abs-5', 'heat-front-abs-6'],
+        obliques: ['heat-front-obliques-l', 'heat-front-obliques-r'],
+        delts: ['heat-front-delts-l', 'heat-front-delts-r', 'heat-back-delts-l', 'heat-back-delts-r'],
+        triceps: ['heat-back-triceps-l', 'heat-back-triceps-r'],
+        lats: ['heat-back-lats-l', 'heat-back-lats-r'],
+        glutes: ['heat-back-glutes-l', 'heat-back-glutes-r'],
+        hamstrings: ['heat-back-hams-l', 'heat-back-hams-r'],
+        calves: ['heat-front-calves-l', 'heat-front-calves-r', 'heat-back-calves-l', 'heat-back-calves-r'],
+        traps: ['heat-back-traps']
+      };
+
+      const mLower = muscles.map(m => m.toLowerCase());
+      Object.keys(muscleClassMap).forEach(key => {
+        if (mLower.some(m => m.includes(key))) {
+          muscleClassMap[key].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.classList.add('active-hover-highlight');
+          });
+        }
+      });
+    }
+    window.highlightMusclesOnModel = highlightMusclesOnModel;
+
+    function clearMuscleHighlightsOnModel() {
+      document.querySelectorAll('.heat-part.active-hover-highlight').forEach(el => {
+        el.classList.remove('active-hover-highlight');
+      });
+    }
+    window.clearMuscleHighlightsOnModel = clearMuscleHighlightsOnModel;
+
     function speakAnnouncement(text) {
       const toggle = document.getElementById('voiceCoachSoundLabToggle') || document.getElementById('voiceCoachToggle');
       if (toggle && !toggle.checked) return;
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
         const utter = new SpeechSynthesisUtterance(text);
-        utter.rate = voiceSettings.rate || 1.05;
-        utter.pitch = voiceSettings.pitch || 1.0;
-        if (voiceSettings.voiceURI && availableVoices.length > 0) {
-          const match = availableVoices.find(v => v.voiceURI === voiceSettings.voiceURI);
-          if (match) utter.voice = match;
+        const coach = getActiveCoach();
+        utter.rate = coach.rate || voiceSettings.rate || 1.05;
+        utter.pitch = coach.pitch || voiceSettings.pitch || 1.0;
+        if (availableVoices && availableVoices.length > 0) {
+          if (coach.gender === 'female') {
+            const femVoice = availableVoices.find(v => v.name.includes('Female') || v.name.includes('Zira') || v.name.includes('Samantha') || v.name.includes('Victoria'));
+            if (femVoice) utter.voice = femVoice;
+          } else {
+            const maleVoice = availableVoices.find(v => v.name.includes('Male') || v.name.includes('David') || v.name.includes('Daniel') || v.name.includes('Alex'));
+            if (maleVoice) utter.voice = maleVoice;
+          }
         }
 
         // Auto-duck gym music beats during coach instruction
@@ -30669,6 +30878,13 @@ const GymMusic = {
       let bassSum = 0;
       for (let i = 0; i < 8; i++) bassSum += freqData[i];
       const bassAvg = bassSum / 8;
+
+      // 100X Audio-Reactive Ambient Spatial Lighting Pulse
+      const ambientMesh = document.querySelector('.ambient-mesh-canvas');
+      if (ambientMesh && this.isPlaying) {
+        const glowOpacity = Math.min(1.0, 0.45 + (bassAvg / 255) * 0.55);
+        ambientMesh.style.opacity = String(glowOpacity);
+      }
 
       const setHud = document.getElementById('setMusicGraphicsHUD');
       const focusHud = document.getElementById('fullscreenFocusHUD');
