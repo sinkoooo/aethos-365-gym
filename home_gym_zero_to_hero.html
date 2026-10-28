@@ -9699,6 +9699,173 @@
       transform: scale(0.9) !important;
       box-shadow: 0 0 40px rgba(0, 242, 254, 0.8), inset 0 0 10px #fff;
     }
+
+    /* ========================================================
+       🏋️ 100X PRO GYM TOOL SUITE STYLES
+       ======================================================== */
+    .btn-warmup-trigger {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.45);
+      color: #fbbf24;
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s ease;
+    }
+    .btn-warmup-trigger:hover {
+      background: rgba(245, 158, 11, 0.28);
+      border-color: #f59e0b;
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.35);
+      transform: translateY(-1px);
+    }
+    .btn-apply-overload {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(56, 189, 248, 0.25) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.6);
+      color: #38bdf8;
+      font-weight: 800;
+      font-size: 0.8rem;
+      padding: 7px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 8px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-apply-overload:hover {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.4) 0%, rgba(56, 189, 248, 0.4) 100%);
+      box-shadow: 0 0 18px rgba(56, 189, 248, 0.5);
+      transform: translateY(-1px);
+      color: #fff;
+    }
+    .warmup-stage-card {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      display: grid;
+      grid-template-columns: 82px 1fr auto;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.2s ease;
+    }
+    .warmup-stage-card.primer {
+      border-color: rgba(245, 158, 11, 0.45);
+      background: rgba(245, 158, 11, 0.08);
+    }
+    .warmup-stage-card.working {
+      border-color: rgba(56, 189, 248, 0.55);
+      background: rgba(56, 189, 248, 0.1);
+    }
+    .warmup-stage-badge {
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 6px;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+    .badge-ramp-0 { background: rgba(148, 163, 184, 0.2); color: #94a3b8; }
+    .badge-ramp-50 { background: rgba(56, 189, 248, 0.2); color: #38bdf8; }
+    .badge-ramp-70 { background: rgba(168, 85, 247, 0.2); color: #c084fc; }
+    .badge-ramp-85 { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+    .badge-ramp-100 { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+    .warmup-plates-mini {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+      margin-top: 5px;
+    }
+    .mini-disc {
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 4px;
+      color: #fff;
+      display: inline-block;
+    }
+    .disc-25 { background: #ef4444; }
+    .disc-20 { background: #3b82f6; }
+    .disc-15 { background: #eab308; color: #000; }
+    .disc-10 { background: #22c55e; }
+    .disc-5  { background: #ffffff; color: #000; }
+    .disc-2-5 { background: #1e293b; border: 1px solid #64748b; }
+    .disc-1-25 { background: #94a3b8; color: #000; }
+
+    /* 1RM Matrix Table */
+    .onerm-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 6px;
+      font-size: 0.85rem;
+    }
+    .onerm-table th {
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      padding: 6px 10px;
+      text-align: left;
+    }
+    .onerm-table tr td {
+      background: rgba(15, 23, 42, 0.65);
+      padding: 10px 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .onerm-table tr td:first-child {
+      border-left: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px 0 0 8px;
+    }
+    .onerm-table tr td:last-child {
+      border-right: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 0 8px 8px 0;
+    }
+    .onerm-table tr:hover td {
+      background: rgba(22, 34, 62, 0.85);
+      border-color: rgba(56, 189, 248, 0.35);
+    }
+
+    /* Volume Landmarks & Push:Pull */
+    .landmark-group-row {
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+    }
+    .landmark-progress-track {
+      height: 9px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 99px;
+      position: relative;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+    .landmark-progress-fill {
+      height: 100%;
+      border-radius: 99px;
+      transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .push-pull-ratio-card {
+      background: linear-gradient(135deg, rgba(20, 31, 58, 0.9) 0%, rgba(13, 21, 40, 0.9) 100%);
+      border: 1.5px solid rgba(56, 189, 248, 0.35);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
   </style>
 </head>
 <body>
@@ -9846,6 +10013,29 @@
               <div>
                 <div>Weight & Body Log</div>
                 <div class="tool-item-desc">Track weight & waistline</div>
+              </div>
+            </button>
+
+            <div class="tools-group-title" style="margin-top: 4px;">🏋️ 100X Pro Gym Tools</div>
+            <button type="button" class="tool-item-row" onclick="closeHeaderToolsMenu(); openWarmupRampModal();">
+              <span class="tool-icon">🔥</span>
+              <div>
+                <div>Warm-Up Ramp Ladder</div>
+                <div class="tool-item-desc">4-tier neural primer & plates</div>
+              </div>
+            </button>
+            <button type="button" class="tool-item-row" onclick="closeHeaderToolsMenu(); openOneRmMatrixModal();">
+              <span class="tool-icon">📈</span>
+              <div>
+                <div>1RM & % Training Matrix</div>
+                <div class="tool-item-desc">Consensus 1RM & velocity zones</div>
+              </div>
+            </button>
+            <button type="button" class="tool-item-row" onclick="closeHeaderToolsMenu(); openVolumeLandmarksModal();">
+              <span class="tool-icon">⚖️</span>
+              <div>
+                <div>Volume Landmarks & Symmetry</div>
+                <div class="tool-item-desc">MEV / MAV / MRV & Push:Pull</div>
               </div>
             </button>
 
@@ -15024,6 +15214,146 @@
     </div>
   </div>
 
+  <!-- MODAL: 🔥 NEUROMUSCULAR WARM-UP RAMP & PYRAMIDAL PRIMER -->
+  <div id="warmupRampModal" class="app-modal" onclick="closeModalOnBackdrop(event, 'warmupRampModal')">
+    <div class="modal-box" style="max-width: 640px; border-color: rgba(245, 158, 11, 0.45); box-shadow: 0 0 50px rgba(245, 158, 11, 0.25);">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 1.4rem;">🔥</span>
+          <div>
+            <div style="font-size: 0.72rem; color: var(--amber); font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">Precision Injury Prevention</div>
+            <div class="modal-title" id="warmupModalTitle" style="color: #fff;">Neuromuscular Warm-Up Ramp Ladder</div>
+          </div>
+        </div>
+        <button class="modal-close" onclick="closeModal('warmupRampModal')">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 20px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+          <div>
+            <label style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 4px; font-weight: 700;">Working Weight Target (kg)</label>
+            <input type="number" id="warmupTargetWeightInput" min="0" max="400" step="2.5" value="70" oninput="calculateWarmupLadder()" style="width: 100%; background: var(--bg-surface); border: 1px solid var(--border); padding: 8px 12px; color: #fff; border-radius: 8px; font-weight: 800; font-family: 'JetBrains Mono';">
+          </div>
+          <div>
+            <label style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 4px; font-weight: 700;">Barbell Baseline (kg)</label>
+            <select id="warmupBarbellSelect" onchange="calculateWarmupLadder()" style="width: 100%; background: var(--bg-surface); border: 1px solid var(--border); padding: 8px 12px; color: #fff; border-radius: 8px; font-weight: 700;">
+              <option value="20">20 kg (Olympic Mens Bar)</option>
+              <option value="15">15 kg (Olympic Womens Bar)</option>
+              <option value="10">10 kg (Technique / EZ Bar)</option>
+              <option value="0">0 kg (Plate-Loaded / Dumbbell)</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+          <span>🎯 <strong>Warm-Up Ladder:</strong> 4 neuromuscular stages priming joint capsules &amp; CNS:</span>
+          <span id="warmupPerSideWorkingText" style="color: var(--cyan); font-weight: 800; font-family: 'JetBrains Mono';">Working: 25.0 kg / side</span>
+        </div>
+
+        <div id="warmupLadderContainer">
+          <!-- Populated dynamically by calculateWarmupLadder() -->
+        </div>
+
+        <div style="margin-top: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; background: rgba(0,0,0,0.3); padding: 10px 14px; border-radius: 8px;">
+          <span style="font-size: 0.75rem; color: #94a3b8;">⏱️ Tap any stage to launch rest timer or view plates</span>
+          <div style="display: flex; gap: 8px;">
+            <button type="button" class="btn-micro-step" onclick="syncWarmupToPlateOptimizer()" style="color: var(--cyan); border-color: rgba(56, 189, 248, 0.4); padding: 4px 10px;">
+              🏋️ Open in Plate Optimizer
+            </button>
+            <button type="button" class="btn-micro-step" onclick="closeModal('warmupRampModal'); startTimer(60);" style="color: var(--amber); border-color: rgba(245, 158, 11, 0.4); padding: 4px 10px;">
+              ⏱️ Start 60s Rest
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: 📈 MULTI-FORMULA 1RM & % TRAINING MATRIX -->
+  <div id="oneRmMatrixModal" class="app-modal" onclick="closeModalOnBackdrop(event, 'oneRmMatrixModal')">
+    <div class="modal-box" style="max-width: 680px; border-color: rgba(56, 189, 248, 0.45); box-shadow: 0 0 50px rgba(56, 189, 248, 0.25);">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 1.4rem;">📈</span>
+          <div>
+            <div style="font-size: 0.72rem; color: var(--cyan); font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">Consensus Biomechanics</div>
+            <div class="modal-title" style="color: #fff;">1RM &amp; Percentage Velocity Matrix</div>
+          </div>
+        </div>
+        <button class="modal-close" onclick="closeModal('oneRmMatrixModal')">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 20px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+          <div>
+            <label style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 4px; font-weight: 700;">Lifted Load (kg)</label>
+            <input type="number" id="oneRmLoadInput" min="1" max="400" step="2.5" value="80" oninput="calculateOneRmMatrix()" style="width: 100%; background: var(--bg-surface); border: 1px solid var(--border); padding: 8px 12px; color: #fff; border-radius: 8px; font-weight: 800; font-family: 'JetBrains Mono';">
+          </div>
+          <div>
+            <label style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 4px; font-weight: 700;">Reps Conquered (1–12)</label>
+            <input type="number" id="oneRmRepsInput" min="1" max="15" step="1" value="6" oninput="calculateOneRmMatrix()" style="width: 100%; background: var(--bg-surface); border: 1px solid var(--border); padding: 8px 12px; color: #fff; border-radius: 8px; font-weight: 800; font-family: 'JetBrains Mono';">
+          </div>
+        </div>
+
+        <div style="background: linear-gradient(135deg, rgba(20, 31, 58, 0.8) 0%, rgba(13, 21, 40, 0.9) 100%); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 12px; padding: 14px 18px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <div style="font-size: 0.72rem; color: var(--text-dim); text-transform: uppercase; font-weight: 800;">Consensus 1-Rep Max (E1RM)</div>
+            <div style="font-size: 1.8rem; font-weight: 900; color: #fff; font-family: 'JetBrains Mono';" id="oneRmConsensusDisplay">94.6 kg</div>
+            <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;" id="oneRmFormulaBreakdown">Brzycki: 93.8kg • Epley: 96.0kg • Lombardi: 94.2kg</div>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-size: 0.72rem; color: var(--text-dim); text-transform: uppercase; font-weight: 800;">Relative Strength</div>
+            <div style="font-size: 1.25rem; font-weight: 800; color: var(--cyan); font-family: 'JetBrains Mono';" id="oneRmMultiplierDisplay">1.28x BW</div>
+            <span class="badge" style="background: rgba(16, 185, 129, 0.2); color: var(--emerald); font-size: 0.7rem; font-weight: 800;" id="oneRmTierBadge">INTERMEDIATE</span>
+          </div>
+        </div>
+
+        <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 8px; font-weight: 700;">TRAINING INTENSITY VELOCITY SPECTRUM:</div>
+        <div style="max-height: 280px; overflow-y: auto;">
+          <table class="onerm-table" id="oneRmSpectrumTable">
+            <!-- Populated dynamically by calculateOneRmMatrix() -->
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: ⚖️ WEEKLY VOLUME LANDMARKS & PUSH:PULL SYMMETRY -->
+  <div id="volumeLandmarksModal" class="app-modal" onclick="closeModalOnBackdrop(event, 'volumeLandmarksModal')">
+    <div class="modal-box" style="max-width: 680px; border-color: rgba(168, 85, 247, 0.45); box-shadow: 0 0 50px rgba(168, 85, 247, 0.25);">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 1.4rem;">⚖️</span>
+          <div>
+            <div style="font-size: 0.72rem; color: var(--purple); font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">Periodization &amp; Joint Longevity</div>
+            <div class="modal-title" style="color: #fff;">Volume Landmarks &amp; Kinetic Symmetry Audit</div>
+          </div>
+        </div>
+        <button class="modal-close" onclick="closeModal('volumeLandmarksModal')">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 20px;">
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 14px;">
+          Evidence-based hypertrophy landmarks (Renaissance Periodization standard). Tracks direct weekly sets against <strong>MEV</strong> (Minimum Effective Volume), <strong>MAV</strong> (Maximum Adaptive Volume), and <strong>MRV</strong> (Maximum Recoverable Volume):
+        </p>
+
+        <!-- Push:Pull Symmetry Ratio -->
+        <div class="push-pull-ratio-card" id="pushPullRatioCard">
+          <div>
+            <div style="font-size: 0.72rem; color: var(--cyan); font-weight: 800; text-transform: uppercase;">Scapular &amp; Shoulder Symmetry</div>
+            <div style="font-size: 1.35rem; font-weight: 900; color: #fff; margin: 4px 0;" id="pushPullRatioValue">1.08x Pull:Push Ratio</div>
+            <div style="font-size: 0.78rem; color: #94a3b8;" id="pushPullRatioDiagnosis">🟢 Optimal kinetic balance. Lower risk of impingement.</div>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-size: 0.75rem; color: var(--text-muted);">Pull Sets: <strong style="color: #fff;" id="statPullSetsCount">13</strong></div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">Push Sets: <strong style="color: #fff;" id="statPushSetsCount">12</strong></div>
+          </div>
+        </div>
+
+        <div id="volumeLandmarksList">
+          <!-- Populated dynamically by calculateWeeklyVolumeLandmarks() -->
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- GLOBAL FULLSCREEN CANVAS PARTICLE & CONFETTI ENGINE -->
   <canvas id="globalFxCanvas"></canvas>
 
@@ -20191,6 +20521,8 @@
         const overloadHtml = typeof getExerciseOverloadTip === 'function' ? getExerciseOverloadTip(item, currentDay) : '';
 
         const cardPrefix = `d${currentDay}_ex${item.key}`;
+        const firstSetKey = `d${currentDay}_ex${item.key}_s1`;
+        const activeWorkingWeight = (loggedSetData[firstSetKey] && loggedSetData[firstSetKey].wt) ? loggedSetData[firstSetKey].wt : (item.targetWeight || item.defWt || 0);
         let allSetsInCardDone = true;
         for (let cs = 1; cs <= item.sets; cs++) {
           const cKey = `${cardPrefix}_s${cs}`;
@@ -20207,6 +20539,9 @@
               <span class="ex-target-pill">${activeTarget}</span>
             </div>
             <div style="display: flex; align-items: center; gap: 8px;">
+              <button type="button" class="btn-warmup-trigger" onclick="openWarmupRampForExercise('${item.key}', '${activeName.replace(/'/g, "\\'")}', '${activeWorkingWeight}')" title="Generate 4-tier neuromuscular warm-up ladder & plate loadout">
+                🔥 Warmup
+              </button>
               <button type="button" class="btn-start-set" id="cardStartBtn_${cardPrefix}" data-card-prefix="${cardPrefix}" data-total-sets="${item.sets}" data-default-reps="${item.reps}" data-default-wt="${item.targetWeight || 0}" onclick="startNextIncompleteSetInCard('${cardPrefix}', '${activeName.replace(/'/g, "\\'")}', ${item.sets}, '${item.reps}', '${item.targetWeight || 0}')" style="padding: 5px 12px; font-size: 0.78rem; ${allSetsInCardDone ? 'display: none;' : ''}" title="Start next set with on-screen music graphics">
                 ⚡ Lift Move &bull; Music Beats
               </button>
@@ -20556,7 +20891,15 @@
           speakAnnouncement("Workout complete!");
           showCelebrationBanner("🏆 WORKOUT COMPLETE!", "Incredible discipline! All sets conquered for Day " + setDay + ". Day marked complete!");
         } else {
-          startTimer(60);
+          // 100X Adaptive Rest Interval: Compound (120s), Isolation (60s), Core/Mobility (45s)
+          const lowerKey = (key || '').toLowerCase();
+          let smartRestSec = 60;
+          if (lowerKey.includes('squat') || lowerKey.includes('deadlift') || lowerKey.includes('press') || lowerKey.includes('bench') || lowerKey.includes('row') || lowerKey.includes('pullup') || lowerKey.includes('chin') || lowerKey.includes('lunge') || lowerKey.includes('dip')) {
+            smartRestSec = 120;
+          } else if (lowerKey.includes('plank') || lowerKey.includes('hold') || lowerKey.includes('crunch') || lowerKey.includes('bug') || lowerKey.includes('stretch') || lowerKey.includes('warmup')) {
+            smartRestSec = 45;
+          }
+          startTimer(smartRestSec);
         }
       } else {
         btn.classList.remove('done');
@@ -26190,7 +26533,15 @@ function stopGuidedCooldown() {
           renderHeatmapGrid();
           showCelebrationBanner("🏆 WORKOUT COMPLETE!", "All sets conquered for Day " + setDay + "!");
         } else {
-          startTimer(60);
+          // 100X Adaptive Rest Interval: Compound (120s), Isolation (60s), Core/Mobility (45s)
+          const lowerKey = (key || '').toLowerCase();
+          let smartRestSec = 60;
+          if (lowerKey.includes('squat') || lowerKey.includes('deadlift') || lowerKey.includes('press') || lowerKey.includes('bench') || lowerKey.includes('row') || lowerKey.includes('pullup') || lowerKey.includes('chin') || lowerKey.includes('lunge') || lowerKey.includes('dip')) {
+            smartRestSec = 120;
+          } else if (lowerKey.includes('plank') || lowerKey.includes('hold') || lowerKey.includes('crunch') || lowerKey.includes('bug') || lowerKey.includes('stretch') || lowerKey.includes('warmup')) {
+            smartRestSec = 45;
+          }
+          startTimer(smartRestSec);
         }
         return;
       }
@@ -27275,6 +27626,22 @@ function stopGuidedCooldown() {
       const avgRir = count > 0 ? (rirSum / count) : 2;
       const vbtSpeed = (0.15 + (avgRir * 0.16)).toFixed(2); // estimated mean velocity (0.15 to 0.65 m/s)
 
+      const firstKey = `d${day}_ex${item.key}_s1`;
+      const currWt = parseFloat(loggedSetData[firstKey] ? loggedSetData[firstKey].wt : (item.targetWeight || item.defWt || 0)) || 0;
+      const currReps = (loggedSetData[firstKey] ? loggedSetData[firstKey].reps : item.reps) || '10';
+
+      const isLower = item.key.includes('squat') || item.key.includes('deadlift') || item.key.includes('lunge') || item.key.includes('bridge') || item.key.includes('thrust');
+      const incKg = currWt === 0 ? 0 : (isLower ? (avgRir >= 2.5 ? 5 : 2.5) : (avgRir >= 2.5 ? 2.5 : 1.25));
+      const nextWt = currWt + incKg;
+      let nextReps = currReps;
+      if (currWt === 0) {
+        const numR = parseInt(currReps, 10);
+        if (!isNaN(numR)) nextReps = String(numR + 1) + ' reps';
+      }
+
+      const overloadReg = JSON.parse(localStorage.getItem(getProfileKey('gym_overload_registry')) || '{}');
+      const alreadyApplied = overloadReg[item.key] && overloadReg[item.key].appliedFromDay === day;
+
       if (avgRir >= 2) {
         return `
           <div class="overload-banner ready">
@@ -27282,7 +27649,17 @@ function stopGuidedCooldown() {
               <span>🚀 <strong>Progressive Overload Triggered</strong></span>
               <span class="vbt-velocity-tag" style="background: rgba(16,185,129,0.3); color: #34d399;">Mean Vel: ~${vbtSpeed} m/s</span>
             </div>
-            You conquered all ${item.sets} sets with an average ${avgRir.toFixed(1)} RIR! Autoregulation Engine recommends <strong>increasing load by +1–2.5 kg</strong> or adding +1 rep next session.
+            <div>
+              You conquered all ${item.sets} sets with an average ${avgRir.toFixed(1)} RIR! Autoregulation Engine recommends <strong>increasing load by +${incKg || 1} ${currWt === 0 ? 'rep' : 'kg'}</strong> (${currWt === 0 ? 'bodyweight rep progression' : `${currWt}kg → ${nextWt}kg`}) for your next session.
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-top: 8px;">
+              <button type="button" class="btn-apply-overload" ${alreadyApplied ? 'disabled style="opacity: 0.6; cursor: default;"' : ''} onclick="applyOverloadToUpcomingDay('${item.key}', ${nextWt}, '${nextReps}', ${day})">
+                ${alreadyApplied ? '✓ Overload Scheduled for Day ' + overloadReg[item.key].targetDay : '⚡ Auto-Apply Overload to Next Session (' + (currWt === 0 ? '+1 rep' : `+${incKg}kg`) + ')'}
+              </button>
+              <button type="button" class="btn-warmup-trigger" onclick="openOneRmMatrixModal(${currWt || 50}, ${parseInt(currReps, 10) || 10})" style="margin: 0;">
+                📈 View 1RM Spectrum
+              </button>
+            </div>
           </div>
         `;
       } else if (avgRir <= 0.5) {
@@ -32201,6 +32578,471 @@ if (typeof window !== 'undefined') {
       window.resetTapRepCounter = resetTapRepCounter;
       window.logRepsFromClicker = logRepsFromClicker;
       window.testBossAttack = testBossAttack;
+
+      // ==========================================
+      // 🏋️ 100X PRO GYM TOOL SUITE ENGINE
+      // ==========================================
+
+      // 1. NEUROMUSCULAR WARM-UP RAMP & PYRAMIDAL PRIMER
+      function openWarmupRampModal(defaultWt, exName) {
+        const input = document.getElementById('warmupTargetWeightInput');
+        const title = document.getElementById('warmupModalTitle');
+        if (input && defaultWt !== undefined) {
+          input.value = parseFloat(defaultWt) || 70;
+        }
+        if (title) {
+          title.innerHTML = exName ? `🔥 ${exName}: Warm-Up Ramp` : `Neuromuscular Warm-Up Ramp Ladder`;
+        }
+        calculateWarmupLadder();
+        openModal('warmupRampModal');
+      }
+      window.openWarmupRampModal = openWarmupRampModal;
+
+      function openWarmupRampForExercise(exKey, exName, targetWt) {
+        const wt = parseFloat(targetWt) || 60;
+        openWarmupRampModal(wt, exName);
+      }
+      window.openWarmupRampForExercise = openWarmupRampForExercise;
+
+      function getPlateBreakdownMini(perSide) {
+        if (perSide <= 0) return '<span style="color: var(--text-dim); font-size: 0.72rem;">Empty Sleeve</span>';
+        const denoms = [
+          { wt: 25, cls: 'disc-25' },
+          { wt: 20, cls: 'disc-20' },
+          { wt: 15, cls: 'disc-15' },
+          { wt: 10, cls: 'disc-10' },
+          { wt: 5,  cls: 'disc-5' },
+          { wt: 2.5, cls: 'disc-2-5' },
+          { wt: 1.25, cls: 'disc-1-25' }
+        ];
+        let rem = perSide;
+        const discs = [];
+        for (const d of denoms) {
+          while (rem >= d.wt - 0.001) {
+            discs.push(`<span class="mini-disc ${d.cls}">${d.wt}k</span>`);
+            rem = Math.round((rem - d.wt) * 100) / 100;
+          }
+        }
+        return discs.join(' ');
+      }
+
+      function calculateWarmupLadder() {
+        const input = document.getElementById('warmupTargetWeightInput');
+        const barSelect = document.getElementById('warmupBarbellSelect');
+        const container = document.getElementById('warmupLadderContainer');
+        const workingLabel = document.getElementById('warmupPerSideWorkingText');
+        if (!input || !container) return;
+
+        const target = Math.max(0, parseFloat(input.value) || 0);
+        const bar = parseFloat(barSelect ? barSelect.value : 20) || 0;
+
+        const workingPerSide = Math.max(0, (target - bar) / 2);
+        if (workingLabel) {
+          workingLabel.innerText = `Working Load: ${workingPerSide.toFixed(1)} kg / side`;
+        }
+
+        function roundToBarOrPlate(w) {
+          if (w <= bar) return bar;
+          return Math.round(w / 2.5) * 2.5;
+        }
+
+        const w50 = roundToBarOrPlate(bar + (target - bar) * 0.50);
+        const w70 = roundToBarOrPlate(bar + (target - bar) * 0.70);
+        const w85 = roundToBarOrPlate(bar + (target - bar) * 0.85);
+
+        const stages = [
+          {
+            stageNum: 1,
+            pct: '0%',
+            label: 'Stage 1: Lubrication',
+            badgeCls: 'badge-ramp-0',
+            reps: '10 reps',
+            wt: bar,
+            rest: '45s',
+            note: 'Bar only • Synovial fluid secretion & grooving neuromuscular trajectory.'
+          },
+          {
+            stageNum: 2,
+            pct: '50%',
+            label: 'Stage 2: Recruitment',
+            badgeCls: 'badge-ramp-50',
+            reps: '5 reps',
+            wt: w50,
+            rest: '60s',
+            note: 'Low-threshold motor unit recruitment & deep muscle belly blood flow.'
+          },
+          {
+            stageNum: 3,
+            pct: '70%',
+            label: 'Stage 3: Activation',
+            badgeCls: 'badge-ramp-70',
+            reps: '3 reps',
+            wt: w70,
+            rest: '75s',
+            note: 'High-threshold Type IIx fiber firing without producing lactic buildup.'
+          },
+          {
+            stageNum: 4,
+            pct: '85%',
+            label: 'Stage 4: Primer (PAP)',
+            badgeCls: 'badge-ramp-85',
+            reps: '1 rep',
+            wt: w85,
+            rest: '90s',
+            note: 'Post-Activation Potentiation • Wakes CNS up to heavy load perception.'
+          },
+          {
+            stageNum: 5,
+            pct: '100%',
+            label: 'Working Sets',
+            badgeCls: 'badge-ramp-100',
+            reps: 'Prescribed',
+            wt: target,
+            rest: '120s',
+            note: 'Full mechanical tension & hypertrophic stimulus.'
+          }
+        ];
+
+        container.innerHTML = stages.map(st => {
+          const perSide = Math.max(0, (st.wt - bar) / 2);
+          const platesHtml = getPlateBreakdownMini(perSide);
+          const isWorking = st.pct === '100%';
+          const isPrimer = st.pct === '85%';
+          const cardClass = isWorking ? 'warmup-stage-card working' : isPrimer ? 'warmup-stage-card primer' : 'warmup-stage-card';
+
+          return `
+            <div class="${cardClass}">
+              <div style="text-align: center;">
+                <span class="warmup-stage-badge ${st.badgeCls}">${st.pct}</span>
+                <div style="font-size: 1.15rem; font-weight: 900; color: #fff; font-family: 'JetBrains Mono'; margin-top: 3px;">${st.wt}kg</div>
+              </div>
+              <div>
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                  <strong style="color: #fff; font-size: 0.85rem;">${st.label}</strong>
+                  <span style="font-size: 0.75rem; color: var(--cyan); font-weight: 700;">${st.reps} • Rest ${st.rest}</span>
+                </div>
+                <div style="font-size: 0.74rem; color: var(--text-muted); margin-top: 2px;">${st.note}</div>
+                <div class="warmup-plates-mini">
+                  <span style="font-size: 0.68rem; color: var(--text-dim); margin-right: 4px;">Per Side (${perSide.toFixed(1)}kg):</span>
+                  ${platesHtml}
+                </div>
+              </div>
+              <div>
+                <button type="button" class="btn-micro-step" onclick="closeModal('warmupRampModal'); startTimer(${parseInt(st.rest, 10)});" title="Start ${st.rest} rest timer">
+                  ⏱️ ${st.rest}
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+      window.calculateWarmupLadder = calculateWarmupLadder;
+
+      function syncWarmupToPlateOptimizer() {
+        const input = document.getElementById('warmupTargetWeightInput');
+        const barSelect = document.getElementById('warmupBarbellSelect');
+        const target = input ? parseFloat(input.value) || 60 : 60;
+        const bar = barSelect ? barSelect.value : '20';
+
+        closeModal('warmupRampModal');
+        switchView('analyticsView');
+
+        const plateInput = document.getElementById('plateTargetWeightInput');
+        const plateBar = document.getElementById('plateBarbellType');
+        if (plateInput) plateInput.value = target;
+        if (plateBar) plateBar.value = bar;
+
+        if (typeof calculatePlateLoading === 'function') calculatePlateLoading();
+
+        const calcBox = document.getElementById('plateCalcBox');
+        if (calcBox) {
+          calcBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+      window.syncWarmupToPlateOptimizer = syncWarmupToPlateOptimizer;
+
+      // 2. CONSENSUS 1RM & PERCENTAGE VELOCITY MATRIX
+      function openOneRmMatrixModal(defaultWt, defaultReps) {
+        const loadIn = document.getElementById('oneRmLoadInput');
+        const repsIn = document.getElementById('oneRmRepsInput');
+        if (loadIn && defaultWt !== undefined) loadIn.value = parseFloat(defaultWt) || 80;
+        if (repsIn && defaultReps !== undefined) repsIn.value = parseInt(defaultReps, 10) || 6;
+        calculateOneRmMatrix();
+        openModal('oneRmMatrixModal');
+      }
+      window.openOneRmMatrixModal = openOneRmMatrixModal;
+
+      function calculateOneRmMatrix() {
+        const loadIn = document.getElementById('oneRmLoadInput');
+        const repsIn = document.getElementById('oneRmRepsInput');
+        const consensusDisplay = document.getElementById('oneRmConsensusDisplay');
+        const formulaBreakdown = document.getElementById('oneRmFormulaBreakdown');
+        const multDisplay = document.getElementById('oneRmMultiplierDisplay');
+        const tierBadge = document.getElementById('oneRmTierBadge');
+        const table = document.getElementById('oneRmSpectrumTable');
+
+        if (!loadIn || !repsIn || !table) return;
+
+        const wt = Math.max(1, parseFloat(loadIn.value) || 80);
+        const reps = Math.max(1, Math.min(15, parseInt(repsIn.value, 10) || 6));
+
+        // Formulas
+        let brzycki = wt / (1.0278 - 0.0278 * reps);
+        let epley = wt * (1 + reps / 30);
+        let lombardi = wt * Math.pow(reps, 0.10);
+
+        if (reps === 1) {
+          brzycki = wt; epley = wt; lombardi = wt;
+        }
+
+        const consensus = Math.round((0.45 * brzycki + 0.40 * epley + 0.15 * lombardi) * 10) / 10;
+
+        if (consensusDisplay) consensusDisplay.innerText = `${consensus.toFixed(1)} kg`;
+        if (formulaBreakdown) {
+          formulaBreakdown.innerText = `Brzycki: ${brzycki.toFixed(1)}kg • Epley: ${epley.toFixed(1)}kg • Lombardi: ${lombardi.toFixed(1)}kg`;
+        }
+
+        const bodyweight = (currentUser && currentUser.targetWeight) ? currentUser.targetWeight : 74;
+        const mult = (consensus / bodyweight).toFixed(2);
+        if (multDisplay) multDisplay.innerText = `${mult}x BW`;
+
+        if (tierBadge) {
+          if (mult >= 2.0) { tierBadge.innerText = 'ELITE TITAN'; tierBadge.style.color = '#c084fc'; }
+          else if (mult >= 1.5) { tierBadge.innerText = 'ADVANCED'; tierBadge.style.color = '#38bdf8'; }
+          else if (mult >= 1.15) { tierBadge.innerText = 'INTERMEDIATE'; tierBadge.style.color = '#34d399'; }
+          else { tierBadge.innerText = 'NOVICE RECRUIT'; tierBadge.style.color = '#fbbf24'; }
+        }
+
+        const tiers = [
+          { pct: 95, reps: '1–2 reps', intent: 'Maximal Neural Output (Speed < 0.25 m/s)', cls: 'color: #f43f5e;' },
+          { pct: 90, reps: '3–4 reps', intent: 'Heavy Mechanical Tension (Strength Peak)', cls: 'color: #fb923c;' },
+          { pct: 85, reps: '5–6 reps', intent: 'Power Hypertrophy Optimal Pocket', cls: 'color: #fbbf24;' },
+          { pct: 80, reps: '7–8 reps', intent: 'Hypertrophic Core Volume (0.45 m/s)', cls: 'color: #34d399;' },
+          { pct: 75, reps: '9–10 reps', intent: 'Volume Accretion & Work Capacity', cls: 'color: #38bdf8;' },
+          { pct: 70, reps: '11–12 reps', intent: 'Metabolic Stress & Capillarization', cls: 'color: #818cf8;' },
+          { pct: 65, reps: '13–15 reps', intent: 'Muscular Endurance & Glycogen Depletion', cls: 'color: #c084fc;' }
+        ];
+
+        table.innerHTML = `
+          <thead>
+            <tr>
+              <th>Intensity</th>
+              <th>Calculated Load</th>
+              <th>Rep Bracket</th>
+              <th>Adaptation Intent</th>
+              <th style="text-align: right;">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${tiers.map(t => {
+              const tierWt = Math.round((consensus * (t.pct / 100)) / 2.5) * 2.5;
+              return `
+                <tr>
+                  <td><strong style="${t.cls}">${t.pct}%</strong></td>
+                  <td><strong style="color: #fff; font-family: 'JetBrains Mono'; font-size: 0.95rem;">${tierWt} kg</strong></td>
+                  <td style="color: var(--cyan);">${t.reps}</td>
+                  <td style="color: var(--text-muted); font-size: 0.78rem;">${t.intent}</td>
+                  <td style="text-align: right;">
+                    <button type="button" class="btn-micro-step" onclick="syncOneRmToBarbell(${tierWt})" title="Load ${tierWt}kg onto Barbell Visualizer">
+                      🏋️ Load
+                    </button>
+                  </td>
+                </tr>
+              `;
+            }).join('')}
+          </tbody>
+        `;
+      }
+      window.calculateOneRmMatrix = calculateOneRmMatrix;
+
+      function syncOneRmToBarbell(weight) {
+        closeModal('oneRmMatrixModal');
+        switchView('analyticsView');
+
+        const plateInput = document.getElementById('plateTargetWeightInput');
+        if (plateInput) plateInput.value = weight;
+        if (typeof calculatePlateLoading === 'function') calculatePlateLoading();
+
+        const calcBox = document.getElementById('plateCalcBox');
+        if (calcBox) calcBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        showToast(`🏋️ Loaded ${weight} kg into Barbell Plate Optimizer!`);
+      }
+      window.syncOneRmToBarbell = syncOneRmToBarbell;
+
+      // 3. WEEKLY VOLUME LANDMARKS & PUSH:PULL KINETIC BALANCE
+      function openVolumeLandmarksModal() {
+        calculateWeeklyVolumeLandmarks();
+        openModal('volumeLandmarksModal');
+      }
+      window.openVolumeLandmarksModal = openVolumeLandmarksModal;
+
+      function calculateWeeklyVolumeLandmarks() {
+        const container = document.getElementById('volumeLandmarksList');
+        const ratioValue = document.getElementById('pushPullRatioValue');
+        const ratioDiag = document.getElementById('pushPullRatioDiagnosis');
+        const statPull = document.getElementById('statPullSetsCount');
+        const statPush = document.getElementById('statPushSetsCount');
+        if (!container) return;
+
+        // Group sets into 6 muscle zones for the current 7-day microcycle
+        const weekStart = Math.max(1, currentDay - ((currentDay - 1) % 7));
+        const weekEnd = Math.min(365, weekStart + 6);
+
+        const zoneCounts = {
+          chest: 0,
+          back: 0,
+          quads: 0,
+          hamstrings: 0,
+          shoulders: 0,
+          arms_core: 0
+        };
+
+        for (let d = weekStart; d <= weekEnd; d++) {
+          const plan = getDayPlan(d);
+          if (!plan || !plan.exercises) continue;
+
+          plan.exercises.forEach(ex => {
+            for (let s = 1; s <= ex.sets; s++) {
+              const k = `d${d}_ex${ex.key}_s${s}`;
+              if (loggedSetData[k] && loggedSetData[k].done) {
+                const keyLow = ex.key.toLowerCase();
+                if (keyLow.includes('pushup') || keyLow.includes('bench') || keyLow.includes('dip') || keyLow.includes('chest')) {
+                  zoneCounts.chest++;
+                } else if (keyLow.includes('pullup') || keyLow.includes('chin') || keyLow.includes('row') || keyLow.includes('lat')) {
+                  zoneCounts.back++;
+                } else if (keyLow.includes('squat') || keyLow.includes('lunge') || keyLow.includes('step_up')) {
+                  zoneCounts.quads++;
+                } else if (keyLow.includes('deadlift') || keyLow.includes('bridge') || keyLow.includes('thrust') || keyLow.includes('rdl') || keyLow.includes('hinge')) {
+                  zoneCounts.hamstrings++;
+                } else if (keyLow.includes('overhead') || keyLow.includes('pike') || keyLow.includes('lateral') || keyLow.includes('shoulder')) {
+                  zoneCounts.shoulders++;
+                } else {
+                  zoneCounts.arms_core++;
+                }
+              }
+            }
+          });
+        }
+
+        // Compute Push:Pull
+        const pushSets = zoneCounts.chest + zoneCounts.shoulders;
+        const pullSets = zoneCounts.back;
+        const ratio = pushSets > 0 ? (pullSets / pushSets).toFixed(2) : (pullSets > 0 ? '2.0' : '1.0');
+
+        if (statPull) statPull.innerText = `${pullSets} sets`;
+        if (statPush) statPush.innerText = `${pushSets} sets`;
+        if (ratioValue) ratioValue.innerText = `${ratio}x Pull:Push Ratio`;
+
+        if (ratioDiag) {
+          if (parseFloat(ratio) < 0.8) {
+            ratioDiag.innerHTML = `<span style="color: var(--rose);">⚠️ Excessive Pressing detected. Add +2–4 sets of Horizontal Rows or Face Pulls to prevent shoulder impingement.</span>`;
+          } else if (parseFloat(ratio) <= 1.3) {
+            ratioDiag.innerHTML = `<span style="color: var(--emerald);">🟢 Optimal Scapular Symmetry. Balanced anterior/posterior deltoid forces.</span>`;
+          } else {
+            ratioDiag.innerHTML = `<span style="color: var(--cyan);">🛡️ Pull-Dominant Armor. Exceptional upper back stability and posture reinforcement.</span>`;
+          }
+        }
+
+        const landmarkDefs = [
+          { zone: 'Chest (Horizontal Push)', sets: zoneCounts.chest, mev: 8, mav: 14, mrv: 20, color: '#38bdf8' },
+          { zone: 'Back & Lats (Pulling Engine)', sets: zoneCounts.back, mev: 10, mav: 16, mrv: 22, color: '#10b981' },
+          { zone: 'Quadriceps (Knee Dominant)', sets: zoneCounts.quads, mev: 8, mav: 14, mrv: 18, color: '#fbbf24' },
+          { zone: 'Hamstrings & Posterior Chain', sets: zoneCounts.hamstrings, mev: 6, mav: 12, mrv: 16, color: '#a855f7' },
+          { zone: 'Deltoids & Vertical Press', sets: zoneCounts.shoulders, mev: 6, mav: 12, mrv: 18, color: '#f43f5e' },
+          { zone: 'Arms & Trunk Stabilizers', sets: zoneCounts.arms_core, mev: 6, mav: 14, mrv: 20, color: '#06b6d4' }
+        ];
+
+        container.innerHTML = landmarkDefs.map(def => {
+          const pctOfMrv = Math.min(100, Math.round((def.sets / def.mrv) * 100));
+          let statusBadge = '';
+          if (def.sets < def.mev) {
+            statusBadge = `<span class="badge" style="background: rgba(148,163,184,0.2); color: #94a3b8;">Below MEV (${def.sets}/${def.mev})</span>`;
+          } else if (def.sets <= def.mav) {
+            statusBadge = `<span class="badge" style="background: rgba(16,185,129,0.2); color: var(--emerald);">MAV Optimal (${def.sets} sets)</span>`;
+          } else if (def.sets <= def.mrv) {
+            statusBadge = `<span class="badge" style="background: rgba(245,158,11,0.2); color: var(--amber);">High Volume (${def.sets} sets)</span>`;
+          } else {
+            statusBadge = `<span class="badge" style="background: rgba(244,63,94,0.2); color: var(--rose);">Exceeding MRV (${def.sets} sets)</span>`;
+          }
+
+          return `
+            <div class="landmark-group-row">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <strong style="color: #fff; font-size: 0.85rem;">${def.zone}</strong>
+                  <div style="font-size: 0.72rem; color: var(--text-dim); margin-top: 1px;">
+                    MEV: ${def.mev}s &bull; MAV: ${def.mav}s &bull; MRV: ${def.mrv}s / week
+                  </div>
+                </div>
+                <div>${statusBadge}</div>
+              </div>
+              <div class="landmark-progress-track">
+                <div class="landmark-progress-fill" style="width: ${pctOfMrv}%; background: ${def.color};"></div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+      window.calculateWeeklyVolumeLandmarks = calculateWeeklyVolumeLandmarks;
+
+      // 4. AUTOMATED PROGRESSIVE OVERLOAD DISPATCHER
+      function applyOverloadToUpcomingDay(exKey, newWt, newReps, fromDay) {
+        fromDay = parseInt(fromDay, 10) || currentDay;
+        let targetFoundDay = null;
+
+        for (let d = fromDay + 1; d <= 365; d++) {
+          const plan = getDayPlan(d);
+          if (plan && plan.exercises && plan.exercises.some(e => e.key === exKey)) {
+            targetFoundDay = d;
+            const exItem = plan.exercises.find(e => e.key === exKey);
+            for (let s = 1; s <= exItem.sets; s++) {
+              const futureKey = `d${d}_ex${exKey}_s${s}`;
+              if (!loggedSetData[futureKey]) {
+                loggedSetData[futureKey] = {
+                  wt: String(newWt),
+                  reps: String(newReps || exItem.reps),
+                  done: false,
+                  userCustom: true
+                };
+              } else {
+                loggedSetData[futureKey].wt = String(newWt);
+                if (newReps) loggedSetData[futureKey].reps = String(newReps);
+                loggedSetData[futureKey].userCustom = true;
+              }
+            }
+            break;
+          }
+        }
+
+        if (targetFoundDay) {
+          localStorage.setItem(getProfileKey('gym_set_logs'), JSON.stringify(loggedSetData));
+
+          const overloadReg = JSON.parse(localStorage.getItem(getProfileKey('gym_overload_registry')) || '{}');
+          overloadReg[exKey] = {
+            targetWeight: newWt,
+            targetReps: newReps,
+            appliedFromDay: fromDay,
+            targetDay: targetFoundDay,
+            timestamp: new Date().toISOString()
+          };
+          localStorage.setItem(getProfileKey('gym_overload_registry'), JSON.stringify(overloadReg));
+
+          if (typeof SoundFX !== 'undefined' && SoundFX.playFanfare) {
+            SoundFX.playFanfare();
+          } else {
+            playAudioTone(659.25, 'triangle', 0.3);
+          }
+          if (typeof CanvasFX !== 'undefined' && CanvasFX.confetti) {
+            CanvasFX.confetti({ count: 100 });
+          }
+
+          showToast(`🚀 Progressive Overload Locked: Day ${targetFoundDay} pre-configured for ${newWt} kg!`);
+          renderActiveDay(currentDay, false);
+        } else {
+          showToast(`⚡ Overload recorded: +${newWt} kg for upcoming cycles!`);
+        }
+      }
+      window.applyOverloadToUpcomingDay = applyOverloadToUpcomingDay;
 
       // Guarantee pill click responsiveness
       const userPillEl = document.getElementById('headerUserPill');
