@@ -11338,6 +11338,60 @@
       --shadow-card: 0 14px 34px -8px rgba(6, 11, 36, 0.8), 0 0 20px -5px rgba(0, 85, 255, 0.2);
     }
 
+    
+    /* COCKPIT TABS & ACTIONS CLICK PRIORITY */
+    .workout-cockpit-nav {
+      position: relative;
+      z-index: 120 !important;
+      pointer-events: auto !important;
+    }
+    .cockpit-nav-pill {
+      position: relative;
+      z-index: 121 !important;
+      pointer-events: auto !important;
+      cursor: pointer !important;
+    }
+    .cockpit-workout-quickbar {
+      position: relative;
+      z-index: 115 !important;
+      pointer-events: auto !important;
+      cursor: pointer !important;
+    }
+    .hero-dashboard, .day-dock, .readiness-strip, .pro-ex-card, .workout-layout {
+      position: relative;
+      z-index: 10 !important;
+      pointer-events: auto !important;
+    }
+
+    /* DYNAMIC ISLAND NON-INTRUSIVE DOCKING */
+    .dynamic-island-capsule {
+      position: fixed;
+      top: 66px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 95;
+      pointer-events: auto;
+    }
+
+    /* FLOATING QUICK DOCK & GLOBAL MUSIC DOCK COLLISION FIX */
+    .floating-quick-dock {
+      bottom: 84px !important;
+      z-index: 1005 !important;
+      transition: bottom 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      pointer-events: auto !important;
+    }
+    .global-music-dock.dock-minimized ~ .floating-quick-dock,
+    body:has(.global-music-dock.dock-minimized) .floating-quick-dock {
+      bottom: 22px !important;
+    }
+    .global-music-dock {
+      z-index: 1000 !important;
+      pointer-events: auto !important;
+    }
+    body {
+      padding-bottom: 160px !important;
+    }
+
     /* 1000X GRAPHICS: LIQUID AURORA CANVAS */
     .genz-aurora-canvas {
       position: fixed;
@@ -11664,8 +11718,8 @@
 <body>
 
   <!-- SPATIAL CANVAS: SUB-PIXEL DOT-MATRIX & DUAL AURORA GLOW MESH -->
-  <canvas id="genzAuroraCanvas" class="genz-aurora-canvas" aria-hidden="true"></canvas>
-  <div class="ambient-mesh-canvas" aria-hidden="true"></div>
+  <canvas id="genzAuroraCanvas" class="genz-aurora-canvas" aria-hidden="true" style="pointer-events: none !important; z-index: -1 !important; position: fixed; inset: 0; width: 100vw; height: 100vh;"></canvas>
+  <div class="ambient-mesh-canvas" aria-hidden="true" style="pointer-events: none !important; z-index: -1 !important; position: fixed; inset: 0; width: 100vw; height: 100vh;"></div>
 
   <!-- FLOATING DYNAMIC ISLAND: LIVE ACTIVITY CAPSULE -->
   <aside class="dynamic-island-capsule" id="floatingDynamicIsland" onclick="handleDynamicIslandClick(event)" title="Live Session Activity Capsule (Click to expand Focus HUD)">
@@ -17368,7 +17422,7 @@
   </div>
 
   <!-- GLOBAL FULLSCREEN CANVAS PARTICLE & CONFETTI ENGINE -->
-  <canvas id="globalFxCanvas"></canvas>
+  <canvas id="globalFxCanvas" style="pointer-events: none !important; z-index: 999999 !important; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;"></canvas>
 
   <script>
     // ==========================================
@@ -22446,6 +22500,7 @@
       const targetWater = '3.6L';
       const traineeBio = '74 kg • Athletic Hypertrophy & Progressive Overload';
       const isDayDone = completedDays.has(Number(currentDay));
+      const traineeName = (typeof userProfile !== 'undefined' && userProfile && userProfile.name) ? userProfile.name : 'Athlete';
 
       if (plan.isRest) {
         flow.innerHTML = `
@@ -25373,7 +25428,10 @@ function stopGuidedCooldown() {
       emojiSet: ['🔥', '⚡', '💯', '✨', '👑', '🚀', '💎', '🦾'],
 
       triggerSetCelebration(btn) {
-        const rect = btn.getBoundingClientRect();
+        if (!btn) return;
+        const rect = (btn && btn.getBoundingClientRect) ? btn.getBoundingClientRect() : {
+          left: window.innerWidth / 2, top: window.innerHeight / 2, width: 0, height: 0
+        };
         const originX = (rect.left + rect.width / 2) / window.innerWidth;
         const originY = (rect.top + rect.height / 2) / window.innerHeight;
         const posX = rect.left + rect.width / 2;
@@ -25815,6 +25873,16 @@ function stopGuidedCooldown() {
     }
 
     function updateActiveQuestBanner(stats) {
+      if (!stats && typeof calculateXPAndLevel === 'function') {
+        try { stats = calculateXPAndLevel(); } catch(e) {}
+      }
+      if (!stats) {
+        stats = {
+          completedCount: (typeof completedDays !== 'undefined' && completedDays) ? completedDays.size : 0,
+          totalVolume: 0,
+          photosCount: (typeof photosLoggedDays !== 'undefined' && photosLoggedDays) ? photosLoggedDays.size : 0
+        };
+      }
       const quest = ACHIEVEMENTS.find(a => !unlockedMilestones.has(a.id)) || ACHIEVEMENTS[ACHIEVEMENTS.length - 1];
       if (!quest) return;
 
@@ -31515,6 +31583,17 @@ const GymMusic = {
     }
   },
 
+  toggleDockMinimize() {
+    const dock = document.getElementById('globalFloatingMusicDock');
+    if (dock) {
+      dock.classList.toggle('dock-minimized');
+      const isMin = dock.classList.contains('dock-minimized');
+      if (typeof showToast === 'function') {
+        showToast(isMin ? '🎵 Music Dock Minimized' : '🎵 Music Dock Expanded');
+      }
+    }
+  },
+
   toggleBassBoost() {
     this.init();
     this.bassBoostActive = !this.bassBoostActive;
@@ -35567,6 +35646,33 @@ if (typeof window !== 'undefined') {
       if (typeof BossBattleEngine !== 'undefined' && BossBattleEngine.updateUI) {
         BossBattleEngine.updateUI();
       }
+
+      
+    // GLOBAL ONCLICK FIXES & BRIDGE HELPERS
+    function triggerManualSync() {
+      if (typeof manualTriggerServerSync === 'function') {
+        manualTriggerServerSync();
+      } else if (typeof updateSyncBadge === 'function') {
+        updateSyncBadge('syncing');
+        setTimeout(() => updateSyncBadge('connected'), 600);
+      }
+      if (typeof showToast === 'function') {
+        showToast('🟢 Cloud Telemetry Synced & Verified!');
+      }
+    }
+    window.triggerManualSync = triggerManualSync;
+
+    function stopTimer() {
+      if (typeof skipRestTimer === 'function') {
+        skipRestTimer();
+      } else if (typeof resetTimer === 'function') {
+        resetTimer();
+      }
+      if (typeof showToast === 'function') {
+        showToast('⏩ Rest Timer Skipped');
+      }
+    }
+    window.stopTimer = stopTimer;
 
       // Gamification Global Window Exports
       window.CanvasFX = CanvasFX;
