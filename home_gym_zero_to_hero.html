@@ -15942,6 +15942,8 @@
               <button type="button" class="vis-mode-btn" data-mode="cyber_hex" onclick="GymMusic.setVisualizerMode('cyber_hex')">🛑 Hex</button>
               <button type="button" class="vis-mode-btn" data-mode="particles" onclick="GymMusic.setVisualizerMode('particles')">✨ Particles</button>
               <button type="button" class="vis-mode-btn" data-mode="cyber_tunnel" onclick="GymMusic.setVisualizerMode('cyber_tunnel')">🚀 Tunnel</button>
+              <button type="button" class="vis-mode-btn" data-mode="chroma_vortex" onclick="GymMusic.setVisualizerMode('chroma_vortex')">🌪️ Vortex</button>
+              <button type="button" class="vis-mode-btn" data-mode="laser_prism" onclick="GymMusic.setVisualizerMode('laser_prism')">⚡ Lasers</button>
               <button type="button" class="vis-mode-btn" onclick="GymMusic.toggleStageExpanded()" title="Toggle Expanded Stage View">⛶</button>
             </div>
           </div>
@@ -17090,6 +17092,10 @@
         <button type="button" class="vis-mode-btn" data-hudmode="orbit" onclick="GymMusic.setVisualizerMode('orbit')" title="Cyber Pulse Orbit" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">ORBIT</button>
         <button type="button" class="vis-mode-btn" data-hudmode="matrix" onclick="GymMusic.setVisualizerMode('matrix')" title="Sub-Bass Matrix Pillars" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">MATRIX</button>
         <button type="button" class="vis-mode-btn" data-hudmode="cyber_hex" onclick="GymMusic.setVisualizerMode('cyber_hex')" title="Cyber Hexagonal Portal" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">HEX</button>
+        <button type="button" class="vis-mode-btn" data-hudmode="particles" onclick="GymMusic.setVisualizerMode('particles')" title="Quantum Particles" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">PARTICLES</button>
+        <button type="button" class="vis-mode-btn" data-hudmode="cyber_tunnel" onclick="GymMusic.setVisualizerMode('cyber_tunnel')" title="3D Tunnel" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">TUNNEL</button>
+        <button type="button" class="vis-mode-btn" data-hudmode="chroma_vortex" onclick="GymMusic.setVisualizerMode('chroma_vortex')" title="Chroma Vortex" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">VORTEX</button>
+        <button type="button" class="vis-mode-btn" data-hudmode="laser_prism" onclick="GymMusic.setVisualizerMode('laser_prism')" title="Concert Lasers" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">LASERS</button>
         <button type="button" class="btn-micro-step" onclick="toggleSetHudCadence()" id="btnSetHudTempoToggle" title="Toggle Cadence Metronome & Audio Ticks (Hotkey: T)" style="padding: 2px 7px; font-size: 0.65rem; font-weight: 800; border-radius: 5px; color: #f43f5e; border-color: rgba(244, 63, 94, 0.4); background: rgba(244, 63, 94, 0.12);">⏹ TEMPO &amp; TICKS</button>
         <button type="button" class="btn-micro-step" onclick="cycleSetHudTempoRate()" id="btnSetHudTempoSpeed" title="Rep Tempo Cadence (Brisk 2.4s / Dynamic 3.0s / Control 3.9s)" style="padding: 2px 6px; font-size: 0.65rem; font-weight: 800; border-radius: 5px; color: var(--amber);">⚡ 2.4s TEMPO</button>
         <button type="button" class="btn-micro-step" onclick="GymMusic.toggleBassBoost()" id="btnSetHudBass" title="Toggle Bass Boost" style="padding: 2px 6px; font-size: 0.65rem; font-weight: 800; border-radius: 5px;">⚡ BASS</button>
@@ -31553,9 +31559,36 @@ const GymMusic = {
         this.duckGain.gain.setValueAtTime(1.0, this.ctx.currentTime);
       }
 
-      // Audio Graph: Synth/Media -> duckGain -> bassFilter -> masterGain -> compressor -> analyser -> destination
+      // Studio-Grade 3-Band Mastering Strip & Harmonic Enhancer
+      this.subBassFilter = this.ctx.createBiquadFilter();
+      this.subBassFilter.type = 'lowshelf';
+      this.subBassFilter.frequency.setValueAtTime(60, this.ctx.currentTime);
+      this.subBassFilter.gain.setValueAtTime(this.bassBoostActive ? 9.0 : 4.5, this.ctx.currentTime);
+
+      this.midPunchFilter = this.ctx.createBiquadFilter();
+      this.midPunchFilter.type = 'peaking';
+      this.midPunchFilter.frequency.setValueAtTime(1400, this.ctx.currentTime);
+      this.midPunchFilter.Q.setValueAtTime(1.1, this.ctx.currentTime);
+      this.midPunchFilter.gain.setValueAtTime(2.5, this.ctx.currentTime);
+
+      this.airFilter = this.ctx.createBiquadFilter();
+      this.airFilter.type = 'highshelf';
+      this.airFilter.frequency.setValueAtTime(11000, this.ctx.currentTime);
+      this.airFilter.gain.setValueAtTime(3.0, this.ctx.currentTime);
+
+      // Ultra-High-Resolution 512-point FFT Analyser for Smooth 60FPS Visuals
+      if (this.ctx.createAnalyser) {
+        this.analyser = this.ctx.createAnalyser();
+        this.analyser.fftSize = 512;
+        this.analyser.smoothingTimeConstant = 0.82;
+      }
+
+      // Chain: Synth/Media -> duckGain -> bassFilter -> subBass -> midPunch -> air -> masterGain -> compressor -> analyser -> destination
       this.duckGain.connect(this.bassFilter);
-      this.bassFilter.connect(this.masterGain);
+      this.bassFilter.connect(this.subBassFilter);
+      this.subBassFilter.connect(this.midPunchFilter);
+      this.midPunchFilter.connect(this.airFilter);
+      this.airFilter.connect(this.masterGain);
       this.masterGain.connect(this.compressor);
       if (this.analyser && this.analyser.connect) {
         this.compressor.connect(this.analyser);
@@ -31651,46 +31684,59 @@ const GymMusic = {
   startVisualizer() {
     if (this.visualizerAnimId) return;
 
-    // Peak VU Physics State
-    this.peakCaps = new Float32Array(128);
-    this.peakDrop = new Float32Array(128);
+    // Studio VU Physics Engine (Gravity + Peak Cap Decay)
+    this.peakCaps = new Float32Array(256);
+    this.peakDrop = new Float32Array(256);
 
-    // Quantum Particle Field State
-    this.particles = Array.from({ length: 64 }, () => ({
-      x: Math.random() * 600,
-      y: Math.random() * 200,
-      vx: (Math.random() - 0.5) * 1.6,
-      vy: (Math.random() - 0.5) * 1.6,
-      r: Math.random() * 2.2 + 1,
-      col: Math.random() > 0.5 ? '#00f2fe' : '#a855f7'
+    // Quantum Cosmic Warp Field (96 Stellar Particle Filaments)
+    this.particles = Array.from({ length: 96 }, () => ({
+      x: Math.random() * 800,
+      y: Math.random() * 300,
+      vx: (Math.random() - 0.5) * 2.2,
+      vy: (Math.random() - 0.5) * 2.2,
+      r: Math.random() * 2.8 + 0.8,
+      col: ['#00f2fe', '#a855f7', '#ff007f', '#00ffa3', '#ffe600'][Math.floor(Math.random() * 5)]
     }));
 
+    // God-Level Visualizer 60FPS Render Loop
     const render = () => {
       this.visualizerAnimId = requestAnimationFrame(render);
 
-      const targetCanvases = [
-        document.getElementById('onScreenSetCanvas'),
-        document.getElementById('musicSpectrumCanvas'),
-        document.getElementById('focusMusicSpectrumCanvas'),
-        document.getElementById('liveMusicSpectrumCanvas'),
-        document.getElementById('warmupMusicSpectrumCanvas'),
-        document.getElementById('cooldownMusicSpectrumCanvas'),
-        document.getElementById('islandMiniSpectrumCanvas'),
-        document.getElementById('dockMiniSpectrumCanvas')
-      ].filter(c => c && c.offsetParent !== null);
+      // Robust Canvas Discovery: Checks actual visibility via getBoundingClientRect (no offsetParent fixed bugs)
+      const canvasIds = [
+        'dockMiniSpectrumCanvas',
+        'islandMiniSpectrumCanvas',
+        'onScreenSetCanvas',
+        'musicSpectrumCanvas',
+        'focusMusicSpectrumCanvas',
+        'liveMusicSpectrumCanvas',
+        'warmupMusicSpectrumCanvas',
+        'cooldownMusicSpectrumCanvas'
+      ];
 
-      if (targetCanvases.length === 0) return;
+      const activeCanvases = [];
+      for (const id of canvasIds) {
+        const c = document.getElementById(id);
+        if (!c) continue;
+        const rect = c.getBoundingClientRect();
+        // Visible if element has physical rendered dimensions and parent is not hidden
+        if (rect.width > 0 && rect.height > 0 && c.style.display !== 'none') {
+          activeCanvases.push({ canvas: c, rect });
+        }
+      }
 
-      // Extract real audio data or generate energetic synthetic beat pulse
+      if (activeCanvases.length === 0) return;
+
+      // Extract high-resolution audio data or synthesize energetic beat pulse
       let hasRealAudio = false;
-      const bufferLength = this.analyser ? this.analyser.frequencyBinCount : 128;
+      const bufferLength = this.analyser ? this.analyser.frequencyBinCount : 256;
       const freqData = new Uint8Array(bufferLength);
-      const timeData = new Uint8Array(this.analyser ? this.analyser.fftSize : 256);
+      const timeData = new Uint8Array(this.analyser ? this.analyser.fftSize : 512);
 
       if (this.analyser && this.isPlaying) {
         this.analyser.getByteFrequencyData(freqData);
         this.analyser.getByteTimeDomainData(timeData);
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 24; i++) {
           if (freqData[i] > 10) { hasRealAudio = true; break; }
         }
       }
@@ -31703,71 +31749,148 @@ const GymMusic = {
         const kick = Math.pow(Math.max(0, 1 - phase * 1.8), 2.5);
 
         for (let i = 0; i < bufferLength; i++) {
-          const harmonic = Math.sin(now * 8 + i * 0.25) * 0.5 + 0.5;
-          const bassBoost = (i < 8) ? kick * 200 : 0;
-          const val = Math.min(255, Math.floor(bassBoost + harmonic * 100 + (kick * 60)));
-          freqData[i] = val;
+          const harmonic = Math.sin(now * 8 + i * 0.2) * 0.5 + 0.5;
+          const bassBoost = (i < 12) ? kick * 220 : 0;
+          freqData[i] = Math.min(255, Math.floor(bassBoost + harmonic * 110 + (kick * 65)));
         }
         for (let i = 0; i < timeData.length; i++) {
-          timeData[i] = Math.floor(128 + Math.sin(now * 12 + i * 0.1) * (28 + kick * 42));
+          timeData[i] = Math.floor(128 + Math.sin(now * 14 + i * 0.08) * (32 + kick * 52));
         }
       }
 
-      // Calculate bass average for neon shockwave & full screen vibration on active set HUD
+      // Sub-Bass energy computation for HUD reactivity & ambient lighting
       let bassSum = 0;
-      for (let i = 0; i < 8; i++) bassSum += freqData[i];
-      const bassAvg = bassSum / 8;
+      for (let i = 0; i < 10; i++) bassSum += freqData[i];
+      const bassAvg = bassSum / 10;
+      const bassRatio = Math.min(1.0, bassAvg / 255);
 
-      // 100X Audio-Reactive Ambient Spatial Lighting Pulse
+      // Modulate ambient mesh opacity to bass impact
       const ambientMesh = document.querySelector('.ambient-mesh-canvas');
       if (ambientMesh && this.isPlaying) {
-        const glowOpacity = Math.min(1.0, 0.45 + (bassAvg / 255) * 0.55);
-        ambientMesh.style.opacity = String(glowOpacity);
+        ambientMesh.style.opacity = String(Math.min(1.0, 0.45 + bassRatio * 0.55));
       }
 
+      // HUD Vibration & Bass Shockwave triggers
       const setHud = document.getElementById('setMusicGraphicsHUD');
       const focusHud = document.getElementById('fullscreenFocusHUD');
       if (setHud && setHud.classList.contains('active') && !setHud.classList.contains('docked')) {
-        if (bassAvg > 130) {
-          setHud.classList.add('hud-heavy-bass');
-        } else {
-          setHud.classList.remove('hud-heavy-bass');
-        }
+        setHud.classList.toggle('hud-heavy-bass', bassAvg > 125);
       } else if (setHud) {
         setHud.classList.remove('hud-heavy-bass');
       }
 
       if (focusHud && focusHud.classList.contains('active')) {
-        if (bassAvg > 130) {
-          focusHud.classList.add('hud-heavy-bass');
-        } else {
-          focusHud.classList.remove('hud-heavy-bass');
-        }
+        focusHud.classList.toggle('hud-heavy-bass', bassAvg > 125);
       } else if (focusHud) {
         focusHud.classList.remove('hud-heavy-bass');
       }
 
-      targetCanvases.forEach(canvas => {
-        const parent = canvas.parentElement;
+      // Telemetry updates
+      const bpmEl = document.getElementById('visBpmPill');
+      const energyEl = document.getElementById('visEnergyPill');
+      if (bpmEl) bpmEl.innerText = (this.tempoBpm || 128) + ' BPM';
+      if (energyEl) energyEl.innerText = 'ENERGY: ' + Math.min(100, Math.round(bassRatio * 135)) + '%';
+
+      // RENDER EACH ACTIVE CANVAS INDIVIDUALLY WITH TAILORED RESOLUTION & STYLING
+      activeCanvases.forEach(({ canvas, rect }) => {
+        const isMiniIsland = (canvas.id === 'islandMiniSpectrumCanvas');
+        const isMiniDock = (canvas.id === 'dockMiniSpectrumCanvas');
         const isFullScreenHud = (canvas.id === 'onScreenSetCanvas' && !canvas.closest('.docked'));
-        const w = canvas.width = (isFullScreenHud && parent && parent.clientWidth < 400)
-          ? window.innerWidth
-          : (parent ? (parent.clientWidth || 580) : 580);
-        const h = canvas.height = (isFullScreenHud && parent && parent.clientHeight < 50)
-          ? 120
-          : (parent ? (parent.clientHeight || 72) : 72);
-        if (w === 0 || h === 0) return;
+
+        // Hi-DPI Crisp Retina Scaling: Only reallocate buffer when dimensions actually change
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const cssW = Math.max(10, Math.round(rect.width));
+        const cssH = Math.max(8, Math.round(rect.height));
+        const targetW = Math.round(cssW * dpr);
+        const targetH = Math.round(cssH * dpr);
+
+        if (canvas.width !== targetW || canvas.height !== targetH) {
+          canvas.width = targetW;
+          canvas.height = targetH;
+        }
+
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
-        // Phosphor Persistence Motion-Blur Trail
-        ctx.fillStyle = 'rgba(6, 11, 24, 0.32)';
-        ctx.fillRect(0, 0, w, h);
 
-        // Update Real-Time Telemetry HUD
-        const bpmEl = document.getElementById('visBpmPill');
-        const energyEl = document.getElementById('visEnergyPill');
-        if (bpmEl) bpmEl.innerText = (this.tempoBpm || 128) + ' BPM';
-        if (energyEl) energyEl.innerText = 'ENERGY: ' + Math.min(100, Math.round((bassAvg / 255) * 125)) + '%';
+        ctx.save();
+        ctx.scale(dpr, dpr);
+        const w = cssW;
+        const h = cssH;
+
+        // ==========================================
+        // 1. MINI SPECTRUM FOR DYNAMIC ISLAND (46x14)
+        // ==========================================
+        if (isMiniIsland) {
+          ctx.clearRect(0, 0, w, h);
+          const barCount = 5;
+          const barW = 4;
+          const gap = 3;
+          const startX = (w - (barCount * barW + (barCount - 1) * gap)) / 2;
+
+          for (let b = 0; b < barCount; b++) {
+            const sample = freqData[b * 4] || 0;
+            const barH = this.isPlaying ? Math.max(3, (sample / 255) * h * 0.95) : 3;
+            const bx = startX + b * (barW + gap);
+            const by = (h - barH) / 2;
+
+            const grad = ctx.createLinearGradient(0, by, 0, by + barH);
+            grad.addColorStop(0, '#00f2fe');
+            grad.addColorStop(1, '#ff007f');
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            if (ctx.roundRect) ctx.roundRect(bx, by, barW, barH, 2);
+            else ctx.rect(bx, by, barW, barH);
+            ctx.fill();
+          }
+          ctx.restore();
+          return;
+        }
+
+        // ==========================================
+        // 2. MINI SPECTRUM FOR PERSISTENT MUSIC DOCK (180x26)
+        // ==========================================
+        if (isMiniDock) {
+          ctx.fillStyle = 'rgba(8, 14, 28, 0.45)';
+          ctx.fillRect(0, 0, w, h);
+          const barCount = 20;
+          const barW = Math.max(2, Math.floor(w / barCount) - 2);
+          const totalW = barCount * (barW + 2);
+          const startX = Math.max(2, (w - totalW) / 2);
+
+          for (let i = 0; i < barCount; i++) {
+            const sampleIdx = Math.floor(i * (bufferLength / barCount) * 0.85);
+            const val = freqData[sampleIdx] || 0;
+            const barH = this.isPlaying ? Math.max(3, (val / 255) * h * 0.92) : 2;
+            const bx = startX + i * (barW + 2);
+            const by = h - barH;
+
+            // Multi-Chroma Gradient
+            const grad = ctx.createLinearGradient(0, h, 0, by);
+            grad.addColorStop(0, '#ff007f');
+            grad.addColorStop(0.5, '#7928ca');
+            grad.addColorStop(1, '#00f2fe');
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            if (ctx.roundRect) ctx.roundRect(bx, by, barW, barH, [1.5, 1.5, 0, 0]);
+            else ctx.rect(bx, by, barW, barH);
+            ctx.fill();
+
+            // Peak Dot
+            if (this.isPlaying && val > 110) {
+              ctx.fillStyle = '#ffffff';
+              ctx.fillRect(bx, Math.max(0, by - 2), barW, 1.5);
+            }
+          }
+          ctx.restore();
+          return;
+        }
+
+        // ==========================================
+        // 3. FULL-STAGE & HUD VISUALIZERS (9 GOD-TIER MODES)
+        // ==========================================
+        // Phosphor Persistence Motion-Blur Trail
+        ctx.fillStyle = 'rgba(7, 12, 28, 0.28)';
+        ctx.fillRect(0, 0, w, h);
 
         if (!this.isPlaying) {
           ctx.strokeStyle = 'rgba(56, 189, 248, 0.35)';
@@ -31780,13 +31903,15 @@ const GymMusic = {
             ctx.lineTo(x, midY + Math.sin(time + x * 0.04) * 2.5);
           }
           ctx.stroke();
+          ctx.restore();
           return;
         }
 
+        // MODE 1: PRO 64-BAND CHROMA EQUALIZER BARS
         if (this.visualizerMode === 'bars') {
-          const step = isFullScreenHud ? 14 : 10;
-          const barCount = Math.max(24, Math.min(128, Math.floor(w / step)));
-          const barWidth = Math.max(3, (w / barCount) - 3);
+          const step = isFullScreenHud ? 12 : 9;
+          const barCount = Math.max(32, Math.min(96, Math.floor(w / step)));
+          const barWidth = Math.max(3, Math.floor(w / barCount) - 3);
           let x = (w - (barCount * (barWidth + 3))) / 2;
           if (x < 0) x = 2;
 
@@ -31795,21 +31920,22 @@ const GymMusic = {
             const val = freqData[sampleIdx] || 0;
             const barHeight = Math.max(4, (val / 255) * (h * 0.9));
 
-            // Studio VU Gravity Physics for Peak Caps
+            // Peak VU Physics with Gravitational Acceleration
             if (barHeight >= this.peakCaps[i]) {
               this.peakCaps[i] = barHeight;
               this.peakDrop[i] = 0;
             } else {
-              this.peakDrop[i] += 0.35;
+              this.peakDrop[i] += 0.38;
               this.peakCaps[i] = Math.max(0, this.peakCaps[i] - this.peakDrop[i]);
             }
 
+            // God-Level Multi-Stop Chroma Gradient
             const grad = ctx.createLinearGradient(0, h, 0, h - barHeight);
-            grad.addColorStop(0, 'rgba(0, 242, 254, 0.2)');
-            grad.addColorStop(0.35, '#00f2fe');
-            grad.addColorStop(0.65, '#10b981');
-            grad.addColorStop(0.85, '#fbbf24');
-            grad.addColorStop(1, '#f43f5e');
+            grad.addColorStop(0, 'rgba(255, 0, 128, 0.3)');
+            grad.addColorStop(0.3, '#ff007f');
+            grad.addColorStop(0.6, '#7928ca');
+            grad.addColorStop(0.85, '#00f2fe');
+            grad.addColorStop(1, '#00ffa3');
 
             ctx.fillStyle = grad;
             const radius = Math.min(3, barWidth / 2);
@@ -31819,204 +31945,170 @@ const GymMusic = {
             else ctx.rect(x, topY, barWidth, barHeight);
             ctx.fill();
 
-            // Floating Studio VU Peak Cap with Neon Glow
+            // Floating VU Peak Cap with Luminescent Glow
             const capY = Math.max(2, h - this.peakCaps[i] - 2);
             ctx.fillStyle = '#ffffff';
             ctx.shadowColor = '#00f2fe';
-            ctx.shadowBlur = 6;
-            ctx.fillRect(x, capY, barWidth, 2);
+            ctx.shadowBlur = 8;
+            ctx.fillRect(x, capY, barWidth, 2.5);
             ctx.shadowBlur = 0;
 
             x += barWidth + 3;
           }
-        } else if (this.visualizerMode === 'wave') {
-          // Multi-layer full-screen oscilloscope wave
+        }
+        // MODE 2: LIQUID PLASMA OSCILLOSCOPE (DOUBLE HELIX)
+        else if (this.visualizerMode === 'wave') {
           const midY = h / 2;
-          
-          // Layer 1: Ambient background wave glow
-          if (isFullScreenHud) {
-            ctx.lineWidth = 6;
-            ctx.strokeStyle = 'rgba(0, 242, 254, 0.15)';
-            ctx.beginPath();
-            const sliceWidth = w * 1.0 / timeData.length;
-            let wx = 0;
-            for (let i = 0; i < timeData.length; i++) {
-              const v = timeData[i] / 128.0;
-              const y = midY + ((v - 1) * (h * 0.42));
-              if (i === 0) ctx.moveTo(wx, y);
-              else ctx.lineTo(wx, y);
-              wx += sliceWidth;
-            }
-            ctx.stroke();
-          }
+          const sliceWidth = w * 1.0 / timeData.length;
 
-          // Layer 2: Vivid neon gradient core waveform
+          // Layer 1: Ambient Reflected Inverted Sub-Wave
+          ctx.lineWidth = isFullScreenHud ? 5 : 3;
+          ctx.strokeStyle = 'rgba(255, 0, 128, 0.25)';
+          ctx.beginPath();
+          let xInv = 0;
+          for (let i = 0; i < timeData.length; i++) {
+            const v = timeData[i] / 128.0;
+            const y = midY - ((v - 1) * (h * 0.38));
+            if (i === 0) ctx.moveTo(xInv, y); else ctx.lineTo(xInv, y);
+            xInv += sliceWidth;
+          }
+          ctx.stroke();
+
+          // Layer 2: Main Vivid Neon Wave
           ctx.lineWidth = isFullScreenHud ? 3.5 : 2.5;
           const grad = ctx.createLinearGradient(0, 0, w, 0);
           grad.addColorStop(0, '#00f2fe');
-          grad.addColorStop(0.3, '#34d399');
-          grad.addColorStop(0.7, '#a855f7');
-          grad.addColorStop(1, '#f43f5e');
+          grad.addColorStop(0.3, '#00ffa3');
+          grad.addColorStop(0.65, '#ffe600');
+          grad.addColorStop(0.85, '#ff007f');
+          grad.addColorStop(1, '#7928ca');
           ctx.strokeStyle = grad;
-          ctx.shadowColor = 'rgba(0, 242, 254, 0.9)';
-          ctx.shadowBlur = isFullScreenHud ? 16 : 8;
+          ctx.shadowColor = '#00f2fe';
+          ctx.shadowBlur = isFullScreenHud ? 18 : 8;
 
           ctx.beginPath();
-          const sliceWidth = w * 1.0 / timeData.length;
           let x = 0;
           for (let i = 0; i < timeData.length; i++) {
             const v = timeData[i] / 128.0;
-            const y = midY + ((v - 1) * (h * (isFullScreenHud ? 0.38 : 0.45)));
-            if (i === 0) ctx.moveTo(x, y);
-            else ctx.lineTo(x, y);
+            const y = midY + ((v - 1) * (h * 0.44));
+            if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
             x += sliceWidth;
           }
-          ctx.lineTo(w, midY);
           ctx.stroke();
           ctx.shadowBlur = 0;
-        } else if (this.visualizerMode === 'orbit') {
-          // Massive reactive cyber orbit spanning the viewport
-          const bassVal = bassAvg;
-          const maxRadius = Math.min(w, h) * 0.42;
-          const baseRadius = isFullScreenHud ? Math.min(260, maxRadius) : Math.min(h / 2 - 6, 22);
-          const radius = baseRadius + ((bassVal / 255) * (isFullScreenHud ? 70 : 18));
+        }
+        // MODE 3: 3D HOLO-REACTOR ORBIT
+        else if (this.visualizerMode === 'orbit') {
           const cx = w / 2;
           const cy = h / 2;
+          const baseRadius = Math.min(w, h) * (isFullScreenHud ? 0.32 : 0.28);
+          const radius = baseRadius * (1 + bassRatio * 0.45);
 
-          // Outer sonic aura
-          if (isFullScreenHud) {
-            const auraGrad = ctx.createRadialGradient(cx, cy, radius * 0.2, cx, cy, radius * 1.5);
-            auraGrad.addColorStop(0, 'rgba(0, 242, 254, 0.12)');
-            auraGrad.addColorStop(0.6, 'rgba(168, 85, 247, 0.08)');
-            auraGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
-            ctx.fillStyle = auraGrad;
-            ctx.beginPath();
-            ctx.arc(cx, cy, radius * 1.5, 0, Math.PI * 2);
-            ctx.fill();
-          }
-
-          // Main Orbit Ring
-          ctx.strokeStyle = 'rgba(56, 189, 248, 0.65)';
-          ctx.lineWidth = isFullScreenHud ? 3 : 2;
-          ctx.shadowColor = '#00f2fe';
-          ctx.shadowBlur = isFullScreenHud ? 18 : 8;
+          // Radial Acoustic Aura
+          const aura = ctx.createRadialGradient(cx, cy, radius * 0.2, cx, cy, radius * 1.6);
+          aura.addColorStop(0, 'rgba(0, 242, 254, 0.35)');
+          aura.addColorStop(0.5, 'rgba(121, 40, 202, 0.2)');
+          aura.addColorStop(1, 'transparent');
+          ctx.fillStyle = aura;
           ctx.beginPath();
-          ctx.arc(cx, cy, radius, 0, Math.PI * 2);
-          ctx.stroke();
-          ctx.shadowBlur = 0;
-
-          // Pulsing Core
-          ctx.fillStyle = 'rgba(0, 242, 254, 0.28)';
-          ctx.shadowColor = '#00f2fe';
-          ctx.shadowBlur = (bassVal / 255) * (isFullScreenHud ? 38 : 24);
-          ctx.beginPath();
-          ctx.arc(cx, cy, Math.max(3, radius * 0.62), 0, Math.PI * 2);
+          ctx.arc(cx, cy, radius * 1.6, 0, Math.PI * 2);
           ctx.fill();
-          ctx.shadowBlur = 0;
 
-          // Reactive Wave Perimeter around orbit
-          ctx.strokeStyle = '#c084fc';
-          ctx.lineWidth = isFullScreenHud ? 2.5 : 1.8;
+          // Frequency Spikes around Ring
+          const spikes = 48;
           ctx.beginPath();
-          const pts = isFullScreenHud ? 64 : 36;
-          for (let p = 0; p < pts; p++) {
-            const ang = (p / pts) * Math.PI * 2;
-            const freqIdx = Math.floor((p / pts) * (bufferLength * 0.65));
-            const amp = (freqData[freqIdx] || 0) / 255 * (isFullScreenHud ? 42 : 18);
-            const px = cx + Math.cos(ang) * (radius + amp);
-            const py = cy + Math.sin(ang) * (radius + amp);
-            if (p === 0) ctx.moveTo(px, py);
-            else ctx.lineTo(px, py);
+          for (let i = 0; i <= spikes; i++) {
+            const angle = (i / spikes) * Math.PI * 2;
+            const sample = freqData[i % bufferLength] || 0;
+            const rOffset = (sample / 255) * (isFullScreenHud ? 45 : 18);
+            const px = cx + Math.cos(angle) * (radius + rOffset);
+            const py = cy + Math.sin(angle) * (radius + rOffset);
+            if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
           }
           ctx.closePath();
+          ctx.strokeStyle = '#00f2fe';
+          ctx.lineWidth = 2.5;
+          ctx.shadowColor = '#00f2fe';
+          ctx.shadowBlur = 12;
           ctx.stroke();
-        } else if (this.visualizerMode === 'matrix') {
-          // Futuristic Cyber Matrix Digital Cascade & Mirror Pillars
-          const colWidth = isFullScreenHud ? 12 : 8;
+          ctx.shadowBlur = 0;
+        }
+        // MODE 4: CYBER MATRIX CASCADE
+        else if (this.visualizerMode === 'matrix') {
+          const colWidth = isFullScreenHud ? 10 : 7;
           const cols = Math.floor(w / colWidth);
           const midY = h / 2;
-          const bassBoost = (bassAvg / 255) * 1.5;
 
-          for (let c = 0; c < cols; c++) {
-            const fIdx = Math.floor((c / cols) * (bufferLength * 0.75));
-            const val = freqData[fIdx] || 0;
-            const colHeight = (val / 255) * (h * 0.46) * (1 + bassBoost * 0.4);
-            const cx = c * colWidth;
+          for (let i = 0; i < cols; i++) {
+            const sampleIdx = Math.floor(i * (bufferLength / cols));
+            const val = freqData[sampleIdx] || 0;
+            const colHeight = (val / 255) * (h * 0.45);
+            const cx = i * colWidth;
 
-            // Mirror vertical columns (top & bottom from center)
             const grad = ctx.createLinearGradient(0, midY - colHeight, 0, midY + colHeight);
-            grad.addColorStop(0, '#00f2fe');
-            grad.addColorStop(0.5, 'rgba(16, 185, 129, 0.85)');
-            grad.addColorStop(1, '#00f2fe');
+            grad.addColorStop(0, '#00ffa3');
+            grad.addColorStop(0.5, '#00f2fe');
+            grad.addColorStop(1, '#ff007f');
             ctx.fillStyle = grad;
-
             ctx.fillRect(cx + 1, midY - colHeight, colWidth - 2, colHeight * 2);
 
-            // Digital matrix cap sparks
             if (val > 140) {
               ctx.fillStyle = '#ffffff';
-              ctx.shadowColor = '#00f2fe';
-              ctx.shadowBlur = 6;
               ctx.fillRect(cx + 1, midY - colHeight - 2, colWidth - 2, 2);
               ctx.fillRect(cx + 1, midY + colHeight, colWidth - 2, 2);
-              ctx.shadowBlur = 0;
             }
           }
-        } else if (this.visualizerMode === 'cyber_hex') {
-          // Cyber Hexagonal Portal & Sonic Shockwave Rings
+        }
+        // MODE 5: CYBER HEXAGONAL PORTAL
+        else if (this.visualizerMode === 'cyber_hex') {
           const cx = w / 2;
           const cy = h / 2;
-          const maxR = Math.min(w, h) * 0.44;
-          const bassRatio = bassAvg / 255;
+          const maxR = Math.min(w, h) * 0.45;
           const ringCount = isFullScreenHud ? 5 : 3;
 
           for (let r = 1; r <= ringCount; r++) {
-            const ringR = (maxR / ringCount) * r * (0.8 + bassRatio * 0.35);
+            const ringR = (maxR / ringCount) * r * (0.8 + bassRatio * 0.4);
             ctx.beginPath();
             for (let side = 0; side < 6; side++) {
               const ang = (side / 6) * Math.PI * 2 + (Date.now() * 0.0008 * (r % 2 === 0 ? 1 : -1));
               const fIdx = Math.floor((side / 6) * 32);
-              const hexAmp = (freqData[fIdx] || 0) / 255 * (isFullScreenHud ? 18 : 8);
+              const hexAmp = ((freqData[fIdx] || 0) / 255) * (isFullScreenHud ? 22 : 10);
               const hx = cx + Math.cos(ang) * (ringR + hexAmp);
               const hy = cy + Math.sin(ang) * (ringR + hexAmp);
-              if (side === 0) ctx.moveTo(hx, hy);
-              else ctx.lineTo(hx, hy);
+              if (side === 0) ctx.moveTo(hx, hy); else ctx.lineTo(hx, hy);
             }
             ctx.closePath();
-            ctx.strokeStyle = r === ringCount ? '#00f2fe' : (r % 2 === 0 ? '#ec4899' : '#a855f7');
-            ctx.lineWidth = isFullScreenHud ? (r === ringCount ? 3 : 1.8) : 1.5;
+            ctx.strokeStyle = r === ringCount ? '#00f2fe' : (r % 2 === 0 ? '#ff007f' : '#a855f7');
+            ctx.lineWidth = isFullScreenHud ? (r === ringCount ? 3 : 2) : 1.5;
             ctx.shadowColor = '#00f2fe';
-            ctx.shadowBlur = isFullScreenHud ? (bassRatio * 16) : 6;
+            ctx.shadowBlur = bassRatio * 16;
             ctx.stroke();
             ctx.shadowBlur = 0;
           }
-        } else if (this.visualizerMode === 'particles') {
-          // Mode 6: Quantum Sonic Particle Field
+        }
+        // MODE 6: QUANTUM SONIC COSMIC PARTICLES
+        else if (this.visualizerMode === 'particles') {
           const cx = w / 2;
           const cy = h / 2;
-          const bassBoost = bassAvg / 255;
 
-          // Radial Kick Shockwave on Heavy Drops
-          if (bassAvg > 140) {
-            ctx.strokeStyle = 'rgba(0, 242, 254, ' + (bassBoost * 0.45) + ')';
-            ctx.lineWidth = 2;
+          if (bassAvg > 130) {
+            ctx.strokeStyle = 'rgba(0, 242, 254, ' + (bassRatio * 0.6) + ')';
+            ctx.lineWidth = 2.5;
             ctx.beginPath();
-            ctx.arc(cx, cy, (bassBoost * Math.min(w, h) * 0.48), 0, Math.PI * 2);
+            ctx.arc(cx, cy, bassRatio * Math.min(w, h) * 0.5, 0, Math.PI * 2);
             ctx.stroke();
           }
 
           this.particles.forEach((p, idx) => {
             const freqSample = freqData[idx % bufferLength] || 0;
             const energy = freqSample / 255;
-            p.x += p.vx * (1 + energy * 2.5);
-            p.y += p.vy * (1 + energy * 2.5);
+            p.x += p.vx * (1 + energy * 3);
+            p.y += p.vy * (1 + energy * 3);
 
-            if (p.x < 0) p.x = w;
-            if (p.x > w) p.x = 0;
-            if (p.y < 0) p.y = h;
-            if (p.y > h) p.y = 0;
+            if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
+            if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
 
-            const radius = p.r * (1 + energy * 1.5);
+            const radius = p.r * (1 + energy * 1.8);
             ctx.fillStyle = p.col;
             ctx.shadowColor = p.col;
             ctx.shadowBlur = 8;
@@ -32024,34 +32116,19 @@ const GymMusic = {
             ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
             ctx.fill();
             ctx.shadowBlur = 0;
-
-            // Connect constellation filaments
-            for (let j = idx + 1; j < this.particles.length; j++) {
-              const p2 = this.particles[j];
-              const dx = p.x - p2.x;
-              const dy = p.y - p2.y;
-              const dist = Math.sqrt(dx * dx + dy * dy);
-              if (dist < 42) {
-                ctx.strokeStyle = 'rgba(56, 189, 248, ' + ((1 - dist / 42) * 0.3) + ')';
-                ctx.lineWidth = 1;
-                ctx.beginPath();
-                ctx.moveTo(p.x, p.y);
-                ctx.lineTo(p2.x, p2.y);
-                ctx.stroke();
-              }
-            }
           });
-        } else if (this.visualizerMode === 'cyber_tunnel') {
-          // Mode 7: Hyperdrive 3D Space Tunnel
+        }
+        // MODE 7: HYPERDRIVE 3D SPACE TUNNEL
+        else if (this.visualizerMode === 'cyber_tunnel') {
           const cx = w / 2;
           const cy = h / 2;
-          const numRings = isFullScreenHud ? 12 : 8;
+          const numRings = isFullScreenHud ? 14 : 9;
           const time = Date.now() * 0.0025;
 
           for (let r = 0; r < numRings; r++) {
-            const ringPhase = ((r / numRings) + (time * 0.3)) % 1;
+            const ringPhase = ((r / numRings) + (time * 0.35)) % 1;
             const scale = Math.pow(ringPhase, 2.2);
-            const ringRadius = scale * Math.max(w, h) * 0.7 + ((bassAvg / 255) * 20);
+            const ringRadius = scale * Math.max(w, h) * 0.72 + (bassRatio * 25);
 
             ctx.beginPath();
             const sides = 8;
@@ -32059,17 +32136,75 @@ const GymMusic = {
               const ang = (s / sides) * Math.PI * 2 + (r * 0.1);
               const px = cx + Math.cos(ang) * ringRadius;
               const py = cy + Math.sin(ang) * ringRadius;
-              if (s === 0) ctx.moveTo(px, py);
-              else ctx.lineTo(px, py);
+              if (s === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
             }
-            ctx.strokeStyle = ringPhase > 0.65 ? '#00f2fe' : (ringPhase > 0.35 ? '#a855f7' : '#f43f5e');
+            ctx.strokeStyle = ringPhase > 0.65 ? '#00f2fe' : (ringPhase > 0.35 ? '#7928ca' : '#ff007f');
             ctx.lineWidth = Math.max(1, scale * 3.5);
             ctx.shadowColor = '#00f2fe';
-            ctx.shadowBlur = scale * 12;
+            ctx.shadowBlur = scale * 14;
             ctx.stroke();
             ctx.shadowBlur = 0;
           }
         }
+        // MODE 8: 3D CHROMA VORTEX (GOD LEVEL SPIRAL)
+        else if (this.visualizerMode === 'chroma_vortex') {
+          const cx = w / 2;
+          const cy = h / 2;
+          const points = 72;
+          const t = Date.now() * 0.002;
+
+          ctx.beginPath();
+          for (let p = 0; p < points; p++) {
+            const theta = p * 0.28 + t;
+            const sample = freqData[p % bufferLength] || 0;
+            const r = (p / points) * Math.min(w, h) * 0.46 * (1 + (sample / 255) * 0.5);
+            const px = cx + Math.cos(theta) * r;
+            const py = cy + Math.sin(theta) * r;
+            if (p === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+          }
+          const vortexGrad = ctx.createLinearGradient(0, 0, w, h);
+          vortexGrad.addColorStop(0, '#ff007f');
+          vortexGrad.addColorStop(0.5, '#00f2fe');
+          vortexGrad.addColorStop(1, '#00ffa3');
+          ctx.strokeStyle = vortexGrad;
+          ctx.lineWidth = isFullScreenHud ? 3 : 2;
+          ctx.shadowColor = '#00f2fe';
+          ctx.shadowBlur = 12;
+          ctx.stroke();
+          ctx.shadowBlur = 0;
+        }
+        // MODE 9: CONCERT LASER PRISM & STROBES
+        else if (this.visualizerMode === 'laser_prism') {
+          const cx = w / 2;
+          const cy = h;
+          const laserCount = 12;
+          const t = Date.now() * 0.0015;
+
+          for (let l = 0; l < laserCount; l++) {
+            const sample = freqData[l * 4] || 0;
+            const energy = sample / 255;
+            const sweep = Math.sin(t + l * 0.5) * 0.65;
+            const targetX = cx + sweep * w * 0.8;
+            const targetY = 0;
+
+            const grad = ctx.createLinearGradient(cx, cy, targetX, targetY);
+            grad.addColorStop(0, '#00f2fe');
+            grad.addColorStop(0.7, '#ff007f');
+            grad.addColorStop(1, 'transparent');
+
+            ctx.strokeStyle = grad;
+            ctx.lineWidth = Math.max(1, energy * (isFullScreenHud ? 4.5 : 2.5));
+            ctx.shadowColor = '#00f2fe';
+            ctx.shadowBlur = energy * 16;
+            ctx.beginPath();
+            ctx.moveTo(cx, cy);
+            ctx.lineTo(targetX, targetY);
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+          }
+        }
+
+        ctx.restore();
       });
     };
     render();
