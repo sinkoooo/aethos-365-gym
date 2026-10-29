@@ -2112,54 +2112,11 @@
       100% { height: 6px; }
     }
 
-    /* 100x Real-time Audio Spectrum Canvas */
-    .music-visualizer-container {
-      position: relative;
-      width: 100%;
-      height: 72px;
-      background: rgba(7, 10, 18, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
-      overflow: hidden;
-      margin-top: 14px;
-      margin-bottom: 14px;
-      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
-    }
+    /* Real-time Audio Spectrum Canvas */
     #musicSpectrumCanvas {
       width: 100%;
       height: 100%;
       display: block;
-    }
-    .vis-mode-dock {
-      position: absolute;
-      top: 6px;
-      right: 8px;
-      display: flex;
-      gap: 4px;
-      background: rgba(13, 20, 36, 0.8);
-      backdrop-filter: blur(10px);
-      padding: 2px 4px;
-      border-radius: 99px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    .vis-mode-btn {
-      background: transparent;
-      border: none;
-      color: #94a3b8;
-      font-size: 0.68rem;
-      font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 99px;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-    .vis-mode-btn:hover {
-      color: #fff;
-    }
-    .vis-mode-btn.active {
-      background: rgba(56, 189, 248, 0.25);
-      color: var(--cyan);
-      font-weight: 800;
     }
 
     /* Studio DSP Controls & Tempo Bar */
@@ -2373,81 +2330,61 @@
       inset: 0;
       width: 100vw;
       height: 100vh;
-      background: radial-gradient(circle at 50% 18%, rgba(10, 22, 54, 0.98) 0%, rgba(5, 9, 22, 0.99) 65%, rgba(2, 4, 10, 1) 100%);
-      backdrop-filter: blur(36px) saturate(220%);
-      -webkit-backdrop-filter: blur(36px) saturate(220%);
-      border: 2px solid rgba(0, 242, 254, 0.4);
+      background: radial-gradient(circle at 50% 20%, rgba(10, 20, 44, 0.88) 0%, rgba(4, 8, 20, 0.94) 70%, rgba(2, 4, 12, 0.97) 100%);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      border: 2px solid rgba(0, 242, 254, 0.35);
       z-index: 100000;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: clamp(12px, 2.2vh, 24px) clamp(16px, 3vw, 36px);
+      padding: clamp(14px, 2.2vh, 26px) clamp(16px, 3.5vw, 40px);
       box-sizing: border-box;
       opacity: 0;
       pointer-events: none;
-      transform: scale(0.96);
-      transition: opacity 0.3s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+      transform: scale(0.98);
+      transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
       overflow-y: auto;
-      will-change: transform, box-shadow, filter;
+      overflow-x: hidden;
+      will-change: opacity, transform, box-shadow;
     }
     .set-music-graphics-hud.active {
       opacity: 1;
       pointer-events: auto;
       transform: scale(1);
-      animation: hudNeonBreathingFS 2.8s ease-in-out infinite alternate, hudWholeScreenVibrate 0.14s linear infinite;
+      animation: hudNeonBreathingFS 3.5s ease-in-out infinite alternate;
     }
-    /* WHOLE SCREEN VIBRATION & SHOCKWAVE ANIMATION */
-    @keyframes hudWholeScreenVibrate {
-      0% {
-        transform: translate(0, 0) scale(1);
-      }
-      20% {
-        transform: translate(-1.5px, 1.2px) scale(1.002);
-      }
-      40% {
-        transform: translate(1.4px, -1.1px) scale(0.999);
-      }
-      60% {
-        transform: translate(-1.2px, -1.4px) scale(1.002);
-      }
-      80% {
-        transform: translate(1.3px, 1.3px) scale(1.001);
-      }
-      100% {
-        transform: translate(0, 0) scale(1);
-      }
+    .set-music-graphics-hud.active ~ .floating-music-capsule {
+      display: none !important;
     }
+    /* HIGH-IMPACT BASS PULSE (AURA ONLY, ZERO SCREEN JITTER) */
     .set-music-graphics-hud.hud-heavy-bass {
-      animation: hudNeonBreathingFS 2.8s ease-in-out infinite alternate, hudHeavyBassShock 0.09s ease-in-out infinite alternate !important;
+      animation: hudNeonBreathingFS 3.5s ease-in-out infinite alternate, hudBassGlowPulse 0.18s ease-in-out infinite alternate !important;
       border-color: rgba(0, 242, 254, 0.95) !important;
-      box-shadow: inset 0 0 160px rgba(0, 242, 254, 0.35), 0 0 90px rgba(0, 242, 254, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+      box-shadow: inset 0 0 140px rgba(0, 242, 254, 0.4), 0 0 75px rgba(0, 242, 254, 0.7), 0 0 110px rgba(168, 85, 247, 0.35) !important;
     }
-    @keyframes hudHeavyBassShock {
+    @keyframes hudBassGlowPulse {
       0% {
-        transform: translate(-2.5px, 1.8px) scale(1.006);
-        filter: contrast(108%) brightness(105%);
-      }
-      50% {
-        transform: translate(2.2px, -2.1px) scale(0.997);
-        filter: contrast(102%) brightness(98%);
+        box-shadow: inset 0 0 80px rgba(0, 242, 254, 0.2), 0 0 45px rgba(0, 242, 254, 0.35);
+        border-color: rgba(0, 242, 254, 0.5);
       }
       100% {
-        transform: translate(-1.8px, -1.9px) scale(1.007);
-        filter: contrast(112%) brightness(108%);
+        box-shadow: inset 0 0 150px rgba(0, 242, 254, 0.45), 0 0 85px rgba(0, 242, 254, 0.75), 0 0 120px rgba(168, 85, 247, 0.4);
+        border-color: rgba(0, 242, 254, 0.95);
       }
     }
     @keyframes hudNeonBreathingFS {
       0% {
-        box-shadow: inset 0 0 100px rgba(0, 242, 254, 0.18), 0 0 50px rgba(0, 0, 0, 0.9);
-        border-color: rgba(0, 242, 254, 0.45);
+        box-shadow: inset 0 0 80px rgba(0, 242, 254, 0.16), 0 0 40px rgba(0, 0, 0, 0.85);
+        border-color: rgba(0, 242, 254, 0.4);
       }
       50% {
-        box-shadow: inset 0 0 150px rgba(168, 85, 247, 0.28), 0 0 75px rgba(168, 85, 247, 0.32);
-        border-color: rgba(168, 85, 247, 0.75);
+        box-shadow: inset 0 0 120px rgba(168, 85, 247, 0.24), 0 0 60px rgba(168, 85, 247, 0.3);
+        border-color: rgba(168, 85, 247, 0.7);
       }
       100% {
-        box-shadow: inset 0 0 130px rgba(244, 63, 94, 0.24), 0 0 65px rgba(244, 63, 94, 0.28);
-        border-color: rgba(0, 242, 254, 0.65);
+        box-shadow: inset 0 0 100px rgba(244, 63, 94, 0.2), 0 0 50px rgba(244, 63, 94, 0.25);
+        border-color: rgba(0, 242, 254, 0.6);
       }
     }
     /* DOCKED MODE (PICTURE-IN-PICTURE / BOTTOM DOCK) */
@@ -2459,41 +2396,51 @@
       top: auto;
       transform: translateX(-50%) scale(1) !important;
       animation: none !important;
-      width: min(94vw, 840px);
+      width: min(94vw, 820px);
       height: auto;
-      max-height: 88vh;
-      border-radius: 24px;
-      padding: 16px 22px;
+      max-height: 86vh;
+      border-radius: 22px;
+      padding: 14px 20px;
       box-shadow: 0 24px 80px rgba(0, 0, 0, 0.95), 0 0 40px rgba(0, 242, 254, 0.35);
-      background: linear-gradient(155deg, rgba(8, 14, 28, 0.97) 0%, rgba(4, 7, 16, 0.99) 100%);
+      background: linear-gradient(155deg, rgba(8, 14, 30, 0.93) 0%, rgba(4, 7, 18, 0.98) 100%);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1.5px solid rgba(0, 242, 254, 0.45);
+      z-index: 100000;
     }
     .set-music-graphics-hud.docked .set-hud-hero-ex {
-      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
-      margin-bottom: 6px;
+      font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+      margin-bottom: 4px;
     }
     .set-music-graphics-hud.docked .set-hud-canvas-wrap {
-      height: 90px;
-      margin-bottom: 8px;
+      height: 75px !important;
+      margin: 6px auto !important;
+      max-width: 100% !important;
+      border-radius: 12px !important;
     }
     .set-music-graphics-hud.docked .set-hud-tempo-callout {
-      font-size: 0.9rem;
+      font-size: 0.82rem;
       margin-bottom: 6px;
+      padding: 3px 10px;
     }
     .set-music-graphics-hud.docked .set-hud-telemetry {
-      margin-bottom: 8px;
-      gap: 10px;
+      margin-bottom: 6px;
+      gap: 8px;
     }
     .set-music-graphics-hud.docked .set-hud-telemetry-card {
-      padding: 6px 12px;
-      min-width: 100px;
+      padding: 4px 10px;
+      min-width: 90px;
     }
     .set-music-graphics-hud.docked .set-hud-telemetry-val {
-      font-size: 1.25rem;
+      font-size: 1.15rem;
     }
     .set-music-graphics-hud.docked .btn-set-hud-finish {
       padding: 6px 14px;
       font-size: 0.8rem;
       max-width: 360px;
+    }
+    .set-music-graphics-hud.docked .set-hud-modes {
+      display: none !important;
     }
     .set-hud-top-bar {
       position: relative;
@@ -2501,11 +2448,39 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       flex-wrap: wrap;
       width: 100%;
       margin-bottom: 6px;
       pointer-events: auto;
+    }
+    .set-hud-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .set-hud-modes {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background: rgba(0, 0, 0, 0.45);
+      padding: 3px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      max-width: 100%;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .set-hud-modes::-webkit-scrollbar {
+      display: none;
+    }
+    .set-hud-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
     }
     .set-hud-pill-track {
       display: inline-flex;
@@ -2575,19 +2550,19 @@
       text-shadow: 0 0 35px rgba(0, 242, 254, 0.6), 0 2px 10px rgba(0,0,0,0.8);
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
     }
-    /* WHOLE SCREEN BACKGROUND CANVAS & PACER */
+    /* ACTIVE SET REACTIVE SOUNDWAVE STAGE & PACER */
     .set-hud-canvas-wrap {
-      position: absolute;
-      inset: 0;
-      width: 100% !important;
-      height: 100% !important;
-      background: transparent;
-      border: none;
-      border-radius: 0;
+      position: relative;
+      width: 100%;
+      max-width: 920px;
+      height: clamp(140px, 24vh, 230px);
+      background: radial-gradient(ellipse 90% 90% at 50% 50%, rgba(13, 22, 46, 0.6) 0%, rgba(4, 7, 18, 0.8) 100%);
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      border-radius: 18px;
       overflow: hidden;
-      box-shadow: none;
-      margin: 0;
-      z-index: 1;
+      box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.75), 0 12px 36px rgba(0, 0, 0, 0.5);
+      margin: clamp(10px, 1.8vh, 20px) auto;
+      z-index: 2;
       pointer-events: none;
     }
     #onScreenSetCanvas {
@@ -2601,26 +2576,29 @@
       position: absolute;
       bottom: 0;
       left: 0;
-      height: 5px;
+      height: 4px;
       background: linear-gradient(90deg, #00f2fe, #a855f7, #f43f5e, #10b981);
       width: 0%;
       transition: width 0.1s linear;
-      box-shadow: 0 0 20px #00f2fe;
+      box-shadow: 0 0 14px #00f2fe;
       z-index: 5;
     }
     .set-hud-tempo-callout {
-      font-size: clamp(0.85rem, 1.5vw, 1.2rem);
+      position: relative;
+      z-index: 5;
+      font-size: clamp(0.85rem, 1.4vw, 1.15rem);
       font-weight: 850;
       letter-spacing: 0.8px;
       text-transform: uppercase;
       text-align: center;
-      margin-bottom: 8px;
-      padding: 4px 14px;
+      margin: 0 auto clamp(6px, 1.2vh, 12px) auto;
+      padding: 5px 16px;
       border-radius: 99px;
-      background: rgba(10, 18, 36, 0.65);
-      border: 1px solid rgba(0, 242, 254, 0.25);
+      background: rgba(10, 18, 36, 0.75);
+      border: 1px solid rgba(0, 242, 254, 0.3);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
+      color: #fff;
     }
     .set-hud-telemetry {
       position: relative;
@@ -4452,10 +4430,11 @@
 
     .fullscreen-focus-hud.active {
       display: flex;
-      animation: hudWholeScreenVibrate 0.14s linear infinite;
+      animation: hudNeonBreathingFS 3.5s ease-in-out infinite alternate;
     }
     .fullscreen-focus-hud.hud-heavy-bass {
-      animation: hudHeavyBassShock 0.09s ease-in-out infinite alternate !important;
+      animation: hudNeonBreathingFS 3.5s ease-in-out infinite alternate, hudBassGlowPulse 0.18s ease-in-out infinite alternate !important;
+      border-color: rgba(0, 242, 254, 0.95) !important;
     }
 
     .focus-hud-inner {
@@ -11111,7 +11090,7 @@
     .music-visualizer-container {
       position: relative;
       width: 100%;
-      height: 140px !important;
+      height: 165px;
       background: radial-gradient(ellipse 90% 90% at 50% 50%, rgba(13, 21, 42, 0.95) 0%, rgba(4, 7, 16, 0.98) 100%);
       border: 1px solid rgba(56, 189, 248, 0.28);
       border-radius: 14px;
@@ -11122,19 +11101,28 @@
       transition: height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .music-visualizer-container.stage-expanded {
-      height: 280px !important;
+      height: 310px;
       border-color: var(--cyan);
       box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.9), 0 0 35px rgba(56, 189, 248, 0.35);
     }
-    .vis-telemetry-hud {
+    .vis-top-overlay {
       position: absolute;
       top: 8px;
       left: 10px;
+      right: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      pointer-events: none;
+      z-index: 6;
+    }
+    .vis-top-overlay > * {
+      pointer-events: auto;
+    }
+    .vis-telemetry-hud {
       display: flex;
       align-items: center;
       gap: 6px;
-      pointer-events: none;
-      z-index: 5;
     }
     .telemetry-pill {
       font-size: 0.65rem;
@@ -11152,40 +11140,69 @@
       color: var(--emerald);
       border-color: rgba(16, 185, 129, 0.4);
     }
+    .vis-stage-expand-btn {
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #94a3b8;
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 2px 9px;
+      border-radius: 6px;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: all 0.2s ease;
+    }
+    .vis-stage-expand-btn:hover {
+      color: #fff;
+      border-color: var(--cyan);
+      background: rgba(0, 242, 254, 0.15);
+    }
     .vis-mode-dock {
       position: absolute;
-      top: 6px;
-      right: 8px;
+      bottom: 0;
+      left: 0;
+      right: 0;
       display: flex;
-      gap: 4px;
+      gap: 6px;
       z-index: 6;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      max-width: 80%;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding: 6px 10px;
+      background: linear-gradient(180deg, transparent 0%, rgba(4, 7, 16, 0.72) 40%, rgba(4, 7, 16, 0.94) 100%);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      align-items: center;
+    }
+    .vis-mode-dock::-webkit-scrollbar {
+      display: none;
     }
     .vis-mode-btn {
-      background: rgba(0, 0, 0, 0.55);
+      background: rgba(15, 23, 42, 0.7);
       border: 1px solid rgba(255, 255, 255, 0.12);
       color: #94a3b8;
       font-size: 0.68rem;
       font-weight: 700;
-      padding: 3px 8px;
+      padding: 3px 9px;
       border-radius: 6px;
       cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
       backdrop-filter: blur(6px);
       transition: all 0.2s ease;
     }
     .vis-mode-btn:hover {
       color: #fff;
-      border-color: rgba(255, 255, 255, 0.3);
-      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.08);
     }
     .vis-mode-btn.active {
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.35), rgba(168, 85, 247, 0.35));
-      border-color: var(--cyan);
-      color: #fff;
+      background: linear-gradient(135deg, rgba(0, 242, 254, 0.25), rgba(168, 85, 247, 0.28));
+      color: #38bdf8;
+      border-color: rgba(0, 242, 254, 0.6);
+      box-shadow: 0 0 12px rgba(0, 242, 254, 0.35);
       font-weight: 800;
-      box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
     }
 
   
@@ -15926,14 +15943,17 @@
           <div class="music-visualizer-container" id="mainMusicVisualizerContainer">
             <canvas id="musicSpectrumCanvas"></canvas>
             
-            <!-- Real-Time Telemetry HUD -->
-            <div class="vis-telemetry-hud">
-              <span class="telemetry-pill live" id="visLivePill">● 60 FPS DSP</span>
-              <span class="telemetry-pill" id="visBpmPill">128 BPM</span>
-              <span class="telemetry-pill" id="visEnergyPill">ENERGY: 85%</span>
+            <!-- Real-Time Telemetry & Stage Control Top Bar -->
+            <div class="vis-top-overlay">
+              <div class="vis-telemetry-hud">
+                <span class="telemetry-pill live" id="visLivePill">● 60 FPS DSP</span>
+                <span class="telemetry-pill" id="visBpmPill">128 BPM</span>
+                <span class="telemetry-pill" id="visEnergyPill">ENERGY: 85%</span>
+              </div>
+              <button type="button" class="vis-stage-expand-btn" onclick="GymMusic.toggleStageExpanded()" title="Toggle Expanded Visualizer Stage (Stage View)">⛶ Stage</button>
             </div>
 
-            <!-- Enhanced Mode Selector Dock -->
+            <!-- Enhanced Mode Selector Dock (Dedicated Bottom Shelf) -->
             <div class="vis-mode-dock">
               <button type="button" class="vis-mode-btn active" data-mode="bars" onclick="GymMusic.setVisualizerMode('bars')">📊 VU Bars</button>
               <button type="button" class="vis-mode-btn" data-mode="wave" onclick="GymMusic.setVisualizerMode('wave')">〰️ Ribbon</button>
@@ -15944,7 +15964,6 @@
               <button type="button" class="vis-mode-btn" data-mode="cyber_tunnel" onclick="GymMusic.setVisualizerMode('cyber_tunnel')">🚀 Tunnel</button>
               <button type="button" class="vis-mode-btn" data-mode="chroma_vortex" onclick="GymMusic.setVisualizerMode('chroma_vortex')">🌪️ Vortex</button>
               <button type="button" class="vis-mode-btn" data-mode="laser_prism" onclick="GymMusic.setVisualizerMode('laser_prism')">⚡ Lasers</button>
-              <button type="button" class="vis-mode-btn" onclick="GymMusic.toggleStageExpanded()" title="Toggle Expanded Stage View">⛶</button>
             </div>
           </div>
 
@@ -17086,22 +17105,26 @@
           </div>
         </div>
       </div>
-      <div style="display: flex; align-items: center; gap: 4px; flex-wrap: wrap;">
-        <button type="button" class="vis-mode-btn active" data-hudmode="bars" onclick="GymMusic.setVisualizerMode('bars')" title="Bars Spectrum" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">BARS</button>
-        <button type="button" class="vis-mode-btn" data-hudmode="wave" onclick="GymMusic.setVisualizerMode('wave')" title="Oscilloscope Wave" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">WAVE</button>
-        <button type="button" class="vis-mode-btn" data-hudmode="orbit" onclick="GymMusic.setVisualizerMode('orbit')" title="Cyber Pulse Orbit" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">ORBIT</button>
-        <button type="button" class="vis-mode-btn" data-hudmode="matrix" onclick="GymMusic.setVisualizerMode('matrix')" title="Sub-Bass Matrix Pillars" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">MATRIX</button>
-        <button type="button" class="vis-mode-btn" data-hudmode="cyber_hex" onclick="GymMusic.setVisualizerMode('cyber_hex')" title="Cyber Hexagonal Portal" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">HEX</button>
-        <button type="button" class="vis-mode-btn" data-hudmode="particles" onclick="GymMusic.setVisualizerMode('particles')" title="Quantum Particles" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">PARTICLES</button>
-        <button type="button" class="vis-mode-btn" data-hudmode="cyber_tunnel" onclick="GymMusic.setVisualizerMode('cyber_tunnel')" title="3D Tunnel" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">TUNNEL</button>
-        <button type="button" class="vis-mode-btn" data-hudmode="chroma_vortex" onclick="GymMusic.setVisualizerMode('chroma_vortex')" title="Chroma Vortex" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">VORTEX</button>
-        <button type="button" class="vis-mode-btn" data-hudmode="laser_prism" onclick="GymMusic.setVisualizerMode('laser_prism')" title="Concert Lasers" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">LASERS</button>
-        <button type="button" class="btn-micro-step" onclick="toggleSetHudCadence()" id="btnSetHudTempoToggle" title="Toggle Cadence Metronome & Audio Ticks (Hotkey: T)" style="padding: 2px 7px; font-size: 0.65rem; font-weight: 800; border-radius: 5px; color: #f43f5e; border-color: rgba(244, 63, 94, 0.4); background: rgba(244, 63, 94, 0.12);">⏹ TEMPO &amp; TICKS</button>
-        <button type="button" class="btn-micro-step" onclick="cycleSetHudTempoRate()" id="btnSetHudTempoSpeed" title="Rep Tempo Cadence (Brisk 2.4s / Dynamic 3.0s / Control 3.9s)" style="padding: 2px 6px; font-size: 0.65rem; font-weight: 800; border-radius: 5px; color: var(--amber);">⚡ 2.4s TEMPO</button>
-        <button type="button" class="btn-micro-step" onclick="GymMusic.toggleBassBoost()" id="btnSetHudBass" title="Toggle Bass Boost" style="padding: 2px 6px; font-size: 0.65rem; font-weight: 800; border-radius: 5px;">⚡ BASS</button>
-        <button type="button" class="btn-micro-step" onclick="toggleSetMusicHudDockMode()" title="Toggle Dock / Fullscreen (Hotkey: F)" id="btnDockSetHud" style="padding: 2px 6px; font-size: 0.65rem; font-weight: 800; border-radius: 5px;">⤢ Dock</button>
-        <button type="button" class="btn-micro-step" onclick="toggleNativeFullscreen()" title="Native Browser Fullscreen (F11)" id="btnNativeFsSetHud" style="padding: 2px 6px; font-size: 0.65rem; font-weight: 800; border-radius: 5px;">⛶ FS</button>
-        <button type="button" class="btn-micro-step" onclick="closeSetMusicGraphicsHUD()" title="Exit Music Stage (Esc)" style="color: #f87171; padding: 2px 6px; font-size: 0.65rem; font-weight: 800; border-radius: 5px;">✕ Exit</button>
+      <div class="set-hud-controls">
+        <div class="set-hud-modes">
+          <button type="button" class="vis-mode-btn active" data-hudmode="bars" onclick="GymMusic.setVisualizerMode('bars')" title="Bars Spectrum" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">BARS</button>
+          <button type="button" class="vis-mode-btn" data-hudmode="wave" onclick="GymMusic.setVisualizerMode('wave')" title="Oscilloscope Wave" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">WAVE</button>
+          <button type="button" class="vis-mode-btn" data-hudmode="orbit" onclick="GymMusic.setVisualizerMode('orbit')" title="Cyber Pulse Orbit" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">ORBIT</button>
+          <button type="button" class="vis-mode-btn" data-hudmode="matrix" onclick="GymMusic.setVisualizerMode('matrix')" title="Sub-Bass Matrix Pillars" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">MATRIX</button>
+          <button type="button" class="vis-mode-btn" data-hudmode="cyber_hex" onclick="GymMusic.setVisualizerMode('cyber_hex')" title="Cyber Hexagonal Portal" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">HEX</button>
+          <button type="button" class="vis-mode-btn" data-hudmode="particles" onclick="GymMusic.setVisualizerMode('particles')" title="Quantum Particles" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">PARTICLES</button>
+          <button type="button" class="vis-mode-btn" data-hudmode="cyber_tunnel" onclick="GymMusic.setVisualizerMode('cyber_tunnel')" title="3D Tunnel" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">TUNNEL</button>
+          <button type="button" class="vis-mode-btn" data-hudmode="chroma_vortex" onclick="GymMusic.setVisualizerMode('chroma_vortex')" title="Chroma Vortex" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">VORTEX</button>
+          <button type="button" class="vis-mode-btn" data-hudmode="laser_prism" onclick="GymMusic.setVisualizerMode('laser_prism')" title="Concert Lasers" style="padding: 2px 6px; font-size: 0.65rem; border-radius: 5px;">LASERS</button>
+        </div>
+        <div class="set-hud-actions">
+          <button type="button" class="btn-micro-step" onclick="toggleSetHudCadence()" id="btnSetHudTempoToggle" title="Toggle Cadence Metronome & Audio Ticks (Hotkey: T)" style="padding: 2px 7px; font-size: 0.65rem; font-weight: 800; border-radius: 5px; color: #f43f5e; border-color: rgba(244, 63, 94, 0.4); background: rgba(244, 63, 94, 0.12);">⏹ TEMPO &amp; TICKS</button>
+          <button type="button" class="btn-micro-step" onclick="cycleSetHudTempoRate()" id="btnSetHudTempoSpeed" title="Rep Tempo Cadence (Brisk 2.4s / Dynamic 3.0s / Control 3.9s)" style="padding: 2px 6px; font-size: 0.65rem; font-weight: 800; border-radius: 5px; color: var(--amber);">⚡ 2.4s TEMPO</button>
+          <button type="button" class="btn-micro-step" onclick="GymMusic.toggleBassBoost()" id="btnSetHudBass" title="Toggle Bass Boost" style="padding: 2px 6px; font-size: 0.65rem; font-weight: 800; border-radius: 5px;">⚡ BASS</button>
+          <button type="button" class="btn-micro-step" onclick="toggleSetMusicHudDockMode()" title="Toggle Dock / Fullscreen (Hotkey: F)" id="btnDockSetHud" style="padding: 2px 6px; font-size: 0.65rem; font-weight: 800; border-radius: 5px;">⤢ Dock</button>
+          <button type="button" class="btn-micro-step" onclick="toggleNativeFullscreen()" title="Native Browser Fullscreen (F11)" id="btnNativeFsSetHud" style="padding: 2px 6px; font-size: 0.65rem; font-weight: 800; border-radius: 5px;">⛶ FS</button>
+          <button type="button" class="btn-micro-step" onclick="closeSetMusicGraphicsHUD()" title="Exit Music Stage (Esc)" style="color: #f87171; padding: 2px 6px; font-size: 0.65rem; font-weight: 800; border-radius: 5px;">✕ Exit</button>
+        </div>
       </div>
     </div>
 
